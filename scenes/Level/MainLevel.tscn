@@ -1,11 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://okvl3jg17a5h"]
+[gd_scene load_steps=3 format=3 uid="uid://okvl3jg17a5h"]
 
 [ext_resource type="Script" uid="uid://cdj8cw7oe3du7" path="res://script/Base/Other/Main_camera.gd" id="1_ba6t7"]
+[ext_resource type="Script" uid="uid://dghk1chdkrxqs" path="res://script/Level/MainLevelController.gd" id="1_o46w5"]
 
 [node name="MainLevel" type="Node2D"]
+script = ExtResource("1_o46w5")
 
 [node name="Main_camera" type="Camera2D" parent="."]
 script = ExtResource("1_ba6t7")
 metadata/_custom_type_script = "uid://cdj8cw7oe3du7"
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="TestBackGround" type="Node2D" parent="."]

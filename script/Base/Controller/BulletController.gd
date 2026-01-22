@@ -53,17 +53,17 @@ func _ready() -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if bullet.is_reflect:
 		return;
-	if area.component == Rumia_controller.Component.HEALTHYRANGE:
-		var player := area.get_parent() as Rumia_controller
-		
-		if player.hurtbox.can_hurt:
-			player.behit(bullet);
-			deactivate()
-		
-	elif area.component == Rumia_controller.Component.DEFENCERANGE and area.is_defending:
-		reflect();
-	elif area.component == Rumia_controller.Component.INITIALSHIELD and area.activate:
-		deactivate();
+	#if area.component == Rumia_controller.Component.HEALTHYRANGE:
+		#var player := area.get_parent() as Rumia_controller
+		#
+		#if player.hurtbox.can_hurt:
+			#player.behit(bullet);
+			#deactivate()
+		#
+	#elif area.component == Rumia_controller.Component.DEFENCERANGE and area.is_defending:
+		#reflect();
+	#elif area.component == Rumia_controller.Component.INITIALSHIELD and area.activate:
+		#deactivate();
 	print(area.name);
 
 

@@ -4,15 +4,15 @@ class_name BulletManager
 var _bullets: Dictionary = {}  # {id: EnemyController}
 var _active_bullets: Dictionary = {}  # {id: EnemyController}
 
-func register_bullet(e: Bullet_controller) -> void:
-	e.controller_id = ToolBar.gameIDGenerator.generate_id()
+func register_bullet(e:Bullet_controller) -> void:
+	e.controller_id = ToolBar.gameIDGenerator.generate_id();
 	_bullets[e.controller_id] = e
 
 func unregister_bullet(id) -> void:
 	# unregister enemy
 	if _bullets.has(id):
 		_bullets.erase(id)
-		ToolBar.Game_Id_generator.recycle_id(id)
+		ToolBar.gameIDGenerator.recycle_id(id)
 		print("Enemy unregistered:", id)
 		
 

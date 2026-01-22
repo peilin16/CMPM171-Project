@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://kks7ir0kgg1a"]
+[gd_scene load_steps=12 format=3 uid="uid://kks7ir0kgg1a"]
 
 [ext_resource type="Script" uid="uid://csieovs421mxl" path="res://script/Character/Player/PlayerController.gd" id="1_beklg"]
 [ext_resource type="Script" uid="uid://bj7f4p0ml38qw" path="res://script/State/StateHub.gd" id="2_4mqus"]
@@ -25,7 +25,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xpp3s"]
+
+[node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_beklg")
 
 [node name="StateHub" type="Node2D" parent="."]
@@ -55,3 +57,8 @@ position = Vector2(0, 1.9073486e-06)
 scale = Vector2(0.5625, 0.5859375)
 sprite_frames = SubResource("SpriteFrames_gc4mm")
 animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xpp3s")
+
+[node name="MultiTaskRunner" type="Node2D" parent="."]

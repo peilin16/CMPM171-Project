@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://boilr8ypqjkcm"]
+[gd_scene load_steps=11 format=3 uid="uid://boilr8ypqjkcm"]
 
 [ext_resource type="Script" uid="uid://cduvvcqhbjk7f" path="res://script/Base/GameManager/GameManager.gd" id="1_r5iky"]
 [ext_resource type="Script" uid="uid://c7n72yx4b1c6w" path="res://script/Base/GameManager/LevelManager.gd" id="2_oryhb"]
 [ext_resource type="Script" uid="uid://dw0v4wxqut7ku" path="res://script/Base/GameManager/UIManager.gd" id="4_e0xc1"]
 [ext_resource type="Script" uid="uid://dddio4ahove4p" path="res://script/Base/GameManager/BulletManager.gd" id="5_70iqa"]
-[ext_resource type="Script" uid="uid://co3fuf7wfah7a" path="res://Script/Base/Pool/BulletPool.gd" id="6_ktoa3"]
+[ext_resource type="Script" uid="uid://co3fuf7wfah7a" path="res://script/Base/Pool/BulletPool.gd" id="6_ktoa3"]
+[ext_resource type="PackedScene" uid="uid://kks7ir0kgg1a" path="res://scenes/Character/player.tscn" id="7_s7fwu"]
 [ext_resource type="Script" uid="uid://n4y6agwlabiw" path="res://script/Base/GameManager/PlayerManager.gd" id="9_mkkgn"]
 [ext_resource type="Script" uid="uid://tdmcu3venow7" path="res://script/Base/GameManager/EnemyManager.gd" id="10_jtbw3"]
 [ext_resource type="Script" uid="uid://dtpvta2g033k" path="res://script/Base/GameManager/CameraManager.gd" id="10_pw3kq"]
@@ -27,6 +28,7 @@ script = ExtResource("6_ktoa3")
 
 [node name="PlayerManager" type="Node" parent="."]
 script = ExtResource("9_mkkgn")
+player_scene = ExtResource("7_s7fwu")
 
 [node name="EnemyManager" type="Node" parent="."]
 script = ExtResource("10_jtbw3")

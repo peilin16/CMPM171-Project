@@ -9,12 +9,12 @@ var _logic :enemy_logic;
 
 #child node2d
 #@onready var _caster: caster = $Caster;
-@onready var _spring: Spring = $Spring;
+#@onready var _spring: Spring = $Spring;
 #@onready var _task: Task_runner = $TaskRunner
 @onready var caster: Cast_scheduler = $CastScheduler
 @onready var movement: Movement_scheduler = $MovementScheduler
 @onready var vfx_parser: VFX_parser = $VFXParser
-@onready var widget_spawner: Widget_spawner = $WidgetSpawner;
+#@onready var widget_spawner: Widget_spawner = $WidgetSpawner;
 @export var death_gravity: float = 100.0       # how fast enemy falls when dying
 @export var death_delay: float = 1.0          # how long it can still be hit after hp <= 0
 
@@ -48,13 +48,13 @@ func _ready() -> void:
 	
 
 func _physics_process(delta: float) -> void:
-	_spring.update_spring(delta)
+	#_spring.update_spring(delta)
 	if _character.hp <= 0 :
 		death()
 		return;
 	# --- normal alive update ---
-	if is_death and hitable and _spring.data.death_elapsed > _spring.data.combo_window:
-		hitable = false   
+	#if is_death and hitable and _spring.data.death_elapsed > _spring.data.combo_window:
+		#hitable = false   
 	#_task._physics_process(delta)	
 	
 func activate(behavoir_code:String = "")->void:
@@ -77,21 +77,18 @@ func behit(bullet:Bullet):
 	if not is_death:
 		_logic.behit(bullet);
 		
-		_spring.apply_hit(bullet);
-	else:
-		#_spring.set_dead_mode();
-		_spring.add_move_data(bullet.move_data);
+
 
 func death() -> void:
 	if is_death:
 		return
 	#spawn score;
-	widget_spawner.spawn_widget(Widget_request.new("PowerPoint"));
+	#widget_spawner.spawn_widget(Widget_request.new("PowerPoint"));
 		
 	GameManager.enemy_manager.unregister_active_enemy(controller_id);
 	is_death = true
 	#hitable = true         
-	_spring.in_death_mode()
+	#_spring.in_death_mode()
 	# 1) enemy becomes lighter
 	_character.weight = max(_character.weight * 0.3, 0.1)
 
@@ -99,16 +96,13 @@ func death() -> void:
 	if movement:
 		movement.cancel();
 
-	# 3) tell spring to enter "dead mode" (no more spring recover)
-	if _spring:
-		_spring.set_dead_mode()
 
 	## 4)  give a small downward push so it starts to fall
 	#velocity.y += 20.0
 #
 	## 5) start coroutine for delayed "true death"
 	##    1.5s during which it can still be hit and keep getting impulses
-	await ToolBar.globalDelayCall.delay(_spring.data.combo_window);
+	#await ToolBar.globalDelayCall.delay(_spring.data.combo_window);
 	_call_death_delay()
 
 func _call_death_delay() -> void:

@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 class_name Level_controller
 
 var _level:Level;
