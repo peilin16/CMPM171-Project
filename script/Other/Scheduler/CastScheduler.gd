@@ -198,13 +198,15 @@ func _make_shoot_vfx(controller, shoot_cfg: Shoot_configure, vfx_dict: Array) ->
 	for k in vfx_dict:
 		match k.get("shoot_mode",k.get("shoot mode")):
 			"start":
-				shoot_cfg.start_vfx_configure = k
+				shoot_cfg.start_vfx = k
+			
 			"shooting":
-				shoot_cfg.shooting_vfx_configure = k
+				shoot_cfg.shooting_vfx= k
 			"shoot_one":
-				shoot_cfg.shoot_one_vfx_configure = k
+				shoot_cfg.shoot_one_vfx= k
 			"bullet":
-				shoot_cfg.bullet_vfx_configure = k
+				shoot_cfg.bullet_vfx= k
+				
 				
 # Caster.gd
 # 约定：entry = ["random_fan", params_dict]
