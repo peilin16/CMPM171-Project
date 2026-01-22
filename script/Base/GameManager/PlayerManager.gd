@@ -2,7 +2,7 @@ extends Node
 class_name  PlayerManager
 
 
-var player: Rumia_controller = null
+var player: Player_controller = null
 @export var player_scene: PackedScene
 
 
@@ -10,11 +10,11 @@ func _ready() -> void:
 	await get_tree().process_frame
 	#_spawn_player()
 
-func register_player(p: Rumia_controller) -> void:
+func register_player(p: Player_controller) -> void:
 	player = p
 	print("Player registered:", player)
 
-func get_player() -> Rumia_controller:
+func get_player() -> Player_controller:
 	return player;
 	
 func get_player_position() -> Vector2:

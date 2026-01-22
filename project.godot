@@ -13,3 +13,9 @@ config_version=5
 config/name="新建游戏项目"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*res://scenes/Base/game_manager.tscn"
+Toolbar="*res://scenes/Base/toolbar.tscn"
+PoolManager="*res://scenes/Base/PoolManager.tscn"
