@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://8b3i2ylgemjg"]
+
+[ext_resource type="Script" uid="uid://bq1wa6bchksqj" path="res://Script/Other/Tool/GameIdGenerator.gd" id="1_8i0fp"]
+[ext_resource type="Script" uid="uid://cwhi3fjs3xb2a" path="res://Script/Other/Tool/ToolBar.gd" id="1_n7h7y"]
+[ext_resource type="Script" uid="uid://bhqhm5mn11ngi" path="res://Script/Other/Tool/DistancMeasure.gd" id="2_1lja0"]
+[ext_resource type="Script" uid="uid://bs87826mttvn6" path="res://Script/Other/Tool/RepeatableRandomGenerator.gd" id="4_mrnid"]
+[ext_resource type="Script" uid="uid://b5gyph0qeiqgh" path="res://Script/Other/Tool/GlobalDelayCall.gd" id="5_aho14"]
+
+[node name="Tool_bar" type="Node"]
+script = ExtResource("1_n7h7y")
+
+[node name="GameIDGenerator" type="Node" parent="."]
+script = ExtResource("1_8i0fp")
+
+[node name="DistanceMeasure" type="Node" parent="."]
+script = ExtResource("2_1lja0")
+
+[node name="RepeatableRandomGenerator" type="Node" parent="."]
+script = ExtResource("4_mrnid")
+
+[node name="GlobalDelayCall" type="Node" parent="."]
+script = ExtResource("5_aho14")

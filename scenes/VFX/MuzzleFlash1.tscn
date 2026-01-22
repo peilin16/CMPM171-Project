@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://b1w1mp7uru7xv"]
+
+[ext_resource type="Script" uid="uid://c83mjdprgdhrk" path="res://Script/VFX/VFXInstance.gd" id="1_fpc3u"]
+[ext_resource type="Texture2D" uid="uid://bmeu1cxyn6ey5" path="res://assets/particle/star_07.png" id="1_kycyx"]
+
+[sub_resource type="Gradient" id="Gradient_5ait0"]
+offsets = PackedFloat32Array(0.06436234, 0.3384982, 0.6626937, 0.9606675)
+colors = PackedColorArray(0.685734, 0.95002764, 0.9453046, 1, 0.67403233, 0.9554978, 0.9274577, 1, 0.8767703, 0.94982344, 0.9410139, 1, 1, 1, 1, 0.9607843)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_porkb"]
+gradient = SubResource("Gradient_5ait0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_37gr2"]
+particle_flag_disable_z = true
+angle_min = -759.8
+angle_max = 720.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.29999998
+color_ramp = SubResource("GradientTexture1D_porkb")
+
+[node name="MuzzleFlash1" type="Node2D"]
+position = Vector2(-1, 1)
+script = ExtResource("1_fpc3u")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 3
+texture = ExtResource("1_kycyx")
+lifetime = 0.21
+process_material = SubResource("ParticleProcessMaterial_37gr2")

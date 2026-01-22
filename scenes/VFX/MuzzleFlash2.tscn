@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2j4wcl4hfor"]
+
+[ext_resource type="Texture2D" uid="uid://b6onun640ug8p" path="res://assets/particle/ShineRound.png" id="1_jgmay"]
+[ext_resource type="Script" uid="uid://c83mjdprgdhrk" path="res://Script/VFX/VFXInstance.gd" id="1_mjq2i"]
+
+[sub_resource type="Curve" id="Curve_mjq2i"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.622449, 1), 0.0, 0.0, 0, 0, Vector2(0.664966, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_5u4ca"]
+curve = SubResource("Curve_mjq2i")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j2vtk"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_5u4ca")
+
+[node name="MuzzleFlash2" type="Node2D"]
+script = ExtResource("1_mjq2i")
+lifetime = 0.2
+
+[node name="MuzzleFlash2Particles2D" type="GPUParticles2D" parent="."]
+amount = 1
+texture = ExtResource("1_jgmay")
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_j2vtk")

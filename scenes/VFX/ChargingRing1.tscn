@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://bh7y5ror0k5cc"]
+
+[ext_resource type="Script" uid="uid://c83mjdprgdhrk" path="res://Script/VFX/VFXInstance.gd" id="1_gddyc"]
+[ext_resource type="Texture2D" uid="uid://choderwmdg367" path="res://assets/particle/circle_03.png" id="1_l13rl"]
+
+[sub_resource type="Curve" id="Curve_gddyc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.33528724, 1), 0.0, 0.0, 0, 0, Vector2(0.7620165, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_nv3dj"]
+curve = SubResource("Curve_gddyc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ej3bs"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_nv3dj")
+
+[node name="ChargingRing1" type="Node2D"]
+script = ExtResource("1_gddyc")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 1
+texture = ExtResource("1_l13rl")
+lifetime = 0.4
+speed_scale = 0.7
+process_material = SubResource("ParticleProcessMaterial_ej3bs")

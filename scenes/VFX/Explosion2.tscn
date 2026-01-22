@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdtj3k2247ovo"]
+
+[ext_resource type="Texture2D" uid="uid://j3tv3l6s6wd" path="res://assets/particle/smoke_07.png" id="1_odi45"]
+
+[sub_resource type="Gradient" id="Gradient_83hnc"]
+offsets = PackedFloat32Array(0, 0.6967822, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.99274415, 0.99274415, 0.99274415, 0.8576733, 0.9490196, 0.9490196, 0.9490196, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_odi45"]
+gradient = SubResource("Gradient_83hnc")
+
+[sub_resource type="Curve" id="Curve_5w7jo"]
+_data = [Vector2(0.06594724, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.5196496), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_83hnc"]
+curve = SubResource("Curve_5w7jo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wctr3"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(1, 0, 0)
+angle_min = -8.79999
+angle_max = -8.79999
+spread = 180.0
+initial_velocity_max = 5.0499997
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -100.0
+linear_accel_max = 99.99999
+tangential_accel_min = -100.0
+tangential_accel_max = 99.99999
+scale_curve = SubResource("CurveTexture_83hnc")
+color_ramp = SubResource("GradientTexture1D_odi45")
+
+[node name="Explosion2" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 30
+texture = ExtResource("1_odi45")
+lifetime = 2.74
+explosiveness = 1.0
+fract_delta = false
+process_material = SubResource("ParticleProcessMaterial_wctr3")

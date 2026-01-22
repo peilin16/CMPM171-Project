@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://dydiukbaqakk0"]
+
+[ext_resource type="Texture2D" uid="uid://trqj2ua4kqmo" path="res://assets/particle/Dot1-Sheet.png" id="1_agltp"]
+[ext_resource type="Script" uid="uid://c83mjdprgdhrk" path="res://Script/VFX/VFXInstance.gd" id="1_c8ogc"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_agltp"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_c8ogc"]
+offsets = PackedFloat32Array(0.029616725, 0.23519164, 0.5400697, 0.81358886, 1)
+colors = PackedColorArray(0.9369241, 0.69629604, 0.15028664, 1, 0.72690564, 0.31162181, 0.074335776, 1, 0.8784314, 0.09019608, 0.14901961, 1, 0.30802143, 0.031627204, 0.05225364, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_64fxo"]
+gradient = SubResource("Gradient_c8ogc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_agltp"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(3, 1, 1)
+emission_shape = 1
+emission_sphere_radius = 34.6
+angle_min = -647.3
+angle_max = 603.60004
+gravity = Vector3(0, 0, 0)
+scale_min = 0.19999999
+color_ramp = SubResource("GradientTexture1D_64fxo")
+anim_speed_min = 0.39
+anim_speed_max = 1.6899999
+
+[node name="BulletExplosion1" type="Node2D"]
+script = ExtResource("1_c8ogc")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_agltp")
+amount = 5
+texture = ExtResource("1_agltp")
+lifetime = 0.4
+process_material = SubResource("ParticleProcessMaterial_agltp")

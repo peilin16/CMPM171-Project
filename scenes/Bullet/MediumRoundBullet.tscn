@@ -1,0 +1,74 @@
+[gd_scene load_steps=15 format=3 uid="uid://bfwcdh78eqhc0"]
+
+[ext_resource type="Script" uid="uid://8mfw6sc2fmo6" path="res://Script/Bullet/RoundBullet/MediumRoundBulletController.gd" id="1_2rsdx"]
+[ext_resource type="Shader" uid="uid://csge0h8sy48lv" path="res://Shader/MediumRoundBullet.gdshader" id="2_6s3kd"]
+[ext_resource type="Script" uid="uid://c2wnvavvwt3f1" path="res://Script/Other/Tool/BulletTextureController.gd" id="3_btjht"]
+[ext_resource type="Texture2D" uid="uid://dhwx0du1y4qxi" path="res://assets/bullet/RoundBullet/Blue/Bullet_1_2.png" id="5_jlwld"]
+[ext_resource type="Script" uid="uid://cr0h73xvntvj0" path="res://Script/Other/Tool/SubsystemHub.gd" id="6_f54a7"]
+[ext_resource type="Texture2D" uid="uid://ch422k2agpfgq" path="res://assets/bullet/RoundBullet/Red/Bullet_1_3.png" id="6_luhwo"]
+[ext_resource type="Texture2D" uid="uid://d2thu0kp7ps8w" path="res://assets/bullet/RoundBullet/Green/Bullet_1_3.png" id="7_lmnsx"]
+[ext_resource type="Script" uid="uid://df6qec5acffqb" path="res://Script/Action/Move/MoveRunner.gd" id="7_ywnlv"]
+[ext_resource type="Script" uid="uid://u1lc0lg311dn" path="res://Script/Action/STG/ShootRunner.gd" id="8_6s3kd"]
+[ext_resource type="Script" uid="uid://by12krurtjnq5" path="res://Script/Action/Base/TaskRunner.gd" id="10_ywnlv"]
+[ext_resource type="Script" uid="uid://ecif63a6ruyr" path="res://Script/Other/Scheduler/MovementScheduler.gd" id="12_jlwld"]
+[ext_resource type="Script" uid="uid://cavt13fjl6be6" path="res://Script/VFX/VFXControllerSpawner.gd" id="13_luhwo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jlwld"]
+shader = ExtResource("2_6s3kd")
+shader_parameter/dissolve = 0.0
+shader_parameter/edge_width = 0.08
+shader_parameter/edge_color = Color(0.5, 0.9, 1, 1)
+shader_parameter/noise_strength = 0.08
+shader_parameter/noise_scale = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_djc4k"]
+
+[node name="Medium_Round_Bullet" type="Area2D" node_paths=PackedStringArray("texture_controller")]
+light_mask = 256
+visibility_layer = 256
+collision_layer = 40
+collision_mask = 48
+script = ExtResource("1_2rsdx")
+texture_controller = NodePath("BulletSprite")
+metadata/_edit_horizontal_guides_ = [-203.0]
+
+[node name="BulletSprite" type="Sprite2D" parent="."]
+light_mask = 8
+visibility_layer = 8
+material = SubResource("ShaderMaterial_jlwld")
+position = Vector2(0, 3.2311743e-27)
+scale = Vector2(1.4375, 1.53125)
+texture = ExtResource("5_jlwld")
+script = ExtResource("3_btjht")
+skins = Array[Texture2D]([ExtResource("5_jlwld"), ExtResource("6_luhwo"), ExtResource("7_lmnsx")])
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, 1)
+scale = Vector2(1.75, 1.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.4799989, 0.52000123)
+shape = SubResource("CircleShape2D_djc4k")
+
+[node name="VFXSpawner" type="Node2D" parent="."]
+script = ExtResource("13_luhwo")
+
+[node name="MovementScheduler" type="Node2D" parent="."]
+script = ExtResource("12_jlwld")
+metadata/_custom_type_script = "uid://ecif63a6ruyr"
+
+[node name="TaskRunner" type="Node2D" parent="MovementScheduler"]
+unique_name_in_owner = true
+script = ExtResource("10_ywnlv")
+
+[node name="SubActionHub" type="Node2D" parent="MovementScheduler/TaskRunner"]
+unique_name_in_owner = true
+script = ExtResource("6_f54a7")
+
+[node name="MoveRunner" type="Node2D" parent="MovementScheduler/TaskRunner/SubActionHub"]
+unique_name_in_owner = true
+script = ExtResource("7_ywnlv")
+
+[node name="ShootRunner" type="Node2D" parent="MovementScheduler/TaskRunner/SubActionHub"]
+unique_name_in_owner = true
+script = ExtResource("8_6s3kd")
