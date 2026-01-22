@@ -4,17 +4,19 @@ class_name Character_controller
 var _character:Character;
 var controller_id:int;#id
 var is_death:bool = false;
+var logic:Character_logic;
+
 enum TEAM {
 	PLAYER,
 	ENEMY,
 	NEUTRAL
 }
-@onready var _state_hub: State_hub = $StateHub;
+@onready var state_hub: State_hub = $StateHub;
 @export var team = TEAM.ENEMY;
 var hitable:bool = false;
 
 func _init() ->void:
-	controller_id = ToolBar.Game_Id_generator.generate_id();
+	controller_id = Toolbar.gameIDGenerator.generate_id();
 	if _character == null:
 		_character = Character.new();
 	

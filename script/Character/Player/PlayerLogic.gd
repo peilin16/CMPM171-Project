@@ -1,0 +1,2 @@
+extends Character_logic
+class_name Player_logic;
