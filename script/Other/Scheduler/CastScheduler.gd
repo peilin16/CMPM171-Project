@@ -3,7 +3,7 @@ extends Node2D
 class_name Cast_scheduler
 
 @onready var task_runner: Task_runner = $TaskRunner
-
+@onready var runner:Shoot_runner = $ShootRunner
 var parent_controller#: Character_controller
 var current_configure = null
 var is_running := false
@@ -14,7 +14,7 @@ var _built_queue: Array[Order] = []
 
 func _ready() -> void:
 	parent_controller = get_parent()# as Character_controller
-
+	task_runner.set_runner(runner);
 func setup(script: Array) -> void:
 	_script = script#.duplicate(true)
 	_built_queue = _build_queue_from_script(_script)
@@ -92,8 +92,8 @@ func _build_orders_from_step(step) -> Array[Order]:
 
 		"fan_shape","fan":
 			return [_make_fan_shape_orders(step)]
-		"mutiple":
-			return [_make_mutiple_orders(step)]
+		"multiple","multi":
+			return [_make_multiple_order(step)]
 		"random_fan":
 			return [_make_random_fan_orders(step)]
 
@@ -116,7 +116,11 @@ func _set_up_base(cfg: Shoot_configure, step: Dictionary) -> void:
 	cfg.pool_name = str(step.get("pool", "MEDIUM_ROUND_BULLET"))
 	cfg.damage = int(step.get("damage", 5))
 	cfg.color_random_seed_index = int(step.get("color_seed", 0))
-
+	var f:String =  str(step.get("faction", "enemy"));
+	if f == "player":
+		cfg.faction = Bullet.Faction.PLAYER;
+	else:
+		cfg.faction = Bullet.Faction.ENEMY;
 
 func _make_timer_order(sec: float) -> Order:
 	var o :Timer_order = Timer_order.new(sec);
@@ -146,8 +150,8 @@ func _apply_aim(cfg: Shoot_configure, step: Dictionary) -> void:
 	cfg.speed = step.get("speed", 120);
 
 
-func _make_mutiple_orders(step: Dictionary) -> Order:
-	var cfg := Mutiple_shoot_configure.new()
+func _make_multiple_order(step: Dictionary) -> Order:
+	var cfg := Multi_shoot_configure.new()
 	_set_up_base(cfg, step);
 	_apply_aim(cfg, step);
 	cfg.interval = float(step.get("interval", 1.3))

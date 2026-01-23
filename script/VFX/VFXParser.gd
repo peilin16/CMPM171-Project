@@ -13,6 +13,8 @@ func _ready() -> void:
 func get_request()->VFX_request:
 	return _built_request;
 
+
+
 func setup(d: Dictionary) -> VFX_request:
 	_built_request = VFX_request.new();
 	_build_request_from_dict(d);

@@ -3,7 +3,7 @@ class_name Rotate_scheduler
 
 
 @onready var task_runner: Task_runner = $TaskRunner
-
+@onready var runner:Rotate_runner = $RotateRunner
 var controller#: Character_controller
 var current_configure = null
 var is_running := false
@@ -14,7 +14,8 @@ var _built_queue: Array[Order] = []
 
 func _ready() -> void:
 	controller = get_parent()# as Character_controller
-	
+	task_runner.set_runner(runner);
+
 func set_up_controller(c)->void:
 	controller= c;
 

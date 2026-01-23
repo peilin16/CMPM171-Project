@@ -4,7 +4,7 @@ class_name Task_runner
 
 @export var orders: Array[Order] = []
 @onready var subsystems: Sub_action_hub = $SubActionHub 
-
+var runner:Runner;
 var _queue: Array[Order] = []
 var _current: Order = null
 var actor
@@ -19,7 +19,12 @@ func reset_queue() -> void:
 	_queue = orders.duplicate()
 	_current = null
 
+func set_runner(r:Runner)->void:
+	runner = r;
+
 func get_runner_for(belong: System.Belong) -> Runner:
+	if subsystems == null:
+		return runner;
 	return subsystems.get_runner_for(belong);
 
 func _start(queue: Array[Order] = [] ) ->void:

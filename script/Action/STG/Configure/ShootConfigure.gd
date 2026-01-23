@@ -17,7 +17,7 @@ enum AimMode { TARGET, ANGLE ,OBJECT}   #
 @export var target:Vector2;
 @export var speed:float;
 @export var angle:float; # if direction mode
-
+@export var faction:Bullet.Faction;
 var refer_bullet:Bullet  #refer bullet if use special bullet data;
 var origin;        # from where duck type
 var object;			#object controller

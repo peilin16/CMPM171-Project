@@ -1,5 +1,5 @@
 extends Shoot_configure
-class_name Mutiple_shoot_configure
+class_name Multi_shoot_configure
 
 @export var interval :float = 1; # bullet interval
 @export var num: int = 5;  #total num
@@ -34,4 +34,4 @@ func _speed_setting(from_speed: float, to_speed: float) -> void:
 		speed_arr.push_back(s)
 
 func default_pattern() ->Pattern:
-	return Mutiple_shoot_pattern.new();
+	return Multi_shoot_pattern.new();

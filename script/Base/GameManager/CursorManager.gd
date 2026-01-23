@@ -53,7 +53,7 @@ func emit_event(event_name: String, payload := {}) -> void:
 	if not _listeners.has(event_name):
 		return
 
-	var ids :String= _listeners[event_name].keys()
+	var ids :Array= _listeners[event_name].keys()
 	for id in ids:
 		var cb: Callable = _listeners[event_name].get(id)
 		if cb == null:

@@ -2,7 +2,7 @@ extends Node2D
 class_name Movement_scheduler
 
 @onready var task_runner: Task_runner = $TaskRunner
-
+@onready var runner:Move_runner = $MoveRunner
 var parent_controller #: Character_controller
 var is_running := false
 var is_finish := false
@@ -32,7 +32,7 @@ func _ready() -> void:
 	parent_controller = get_parent() #as Character_controller
 	if parent_controller == null:
 		push_warning("Movement_scheduler: parent is not Character_controller")
-
+	task_runner.set_runner(runner);
 
 func setup(script: Array) -> void:
 	# script is Array[Dictionary]

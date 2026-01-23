@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://boilr8ypqjkcm"]
+[gd_scene load_steps=12 format=3 uid="uid://boilr8ypqjkcm"]
 
 [ext_resource type="Script" uid="uid://cduvvcqhbjk7f" path="res://script/Base/GameManager/GameManager.gd" id="1_r5iky"]
 [ext_resource type="Script" uid="uid://c7n72yx4b1c6w" path="res://script/Base/GameManager/LevelManager.gd" id="2_oryhb"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://n4y6agwlabiw" path="res://script/Base/GameManager/PlayerManager.gd" id="9_mkkgn"]
 [ext_resource type="Script" uid="uid://tdmcu3venow7" path="res://script/Base/GameManager/EnemyManager.gd" id="10_jtbw3"]
 [ext_resource type="Script" uid="uid://dtpvta2g033k" path="res://script/Base/GameManager/CameraManager.gd" id="10_pw3kq"]
+[ext_resource type="Script" uid="uid://dm7jkuq83bi5d" path="res://script/Base/GameManager/CursorManager.gd" id="11_mfgc0"]
 [ext_resource type="Script" uid="uid://c7g0hx0mww4p4" path="res://script/Base/GameManager/VFXManager.gd" id="15_rxwbf"]
 
 [node name="GameManager" type="Node"]
@@ -40,3 +41,4 @@ script = ExtResource("15_rxwbf")
 script = ExtResource("10_pw3kq")
 
 [node name="CursorManager" type="Node" parent="."]
+script = ExtResource("11_mfgc0")

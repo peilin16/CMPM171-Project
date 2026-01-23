@@ -1,5 +1,5 @@
 extends Shooting_pattern
-class_name Mutiple_shoot_pattern
+class_name Multi_shoot_pattern
 
 
 # runtime state
@@ -10,7 +10,7 @@ var _timer: float = 0.0;
 
 func _ready(runner: Runner, configure: Configure) -> void:
 	if shoot_configure == null:
-		shoot_configure = configure as Mutiple_shoot_configure;
+		shoot_configure = configure as Multi_shoot_configure;
 	if shoot_runner == null:
 		shoot_runner = runner as Shoot_runner
 	current_index = 0

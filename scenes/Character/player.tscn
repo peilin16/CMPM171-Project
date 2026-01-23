@@ -8,8 +8,8 @@
 [ext_resource type="Script" uid="uid://b566wwblvpd6x" path="res://script/VFX/VFXSpawner.gd" id="4_8fgnd"]
 [ext_resource type="Script" uid="uid://c6e2v8pq72rv8" path="res://script/VFX/VFXParser.gd" id="4_i7wy1"]
 [ext_resource type="Script" uid="uid://by12krurtjnq5" path="res://script/Action/Base/TaskRunner.gd" id="6_85mch"]
-[ext_resource type="Script" uid="uid://cr0h73xvntvj0" path="res://script/Other/Tool/SubsystemHub.gd" id="7_h3n2c"]
 [ext_resource type="Texture2D" uid="uid://oya8wpn6jmc8" path="res://icon.svg" id="7_xpp3s"]
+[ext_resource type="Script" uid="uid://u1lc0lg311dn" path="res://script/Action/STG/ShootRunner.gd" id="8_mpo6r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8fgnd"]
 
@@ -56,9 +56,9 @@ metadata/_custom_type_script = "uid://b8na7bb7sjrx3"
 script = ExtResource("6_85mch")
 metadata/_custom_type_script = "uid://by12krurtjnq5"
 
-[node name="SubActionHub" type="Node2D" parent="CastScheduler/TaskRunner"]
-script = ExtResource("7_h3n2c")
-metadata/_custom_type_script = "uid://cr0h73xvntvj0"
+[node name="ShootRunner" type="Node2D" parent="CastScheduler"]
+script = ExtResource("8_mpo6r")
+metadata/_custom_type_script = "uid://u1lc0lg311dn"
 
 [node name="VFXParser" type="Node2D" parent="."]
 script = ExtResource("4_i7wy1")

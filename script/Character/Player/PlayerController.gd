@@ -22,8 +22,9 @@ func _ready() -> void:
 	GameManager.player_manager.register_player(self);
 	#animation.bind_logic(_logic)  
 	state_hub.set_up_root(Player_state.new());
-	GameManager.cursor_manager.on(GameManager.cursor_manager.EVT_LMB_DOWN, "player_shoot", Callable(self, "_on_lmb_down"));
-	
+	#print(GameManager.cursor_manager.get_mouse_world_pos());
+	GameManager.cursor_manager.on(GameManager.cursor_manager.EVT_LMB_DOWN, "player_shoot", Callable(self, "player_shooting"));
+
 	
 	
 func move(delta: float, speed:float = _character.player_velocity) -> void:
@@ -40,9 +41,11 @@ func move(delta: float, speed:float = _character.player_velocity) -> void:
 func avoid(delta:float) -> void:
 	pass
 
-func _on_lmb_down(payload: Dictionary) -> void:
-	print("左键按下 world_pos=", payload["world_pos"])
-
+func player_shooting(payload: Dictionary) -> void:
+	#print("左键按下 world_pos=", payload["world_pos"])
+	var shoot_script:Array = logic.get_shoot_script(payload["world_pos"]);
+	#caster.
+	caster.preemption(shoot_script)
 	
 func shoot(bullet_script:Array)->void:
 	if caster.is_running:

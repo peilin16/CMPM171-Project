@@ -27,8 +27,7 @@ func _ready(runner: Runner, configure: Configure) ->void:
 	#if not runner.is_ready:
 	_prepare(runner , configure );
 	_shoot = true;
-	if shoot_configure.aim_mode == Shoot_configure.AimMode.TARGET:
-		shoot_configure.move_configure.target = shoot_configure.target;
+
 
 func _prepare(runner: Runner, configure: Configure)->void:
 	shooter = shoot_configure.origin;
@@ -86,7 +85,7 @@ func shoot_one(runner: Shoot_runner)->void:
 	bullet_scene.bullet.origin = shooter;
 	bullet_scene.bullet.owner_id = shooter.get_id();
 	bullet_scene._update_collision();
-	
+	bullet_scene.bullet.faction = shoot_configure.faction;
 	bullet_scene.activate();
 	
 func configure_bullet(configure: Shoot_configure ) ->Bullet_controller:
