@@ -62,7 +62,7 @@ func clear() -> void:
 func _physics_process(delta: float) -> void:
 	if not is_running:
 		return
-	task_runner._physics_process(delta)
+	#task_runner._physics_process(delta)
 	if task_runner.is_done:
 		is_running = false
 		is_finish = true

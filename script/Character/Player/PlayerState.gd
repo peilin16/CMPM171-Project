@@ -11,8 +11,7 @@ func enter(controller, hub: State_hub, anim: Animation_player) -> void:
 	current_state = default_state;
 	state_name = "RumiaState"
 
-	
-
+#taskrunner 
 
 func on_ready(controller, hub: State_hub, anim: Animation_player) -> void:
 	var idle := Player_idle_state.new(hub);

@@ -89,6 +89,14 @@ func clear() -> void:
 	_built_queue.clear()
 	#current_configure = null
 
+func _physics_process(delta: float) -> void:
+	if not is_running:
+		return
+	#task_runner._physics_process(delta)
+	if task_runner.is_done:
+		is_running = false
+		is_finish = true
+
 
 ## optional: re-run building if you modified _script at runtime
 #func rebuild() -> void:
