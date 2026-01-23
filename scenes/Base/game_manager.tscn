@@ -38,3 +38,5 @@ script = ExtResource("15_rxwbf")
 
 [node name="CameraManager" type="Node" parent="."]
 script = ExtResource("10_pw3kq")
+
+[node name="CursorManager" type="Node" parent="."]
