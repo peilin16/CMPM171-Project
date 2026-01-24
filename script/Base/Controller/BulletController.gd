@@ -13,7 +13,7 @@ var controller_id :int;#id
 @export var texture_controller:Bullet_texture_controller;
 
 #@onready var subsystems: SubSystemHub = $SubSystemHub  
-@onready var movement:Movement_scheduler = $MovementScheduler
+@onready var scheduler:Scheduler = $Scheduler
 
 #@onready var _state_hub: State_hub = $StateHub;
 @onready var sprite: Sprite2D = $BulletSprite
@@ -47,7 +47,7 @@ func _ready() -> void:
 	notifier.connect("screen_exited", Callable(self, "_on_screen_exited"));
 	set_skin();
 	_update_collision()
-	_logic.set_up_move(movement);
+	_logic.set_up_scheduler(scheduler);
 	_make_material_unique()
 
 func _on_area_entered(area: Area2D) -> void:
@@ -68,6 +68,8 @@ func _on_area_entered(area: Area2D) -> void:
 
 
 func set_skin()->void:
+	if texture_controller == null:
+		return
 	if bullet == null:
 		texture_controller.set_skin(0);
 	elif bullet.is_reflect:
@@ -80,14 +82,14 @@ func set_skin()->void:
 
 #func _set_up_state()->void:
 	#_state_hub.appand_map(Idle_state_object.new());
-
-func reflect():
-	bullet.is_reflect = true;
-	bullet.faction = Bullet.Faction.PLAYER
-	_logic.reflect_bullet(movement.get_current_order())
-
-	_update_collision();
-	set_skin();
+#
+#func reflect():
+	#bullet.is_reflect = true;
+	#bullet.faction = Bullet.Faction.PLAYER
+	#_logic.reflect_bullet(movement.get_current_order())
+#
+	#_update_collision();
+	#set_skin();
 	
 func _on_screen_exited() -> void:
 	# if bullet exited screen
@@ -181,14 +183,14 @@ func activate(behavoir_code: String = "")->void:
 	GameManager.bullet_manager.register_active_bullet(controller_id);
 	#_task._start(task_queue); 
 	bullet.is_active = true
-	movement.start();
+	scheduler.start();
 	set_skin();
 	
 func deactivate():
 	GameManager.bullet_manager.unregister_active_bullet(controller_id);
 	bullet.is_active = false;
 	#_task.cancel_all();
-	movement.cancel();
+	scheduler.cancel();
 	_dissolving = false
 	if sprite and sprite.material:
 		sprite.material.set("shader_parameter/dissolve", 0.0)

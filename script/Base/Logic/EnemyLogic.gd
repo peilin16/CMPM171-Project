@@ -5,8 +5,7 @@ signal hp_changed(current: int, max: int)
 signal died
 signal hit_applied(amount: int)
 
-var caster:Cast_scheduler;
-var movement:Movement_scheduler
+var scheduler:Scheduler;
 var behavoir:String;
 var queue: Array[Order] = [];
 
@@ -19,10 +18,8 @@ func _set_hp(v: int) -> void:
 	if character.hp <= 0:
 		emit_signal("died")
 
-func set_up_caster(c:Cast_scheduler)->void:
-	caster = c;
-func set_up_move(m:Movement_scheduler)->void:
-	movement = m;
+func set_up_scheduler(c:Scheduler)->void:
+	scheduler = c;
 #func apply_damage(amount: int) -> void:
 	#if amount <= 0: return
 	#_set_hp(data.hp - amount)

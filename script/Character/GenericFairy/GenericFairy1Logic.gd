@@ -10,7 +10,6 @@ func apply_behavior(code: String = "") -> void:
 	if code != "":
 		behavoir = code
 
-
 	match behavoir:
 		"_first_time_line_level1":
 			character.max_hp = 10
@@ -32,34 +31,52 @@ func apply_behavior(code: String = "") -> void:
 			_build_behavior_default();
 			
 func _first_time_line_level1()->void:
-	var move_script = [
-	  	{"type":"direction_linear",
-		"speed":110,
-		"angle":180,
 
-	  	}
-		];
-	movement.setup(move_script);
-	movement.start();
 	
 
-	var cast_script = [
-		{"type":"timer", "sec":4},
+	var script = [
+		
+		#{"action":"timer", "sec":0.1},
+	  	{
+			"action": "composite",
+			"array":[
+				{
+					"action": "move",
+					"type":"direction_linear",
+					"speed":110,
+					"angle":180,
+			  	},
 
-	  	{"type":"mutiple",
-	   "pool":"MEDIUM_ROUND_BULLET",
-	   "aim":"OBJECT",
-	   "speed":200,
-	   "interval":1.2,
-	   "num":4,
-	   "color":"BLUE",
-	   "vfx":[
-			{"mode":"start", "name":"MuzzleFlash1", "life":0.15, "front":true},
+				{
+					"action": "sequence",
+					"array":[
+						{
+							"action":"timer", 
+							"sec":3
+						},
+						{
+							"action":"cast",
+							"type":"multi",
+						   "pool":"MEDIUM_ROUND_BULLET",
+						   "aim":"OBJECT",
+						   "speed":200,
+						   "interval":0.3,
+						   "num":4,
+						   "color":"BLUE",
+						   "vfx":[
+								{"shoot mode":"start","mode":"shoot", "name":"MuzzleFlash1", "life":2, "front":true,"follow":true},
+								]
+			  			}
+					]
+				}
 			]
-	  	}
-		]	
-	caster.setup(cast_script);
-	caster.start();
+		}
+				
+				
+
+	]	
+	scheduler.setup(script);
+	scheduler.start();
 	
 
 func _build_behavior_grunt_straight() -> void:
@@ -94,26 +111,29 @@ func _build_behavior_circle_fairy() -> void:
 
 
 func _build_behavior_default()->void:
-	var cast_script = [
-		{"type":"timer", "sec":0.2},
+	var script = [
+		{"action":"timer", "sec":0.2},
+	  	{
+			"action":"cast",
+			"type":"random_fan",
+		   "pool":"MEDIUM_ROUND_BULLET",
+		   "aim":"OBJECT",
+		   "speed":200,
+		   "spread":23,
+		   "count":4,
+		   "time":4,
+		   "interval":0.4,
+		   "color":"BLUE",
+		   "color_seed":2,
+		   "vfx":[
+				{"mode":"start", "name":"MuzzleFlash1", "life":0.15, "front":true},
+				]
+		  },
+		{"action":"timer", "sec":3.0},
 
-	  	{"type":"random_fan",
-	   "pool":"MEDIUM_ROUND_BULLET",
-	   "aim":"OBJECT",
-	   "speed":200,
-	   "spread":23,
-	   "count":4,
-	   "time":4,
-	   "interval":0.4,
-	   "color":"BLUE",
-	   "color_seed":2,
-	   "vfx":[
-			{"mode":"start", "name":"MuzzleFlash1", "life":0.15, "front":true},
-			]
-	  	},
-		{"type":"timer", "sec":3.0},
-
-		  {"type":"single",
+		  {
+			"action":"cast",
+			"type":"single",
 		   "aim":"TARGET",
 		   "target": Vector2(-200, 200),
 		   "pool":"MEDIUM_ROUND_BULLET",
@@ -121,19 +141,5 @@ func _build_behavior_default()->void:
 		   "color":"RED"
 		  },
 		]	
-	caster.setup(cast_script);
-	#caster.start();
-	var move_script = [
-		{"type":"timer", "sec":0.2},
-
-	  	{"type":"arc",
-		"speed":120,
-		"target":GameManager.player_manager.get_player_position(),
-		"vertex":Vector2(0,300),
-		"is_continue":false
-		#"ac":4,
-		#"angle": 130
-	  	}
-		];
-	movement.setup(move_script);
-	movement.start();
+	scheduler.setup(script);
+	scheduler.start();

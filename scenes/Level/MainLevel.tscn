@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://okvl3jg17a5h"]
+[gd_scene load_steps=3 format=3 uid="uid://okvl3jg17a5h"]
 
 [ext_resource type="Script" uid="uid://cdj8cw7oe3du7" path="res://script/Base/Other/Main_camera.gd" id="1_ba6t7"]
 [ext_resource type="Script" uid="uid://dghk1chdkrxqs" path="res://script/Level/MainLevelController.gd" id="1_o46w5"]
-[ext_resource type="PackedScene" uid="uid://drquj63hxwl5c" path="res://scenes/Character/Generic_fairy_1.tscn" id="3_gepok"]
 
 [node name="MainLevel" type="Node2D"]
 script = ExtResource("1_o46w5")
@@ -18,5 +17,3 @@ metadata/_custom_type_script = "uid://cdj8cw7oe3du7"
 [node name="VFXContainer" type="Node2D" parent="."]
 
 [node name="EnemyContainer" type="Node2D" parent="."]
-
-[node name="GnericFiary1" parent="EnemyContainer" instance=ExtResource("3_gepok")]

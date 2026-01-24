@@ -4,7 +4,7 @@ class_name  Player_controller
 
 @onready var hurtbox: Area2D = $HurtBox
 @onready var vfx_parser: VFX_spawner = $VFXSpawner;
-@onready var caster: Cast_scheduler = $CastScheduler;
+@onready var scheduler: Scheduler = $Scheduler;
 @onready var state_hub:State_hub = $StateHub;
 @export var logic:Player_logic;
 var input_vector := Vector2.ZERO;
@@ -45,11 +45,11 @@ func player_shooting(payload: Dictionary) -> void:
 	#print("左键按下 world_pos=", payload["world_pos"])
 	var shoot_script:Array = logic.get_shoot_script(payload["world_pos"]);
 	#caster.
-	caster.preemption(shoot_script)
+	scheduler.preemption(shoot_script)
 	
 func shoot(bullet_script:Array)->void:
-	if caster.is_running:
-		caster.preemption(bullet_script);
+	if scheduler.is_running:
+		scheduler.preemption(bullet_script);
 	else:
-		caster.setup(bullet_script);
-		caster.start();
+		scheduler.setup(bullet_script);
+		scheduler.start();

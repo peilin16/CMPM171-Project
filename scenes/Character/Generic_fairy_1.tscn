@@ -5,13 +5,13 @@
 [ext_resource type="Texture2D" uid="uid://buymoquarpnnp" path="res://assets/character/Generic Fairy/Fairy 1 Fly Right-Sheet.png" id="3_r4drq"]
 [ext_resource type="Script" uid="uid://u1lc0lg311dn" path="res://script/Action/STG/ShootRunner.gd" id="3_wqmd4"]
 [ext_resource type="Script" uid="uid://by12krurtjnq5" path="res://script/Action/Base/TaskRunner.gd" id="4_02khl"]
-[ext_resource type="Script" uid="uid://b8na7bb7sjrx3" path="res://script/Other/Scheduler/CastScheduler.gd" id="4_lxlqp"]
+[ext_resource type="Script" uid="uid://b8na7bb7sjrx3" path="res://script/Other/Scheduler/Scheduler.gd" id="4_lxlqp"]
 [ext_resource type="Script" uid="uid://cr0h73xvntvj0" path="res://script/Other/Tool/SubsystemHub.gd" id="5_7jus5"]
 [ext_resource type="Script" uid="uid://df6qec5acffqb" path="res://script/Action/Move/MoveRunner.gd" id="6_f1dv4"]
 [ext_resource type="Script" uid="uid://bj7f4p0ml38qw" path="res://script/State/StateHub.gd" id="9_ovlrv"]
 [ext_resource type="Script" uid="uid://drv02ar36c0qi" path="res://script/State/AnimationPlayer.gd" id="10_r4drq"]
+[ext_resource type="Script" uid="uid://bfrklaksr3n7b" path="res://script/Action/Rotate/RotateRunner.gd" id="11_1lwsn"]
 [ext_resource type="Script" uid="uid://b566wwblvpd6x" path="res://script/VFX/VFXSpawner.gd" id="12_canex"]
-[ext_resource type="Script" uid="uid://ecif63a6ruyr" path="res://script/Other/Scheduler/MovementScheduler.gd" id="13_sqn1p"]
 [ext_resource type="Script" uid="uid://c6e2v8pq72rv8" path="res://script/VFX/VFXParser.gd" id="15_ebta1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3qtup"]
@@ -144,29 +144,24 @@ script = ExtResource("9_ovlrv")
 [node name="AnimationPlayer" type="Node2D" parent="StateHub"]
 script = ExtResource("10_r4drq")
 
-[node name="CastScheduler" type="Node2D" parent="."]
+[node name="Scheduler" type="Node2D" parent="."]
 script = ExtResource("4_lxlqp")
 
-[node name="TaskRunner" type="Node2D" parent="CastScheduler"]
+[node name="TaskRunner" type="Node2D" parent="Scheduler"]
 script = ExtResource("4_02khl")
 
-[node name="SubActionHub" type="Node2D" parent="CastScheduler/TaskRunner"]
+[node name="SubActionHub" type="Node2D" parent="Scheduler/TaskRunner"]
 script = ExtResource("5_7jus5")
 
-[node name="ShootRunner" type="Node2D" parent="CastScheduler/TaskRunner/SubActionHub"]
+[node name="ShootRunner" type="Node2D" parent="Scheduler/TaskRunner/SubActionHub"]
 script = ExtResource("3_wqmd4")
 
-[node name="MovementScheduler" type="Node2D" parent="."]
-script = ExtResource("13_sqn1p")
-
-[node name="TaskRunner" type="Node2D" parent="MovementScheduler"]
-script = ExtResource("4_02khl")
-
-[node name="SubActionHub" type="Node2D" parent="MovementScheduler/TaskRunner"]
-script = ExtResource("5_7jus5")
-
-[node name="MoveRunner" type="Node2D" parent="MovementScheduler/TaskRunner/SubActionHub"]
+[node name="MoveRunner" type="Node2D" parent="Scheduler/TaskRunner/SubActionHub"]
 script = ExtResource("6_f1dv4")
+
+[node name="RotateRunner" type="Node2D" parent="Scheduler/TaskRunner/SubActionHub"]
+script = ExtResource("11_1lwsn")
+metadata/_custom_type_script = "uid://bfrklaksr3n7b"
 
 [node name="VFXParser" type="Node2D" parent="."]
 script = ExtResource("15_ebta1")

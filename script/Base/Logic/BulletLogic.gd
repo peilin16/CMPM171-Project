@@ -4,7 +4,7 @@ class_name Bullet_logic
 var controller:Bullet_controller;
 var bullet:Bullet;
 #var caster:Cast_scheduler;
-var movement:Movement_scheduler
+var scheduler:Scheduler
 
 
 func _init(c:Bullet_controller = null) -> void:
@@ -16,8 +16,8 @@ func set_up_obj(b:Bullet)->void:
 	
 #func set_up_caster(c:Cast_scheduler)->void:
 	#caster = c;
-func set_up_move(m:Movement_scheduler)->void:
-	movement = m;
+func set_up_scheduler(m:Scheduler)->void:
+	scheduler = m;
 
 	
 func reflect_bullet(current_order:Order)->void:
@@ -31,5 +31,5 @@ func reflect_bullet(current_order:Order)->void:
 			"target":bullet.origin.get_actor_position()
 	  		}
 		];
-	movement.preemption(move_script);
+	scheduler.preemption(move_script);
 	#return new_order;

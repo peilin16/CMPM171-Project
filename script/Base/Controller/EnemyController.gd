@@ -11,8 +11,7 @@ var _logic :enemy_logic;
 #@onready var _caster: caster = $Caster;
 #@onready var _spring: Spring = $Spring;
 #@onready var _task: Task_runner = $TaskRunner
-@onready var caster: Cast_scheduler = $CastScheduler
-@onready var movement: Movement_scheduler = $MovementScheduler
+@onready var scheduler: Scheduler = $Scheduler
 @onready var vfx_parser: VFX_parser = $VFXParser
 #@onready var widget_spawner: Widget_spawner = $WidgetSpawner;
 @export var death_gravity: float = 100.0       # how fast enemy falls when dying
@@ -38,8 +37,7 @@ func _ready() -> void:
 	await get_tree().create_timer(0.5).timeout
 	if is_spawn == false:
 		is_spawn = true;
-	_logic.set_up_caster(caster);	
-	_logic.set_up_move(movement)
+	_logic.set_up_scheduler(scheduler);
 	#_task._start(_logic.get_queue());
 	hitable = true;
 	#
@@ -93,8 +91,8 @@ func death() -> void:
 	_character.weight = max(_character.weight * 0.3, 0.1)
 
 	# 2) stop AI / task logic
-	if movement:
-		movement.cancel();
+	
+	scheduler.cancel();
 
 
 	## 4)  give a small downward push so it starts to fall

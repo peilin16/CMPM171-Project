@@ -28,7 +28,6 @@ func _ready(runner: Runner, configure: Configure) ->void:
 	_prepare(runner , configure );
 	_shoot = true;
 
-
 func _prepare(runner: Runner, configure: Configure)->void:
 	shooter = shoot_configure.origin;
 	if shoot_configure.color == Shoot_configure.ColorType.RANDOM:
@@ -37,7 +36,7 @@ func _prepare(runner: Runner, configure: Configure)->void:
 		
 	#VFX shooting_vfx_configure
 	if not shoot_configure.start_vfx.is_empty():
-		start_vfx = shooter.vfx_parser.setup(shoot_configure.start_vfx);
+		start_vfx = shoot_configure.controller.vfx_parser.setup(shoot_configure.start_vfx);
 	if not shoot_configure.shooting_vfx.is_empty():
 		shooter.vfx_parser.setup(shoot_configure.shooting_vfx);
 	
@@ -49,7 +48,7 @@ func play(runner: Runner, configure: Configure, delta: float) -> bool:
 		return true
 	
 		#bullet config
-	if start_vfx != null and start_vfx.blocking(delta):
+	if start_vfx != null and not start_vfx.blocking(delta):
 		return false;
 	
 	shoot_one(shoot_runner);
@@ -74,8 +73,8 @@ func shoot_one(runner: Shoot_runner)->void:
 
 	var bullet_scene:Bullet_controller = configure_bullet(shoot_configure);
 	# Decide bullet color
-	bullet_scene.movement.clear()# .task_queue.clear();
-	bullet_scene.movement.setup(configure_move(shoot_configure));
+	bullet_scene.scheduler.clear()# .task_queue.clear();
+	bullet_scene.scheduler.setup(configure_move(shoot_configure));
 	
 	if bullet_scene.get_parent() != shoot_runner.container:
 		if bullet_scene.is_inside_tree():
@@ -85,7 +84,7 @@ func shoot_one(runner: Shoot_runner)->void:
 	bullet_scene.bullet.origin = shooter;
 	bullet_scene.bullet.owner_id = shooter.get_id();
 	bullet_scene._update_collision();
-	bullet_scene.bullet.faction = shoot_configure.faction;
+	
 	bullet_scene.activate();
 	
 func configure_bullet(configure: Shoot_configure ) ->Bullet_controller:
@@ -133,6 +132,7 @@ func configure_move(configure: Shoot_configure)->Array:
 	if configure.aim_mode == Shoot_configure.AimMode.TARGET:
 		move_script = [
 			{
+				"action":"move",
 				"mode":"linear_target",
 				"target":configure.target,
 				"max_velocity":configure.speed,
@@ -142,6 +142,7 @@ func configure_move(configure: Shoot_configure)->Array:
 	elif configure.aim_mode == Shoot_configure.AimMode.ANGLE:
 		move_script = [
 			{
+				"action":"move",
 				"mode":"linear_direction",
 				"deg":configure.angle,
 				"max_velocity":configure.speed,
@@ -156,6 +157,7 @@ func configure_move(configure: Shoot_configure)->Array:
 			position = GameManager.player_manager.get_player_position();
 		move_script = [
 			{
+				"action":"move",
 				"mode":"linear_target",
 				"target":position,
 				"max_velocity":configure.speed,

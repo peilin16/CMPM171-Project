@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://kks7ir0kgg1a"]
+[gd_scene load_steps=15 format=3 uid="uid://kks7ir0kgg1a"]
 
 [ext_resource type="Script" uid="uid://csieovs421mxl" path="res://script/Character/Player/PlayerController.gd" id="1_beklg"]
 [ext_resource type="Script" uid="uid://bj7f4p0ml38qw" path="res://script/State/StateHub.gd" id="2_4mqus"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://b566wwblvpd6x" path="res://script/VFX/VFXSpawner.gd" id="4_8fgnd"]
 [ext_resource type="Script" uid="uid://c6e2v8pq72rv8" path="res://script/VFX/VFXParser.gd" id="4_i7wy1"]
 [ext_resource type="Script" uid="uid://by12krurtjnq5" path="res://script/Action/Base/TaskRunner.gd" id="6_85mch"]
-[ext_resource type="Script" uid="uid://cr0h73xvntvj0" path="res://script/Other/Tool/SubsystemHub.gd" id="7_h3n2c"]
 [ext_resource type="Texture2D" uid="uid://oya8wpn6jmc8" path="res://icon.svg" id="7_xpp3s"]
 [ext_resource type="Script" uid="uid://u1lc0lg311dn" path="res://script/Action/STG/ShootRunner.gd" id="8_mpo6r"]
 
@@ -57,11 +56,7 @@ metadata/_custom_type_script = "uid://b8na7bb7sjrx3"
 script = ExtResource("6_85mch")
 metadata/_custom_type_script = "uid://by12krurtjnq5"
 
-[node name="SubActionHub" type="Node2D" parent="Scheduler/TaskRunner"]
-script = ExtResource("7_h3n2c")
-metadata/_custom_type_script = "uid://cr0h73xvntvj0"
-
-[node name="ShootRunner" type="Node2D" parent="Scheduler/TaskRunner/SubActionHub"]
+[node name="ShootRunner" type="Node2D" parent="Scheduler"]
 script = ExtResource("8_mpo6r")
 metadata/_custom_type_script = "uid://u1lc0lg311dn"
 

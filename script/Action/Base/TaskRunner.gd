@@ -9,19 +9,24 @@ var _queue: Array[Order] = []
 var _current: Order = null
 var actor
 var _stop:bool = true
-var is_done:bool = false;
+var is_current_done:bool = true;
+var is_all_done:bool = false;
 var runner:Runner;
+
+
 func _ready() -> void:
 	actor = get_parent();
 	#subsystems = actor.get_node("SubSystemHub");
 	reset_queue()
-
+	
 func reset_queue() -> void:
 	_queue = orders.duplicate()
 	_current = null
 
+
 func set_runner(r:Runner)->void:
 	runner = r;
+
 
 func get_runner_for(belong: System.Belong) -> Runner:
 	if subsystems == null:
@@ -29,16 +34,19 @@ func get_runner_for(belong: System.Belong) -> Runner:
 	return subsystems.get_runner_for(belong);
 
 func _start(queue: Array[Order] = [] ) ->void:
-	_stop = false;
-	is_done = true;
+	is_all_done = false;
 	if not queue.is_empty(): 
-		_queue = queue;
-	else:
-		return;
+		_queue.clear()
+		
+	_queue = queue;
+	if _queue.is_empty():
+		return
+	_stop = false;
+	is_current_done = true;
 	#if not subsystems:
 		#subsystems = actor.subsystems;
-	_current = _queue.pop_front();
-	_current.start(actor, self);
+	#_current = _queue.pop_front();
+	#_current.start(actor, self);
 
 #add order
 func add_order(order: Order,index:int = -1 )->void:
@@ -50,19 +58,19 @@ func add_order(order: Order,index:int = -1 )->void:
 
 
 func _physics_process(delta: float) -> void:
-	if _stop:
+	if _stop or is_all_done:
 		return;
-	if is_done:
+	if is_current_done:
 		if _queue.is_empty():
 			return
 		_current = _queue.pop_front()
 		_current.start(actor, self)
 
 	if _current:
-		is_done = _current.update(actor, self, delta);
+		is_current_done = _current.update(actor, self, delta);
 		
-		if _queue.is_empty():
-			is_done = true;
+		if _queue.is_empty() and is_current_done:
+			is_all_done = true;
 
 #cancel all task
 func cancel_all() ->void:

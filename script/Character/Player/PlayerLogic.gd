@@ -6,7 +6,9 @@ class_name Player_logic;
 
 func get_shoot_script(target:Vector2)->Array:
 	var default_script =[
-	{"type":"single",
+	{
+		"action":"shoot",
+		"type":"single",
 	   "pool":"MEDIUM_ROUND_BULLET",
 	   "aim":"TARGET",
 		"target":target,
