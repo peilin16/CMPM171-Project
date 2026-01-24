@@ -51,7 +51,7 @@ func _ready() -> void:
 	_make_material_unique()
 
 func _on_area_entered(area: Area2D) -> void:
-	if bullet.is_reflect:
+	if bullet.is_reflect or not bullet.is_active:
 		return;
 	#if area.component == Rumia_controller.Component.HEALTHYRANGE:
 		#var player := area.get_parent() as Rumia_controller
@@ -180,6 +180,7 @@ func _set_shader_vec2(param: String, v: Vector2) -> void:
 func activate(behavoir_code: String = "")->void:
 	GameManager.bullet_manager.register_active_bullet(controller_id);
 	#_task._start(task_queue); 
+	bullet.is_active = true
 	movement.start();
 	set_skin();
 	
