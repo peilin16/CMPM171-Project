@@ -4,12 +4,13 @@ class_name Task_runner
 
 @export var orders: Array[Order] = []
 @onready var subsystems: Sub_action_hub = $SubActionHub 
-var runner:Runner;
+
 var _queue: Array[Order] = []
 var _current: Order = null
 var actor
 var _stop:bool = true
 var is_done:bool = false;
+var runner:Runner;
 func _ready() -> void:
 	actor = get_parent();
 	#subsystems = actor.get_node("SubSystemHub");
@@ -29,7 +30,7 @@ func get_runner_for(belong: System.Belong) -> Runner:
 
 func _start(queue: Array[Order] = [] ) ->void:
 	_stop = false;
-	is_done = false;
+	is_done = true;
 	if not queue.is_empty(): 
 		_queue = queue;
 	else:
@@ -51,16 +52,15 @@ func add_order(order: Order,index:int = -1 )->void:
 func _physics_process(delta: float) -> void:
 	if _stop:
 		return;
-	if _current == null:
+	if is_done:
 		if _queue.is_empty():
 			return
 		_current = _queue.pop_front()
 		_current.start(actor, self)
 
 	if _current:
-		var is_finished := _current.update(actor, self, delta);
-		if is_finished:
-			_current = null;
+		is_done = _current.update(actor, self, delta);
+		
 		if _queue.is_empty():
 			is_done = true;
 
