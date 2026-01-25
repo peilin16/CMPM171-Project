@@ -2,7 +2,6 @@
 extends Node2D
 class_name Task_runner
 
-@export var orders: Array[Order] = []
 @onready var subsystems: Sub_action_hub = $SubActionHub 
 
 var _queue: Array[Order] = []
@@ -20,7 +19,7 @@ func _ready() -> void:
 	reset_queue()
 	
 func reset_queue() -> void:
-	_queue = orders.duplicate()
+	_queue.clear();
 	_current = null
 
 

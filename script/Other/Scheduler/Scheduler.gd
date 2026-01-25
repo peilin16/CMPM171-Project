@@ -77,14 +77,14 @@ func _build_queue_from_script(script: Array) -> Array[Order]:
 
 func _build_order(step:Dictionary)->Order:
 	var order :Order;
-	match step.get("parser",step.get("action","") ):
+	match step.get("action",step.get("parser","") ):
 		"timer","delay":
 			order = _make_timer_order(step.get("sec", 0.0))
 		"cast","shoot":
 			order = cast_parser.build_orders_from_step(step);
 		"move","movement":
 			order = move_parser.build_orders_from_step(step)
-		"rotate","round":
+		"rotate","twirl":
 			order = rotate_parser.build_orders_from_step(step)
 		"composite","synchronous":
 			order = _make_composite_order(step);

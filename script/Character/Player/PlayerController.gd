@@ -32,10 +32,10 @@ func move(delta: float, speed:float = _character.player_velocity) -> void:
 	input_vector.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	input_vector.y = Input.get_action_strength("down") - Input.get_action_strength("up")
 	input_vector = input_vector.normalized()
-	if Input.is_action_pressed("slow"):
-		velocity = input_vector * _character.rumia_slow_velocity;
-	else:
-		velocity = input_vector * speed #_character.rumia_velocity;
+	#if Input.is_action_pressed("slow"):
+		#velocity = input_vector * _character.rumia_slow_velocity;
+	#else:
+		#velocity = input_vector * speed #_character.rumia_velocity;
 	move_and_slide();
 
 func avoid(delta:float) -> void:

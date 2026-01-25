@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bfwcdh78eqhc0"]
+[gd_scene load_steps=16 format=3 uid="uid://bfwcdh78eqhc0"]
 
 [ext_resource type="Script" uid="uid://8mfw6sc2fmo6" path="res://script/Bullet/RoundBullet/MediumRoundBulletController.gd" id="1_2rsdx"]
 [ext_resource type="Shader" uid="uid://csge0h8sy48lv" path="res://shader/MediumRoundBullet.gdshader" id="2_6s3kd"]
@@ -11,7 +11,8 @@
 [ext_resource type="Script" uid="uid://b8na7bb7sjrx3" path="res://script/Other/Scheduler/Scheduler.gd" id="8_4p0c3"]
 [ext_resource type="Script" uid="uid://u1lc0lg311dn" path="res://script/Action/STG/ShootRunner.gd" id="8_6s3kd"]
 [ext_resource type="Script" uid="uid://by12krurtjnq5" path="res://script/Action/Base/TaskRunner.gd" id="10_ywnlv"]
-[ext_resource type="Script" uid="uid://cavt13fjl6be6" path="res://script/VFX/VFXControllerSpawner.gd" id="13_luhwo"]
+[ext_resource type="Script" uid="uid://c6e2v8pq72rv8" path="res://script/VFX/VFXParser.gd" id="12_iv77o"]
+[ext_resource type="Script" uid="uid://b566wwblvpd6x" path="res://script/VFX/VFXSpawner.gd" id="13_8hha0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jlwld"]
 shader = ExtResource("2_6s3kd")
@@ -49,9 +50,6 @@ scale = Vector2(1.75, 1.5)
 scale = Vector2(0.4799989, 0.52000123)
 shape = SubResource("CircleShape2D_djc4k")
 
-[node name="VFXSpawner" type="Node2D" parent="."]
-script = ExtResource("13_luhwo")
-
 [node name="Scheduler" type="Node2D" parent="."]
 script = ExtResource("8_4p0c3")
 
@@ -70,3 +68,9 @@ script = ExtResource("7_ywnlv")
 [node name="ShootRunner" type="Node2D" parent="Scheduler/TaskRunner/SubActionHub"]
 unique_name_in_owner = true
 script = ExtResource("8_6s3kd")
+
+[node name="VFXParser" type="Node2D" parent="."]
+script = ExtResource("12_iv77o")
+
+[node name="VFXSpawner" type="Node2D" parent="VFXParser"]
+script = ExtResource("13_8hha0")
