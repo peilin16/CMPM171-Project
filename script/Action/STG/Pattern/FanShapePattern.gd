@@ -104,7 +104,7 @@ func _shoot_one_by_deg(runner: Runner, cfg: Shoot_configure, deg: float) -> void
 				"type":"direction_linear",
 				"angle":deg,
 				"speed":cfg.speed,
-				"wave": cfg.wave,
+				#"wave": cfg.wave,
 				"sec":shoot_configure.block_sec_to_use_custom_script
 			}
 		]
@@ -117,7 +117,7 @@ func _shoot_one_by_deg(runner: Runner, cfg: Shoot_configure, deg: float) -> void
 				"type":"direction_linear",
 				"angle":deg,
 				"speed":cfg.speed,
-				"wave": cfg.wave,
+				#"wave": cfg.wave,
 			}
 		]
 
