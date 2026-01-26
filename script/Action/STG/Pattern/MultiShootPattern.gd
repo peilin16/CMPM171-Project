@@ -27,7 +27,8 @@ func play(runner: Runner, configure: Configure, delta: float) -> bool:
 
 	#if not _shoot:
 		#return false
-
+	if not start_vfx_bool(delta):
+		return false;
 	# 1) Start immediately on first frame
 	if not started:
 		shoot_configure.speed = shoot_configure.speed_arr[current_index];

@@ -48,7 +48,7 @@ func play(runner: Runner, configure: Configure, delta: float) -> bool:
 		return true
 	
 		#bullet config
-	if start_vfx != null and not start_vfx.blocking(delta):
+	if not start_vfx_bool(delta):
 		return false;
 	
 	shoot_one(shoot_runner);

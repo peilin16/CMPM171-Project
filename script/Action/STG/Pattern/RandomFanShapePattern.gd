@@ -148,6 +148,7 @@ func _shoot_one_by_deg(runner: Runner, cfg: Shoot_configure, deg: float) -> void
 	if shoot_configure.block_sec_to_use_custom_script != 0 and not shoot_configure.move_script.is_empty():
 		new_script  = [
 			{
+				"action":"move",
 				"type":"direction_linear",
 				"angle":deg,
 				"speed":cfg.speed,
@@ -160,6 +161,7 @@ func _shoot_one_by_deg(runner: Runner, cfg: Shoot_configure, deg: float) -> void
 	else:
 		new_script  = [
 			{
+				"action":"move",
 				"type":"direction_linear",
 				"angle":deg,
 				"speed":cfg.speed,
