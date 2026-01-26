@@ -34,14 +34,14 @@ func _ready() -> void:
 		_character = Enemy.new();
 	if _logic == null:
 		_logic = enemy_logic.new(self, _character);
-	await get_tree().create_timer(0.5).timeout
+	#await get_tree().create_timer(0.5).timeout
 	if is_spawn == false:
 		is_spawn = true;
 	_logic.set_up_scheduler(scheduler);
 	#_task._start(_logic.get_queue());
 	hitable = true;
 	#
-	_logic.apply_behavior();
+	
 	#_task._queue = _logic.queue;
 	
 
@@ -61,7 +61,7 @@ func activate(behavoir_code:String = "")->void:
 	_logic.reset();
 	_logic.behavoir = behavoir_code;
 	GameManager.enemy_manager.register_active_enemy(controller_id);
-	
+	_logic.apply_behavior();
 #be spawn
 func deactivate()->void:
 	is_spawn = false;
