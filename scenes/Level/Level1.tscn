@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://okvl3jg17a5h"]
+[gd_scene load_steps=5 format=3 uid="uid://okvl3jg17a5h"]
 
 [ext_resource type="Script" uid="uid://dghk1chdkrxqs" path="res://script/Level/Level1Controller.gd" id="1_h32uy"]
 [ext_resource type="Script" uid="uid://cdj8cw7oe3du7" path="res://script/Base/Other/Main_camera.gd" id="2_p0hel"]
+[ext_resource type="Script" uid="uid://byl0aawy0yrv7" path="res://script/Level/Base/WaveDirector.gd" id="3_8mqkg"]
+[ext_resource type="Script" uid="uid://dkfayiq4hb6yc" path="res://script/Level/Base/SubDirector.gd" id="4_8x4nf"]
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_h32uy")
@@ -17,3 +19,13 @@ metadata/_custom_type_script = "uid://cdj8cw7oe3du7"
 [node name="VFXContainer" type="Node2D" parent="."]
 
 [node name="EnemyContainer" type="Node2D" parent="."]
+
+[node name="WaveDirector" type="Node2D" parent="."]
+script = ExtResource("3_8mqkg")
+metadata/_custom_type_script = "uid://byl0aawy0yrv7"
+
+[node name="SubDirector" type="Node2D" parent="WaveDirector"]
+script = ExtResource("4_8x4nf")
+metadata/_custom_type_script = "uid://dkfayiq4hb6yc"
+
+[node name="SpawnDirector" type="Node2D" parent="WaveDirector/SubDirector"]

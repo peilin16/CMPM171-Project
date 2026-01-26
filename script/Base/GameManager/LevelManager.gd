@@ -1,7 +1,7 @@
 extends Node
 class_name LevelManager
 
-@export var current_level := Main_level_controller.new();
+@export var current_level := Level1_controller.new();
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
