@@ -24,8 +24,8 @@ func play(runner: Runner, configure: Configure, delta: float) -> bool:
 	#if cfg == null:
 		#return true
 
-	if shoot_configure.start_vfx_configure != null and not shoot_configure.start_vfx_configure.blocking(delta):
-		return false
+	if not start_vfx_bool(delta):
+		return false;
 
 	_cooldown -= delta
 	if _cooldown > 0.0:

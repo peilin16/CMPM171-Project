@@ -64,7 +64,11 @@ func deactive()->void:
 	pass
 
 
-	
+func start_vfx_bool( delta: float)->bool:
+	if start_vfx != null and not start_vfx.blocking(delta):
+		return false;
+	return true;
+		
 
 # call bullet pool
 func shoot_one(runner: Shoot_runner)->void:

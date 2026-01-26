@@ -44,7 +44,9 @@ func _build_simple_request(d: Dictionary) -> void:
 func  _build_shoot_request(d: Dictionary) -> void:
 	_built_request = Shoot_VFX_request.new();
 	_apply_base(d);
-	_built_request.block_time =  float(d.get("block", 0))
+	_built_request.block_time =  float(d.get("block", 0));
+	if _built_request.block_time ==0:
+		_built_request.block_time = _built_request.lifetime;
 	spawner.spawn(_built_request);
 
 func _build_request_from_dict(d: Dictionary) :
