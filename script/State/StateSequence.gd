@@ -31,7 +31,7 @@ func enter(controller, hub: State_hub, anim: Animation_player) -> void:
 	current_state = child_states[current_child_index]
 	current_state.enter(controller, hub, anim)
 	_playing = true;
-
+	
 
 func update(controller, hub: State_hub, anim: Animation_player, delta: float) -> void:
 	if _finished:
