@@ -14,7 +14,7 @@ func _ready() -> void:
 
 
 
-func spawn_enemy(name:String, _position:Vector2 ,behavior_code:String = "", override: Enemy = null) -> void:
+func spawn_enemy(name:String, _position:Vector2 ,behavior_code:String = "", texture_code:int = 0 , override: Enemy = null) -> void:
 	var _enemy_pool = enemy_pool_manager.get_pool(name);
 	var enemy = _enemy_pool.spawn_enemy();
 	
@@ -22,5 +22,5 @@ func spawn_enemy(name:String, _position:Vector2 ,behavior_code:String = "", over
 		enemy.override_data(override);
 	
 	enemy.set_actor_position(_position);
-	enemy.activate(behavior_code);
 	enemy_container.add_child(enemy);
+	enemy.activate(behavior_code,texture_code);

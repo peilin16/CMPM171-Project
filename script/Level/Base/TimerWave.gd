@@ -14,11 +14,12 @@ func start(sub: Sub_director) -> void:
 	# sub.background_director.scroll_speed = 50.0
 
 
-func update(sub: Sub_director, delta: float) -> bool:
+func update(sub: Sub_director, delta: float) -> void:
+	_elapsed += delta
+	
+func is_done(sub: Sub_director) ->bool:
 	if _finished:
 		return true
-
-	_elapsed += delta
 	if _elapsed >= duration:
 		_finished = true
 	return _finished

@@ -80,24 +80,7 @@ func _first_time_line_level1()->void:
 	
 
 func _build_behavior_grunt_straight() -> void:
-	var move_cfg := Move_configure.new()
-	move_cfg._simple_configure_for_direction(controller.get_actor_position(), 120.0, 90.0)
-	var move_pattern := Linear_move_pattern.new()
-
-	var move_order := Order.new()
-	move_order.system_configure = move_cfg
-	move_order.system_pattern = move_pattern
-	move_order.duration = 3.0
-	queue.append(move_order)
-
-	var shoot_cfg := Shoot_configure.new()
-	# shoot_cfg.xxx …
-	var shoot_pattern := Shooting_pattern.new()
-	var shoot_order := Order.new()
-	shoot_order.system_configure = shoot_cfg
-	shoot_order.system_pattern = shoot_pattern
-	shoot_order.duration = 2.0
-	queue.append(shoot_order);
+	pass
 	
 
 func _build_behavior_sniper_slow() -> void:

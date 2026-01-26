@@ -1,5 +1,5 @@
 extends Level
-class_name Main_level
+class_name Level1
 
 #Level
 #- BackgroundLayer     (z_index = 0)

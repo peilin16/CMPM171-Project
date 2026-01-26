@@ -44,8 +44,8 @@ func _physics_process(delta: float) -> void:
 	if current_wave == null:
 		return
 
-	
-	if current_wave.update(sub_director, delta):
+	current_wave.update(sub_director, delta)
+	if current_wave.is_done(sub_director):
 		current_wave.end(sub_director)
 		_next()
 
@@ -79,4 +79,5 @@ func set_up_config() ->void:
 func create_wave_from_config(config: Array) -> void:
 	for w in config:
 		var wave:= parser.setup(w);
+		wave.wave_director = self;
 		waves.append(wave);
