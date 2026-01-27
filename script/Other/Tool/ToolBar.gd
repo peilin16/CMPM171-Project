@@ -2,9 +2,10 @@ extends Node
 class_name Tool_bar
 
 
-@onready var gameIDGenerator: Node = $GameIDGenerator
-@onready var distanceMeasure: Node = $DistanceMeasure
-@onready var repeatableRandomGenerator: Node = $RepeatableRandomGenerator
-@onready var globalDelayCall: Node = $GlobalDelayCall
+@onready var gameIDGenerator: Game_Id_generator = $GameIDGenerator
+@onready var distanceMeasure: Distance_measure = $DistanceMeasure
+@onready var repeatableRandomGenerator: Repeatable_random_generator = $RepeatableRandomGenerator
+@onready var globalDelayCall: Global_delay_call = $GlobalDelayCall
+@onready var predicting_move:Predicting_move = $PredictingMove
 func _ready():
 	print("Tool bar ready.")
