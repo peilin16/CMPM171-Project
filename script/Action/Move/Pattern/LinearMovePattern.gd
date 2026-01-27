@@ -21,7 +21,8 @@ func _ready(runner: Runner, configure: Configure) -> void:
 	_last_dir = Vector2.RIGHT
 	_locked_dir = Vector2.ZERO
 	_use_locked_dir = false
-
+	record = Move_data.new();
+	
 	# If target mode + continue, lock direction once (aim mode)
 	if move_configure is Target_move_configure:
 		move_configure= configure as Target_move_configure
@@ -33,7 +34,8 @@ func _ready(runner: Runner, configure: Configure) -> void:
 
 			if move_configure.target != Vector2.ZERO:
 				_locked_dir = (move_configure.target - start).normalized()
-				_use_locked_dir = (_locked_dir != Vector2.ZERO)
+				_use_locked_dir = (_locked_dir != Vector2.ZERO);
+	record.reset(move_configure.start);
 	
 func play(runner: Runner, configure: Configure, delta: float) -> bool:
 	_elapsed += delta
@@ -65,11 +67,8 @@ func play(runner: Runner, configure: Configure, delta: float) -> bool:
 	pos += offset
 	move_runner.controller.set_actor_position(pos)
 
-	# 4) record
 	if record:
-		record.set_speed(_current_speed)
-		record.set_deg(rad_to_deg(dir.angle()))
-		record.moved_distance += offset.length()
+		record.record_motion(pos, delta);
 
 	# 5) finish condition
 	if configure is Direction_move_configure:

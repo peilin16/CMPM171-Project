@@ -35,7 +35,8 @@ func _ready(runner: Runner, configure: Configure) -> void:
 	_p2 = cfg.target
 	_p1 = _compute_vertex(cfg, _p0, _p2)
 
-	_build_lut(cfg.sample_count)
+	_build_lut(cfg.sample_count);
+	record.reset(cfg.start);
 	runner.is_ready = true
 
 
@@ -49,6 +50,8 @@ func play(runner: Runner, configure: Configure, delta: float) -> bool:
 		return true
 
 	_elapsed += delta
+
+
 
 	# 已经切到 continue-linear（到达目标后继续）
 	if _continue_linear:
@@ -67,15 +70,17 @@ func play(runner: Runner, configure: Configure, delta: float) -> bool:
 	if _moved_len >= _total_len - cfg.arrive_epsilon:
 		if cfg.is_continue:
 			# 固定到终点，拿末端切线当 continue 方向
-			r.controller.set_actor_position(_p2)
+			r.controller.set_actor_position(_p2);
+			record.record_motion(_p2,delta);
 			_last_tangent = _bezier_tangent(1.0).normalized()
 			_continue_linear = true
 			# 继续移动不结束
-			_record_state(_last_tangent, 0.0, 0.0) # 到达那一帧可选
+			#_record_state(_last_tangent, 0.0, 0.0) # 到达那一帧可选
 			return false
 		else:
+			
 			r.controller.set_actor_position(_p2)
-			_record_state(Vector2.ZERO, 0.0, 0.0)
+			record.record_motion(_p2,delta);
 			return true
 
 	# 4) len -> t
@@ -84,11 +89,11 @@ func play(runner: Runner, configure: Configure, delta: float) -> bool:
 	# 5) position
 	var pos := _bezier_point(t)
 	r.controller.set_actor_position(pos)
-
+	record.record_motion(pos,delta);
 	# 6) record
 	var tan := _bezier_tangent(t).normalized()
 	_last_tangent = tan
-	_record_state(tan, _current_speed, _current_speed * delta)
+	#_record_state(tan, _current_speed, _current_speed * delta)
 
 	return false
 
@@ -106,8 +111,9 @@ func _play_continue_linear(cfg: Arc_move_configure, dt: float) -> bool:
 	var offset := dir * _current_speed * dt
 	var pos := r.get_actor_position() + offset
 	r.controller.set_actor_position(pos)
-
-	_record_state(dir, _current_speed, offset.length())
+	#record.set_direction(pos);
+	record.record_motion(pos,dt);
+	#_record_state(dir, _current_speed, offset.length())
 	return false
 
 
@@ -205,7 +211,9 @@ func _len_to_t(s: float) -> float:
 	var u :float= (s - l0) / max(l1 - l0, 0.0001)
 	return lerp(t0, t1, u)
 
-
+#func get_direction(offset:Vector2)->void:
+	#record.set_direction(offset);
+	
 func _bezier_point(t: float) -> Vector2:
 	var u := 1.0 - t
 	return u*u*_p0 + 2.0*u*t*_p1 + t*t*_p2
@@ -216,10 +224,11 @@ func _bezier_tangent(t: float) -> Vector2:
 	return 2.0*(1.0 - t)*(_p1 - _p0) + 2.0*t*(_p2 - _p1)
 
 
-func _record_state(dir: Vector2, speed: float, moved: float) -> void:
-	if record == null:
-		return
-	record.set_speed(speed)
-	if dir != Vector2.ZERO:
-		record.set_deg(rad_to_deg(dir.angle()))
-	record.moved_distance += moved
+#func _record_state(dir: Vector2, speed: float, moved: float) -> void:
+	#if record == null:
+		#return
+	#record.set_speed(speed)
+	#if dir != Vector2.ZERO:
+		#record.set_deg(rad_to_deg(dir.angle()))
+	#record.moved_distance += moved
+	

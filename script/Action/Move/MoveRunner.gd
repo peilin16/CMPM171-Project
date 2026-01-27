@@ -50,7 +50,11 @@ func _physics_process(delta: float) -> void:
 		is_running = false
 
 		
-
+func get_data()->Data:
+	if current_pattern:
+		return current_pattern.record;
+	else:
+		return null;
 
 #for order system only
 func get_actor_position() -> Vector2:

@@ -3,7 +3,7 @@ extends Node2D
 class_name Scheduler
 
 @onready var task_runner: Task_runner = $TaskRunner
-#@onready var shoot_runner :Shoot_runner = $ShootRunner
+@onready var subsystems: Sub_action_hub = $TaskRunner/SubActionHub
 var parent_controller#: Character_controller
 var current_configure = null
 
@@ -46,6 +46,11 @@ func preemption(script: Array)->void:
 	cancel();
 	setup(script);
 	start();
+
+func get_runner_for(belong: System.Belong) -> Runner:
+	if subsystems == null:
+		return null;
+	return subsystems.get_runner_for(belong);
 
 
 func get_current_order()->Order:
