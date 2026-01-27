@@ -43,7 +43,7 @@ func _first_time_line_level1()->void:
 				{
 					"action": "move",
 					"type":"direction_linear",
-					"speed":110,
+					"speed":130,
 					"angle":180,
 			  	},
 
@@ -52,19 +52,22 @@ func _first_time_line_level1()->void:
 					"array":[
 						{
 							"action":"timer", 
-							"sec":3
+							"sec":1
 						},
 						{
 							"action":"cast",
-							"type":"multi",
+							"type":"fan",
 						   "pool":"MEDIUM_ROUND_BULLET",
 						   "aim":"OBJECT",
-						   "speed":200,
-						   "interval":0.3,
-						   "num":4,
+							"count":3,
+						   "speed":180,
+						   "interval":1,
+						   "time":7,
+							"spread":14,
 						   "color":"BLUE",
 						   "vfx":[
-								{"shoot mode":"start","mode":"shoot", "name":"MuzzleFlash1", "life":2, "front":true,"follow":true},
+								{
+									"shoot mode":"start","mode":"shoot", "name":"ChargingRing2", "life":1, "front":true, "follow":true},
 								]
 			  			}
 					]
@@ -80,7 +83,24 @@ func _first_time_line_level1()->void:
 	
 
 func _build_behavior_grunt_straight() -> void:
-	pass
+	var move_cfg := Move_configure.new()
+	move_cfg._simple_configure_for_direction(controller.get_actor_position(), 120.0, 90.0)
+	var move_pattern := Linear_move_pattern.new()
+
+	var move_order := Order.new()
+	move_order.system_configure = move_cfg
+	move_order.system_pattern = move_pattern
+	move_order.duration = 3.0
+	queue.append(move_order)
+
+	var shoot_cfg := Shoot_configure.new()
+	# shoot_cfg.xxx …
+	var shoot_pattern := Shooting_pattern.new()
+	var shoot_order := Order.new()
+	shoot_order.system_configure = shoot_cfg
+	shoot_order.system_pattern = shoot_pattern
+	shoot_order.duration = 2.0
+	queue.append(shoot_order);
 	
 
 func _build_behavior_sniper_slow() -> void:
@@ -109,7 +129,7 @@ func _build_behavior_default()->void:
 		   "color":"BLUE",
 		   "color_seed":2,
 		   "vfx":[
-				{"mode":"start", "name":"MuzzleFlash1", "life":0.15, "front":true},
+				{"mode":"start", "name":"ChargingRing2", "life":0.45, "front":true},
 				]
 		  },
 		{"action":"timer", "sec":3.0},
@@ -126,3 +146,4 @@ func _build_behavior_default()->void:
 		]	
 	scheduler.setup(script);
 	scheduler.start();
+	controller.move_data = scheduler.get_data();
