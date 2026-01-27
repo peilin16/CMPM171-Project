@@ -24,8 +24,7 @@ func on_ready(controller, hub: State_hub, anim: Animation_player) -> void:
 	append_state(fly_right,hub);
 	default_state = fly_left;
 	current_state = fly_left;
-	
-	
+
 
 func update(controller, hub: State_hub, anim: Animation_player, delta: float) -> void:
 	super.update(controller,hub,anim,delta);

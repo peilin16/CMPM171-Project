@@ -36,7 +36,7 @@ func _first_time_line_level1()->void:
 
 	var script = [
 		
-		#{"action":"timer", "sec":0.1},
+		{"action":"delay", "sec":5},
 	  	{
 			"action": "composite",
 			"array":[
@@ -45,6 +45,7 @@ func _first_time_line_level1()->void:
 					"type":"direction_linear",
 					"speed":130,
 					"angle":180,
+					"sec": 10
 			  	},
 
 				{
@@ -52,7 +53,7 @@ func _first_time_line_level1()->void:
 					"array":[
 						{
 							"action":"timer", 
-							"sec":1
+							"sec":4
 						},
 						{
 							"action":"cast",

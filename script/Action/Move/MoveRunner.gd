@@ -54,7 +54,7 @@ func get_data()->Data:
 	if current_pattern:
 		return current_pattern.record;
 	else:
-		return null;
+		return Move_data.new();
 
 #for order system only
 func get_actor_position() -> Vector2:

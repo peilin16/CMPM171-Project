@@ -91,7 +91,7 @@ func _build_order(step:Dictionary)->Order:
 			order = move_parser.build_orders_from_step(step)
 		"rotate","twirl":
 			order = rotate_parser.build_orders_from_step(step)
-		"composite","synchronous":
+		"composite","synchronous","parallel":
 			order = _make_composite_order(step);
 		"sequence","list":
 			order = _make_sequence_order(step);

@@ -34,6 +34,8 @@ func _build_state_map(states: Array[State_object] ) -> void:
 
 
 func set_up_root(obj:State_object)->void:
+	if not _state_map.is_empty():
+		_state_map.clear();
 	root_state_name = obj.state_name;
 	if obj is State_selector:
 		root_state =  obj as State_selector
