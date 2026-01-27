@@ -24,6 +24,12 @@ func get_speed()->float:
 func get_deg()->float: 
 	return _current_direction_deg
 
+func get_math_deg()->float: 
+	return _current_math_deg
+func get_last_position()->Vector2:
+	return _last_position;
+
+
 func reset(pos: Vector2) -> void:
 	_last_position = pos
 	_has_last = true
