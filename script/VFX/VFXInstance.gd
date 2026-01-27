@@ -43,7 +43,10 @@ func stop_emitting() -> void:
 	for child in particles_array:
 		child.emitting = false
 
-
+func set_up_scale(scale_min:float, scale_max:float)->void:
+	for particle in particles_array:
+		particle.process_material.scale_min = scale_min
+		particle.process_material.scale_max = scale_max
 func bind_pool(p: VFX_pool) -> void:
 	_pool = p
 
