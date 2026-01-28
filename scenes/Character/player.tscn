@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://kks7ir0kgg1a"]
+[gd_scene load_steps=20 format=3 uid="uid://kks7ir0kgg1a"]
 
 [ext_resource type="Script" uid="uid://csieovs421mxl" path="res://script/Character/Player/PlayerController.gd" id="1_beklg"]
 [ext_resource type="Script" uid="uid://bj7f4p0ml38qw" path="res://script/State/StateHub.gd" id="2_4mqus"]
@@ -9,24 +9,46 @@
 [ext_resource type="Script" uid="uid://c6e2v8pq72rv8" path="res://script/VFX/VFXParser.gd" id="4_i7wy1"]
 [ext_resource type="Script" uid="uid://by12krurtjnq5" path="res://script/Action/Base/TaskRunner.gd" id="6_85mch"]
 [ext_resource type="Script" uid="uid://cr0h73xvntvj0" path="res://script/Other/Tool/SubsystemHub.gd" id="7_h3n2c"]
-[ext_resource type="Texture2D" uid="uid://oya8wpn6jmc8" path="res://icon.svg" id="7_xpp3s"]
 [ext_resource type="Script" uid="uid://u1lc0lg311dn" path="res://script/Action/STG/ShootRunner.gd" id="8_mpo6r"]
+[ext_resource type="Texture2D" uid="uid://dbv01t24uelp5" path="res://assets/character/Player/standing.png" id="11_h3n2c"]
+[ext_resource type="Script" uid="uid://cdj8cw7oe3du7" path="res://script/Base/Other/Main_camera.gd" id="12_hdh7n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8fgnd"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hxpvn"]
-atlas = ExtResource("7_xpp3s")
-region = Rect2(0, 0, 128, 128)
+[sub_resource type="AtlasTexture" id="AtlasTexture_hdh7n"]
+atlas = ExtResource("11_h3n2c")
+region = Rect2(110, 195, 410, 545)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mpo6r"]
+atlas = ExtResource("11_h3n2c")
+region = Rect2(595, 195, 410, 545)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7g3w"]
+atlas = ExtResource("11_h3n2c")
+region = Rect2(1080, 195, 410, 545)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hpedc"]
+atlas = ExtResource("11_h3n2c")
+region = Rect2(1565, 195, 410, 545)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gc4mm"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hxpvn")
+"texture": SubResource("AtlasTexture_hdh7n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mpo6r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g7g3w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hpedc")
 }],
-"loop": true,
-"name": &"Idle",
-"speed": 5.0
+"loop": false,
+"name": &"rumia_idle",
+"speed": 12.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xpp3s"]
@@ -77,7 +99,13 @@ metadata/_custom_type_script = "uid://b566wwblvpd6x"
 position = Vector2(0, 1.9073486e-06)
 scale = Vector2(0.5625, 0.5859375)
 sprite_frames = SubResource("SpriteFrames_gc4mm")
-animation = &"Idle"
+animation = &"rumia_idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_xpp3s")
+
+[node name="BulletContainer" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("12_hdh7n")
+lock_position = false
