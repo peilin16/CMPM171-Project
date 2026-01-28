@@ -74,7 +74,8 @@ func spawn(cfg: VFX_request) -> VFX_instance:
 	#inst.particles.process_material.scale_min = cfg.scale_min
 	#inst.particles.process_material.scale_max = cfg.scale_max
 	inst.set_up_scale(cfg.scale_min, cfg.scale_max);
-
+	if cfg.amount > 0:
+		inst.set_up_amount(cfg.amount);
 
 	return inst
 

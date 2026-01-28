@@ -28,8 +28,14 @@ func _apply_base(d: Dictionary) -> void:
 	if _built_request.spawn_position== Vector2(999999,99999):
 		_built_request.spawn_position = get_actor_position();
 	_built_request.local_offset = d.get("offset", Vector2.ZERO);
-	_built_request.scale_min= float(d.get("scale_min",d.get("min", 1.0)))
-	_built_request.scale_max= float(d.get("scale_max",  d.get("max",  1.0)))
+	if d.has("scale"):
+		var s :float =  d.get("scale", 1);
+		_built_request.scale_min = s ;
+		_built_request.scale_max= s ;
+	else:
+		_built_request.scale_min= float(d.get("scale_min",d.get("min", 1.0)))
+		_built_request.scale_max= float(d.get("scale_max",  d.get("max",  1.0)))
+
 	_built_request.lifetime =  float(d.get("life", 0.15))
 	_built_request.is_front = bool(d.get("front", true));
 	_built_request.rotation_rad =  d.get("rotate", d.get("rad", d.get("rotate_rad", Vector2.ZERO)))

@@ -21,7 +21,7 @@ class_name VFX_request
 @export var attach_to_owner: bool = false
 #z-index
 @export var is_front: bool = true;
-
+@export var amount:int = 0;
 
 func _init(vfx: String = "", life: float = 1,sc_min:float = 1, sc_max:float = 1) -> void:
 	belong = System.Belong.VFX   # or create a VFX belong if you want
