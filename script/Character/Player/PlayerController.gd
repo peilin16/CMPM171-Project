@@ -36,8 +36,8 @@ func move(delta: float, speed:float = _character.player_velocity) -> void:
 	move_and_slide();
 	move_data.record_motion(global_position,delta);
 	move_data.print_data();
-	
-	
+
+
 func avoid(delta:float) -> void:
 	pass
 

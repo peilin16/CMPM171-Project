@@ -8,11 +8,13 @@ var current_cfg: Move_configure
 #var is_running: bool = false
 #var is_finished: bool = true
 var elapsed_time: float = 0.0
+var move_data:Move_data;
+
 
 func start(actor ,pattern: Pattern, configure: Configure) -> void:
 	controller = actor
 	stop() # interrupt old
-
+	move_data = Move_data.new();
 	if pattern == null or configure == null or controller == null:
 		return
 
@@ -25,9 +27,9 @@ func start(actor ,pattern: Pattern, configure: Configure) -> void:
 	# auto start position
 	if current_cfg.start == Vector2.ZERO:
 		current_cfg.start = controller.get_actor_position()
-
+	move_data.reset(controller.get_actor_position())
 	current_pattern._ready(self, current_cfg)
-
+	
 func stop() -> void:
 	if is_running and current_pattern:
 		current_pattern.interrupt()
@@ -36,6 +38,7 @@ func stop() -> void:
 	is_finished = true
 
 func _physics_process(delta: float) -> void:
+	move_data.record_motion(controller.get_actor_position(),delta);
 	if not is_running or is_finished:
 		return
 	if current_pattern == null or current_cfg == null or controller == null:
@@ -51,8 +54,8 @@ func _physics_process(delta: float) -> void:
 
 		
 func get_data()->Data:
-	if current_pattern:
-		return current_pattern.record;
+	if move_data:
+		return move_data;
 	else:
 		return Move_data.new();
 
