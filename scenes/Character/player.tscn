@@ -81,3 +81,5 @@ animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_xpp3s")
+
+[node name="BulletContainer" type="Node2D" parent="."]
