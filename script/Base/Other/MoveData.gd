@@ -29,7 +29,13 @@ func get_math_deg()->float:
 func get_last_position()->Vector2:
 	return _last_position;
 
-
+func print_data()->void:
+	print("moved_distance",moved_distance);
+	print("_current_math_deg",_current_math_deg);
+	print("moveY",moveY);
+	print("moveX",moveX);
+	print("_current_direction_deg",_current_direction_deg);
+	print("_last_position",_last_position);
 func reset(pos: Vector2) -> void:
 	_last_position = pos
 	_has_last = true

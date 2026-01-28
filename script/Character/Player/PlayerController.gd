@@ -10,13 +10,13 @@ class_name  Player_controller
 var input_vector := Vector2.ZERO;
 #re spawn
 var is_behit: bool = false
-
+var move_data:Move_data;
 
 func _init() -> void:
 	_character = Player.new();
 	logic = Player_logic.new(self,_character);
 	team = TEAM.PLAYER;
-	
+	move_data = Move_data.new();
 
 func _ready() -> void:
 	GameManager.player_manager.register_player(self);
@@ -24,7 +24,7 @@ func _ready() -> void:
 	state_hub.set_up_root(Player_state.new());
 	#print(GameManager.cursor_manager.get_mouse_world_pos());
 	GameManager.cursor_manager.on(GameManager.cursor_manager.EVT_LMB_DOWN, "player_shoot", Callable(self, "player_shooting"));
-
+	move_data.reset(global_position);
 	
 	
 func move(delta: float, speed:float = _character.player_velocity) -> void:
@@ -34,7 +34,10 @@ func move(delta: float, speed:float = _character.player_velocity) -> void:
 	input_vector = input_vector.normalized()
 	velocity = input_vector * speed 
 	move_and_slide();
-
+	move_data.record_motion(global_position,delta);
+	move_data.print_data();
+	
+	
 func avoid(delta:float) -> void:
 	pass
 
