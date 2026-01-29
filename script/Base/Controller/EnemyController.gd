@@ -5,6 +5,7 @@ class_name Enemy_controller
 
 # EnemyController.gd
 var _logic :enemy_logic;
+var _ai_brain_hub: State_hub = null;
 
 
 #child node2d
@@ -38,6 +39,11 @@ func _ready() -> void:
 	if is_spawn == false:
 		is_spawn = true;
 	_logic.set_up_scheduler(scheduler);
+	
+	_ai_brain_hub = get_node_or_null("StateHub")
+	if _ai_brain_hub and _ai_brain_hub.root_state:
+		_ai_brain_hub.root_state.enter(self, _ai_brain_hub, _ai_brain_hub.anim_player)
+		
 	#_task._start(_logic.get_queue());
 	hitable = true;
 	#
@@ -50,6 +56,12 @@ func _physics_process(delta: float) -> void:
 	if _character.hp <= 0 :
 		death()
 		return;
+		
+	if _ai_brain_hub and _ai_brain_hub.root_state:
+		_ai_brain_hub.root_state.update(self, _ai_brain_hub, _ai_brain_hub.anim_player, delta)
+		if _ai_brain_hub.root_state.is_done(self, _ai_brain_hub, _ai_brain_hub.anim_player):
+			_ai_brain_hub.root_state.enter(self, _ai_brain_hub, _ai_brain_hub.anim_player)
+			
 	# --- normal alive update ---
 	#if is_death and hitable and _spring.data.death_elapsed > _spring.data.combo_window:
 		#hitable = false   

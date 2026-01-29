@@ -70,7 +70,7 @@ func is_stop()->bool:
 	return task_runner._stop
 
 func is_finish()->bool:
-	return task_runner.is_done;
+	return task_runner.is_all_done;
 
 #Crucial Code: Shoot Parser
 

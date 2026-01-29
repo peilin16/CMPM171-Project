@@ -84,6 +84,9 @@ func cancel()->void:
 	
 #interrupt
 func interrupt() -> void:
+	stop()
+
+func stop() ->void:
 	_stop = true;
 	if _current:
 		_current.interrupt();
