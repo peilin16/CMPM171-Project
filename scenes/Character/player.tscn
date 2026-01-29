@@ -53,7 +53,7 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xpp3s"]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_beklg")
 
 [node name="StateHub" type="Node2D" parent="."]
