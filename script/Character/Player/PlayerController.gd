@@ -64,19 +64,19 @@ func _physics_process(delta: float) -> void:
 		  "polyphony": 2,             # 同名最多同时2个
 		  "max_voices": 12            # 全局并发上限（一般放 manager 配置里更好）
 		})
-
-func move(delta: float, speed:float = _character.player_velocity) -> void:
-	input_vector = Vector2.ZERO
-	input_vector.x = Input.get_action_strength("right") - Input.get_action_strength("left")
-	input_vector.y = Input.get_action_strength("down") - Input.get_action_strength("up")
-	input_vector = input_vector.normalized()
-	velocity = input_vector * speed 
-	move_and_slide();
-	move_data.record_motion(global_position,delta);
-	move_data.print_data();
-
-func _physics_process(delta: float) -> void:
 	handle_dash_cooldown(delta)
+#func move(delta: float, speed:float = _character.player_velocity) -> void:
+	#input_vector = Vector2.ZERO
+	#input_vector.x = Input.get_action_strength("right") - Input.get_action_strength("left")
+	#input_vector.y = Input.get_action_strength("down") - Input.get_action_strength("up")
+	#input_vector = input_vector.normalized()
+	#velocity = input_vector * speed 
+	#move_and_slide();
+	#move_data.record_motion(global_position,delta);
+	#move_data.print_data();
+
+#func _physics_process(delta: float) -> void:
+
 
 # --- 核心移动逻辑 ---
 # 注意：这里改回了 'delta' (去掉了下划线)，因为下面要用到它
@@ -87,9 +87,6 @@ func move(delta: float, speed: float = _character.player_velocity) -> void:
 	# 2. 冲刺判定
 	if Input.is_action_just_pressed("avoid") and can_dash and input_vector != Vector2.ZERO:
 		start_dash()
-
-func avoid(delta:float) -> void:
-	pass
 
 	# 3. 计算速度
 	var current_speed = speed
