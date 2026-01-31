@@ -49,7 +49,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Test"):
-		SoundManager.play_sound({
+		SoundManager.command({
 		  "sound":"sfx",
 		  "name":"cast1",
 		  "pitch_scale":[0.9, 1.1],

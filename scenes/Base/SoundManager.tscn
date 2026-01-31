@@ -1,18 +1,18 @@
 [gd_scene load_steps=14 format=3 uid="uid://bo1i43mp1pqa8"]
 
-[ext_resource type="Script" uid="uid://dm8qv6ok17wlu" path="res://Script/Sound/SoundManager.gd" id="1_oqudx"]
+[ext_resource type="Script" uid="uid://dm8qv6ok17wlu" path="res://script/Sound/SoundManager.gd" id="1_oqudx"]
 [ext_resource type="AudioStream" uid="uid://bfrrak3qrk4fb" path="res://assets/Sound/sfx/158956__carlmartin__jembay-hit-13-rim.wav" id="2_4wqie"]
-[ext_resource type="Script" uid="uid://ickj4en558at" path="res://Script/Sound/SFXManager.gd" id="2_i8oty"]
+[ext_resource type="Script" uid="uid://ickj4en558at" path="res://script/Sound/SFXManager.gd" id="2_i8oty"]
 [ext_resource type="AudioStream" uid="uid://bvimqtass7a0p" path="res://assets/Sound/sfx/406263__anthousai__hit-clay-clay-stool-01.wav" id="3_ehgxw"]
 [ext_resource type="AudioStream" uid="uid://c61mlgf6ftam1" path="res://assets/Sound/sfx/334237__liamg_sfx__fireball-cast-3.wav" id="4_6brhb"]
-[ext_resource type="Script" uid="uid://dj2qiyyi71vih" path="res://Script/Sound/SFXInstance.gd" id="4_hs8v2"]
+[ext_resource type="Script" uid="uid://dj2qiyyi71vih" path="res://script/Sound/SFXInstance.gd" id="4_hs8v2"]
 [ext_resource type="AudioStream" uid="uid://c41jwijtcmg8j" path="res://assets/Sound/sfx/406278__anthousai__hit-wooden-09.wav" id="6_hs8v2"]
-[ext_resource type="Script" uid="uid://dsbnxpwduyc8v" path="res://Script/Sound/BGMManager.gd" id="7_j8vmf"]
+[ext_resource type="Script" uid="uid://dsbnxpwduyc8v" path="res://script/Sound/BGMManager.gd" id="7_j8vmf"]
 [ext_resource type="AudioStream" uid="uid://bknhv77cfw4uv" path="res://assets/Sound/BGM/Test1.wav" id="8_e80in"]
 [ext_resource type="AudioStream" uid="uid://ci48bp40gdgef" path="res://assets/Sound/sfx/593665__marlene_coetzer__hitting-a-cast-with-a-spoon.wav" id="8_qns88"]
 [ext_resource type="AudioStream" uid="uid://y528bftlinh8" path="res://assets/Sound/sfx/833077__zeltbolt__status_burn.wav" id="9_mli17"]
 [ext_resource type="AudioStream" uid="uid://doad5p5qdjnh7" path="res://assets/Sound/BGM/Test2.wav" id="10_6brhb"]
-[ext_resource type="Script" uid="uid://njrte2ni14yr" path="res://Script/Sound/BGMInstance.gd" id="10_j8vmf"]
+[ext_resource type="Script" uid="uid://njrte2ni14yr" path="res://script/Sound/BGMInstance.gd" id="10_j8vmf"]
 
 [node name="SoundManager" type="Node"]
 script = ExtResource("1_oqudx")

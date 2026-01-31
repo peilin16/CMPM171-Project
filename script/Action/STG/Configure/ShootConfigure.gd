@@ -33,6 +33,8 @@ var shoot_one_vfx:Dictionary# Shoot_VFX_request;
 #what vfx for bullet configure
 var bullet_vfx: Dictionary #VFX_request;
 
+
+var shoot_start_sfx:Dictionary
 var owner_id: int = -1     # owner id if require abandon value
 
 func _set_base_data(_controller,_origin = null ,_refer_bullet:Bullet = null ):

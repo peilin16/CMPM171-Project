@@ -11,7 +11,7 @@ var sfx_parser:SFX_parser = SFX_parser.new();
 
 
 #main entrance
-func play_sound(cmd: Dictionary) -> void:
+func command(cmd: Dictionary) -> void:
 	var t := str(cmd.get("sound", "sfx"))
 	match t:
 		"sfx":

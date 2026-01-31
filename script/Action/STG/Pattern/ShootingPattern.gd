@@ -65,6 +65,8 @@ func deactive()->void:
 
 
 func start_vfx_bool( delta: float)->bool:
+	if not shoot_configure.shoot_start_sfx.is_empty():
+		SoundManager.command(shoot_configure.shoot_start_sfx);
 	if start_vfx != null and not start_vfx.blocking(delta):
 		return false;
 	return true;
