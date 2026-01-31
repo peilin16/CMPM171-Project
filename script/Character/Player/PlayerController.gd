@@ -48,6 +48,34 @@ func _ready() -> void:
 	move_data.reset(global_position)
 
 func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("Test"):
+		SoundManager.play_sound({
+		  "sound":"sfx",
+		  "name":"cast1",
+		  "pitch_scale":[0.9, 1.1],
+		  "volume_mul":[0.9, 1.05],
+
+		  "timbre_variant" : [0, 4],   # 随机选 0~2，映射到不同bus: SFX_VAR0..2
+		  # 或者直接指定：
+		 # "timbre_bus":"SFX_VAR1",
+
+		  "priority": 8,
+		   #""
+		  "polyphony": 2,             # 同名最多同时2个
+		  "max_voices": 12            # 全局并发上限（一般放 manager 配置里更好）
+		})
+
+func move(delta: float, speed:float = _character.player_velocity) -> void:
+	input_vector = Vector2.ZERO
+	input_vector.x = Input.get_action_strength("right") - Input.get_action_strength("left")
+	input_vector.y = Input.get_action_strength("down") - Input.get_action_strength("up")
+	input_vector = input_vector.normalized()
+	velocity = input_vector * speed 
+	move_and_slide();
+	move_data.record_motion(global_position,delta);
+	move_data.print_data();
+
+func _physics_process(delta: float) -> void:
 	handle_dash_cooldown(delta)
 
 # --- 核心移动逻辑 ---
@@ -59,6 +87,9 @@ func move(delta: float, speed: float = _character.player_velocity) -> void:
 	# 2. 冲刺判定
 	if Input.is_action_just_pressed("avoid") and can_dash and input_vector != Vector2.ZERO:
 		start_dash()
+
+func avoid(delta:float) -> void:
+	pass
 
 	# 3. 计算速度
 	var current_speed = speed
@@ -100,8 +131,15 @@ func handle_dash_cooldown(delta: float) -> void:
 
 # --- 射击系统 ---
 func player_shooting(payload: Dictionary) -> void:
-	var shoot_script: Array = logic.get_shoot_script(payload["world_pos"])
-	shoot(shoot_script)
-
-func shoot(bullet_script: Array) -> void:
-	scheduler.preemption(bullet_script)
+	#print("左键按下 world_pos=", payload["world_pos"])
+	var shoot_script:Array = logic.get_shoot_script(payload["world_pos"]);
+	#caster.
+	scheduler.preemption(shoot_script)
+	
+	
+func shoot(bullet_script:Array)->void:
+	if scheduler.is_running:
+		scheduler.preemption(bullet_script);
+	else:
+		scheduler.setup(bullet_script);
+		scheduler.start();

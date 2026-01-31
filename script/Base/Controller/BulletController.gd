@@ -51,7 +51,7 @@ func _ready() -> void:
 	_make_material_unique()
 
 func _on_area_entered(area: Area2D) -> void:
-	if bullet.is_reflect or not bullet.is_active:
+	if not bullet.is_active:
 		return;
 	#if area.component == Rumia_controller.Component.HEALTHYRANGE:
 		#var player := area.get_parent() as Rumia_controller
@@ -72,8 +72,6 @@ func set_skin()->void:
 		return
 	if bullet == null:
 		texture_controller.set_skin(0);
-	elif bullet.is_reflect:
-		texture_controller.set_skin(2);
 	elif bullet.is_red:
 		texture_controller.set_skin(1);
 	else:
