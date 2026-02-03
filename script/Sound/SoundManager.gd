@@ -17,12 +17,11 @@ func command(cmd: Dictionary) -> void:
 		"sfx":
 			sfx_manager.play_sound(cmd)
 		"bgm":
-			# bgm_manager.play_sound(cmd)  # 后续再做
-			pass
+			bgm_manager.execute(cmd)
 
 
-func stop_bgm_loop_and_finish() -> void:
-	bgm_manager.stop_loop_and_finish()
+#func stop_bgm_loop_and_finish() -> void:
+	#bgm_manager.stop_loop_and_finish()
 
 func stop_bgm() -> void:
 	bgm_manager.stop_bgm()

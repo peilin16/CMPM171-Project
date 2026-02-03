@@ -64,6 +64,30 @@ func _physics_process(delta: float) -> void:
 		  "polyphony": 2,             # 同名最多同时2个
 		  "max_voices": 12            # 全局并发上限（一般放 manager 配置里更好）
 		})
+		SoundManager.command({
+		"sound":"bgm",
+		"command":"start",
+		"name":"TestBGM1",
+		"fade_in":0.2,
+		"fade_out":0.7,
+		"transfer_fade_out":0.2,
+		"use_loop_segment":true,
+		"loop_start_sec":12.0,
+		"loop_end_sec":48.0,
+		"volume_mul":0.5,
+		"pitch_scale":1.0
+		})	
+		#BGM调用 测试
+		#SoundManager.command({
+			#"sound":"bgm",
+			#"command":"transfer",
+			#"name":"TestBGM2",
+			#"transfer_fade_out":0.8,
+			#"transfer_fade_in":0.1,
+			#"use_loop_segment":true,
+			#"loop_start_sec":6.0,
+			#"loop_end_sec":38.0
+		#})
 	handle_dash_cooldown(delta)
 #func move(delta: float, speed:float = _character.player_velocity) -> void:
 	#input_vector = Vector2.ZERO
