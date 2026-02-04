@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://kks7ir0kgg1a"]
+[gd_scene format=3 uid="uid://kks7ir0kgg1a"]
 
 [ext_resource type="Script" uid="uid://csieovs421mxl" path="res://script/Character/Player/PlayerController.gd" id="1_beklg"]
 [ext_resource type="Script" uid="uid://bj7f4p0ml38qw" path="res://script/State/StateHub.gd" id="2_4mqus"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://cdj8cw7oe3du7" path="res://script/Base/Other/Main_camera.gd" id="12_hdh7n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8fgnd"]
+size = Vector2(38, 39)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hdh7n"]
 atlas = ExtResource("11_h3n2c")
@@ -51,61 +52,57 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xpp3s"]
-
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=1296596587]
 script = ExtResource("1_beklg")
 
-[node name="StateHub" type="Node2D" parent="."]
+[node name="StateHub" type="Node2D" parent="." unique_id=257351427]
 script = ExtResource("2_4mqus")
 metadata/_custom_type_script = "uid://bj7f4p0ml38qw"
 
-[node name="Animation_player" type="Node2D" parent="StateHub" node_paths=PackedStringArray("sprite")]
+[node name="Animation_player" type="Node2D" parent="StateHub" unique_id=1704825607 node_paths=PackedStringArray("sprite")]
 script = ExtResource("3_hxpvn")
 sprite = NodePath("../../AnimatedSprite2D")
 metadata/_custom_type_script = "uid://drv02ar36c0qi"
 
-[node name="HurtBox" type="Area2D" parent="."]
+[node name="HurtBox" type="Area2D" parent="." unique_id=1674513327]
 script = ExtResource("3_8fgnd")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1215220095]
 shape = SubResource("RectangleShape2D_8fgnd")
 
-[node name="Scheduler" type="Node2D" parent="."]
+[node name="Scheduler" type="Node2D" parent="." unique_id=926308382]
 script = ExtResource("3_i7wy1")
 metadata/_custom_type_script = "uid://b8na7bb7sjrx3"
 
-[node name="TaskRunner" type="Node2D" parent="Scheduler"]
+[node name="TaskRunner" type="Node2D" parent="Scheduler" unique_id=1405540055]
 script = ExtResource("6_85mch")
 metadata/_custom_type_script = "uid://by12krurtjnq5"
 
-[node name="SubActionHub" type="Node2D" parent="Scheduler/TaskRunner"]
+[node name="SubActionHub" type="Node2D" parent="Scheduler/TaskRunner" unique_id=874573427]
 script = ExtResource("7_h3n2c")
 metadata/_custom_type_script = "uid://cr0h73xvntvj0"
 
-[node name="ShootRunner" type="Node2D" parent="Scheduler/TaskRunner/SubActionHub"]
+[node name="ShootRunner" type="Node2D" parent="Scheduler/TaskRunner/SubActionHub" unique_id=1210296045]
 script = ExtResource("8_mpo6r")
 metadata/_custom_type_script = "uid://u1lc0lg311dn"
 
-[node name="VFXParser" type="Node2D" parent="."]
+[node name="VFXParser" type="Node2D" parent="." unique_id=1345219793]
 script = ExtResource("4_i7wy1")
 metadata/_custom_type_script = "uid://c6e2v8pq72rv8"
 
-[node name="VFXSpawner" type="Node2D" parent="VFXParser"]
+[node name="VFXSpawner" type="Node2D" parent="VFXParser" unique_id=516571293]
 script = ExtResource("4_8fgnd")
 metadata/_custom_type_script = "uid://b566wwblvpd6x"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 1.9073486e-06)
-scale = Vector2(0.5625, 0.5859375)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=197719698]
+position = Vector2(3.8146973e-06, 3.8146973e-06)
+scale = Vector2(0.08780488, 0.06559634)
 sprite_frames = SubResource("SpriteFrames_gc4mm")
 animation = &"rumia_idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_xpp3s")
+[node name="BulletContainer" type="Node2D" parent="." unique_id=538128306]
 
-[node name="BulletContainer" type="Node2D" parent="."]
-
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=342791192]
+zoom = Vector2(2, 2)
 script = ExtResource("12_hdh7n")
 lock_position = false

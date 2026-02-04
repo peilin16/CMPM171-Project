@@ -8,12 +8,20 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="新建游戏项目"
 run/main_scene="uid://okvl3jg17a5h"
-config/features=PackedStringArray("4.5", "Forward Plus")
+config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[audio]
+
+buses/default_bus_layout="uid://btl302fqnx18h"
 
 [autoload]
 
@@ -21,6 +29,10 @@ GameManager="*res://scenes/Base/game_manager.tscn"
 ToolBar="*res://scenes/Base/toolbar.tscn"
 PoolManager="*res://scenes/Base/PoolManager.tscn"
 SoundManager="*res://scenes/Base/SoundManager.tscn"
+
+[editor]
+
+movie_writer/movie_file="C:/Users/haoji/Desktop/class/CMPM171/CMPM171-Project/record.avi"
 
 [input]
 
