@@ -1,0 +1,68 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3cnfks53qo0f"]
+
+[ext_resource type="Script" uid="uid://c62mvqdyaihqt" path="res://script/UI/StartMenu.gd" id="1_g18el"]
+[ext_resource type="Texture2D" uid="uid://ba4lbqlr1sra1" path="res://assets/UI/temp_background.png" id="2_ghpp4"]
+[ext_resource type="FontFile" uid="uid://ddyg7xlxgvfuu" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="2_yi547"]
+
+[node name="StartMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g18el")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ghpp4")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -230.0
+offset_right = 230.0
+offset_bottom = 120.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_yi547")
+theme_override_font_sizes/font_size = 100
+text = "Ron & Gun"
+
+[node name="MenuContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" type="Button" parent="MenuContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_yi547")
+theme_override_font_sizes/font_size = 50
+text = "New Game"
+
+[node name="QuitButton" type="Button" parent="MenuContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_yi547")
+theme_override_font_sizes/font_size = 50
+text = "Quit Game"
+
+[connection signal="pressed" from="MenuContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MenuContainer/QuitButton" to="." method="_on_quit_button_pressed"]
