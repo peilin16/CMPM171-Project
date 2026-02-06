@@ -31,9 +31,6 @@ func apply_behavior(code: String = "") -> void:
 			_build_behavior_default();
 			
 func _first_time_line_level1()->void:
-
-	
-
 	var script = [
 		
 		{"action":"delay", "sec":5},

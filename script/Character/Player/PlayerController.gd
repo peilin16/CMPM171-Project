@@ -52,17 +52,17 @@ func _physics_process(delta: float) -> void:
 		SoundManager.command({
 		  "sound":"sfx",
 		  "name":"cast1",
-		  "pitch_scale":[0.9, 1.1],
-		  "volume_mul":[0.9, 1.05],
+		  "pitch_scale": 1, #[0.9, 1.1], #播放速度
+		  "volume_mul":[0.9, 1.05], #音量
 
 		  "timbre_variant" : [0, 4],   # 随机选 0~2，映射到不同bus: SFX_VAR0..2
 		  # 或者直接指定：
 		 # "timbre_bus":"SFX_VAR1",
 
-		  "priority": 8,
+		  "priority": 8,			#优先度 越高受其他音效影响就越小
 		   #""
 		  "polyphony": 2,             # 同名最多同时2个
-		  "max_voices": 12            # 全局并发上限（一般放 manager 配置里更好）
+		  "max_voices": 12            # 全局并发上限
 		})
 		SoundManager.command({
 		"sound":"bgm",
@@ -123,7 +123,7 @@ func move(delta: float, speed: float = _character.player_velocity) -> void:
 	move_and_slide()
 	
 	# 5. 屏幕限制
-	global_position = global_position.clamp(Vector2.ZERO, screen_size)
+	#global_position = global_position.clamp(Vector2.ZERO, screen_size)
 	
 	# 6. 动画翻转
 	if input_vector.x != 0:
