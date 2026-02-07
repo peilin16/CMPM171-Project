@@ -1,0 +1,21 @@
+Setup Instructions for Grunt Enemy:
+
+1. Create a new Resource for the Grunt config:
+   - In the FileSystem panel, right-click in `script/Enemy/Data/` -> Create New -> Resource...
+   - Search for "EnemyConfiguration"
+   - Save it as `GruntConfig.tres`
+   - Set the values (e.g., Move Speed: 150, Ray Length: 60)
+
+2. Create the Grunt Scene (`scenes/Character/Grunt.tscn`):
+   - Root Node: `CharacterBody2D` (Name it "Grunt")
+   - Script: Attach `script/Enemy/Grunt/GruntController.gd`
+   - Assign the `GruntConfig.tres` you just created to the "Config" property of the Grunt node in the Inspector.
+
+3. Add Required Child Nodes:
+   - Add a `Node2D` child named "StateHub".
+     - Attach script: `script/State/StateHub.gd`
+   - Add a `CollisionShape2D` and set up your collision shape (Circle/Capsule).
+   - Add visuals (Sprite2D or AnimatedSprite2D).
+
+4. Avoidance:
+   - The `GruntController` will automatically create the "AvoidanceRays" node and the 3 RayCast2D nodes when the game starts. You don't need to add them manually, but make sure your Grunt ignores its own collision layer if necessary (code attempts to add exception).
