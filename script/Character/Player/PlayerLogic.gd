@@ -8,13 +8,15 @@ func get_shoot_script(target:Vector2)->Array:
 	var default_script =[
 	{
 		"action":"shoot",
-		"type":"single",
+		"type":"fan",
+		"spread":20,
+		"num":3,
 	   "pool":"MEDIUM_ROUND_BULLET",
 	   "aim":"TARGET",
 		"target":target,
-	   "speed":270,
+	   "speed":120,
 	   "fiction":"player",
-	   "color":"BLUE"
+	   "color":"RED"
 	 }
 	]
 	#code for base shoot setting
