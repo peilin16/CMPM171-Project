@@ -15,6 +15,10 @@ var _ai_brain_hub: State_hub = null;
 @onready var scheduler: Scheduler = $Scheduler
 @onready var vfx_parser: VFX_parser = $VFXParser
 #@onready var widget_spawner: Widget_spawner = $WidgetSpawner;
+
+#@export var config: EnemyConfiguration
+var stats: Dictionary = {}
+
 @export var death_gravity: float = 100.0       # how fast enemy falls when dying
 @export var death_delay: float = 1.0          # how long it can still be hit after hp <= 0
 
@@ -30,6 +34,14 @@ func _init() ->void:
 	team = TEAM.ENEMY;
 	
 func _ready() -> void:
+	# Load stats based on name (e.g. "Grunt", "fairy1")
+	# Name is usually set in _init of subclass
+	if GameManager.enemy_manager:
+		stats = GameManager.enemy_manager.get_enemy_stats(name)
+		if stats.has("max_hp") and _character:
+			_character.max_hp = stats["max_hp"]
+			_character.hp = _character.max_hp
+
 	#spring
 	if _character == null:
 		_character = Enemy.new();
