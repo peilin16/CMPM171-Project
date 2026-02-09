@@ -21,6 +21,26 @@ var dash_duration: float = 0.15
 var dash_cooldown: float = 0.5 
 var can_dash: bool = true
 
+# =========================
+# Fire rate control
+# =========================
+@export var base_shoot_cooldown: float = 0.35  # 基础射速（秒）
+var shoot_cooldown: float = 0.35              # 实际射速（会被条子加成影响）
+var shoot_timer: float = 0.0
+
+# =========================
+# Cheat code (临时替代商店/拾取)
+# 你在 Inspector 随便填条/筒/万数量即可
+# =========================
+@export var cheat_enabled: bool = true
+@export_range(0, 9) var cheat_tiao: int = 0
+@export_range(0, 9) var cheat_tong: int = 0
+@export_range(0, 9) var cheat_wan: int = 0
+
+var _last_cheat_tiao: int = -1
+var _last_cheat_tong: int = -1
+var _last_cheat_wan: int = -1
+
 # 声明 Move_data 变量
 var move_data: Move_data = Move_data.new()
 
@@ -47,89 +67,64 @@ func _ready() -> void:
 	# 5. 初始化 MoveData (以当前位置为起点)
 	move_data.reset(global_position)
 
+	# ✅ 初始化应用 cheat（没有商店时用）
+	_apply_cheat_if_needed(true)
+
 func _physics_process(delta: float) -> void:
+	# ✅ 每帧更新射击冷却
+	if shoot_timer > 0.0:
+		shoot_timer -= delta
+
+	# ✅ 每帧检查 cheat 是否变更（你改 Inspector 就能生效）
+	_apply_cheat_if_needed(false)
+
+	# 你之前的 1/2/3/4 手动切模式仍可保留（但默认由筒子控制）
+	handle_fire_mode_hotkeys()
+	
 	if Input.is_action_just_pressed("Test"):
 		SoundManager.command({
 		  "sound":"sfx",
 		  "name":"cast1",
-		  "pitch_scale": 1, #[0.9, 1.1], #播放速度
-		  "volume_mul":[0.9, 1.05], #音量
-
-		  "timbre_variant" : [0, 4],   # 随机选 0~2，映射到不同bus: SFX_VAR0..2
-		  # 或者直接指定：
-		 # "timbre_bus":"SFX_VAR1",
-
-		  "priority": 8,			#优先度 越高受其他音效影响就越小
-		   #""
-		  "polyphony": 2,             # 同名最多同时2个
-		  "max_voices": 12            # 全局并发上限
+		  "pitch_scale": 1,
+		  "volume_mul":[0.9, 1.05],
+		  "timbre_variant" : [0, 4],
+		  "priority": 8,
+		  "polyphony": 2,
+		  "max_voices": 12
 		})
 		SoundManager.command({
-		"sound":"bgm",
-		"command":"start",
-		"name":"TestBGM1",
-		"fade_in":0.2,
-		"fade_out":0.7,
-		"transfer_fade_out":0.2,
-		"use_loop_segment":true,
-		"loop_start_sec":12.0,
-		"loop_end_sec":48.0,
-		"volume_mul":0.5,
-		"pitch_scale":1.0
+			"sound":"bgm",
+			"command":"start",
+			"name":"TestBGM1",
+			"fade_in":0.2,
+			"fade_out":0.7,
+			"transfer_fade_out":0.2,
+			"use_loop_segment":true,
+			"loop_start_sec":12.0,
+			"loop_end_sec":48.0,
+			"volume_mul":0.5,
+			"pitch_scale":1.0
 		})	
-		#BGM调用 测试
-		#SoundManager.command({
-			#"sound":"bgm",
-			#"command":"transfer",
-			#"name":"TestBGM2",
-			#"transfer_fade_out":0.8,
-			#"transfer_fade_in":0.1,
-			#"use_loop_segment":true,
-			#"loop_start_sec":6.0,
-			#"loop_end_sec":38.0
-		#})
+	
 	handle_dash_cooldown(delta)
-#func move(delta: float, speed:float = _character.player_velocity) -> void:
-	#input_vector = Vector2.ZERO
-	#input_vector.x = Input.get_action_strength("right") - Input.get_action_strength("left")
-	#input_vector.y = Input.get_action_strength("down") - Input.get_action_strength("up")
-	#input_vector = input_vector.normalized()
-	#velocity = input_vector * speed 
-	#move_and_slide();
-	#move_data.record_motion(global_position,delta);
-	#move_data.print_data();
-
-#func _physics_process(delta: float) -> void:
-
 
 # --- 核心移动逻辑 ---
-# 注意：这里改回了 'delta' (去掉了下划线)，因为下面要用到它
 func move(delta: float, speed: float = _character.player_velocity) -> void:
-	# 1. 获取输入
 	input_vector = Input.get_vector("left", "right", "up", "down")
 	
-	# 2. 冲刺判定
 	if Input.is_action_just_pressed("avoid") and can_dash and input_vector != Vector2.ZERO:
 		start_dash()
 
-	# 3. 计算速度
 	var current_speed = speed
 	if is_dashing:
 		current_speed *= dash_speed_multiplier
 	
 	velocity = input_vector * current_speed
-	
-	# 4. 执行移动
 	move_and_slide()
 	
-	# 5. 屏幕限制
-	#global_position = global_position.clamp(Vector2.ZERO, screen_size)
-	
-	# 6. 动画翻转
 	if input_vector.x != 0:
 		animated_sprite.flip_h = input_vector.x < 0
 	
-	# 7. 记录移动数据
 	move_data.record_motion(global_position, delta)
 
 # --- 冲刺/闪避系统 ---
@@ -137,7 +132,6 @@ func start_dash() -> void:
 	is_dashing = true
 	can_dash = false
 	dash_timer = dash_duration
-	# vfx_parser.spawn_vfx("dash_effect", global_position) 
 
 func handle_dash_cooldown(delta: float) -> void:
 	if is_dashing:
@@ -152,15 +146,76 @@ func handle_dash_cooldown(delta: float) -> void:
 
 # --- 射击系统 ---
 func player_shooting(payload: Dictionary) -> void:
-	#print("左键按下 world_pos=", payload["world_pos"])
-	var shoot_script:Array = logic.get_shoot_script(payload["world_pos"]);
-	#caster.
+	# 当前有效模式（由筒子决定或手动覆盖决定）
+	var mode := logic.get_effective_fire_mode()
+
+	# ✅ 只有 MULTI 不吃全局冷却，其它（SINGLE/FAN/RANDOM_FAN）都吃冷却
+	if mode != Player_logic.FireMode.MULTI:
+		if shoot_timer > 0.0:
+			# 调试：你想确认被限制时可以打开这一行
+			# print("[Shoot] blocked by cooldown: ", shoot_timer)
+			return
+		shoot_timer = shoot_cooldown
+
+	var shoot_script: Array = logic.get_shoot_script(payload["world_pos"])
 	scheduler.preemption(shoot_script)
-	
-	
+
 func shoot(bullet_script:Array)->void:
 	if scheduler.is_running:
-		scheduler.preemption(bullet_script);
+		scheduler.preemption(bullet_script)
 	else:
-		scheduler.setup(bullet_script);
-		scheduler.start();
+		scheduler.setup(bullet_script)
+		scheduler.start()
+
+# =========================
+# Cheat apply / stat update
+# =========================
+func _apply_cheat_if_needed(force: bool) -> void:
+	if not cheat_enabled:
+		return
+
+	if force \
+	or cheat_tiao != _last_cheat_tiao \
+	or cheat_tong != _last_cheat_tong \
+	or cheat_wan != _last_cheat_wan:
+
+		_last_cheat_tiao = cheat_tiao
+		_last_cheat_tong = cheat_tong
+		_last_cheat_wan = cheat_wan
+
+		# 把麻将数量应用到 PlayerLogic（后续你接入拾取/商店时，也只需要调用这个 API）
+		logic.apply_tiles(cheat_tiao, cheat_tong, cheat_wan)
+
+		# 条子影响射速：cooldown = base / multiplier
+		var mult := logic.get_attack_speed_multiplier()
+		shoot_cooldown = base_shoot_cooldown / max(mult, 0.01)
+
+		print("[Mahjong] tiao=", cheat_tiao, " tong=", cheat_tong, " wan=", cheat_wan,
+			" | mode=", logic.get_fire_mode_name(),
+			" | dmg=", logic.get_damage_value(),
+			" | cooldown=", shoot_cooldown)
+
+# =========================
+# Manual fire mode hotkeys (保留)
+# 说明：如果你想“完全由筒子控制”，把 PlayerLogic.gd 里的 manual_fire_mode_override 保持 false 即可
+# =========================
+func handle_fire_mode_hotkeys() -> void:
+	if Input.is_action_just_pressed("fire_mode_1"):
+		logic.manual_fire_mode_override = true
+		logic.set_fire_mode(Player_logic.FireMode.SINGLE)
+		print("[FireMode] MANUAL ", logic.get_fire_mode_name())
+
+	elif Input.is_action_just_pressed("fire_mode_2"):
+		logic.manual_fire_mode_override = true
+		logic.set_fire_mode(Player_logic.FireMode.FAN)
+		print("[FireMode] MANUAL ", logic.get_fire_mode_name())
+
+	elif Input.is_action_just_pressed("fire_mode_3"):
+		logic.manual_fire_mode_override = true
+		logic.set_fire_mode(Player_logic.FireMode.RANDOM_FAN)
+		print("[FireMode] MANUAL ", logic.get_fire_mode_name())
+
+	elif Input.is_action_just_pressed("fire_mode_4"):
+		logic.manual_fire_mode_override = true
+		logic.set_fire_mode(Player_logic.FireMode.MULTI)
+		print("[FireMode] MANUAL ", logic.get_fire_mode_name())

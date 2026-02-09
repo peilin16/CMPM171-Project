@@ -54,6 +54,7 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_beklg")
+base_shoot_cooldown = 0.55
 
 [node name="StateHub" type="Node2D" parent="."]
 script = ExtResource("2_4mqus")
