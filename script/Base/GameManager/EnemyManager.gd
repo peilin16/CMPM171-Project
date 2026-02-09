@@ -4,6 +4,34 @@ class_name EnemyManager
 
 var _enemies: Dictionary = {}  # {id: EnemyController}
 var _active_enemies: Dictionary = {}  # {id: EnemyController}
+var _enemy_stats_data: Dictionary = {}
+
+func _ready() -> void:
+	_load_enemy_stats()
+
+func _load_enemy_stats() -> void:
+	var path = "res://assets/data/enemy_stats.json"
+	if not FileAccess.file_exists(path):
+		printerr("Enemy stats file found at: ", path)
+		return
+		
+	var file = FileAccess.open(path, FileAccess.READ)
+	var content = file.get_as_text()
+	var json = JSON.new()
+	var error = json.parse(content)
+	
+	if error == OK:
+		_enemy_stats_data = json.data
+		print("Loaded enemy stats for: ", _enemy_stats_data.keys())
+	else:
+		printerr("JSON Parse Error: ", json.get_error_message())
+
+func get_enemy_stats(enemy_name: String) -> Dictionary:
+	if _enemy_stats_data.has(enemy_name):
+		return _enemy_stats_data[enemy_name]
+	printerr("No stats found for enemy: ", enemy_name)
+	return {}
+
 func register_enemy(e: Enemy_controller) -> int:
 	var id = ToolBar.gameIDGenerator.generate_id()
 	_enemies[id] = e

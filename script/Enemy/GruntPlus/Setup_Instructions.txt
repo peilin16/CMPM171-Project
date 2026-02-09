@@ -1,0 +1,30 @@
+Setup Instructions for GruntPlus Enemy:
+
+1. Create GruntPlus Scene:
+   - Create a new Scene (e.g. `scenes/Character/GruntPlus.tscn`).
+   - Root Node: `CharacterBody2D` (Rename to "GruntPlus").
+   - Script: Attach `script/Enemy/GruntPlus/GruntPlusController.gd`.
+   - The Stats are loaded automatically from `assets/data/enemy_stats.json`.
+
+2. Node Structure:
+   - Root (GruntPlus)
+     - CollisionShape2D (Set your shape)
+     - StateHub (Node2D, attach `script/State/StateHub.gd`)
+     - Visuals (Sprite/AnimatedSprite2D)
+     - Scheduler (Node, attach `script/Other/Scheduler/Scheduler.gd`) - *Required by base EnemyController logic*
+     - VFXParser (Node, attach `script/VFX/VFXParser.gd`) - *Required by base EnemyController logic*
+
+3. Bullet Behavior:
+   - The GruntPlus spawns `scenes/Bullet/MediumRoundBullet.tscn`.
+   - It injects a "direction_linear" movement script into the bullet's scheduler.
+   - Adjust `attack_range` and `move_speed` in `enemy_stats.json`.
+
+4. State Machine Logic:
+   - Idle (Wait 1s after shooting)
+   - Shoot (Fire bullet when in range 300px)
+   - Move (Chase player)
+   - Avoidance (Rays created at runtime)
+
+5. Important Note:
+   - Ensure the `StateHub` script is attached to the child node named "StateHub".
+   - The base `EnemyController` expects `Scheduler` and `VFXParser` children to exist to avoid errors in `_ready`. Use `scenes/Base/game_id_generator.tscn` or similar as reference if needed, but simple nodes with scripts are enough.
