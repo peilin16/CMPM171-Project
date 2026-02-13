@@ -9,7 +9,7 @@ func _ready() -> void:
 	super._ready();
 	
 func _physics_process(delta: float) -> void:
-	print(GameManager.camera_manager.get_center())
+	#print(GameManager.camera_manager.get_center())
 	if Input.is_action_just_pressed("stop"):
 		if not pause_menu.visible:
 			pause_menu.visible = true;
