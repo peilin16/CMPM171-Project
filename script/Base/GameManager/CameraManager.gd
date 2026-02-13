@@ -25,6 +25,9 @@ func get_view_width() -> float:
 func get_view_height() -> float:
 	return get_view_size().y
 
+func get_center()->Vector2:
+	return current_camera.global_position;
+
 # -------- World rect (visible area in global/world space) --------
 func get_view_rect() -> Rect2:
 	if not has_camera():

@@ -1,5 +1,5 @@
 extends Control
-
+class_name Pause_menu
 # 预加载主菜单和当前关卡（方便重启）
 const START_MENU_PATH = "res://scenes/UI/StartMenu.tscn"
 # 注意：正式版可能需要动态获取当前关卡，这里暂时写死或者留空
@@ -16,8 +16,7 @@ func _ready() -> void:
 func _on_resume_pressed() -> void:
 	# 解除暂停
 	get_tree().paused = false
-	# 销毁自身（如果是动态生成的）或者 隐藏自身
-	queue_free() 
+	self.visible = false
 
 func _on_restart_pressed() -> void:
 	# 重启前务必先解除暂停，否则新场景加载出来也是暂停的！
