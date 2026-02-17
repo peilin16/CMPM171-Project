@@ -3,7 +3,7 @@ class_name Player_controller
 
 # 获取组件引用
 @onready var hurtbox: Area2D = $HurtBox
-@onready var vfx_parser: VFX_spawner = $VFXSpawner
+@onready var vfx_parser: VFX_parser = $VFXParser
 @onready var scheduler: Scheduler = $Scheduler
 @onready var state_hub: State_hub = $StateHub
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D 

@@ -16,8 +16,8 @@ func _ready() -> void:
 	
 	_owner_controller = get_parent()
 	_vfx_pool_manager = PoolManager.vfx_pool_manager; 
-	vfx_container_front = get_tree().current_scene.get_node("VFXContainerFront");
-	vfx_container_back = get_tree().current_scene.get_node("VFXContainerBack")
+	#vfx_container_front = get_tree().current_scene.get_node("VFXContainerFront");
+	#vfx_container_back = get_tree().current_scene.get_node("VFXContainerBack")
 	GameManager.vfx_manager.register_vfx_spawner(self);
 # Main API: spawn by configure
 func spawn(cfg: VFX_request) -> VFX_instance:

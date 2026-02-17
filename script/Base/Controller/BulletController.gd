@@ -50,9 +50,11 @@ func _ready() -> void:
 	_logic.set_up_scheduler(scheduler);
 	_make_material_unique()
 
+
 func _on_area_entered(area: Area2D) -> void:
 	if not bullet.is_active:
 		return;
+	
 	#if area.component == Rumia_controller.Component.HEALTHYRANGE:
 		#var player := area.get_parent() as Rumia_controller
 		#
@@ -97,6 +99,9 @@ func _on_screen_exited() -> void:
 	
 		
 func _on_body_entered(body: Node) -> void:
+	if body is StaticBody2D:
+		deactivate();
+		return;
 	if not body.hitable:
 		return;
 		
