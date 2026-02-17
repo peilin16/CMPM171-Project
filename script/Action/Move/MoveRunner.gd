@@ -10,11 +10,12 @@ var current_cfg: Move_configure
 var elapsed_time: float = 0.0
 var move_data:Move_data;
 
-
+func _init() -> void:
+	move_data = Move_data.new();
 func start(actor ,pattern: Pattern, configure: Configure) -> void:
 	controller = actor
 	stop() # interrupt old
-	move_data = Move_data.new();
+	
 	if pattern == null or configure == null or controller == null:
 		return
 
@@ -54,10 +55,8 @@ func _physics_process(delta: float) -> void:
 
 		
 func get_data()->Data:
-	if move_data:
-		return move_data;
-	else:
-		return Move_data.new();
+	return move_data;
+
 
 #for order system only
 func get_actor_position() -> Vector2:
