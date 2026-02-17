@@ -95,7 +95,7 @@ script = ExtResource("4_8fgnd")
 metadata/_custom_type_script = "uid://b566wwblvpd6x"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=197719698]
-position = Vector2(3.8146973e-06, 3.8146973e-06)
+position = Vector2(1.3552527e-20, 1.9999999)
 scale = Vector2(0.08780488, 0.06559634)
 sprite_frames = SubResource("SpriteFrames_gc4mm")
 animation = &"rumia_idle"
@@ -103,6 +103,7 @@ animation = &"rumia_idle"
 [node name="BulletContainer" type="Node2D" parent="." unique_id=538128306]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=342791192]
+position = Vector2(2, -9)
 zoom = Vector2(2, 2)
 script = ExtResource("12_hdh7n")
 lock_position = false
