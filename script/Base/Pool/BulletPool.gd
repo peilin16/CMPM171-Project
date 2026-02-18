@@ -47,8 +47,8 @@ func spawn_bullets(num:int = 1) :
 		var b = spawn_bullet();
 		bullet_scene_array.push_back(b);
 	return bullet_scene_array;
-	
-	
+
+
 func _create_bullet() -> Node:
 	if bullet_scene == null:
 		push_error("bullet_pool: bullet_scene is not assigned!")
@@ -70,7 +70,7 @@ func _on_bullet_deactivated(bullet_scene: Node) -> void:
 	if not (bullet_scene in available_bullets):
 		_deactivate_bullet(bullet_scene)
 		available_bullets.append(bullet_scene)
-	bullet_scene.bullet._init();		
+	bullet_scene.bullet._init();	
 	
 # ---------- deactivated bullets ----------
 func _on_bullet_deactivateds(bullet_scenes: Array) -> void:

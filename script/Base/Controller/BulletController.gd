@@ -217,6 +217,7 @@ func _update_collision() -> void:
 			##set_collision_mask_value(5, true)   # environment
 
 
+
 # for order system only
 func get_actor_position() -> Vector2:
 	return global_position

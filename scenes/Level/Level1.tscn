@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=4 uid="uid://okvl3jg17a5h"]
+[gd_scene load_steps=62 format=4 uid="uid://okvl3jg17a5h"]
 
 [ext_resource type="Script" uid="uid://dghk1chdkrxqs" path="res://script/Level/Level1Controller.gd" id="1_h32uy"]
 [ext_resource type="Script" uid="uid://cdj8cw7oe3du7" path="res://script/Base/Other/Main_camera.gd" id="2_p0hel"]
@@ -6155,6 +6155,39 @@ size = Vector2(56.125, 31)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j3cc7"]
 size = Vector2(38.25, 90.4209)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mcyjq"]
+size = Vector2(27, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g824q"]
+size = Vector2(16.5, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jrrlw"]
+size = Vector2(43.875, 42.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3q85i"]
+size = Vector2(34.75, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rbypt"]
+size = Vector2(30.5, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6laxy"]
+size = Vector2(63.25, 63)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5r1um"]
+size = Vector2(47.625, 28.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f5v21"]
+size = Vector2(28.625, 30.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e1xui"]
+size = Vector2(16.3125, 33.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8svs3"]
+size = Vector2(16.3125, 31.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gnnbo"]
+size = Vector2(31.15625, 31.25)
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_67qcy"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_mf1cp"]
@@ -6183,7 +6216,7 @@ tile_set = SubResource("TileSet_6laxy")
 
 [node name="BulletContainer" type="Node2D" parent="."]
 
-[node name="VFXContainer" type="Node2D" parent="."]
+[node name="VFXContainerFront" type="Node2D" parent="."]
 
 [node name="EnemyContainer" type="Node2D" parent="."]
 
@@ -6274,6 +6307,48 @@ shape = SubResource("RectangleShape2D_j3cc7")
 [node name="ShortBarrier" type="StaticBody2D" parent="Barrier"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier/ShortBarrier"]
+position = Vector2(-256, 233)
+shape = SubResource("RectangleShape2D_mcyjq")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Barrier/ShortBarrier"]
+position = Vector2(-505.25, 222)
+shape = SubResource("RectangleShape2D_g824q")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Barrier/ShortBarrier"]
+position = Vector2(-376, 276)
+shape = SubResource("RectangleShape2D_jrrlw")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Barrier/ShortBarrier"]
+position = Vector2(-237, 273)
+shape = SubResource("RectangleShape2D_3q85i")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Barrier/ShortBarrier"]
+position = Vector2(129.75, 258)
+shape = SubResource("RectangleShape2D_rbypt")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Barrier/ShortBarrier"]
+position = Vector2(-472, -150)
+shape = SubResource("RectangleShape2D_6laxy")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Barrier/ShortBarrier"]
+position = Vector2(-517, 80)
+shape = SubResource("RectangleShape2D_5r1um")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Barrier/ShortBarrier"]
+position = Vector2(-303, -209)
+shape = SubResource("RectangleShape2D_f5v21")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Barrier/ShortBarrier"]
+position = Vector2(-393.15625, -224.625)
+shape = SubResource("RectangleShape2D_e1xui")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="Barrier/ShortBarrier"]
+position = Vector2(-519.15625, -225.625)
+shape = SubResource("RectangleShape2D_8svs3")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="Barrier/ShortBarrier"]
+position = Vector2(-543, 286)
+shape = SubResource("RectangleShape2D_gnnbo")
 
 [node name="Boundary" type="Node2D" parent="Barrier"]
 
@@ -6305,3 +6380,5 @@ rotation = -1.5707964
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier/Boundary/RightBoundary"]
 shape = SubResource("WorldBoundaryShape2D_ti1q0")
+
+[node name="VFXContainerBack" type="Node2D" parent="."]
