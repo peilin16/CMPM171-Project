@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=4 uid="uid://okvl3jg17a5h"]
+[gd_scene load_steps=64 format=4 uid="uid://okvl3jg17a5h"]
 
 [ext_resource type="Script" uid="uid://dghk1chdkrxqs" path="res://script/Level/Level1Controller.gd" id="1_h32uy"]
 [ext_resource type="Script" uid="uid://cdj8cw7oe3du7" path="res://script/Base/Other/Main_camera.gd" id="2_p0hel"]
@@ -6141,7 +6141,7 @@ size = Vector2(75.5, 208.6836)
 size = Vector2(190.75, 134.3418)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5lfjo"]
-size = Vector2(57, 33.841797)
+size = Vector2(57.5, 61.118652)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ljj10"]
 size = Vector2(57, 33.841797)
@@ -6187,6 +6187,12 @@ size = Vector2(16.3125, 31.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gnnbo"]
 size = Vector2(31.15625, 31.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m430h"]
+size = Vector2(46.367188, 47.859375)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lb7yv"]
+size = Vector2(28.8125, 52.625)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_67qcy"]
 
@@ -6284,10 +6290,6 @@ shape = SubResource("RectangleShape2D_28004")
 position = Vector2(-269.5, 125.68359)
 shape = SubResource("RectangleShape2D_5lfjo")
 
-[node name="CollisionShape2D11" type="CollisionShape2D" parent="Barrier/Building/Building1"]
-position = Vector2(-269.5, 125.68359)
-shape = SubResource("RectangleShape2D_5lfjo")
-
 [node name="CollisionShape2D12" type="CollisionShape2D" parent="Barrier/Building/Building1"]
 position = Vector2(438.5, 19.079102)
 shape = SubResource("RectangleShape2D_ljj10")
@@ -6347,8 +6349,16 @@ position = Vector2(-519.15625, -225.625)
 shape = SubResource("RectangleShape2D_8svs3")
 
 [node name="CollisionShape2D11" type="CollisionShape2D" parent="Barrier/ShortBarrier"]
-position = Vector2(-543, 286)
+position = Vector2(-545, 287)
 shape = SubResource("RectangleShape2D_gnnbo")
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="Barrier/ShortBarrier"]
+position = Vector2(-216, -213.92969)
+shape = SubResource("RectangleShape2D_m430h")
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="Barrier/ShortBarrier"]
+position = Vector2(-129.40625, 113.6875)
+shape = SubResource("RectangleShape2D_lb7yv")
 
 [node name="Boundary" type="Node2D" parent="Barrier"]
 

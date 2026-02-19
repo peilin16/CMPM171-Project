@@ -14,8 +14,7 @@ var _ai_brain_hub: State_hub = null;
 #@onready var _task: Task_runner = $TaskRunner
 @onready var scheduler: Scheduler = $Scheduler
 @onready var vfx_parser: VFX_parser = $VFXParser
-#@onready var widget_spawner: Widget_spawner = $WidgetSpawner;
-
+signal enemy_deactivated(enemy);
 #@export var config: EnemyConfiguration
 var stats: Dictionary = {}
 
@@ -89,8 +88,9 @@ func activate(behavoir_code:String = "")->void:
 #be spawn
 func deactivate()->void:
 	is_spawn = false;
+	hitable = false;
 	GameManager.enemy_manager.unregister_active_enemy(controller_id);
-
+	emit_signal("enemy_deactivated", self);
 func apply_hit_by_float(damage:float):
 	if not is_death:
 		_logic.apply_damage(damage);

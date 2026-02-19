@@ -18,7 +18,7 @@ func get_pool_name() -> String:
 func preload_enemies(count: int) -> void:
 	for i in range(count):
 		var b = _create_enemy()
-		_deactivate_enemy(b)
+		deactivate_enemy(b)
 		available_enemies.append(b)
 
 # spawn
@@ -51,35 +51,34 @@ func _create_enemy() -> Node:
 	# connet signal of _enemy
 	GameManager.enemy_manager.register_enemy(character);
 	if character.has_signal("enemy_deactivated"):
-		character.connect("enemy_deactivated", Callable(self, "_on_character_deactivated"));
+		character.connect("enemy_deactivated", Callable(self, "_on_enemy_deactivated"));
 	preload_count += 1;
 	return character
 
 # ---------- deactivated ----------
 func _on_enemy_deactivated(character_scene: Node) -> void:
 	# remove from active array
+	deactivate_enemy(character_scene);
+# ---------- singal  deactive ----------
+
+
+func deactivate_enemy(character_scene: Node) -> void:
+	#character_scene._enemy._init();
+	character_scene.visible = false
+	character_scene.global_position  =  Vector2(-9999, -9999) # 
+	
+	character_scene.position = Vector2(-9999, -9999);	
+	
 	if character_scene in active_enemies:
 		active_enemies.erase(character_scene)
-	
 	if not (character_scene in available_enemies):
-		_deactivate_enemy(character_scene)
 		available_enemies.append(character_scene)
-	character_scene._enemy._init();		
-# ---------- singal  deactive ----------
-func _deactivate_enemy(character_scene: Node) -> void:
-	character_scene._enemy._init();
-	character_scene.visible = false
-	character_scene._enemy.is_active = false
-
-	if "position" in character_scene:
-		character_scene.global_position  =  Vector2(-9999, -9999) # 
-	elif "position" in character_scene:
-		character_scene.position = Vector2(-9999, -9999);	
+	character_scene._enemy._init();			
 		
 # ---------- recycle enemy ----------
 func _deactivate_all() -> void:
 	for b in active_enemies:
-		_deactivate_enemy(b)
+		deactivate_enemy(b)
 		if not (b in available_enemies):
 			available_enemies.append(b)
 	active_enemies.clear()

@@ -1,13 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://r057xmkcna5b"]
+[gd_scene load_steps=21 format=3 uid="uid://r057xmkcna5b"]
 
-[ext_resource type="Script" uid="uid://cjjxviid7c87j" path="res://Script/Base/Pool/PoolManager.gd" id="1_3ulbt"]
-[ext_resource type="Script" uid="uid://b8crcgnfawqk4" path="res://Script/Base/Pool/BulletPoolManager.gd" id="1_4hjfb"]
+[ext_resource type="Script" uid="uid://cjjxviid7c87j" path="res://script/Base/Pool/PoolManager.gd" id="1_3ulbt"]
+[ext_resource type="Script" uid="uid://b8crcgnfawqk4" path="res://script/Base/Pool/BulletPoolManager.gd" id="1_4hjfb"]
 [ext_resource type="Script" uid="uid://whrqv3ln4v1r" path="res://script/Bullet/RoundBullet/MediumRoundBulletPool.gd" id="2_3ulbt"]
 [ext_resource type="PackedScene" uid="uid://bfwcdh78eqhc0" path="res://scenes/Bullet/MediumRoundBullet.tscn" id="3_iv2jh"]
-[ext_resource type="Script" uid="uid://dsxf0cioy76ts" path="res://Script/Base/Pool/EnemyPoolManager.gd" id="4_7qdiy"]
-[ext_resource type="Script" uid="uid://bj8kd5d5847bi" path="res://script/Character/GenericFairy/GenericFairy1Pool.gd" id="5_0e1ta"]
-[ext_resource type="PackedScene" uid="uid://drquj63hxwl5c" path="res://scenes/Character/Generic_fairy_1.tscn" id="6_lnn2d"]
-[ext_resource type="Script" uid="uid://bgh2ba5puwfbw" path="res://Script/Base/Pool/VFXPoolManager.gd" id="7_cyrnx"]
+[ext_resource type="Script" uid="uid://dsxf0cioy76ts" path="res://script/Base/Pool/EnemyPoolManager.gd" id="4_7qdiy"]
+[ext_resource type="Script" uid="uid://bgh2ba5puwfbw" path="res://script/Base/Pool/VFXPoolManager.gd" id="7_cyrnx"]
 [ext_resource type="Script" uid="uid://52tf2dol7w7s" path="res://script/VFX/Muzzle/MuzzleFlash1Pool.gd" id="8_v3vmm"]
 [ext_resource type="PackedScene" uid="uid://b1w1mp7uru7xv" path="res://scenes/VFX/MuzzleFlash1.tscn" id="9_jeoll"]
 [ext_resource type="Script" uid="uid://bp6uddlt4s6un" path="res://script/VFX/Muzzle/MuzzleFlash2Pool.gd" id="11_lnn2d"]
@@ -37,8 +35,6 @@ bullet_scene = ExtResource("3_iv2jh")
 script = ExtResource("4_7qdiy")
 
 [node name="GenericFairy1Pool" type="Node" parent="EnemyPoolManager"]
-script = ExtResource("5_0e1ta")
-character_scene = ExtResource("6_lnn2d")
 
 [node name="VFXPoolManager" type="Node" parent="."]
 script = ExtResource("7_cyrnx")
