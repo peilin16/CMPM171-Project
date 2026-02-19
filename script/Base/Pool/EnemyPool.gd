@@ -73,7 +73,7 @@ func deactivate_enemy(character_scene: Node) -> void:
 		active_enemies.erase(character_scene)
 	if not (character_scene in available_enemies):
 		available_enemies.append(character_scene)
-	character_scene._enemy._init();			
+	#character_scene._enemy._init();			
 		
 # ---------- recycle enemy ----------
 func _deactivate_all() -> void:
