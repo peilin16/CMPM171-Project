@@ -75,14 +75,26 @@ func _on_area_entered(area: Area2D) -> void:
 
 
 func set_skin()->void:
-	if texture_controller == null:
+	var skin_controller := texture_controller
+	if skin_controller == null:
+		skin_controller = sprite as Bullet_texture_controller
+	if skin_controller == null:
 		return
 	if bullet == null:
-		texture_controller.set_skin(0);
+		skin_controller.set_skin(0);
 	elif bullet.is_red:
-		texture_controller.set_skin(1);
+		skin_controller.set_skin(1);
+	elif bullet.current_color == Bullet.BulletColor.GREEN:
+		skin_controller.set_skin(2);
 	else:
-		texture_controller.set_skin(0);
+		skin_controller.set_skin(0);
+
+	var shader_material := sprite.material as ShaderMaterial
+	if shader_material:
+		if bullet != null and bullet.is_red:
+			shader_material.set_shader_parameter("edge_color", Color(1.0, 0.35, 0.35, 1.0))
+		else:
+			shader_material.set_shader_parameter("edge_color", Color(0.5, 0.9, 1.0, 1.0))
 		
 
 #func _set_up_state()->void:

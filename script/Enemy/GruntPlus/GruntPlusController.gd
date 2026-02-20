@@ -72,6 +72,8 @@ func spawn_bullet() -> void:
 	bullet.bullet.origin = self
 	bullet.bullet.owner_id = get_id()
 	bullet.bullet.faction = bullet.bullet.Faction.ENEMY
+	bullet.bullet.current_color = Bullet.BulletColor.RED
+	bullet.bullet.is_red = true
 	bullet._update_collision()
 	
 	# Determine Direction
