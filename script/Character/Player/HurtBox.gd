@@ -5,6 +5,11 @@ var can_hurt:bool = false;
 @onready var sprite:Sprite2D = $Sprite
 var tween: Tween
 
+func open()->void:
+	can_hurt = true;
+
+func close()->void:
+	can_hurt = false;
 
 func _ready():
 	# 确保 sprite 存在
