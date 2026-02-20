@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dve00d1llu8hw"]
 
 [ext_resource type="Texture2D" uid="uid://c3qmjsex5bm6g" path="res://assets/particle/star_05.png" id="1_3nv6y"]
-[ext_resource type="Script" uid="uid://c83mjdprgdhrk" path="res://Script/VFX/VFXInstance.gd" id="1_3wn8f"]
+[ext_resource type="Script" uid="uid://c83mjdprgdhrk" path="res://script/VFX/VFXInstance.gd" id="1_3wn8f"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3wn8f"]
 light_mode = 1

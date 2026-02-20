@@ -30,6 +30,9 @@ func spawn_bullet() -> Node:
 	else:
 		bullet_scene = _create_bullet()
 
+	if bullet_scene == null:
+		return null
+
 	# 
 	if "visible" in bullet_scene:
 		bullet_scene.visible = true
@@ -79,6 +82,8 @@ func _on_bullet_deactivateds(bullet_scenes: Array) -> void:
 		_on_bullet_deactivated(element);
 # ---------- singal bullet  deactive ----------
 func _deactivate_bullet(bullet_scene: Node) -> void:
+	if bullet_scene == null:
+		return
 	bullet_scene.bullet._init();
 	bullet_scene.visible = false
 	bullet_scene.bullet.is_active = false

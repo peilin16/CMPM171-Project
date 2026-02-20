@@ -8,7 +8,13 @@ var _controller
 @export var root_state:State_object = null;
 var _state_map: Dictionary = {}  # name -> StateObject
 #var null_state: State_object
-@onready var anim_player: Animation_player = $AnimationPlayer
+@onready var anim_player: Animation_player = _resolve_anim_player()
+
+func _resolve_anim_player() -> Animation_player:
+	var node = get_node_or_null("AnimationPlayer")
+	if node == null:
+		node = get_node_or_null("Animation_player")
+	return node as Animation_player
 
 
 func _ready() -> void:

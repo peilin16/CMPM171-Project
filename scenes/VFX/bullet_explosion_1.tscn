@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dydiukbaqakk0"]
 
 [ext_resource type="Texture2D" uid="uid://trqj2ua4kqmo" path="res://assets/particle/Dot1-Sheet.png" id="1_agltp"]
-[ext_resource type="Script" uid="uid://c83mjdprgdhrk" path="res://Script/VFX/VFXInstance.gd" id="1_c8ogc"]
+[ext_resource type="Script" uid="uid://c83mjdprgdhrk" path="res://script/VFX/VFXInstance.gd" id="1_c8ogc"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_agltp"]
 particles_animation = true

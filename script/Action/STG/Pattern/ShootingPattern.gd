@@ -82,11 +82,6 @@ func shoot_one(runner: Shoot_runner)->void:
 	bullet_scene.scheduler.clear()# .task_queue.clear();
 	bullet_scene.scheduler.setup(configure_move(shoot_configure));
 	
-	if bullet_scene.get_parent() != shoot_runner.container:
-		if bullet_scene.is_inside_tree():
-			bullet_scene.get_parent().remove_child(bullet_scene);
-
-	
 	bullet_scene.bullet.origin = shooter;
 	bullet_scene.bullet.owner_id = shooter.get_id();
 	bullet_scene._update_collision();
@@ -95,7 +90,10 @@ func shoot_one(runner: Shoot_runner)->void:
 	
 func configure_bullet(configure: Shoot_configure ) ->Bullet_controller:
 	var bullet_scene:Bullet_controller = _bullets.pop_front();
-	shoot_runner.container.add_child(bullet_scene);
+	if bullet_scene.get_parent() != shoot_runner.container:
+		if bullet_scene.get_parent() != null:
+			bullet_scene.get_parent().remove_child(bullet_scene)
+		shoot_runner.container.add_child(bullet_scene)
 	bullet_scene.set_actor_position(shoot_configure.origin.get_actor_position());
 	if configure.refer_bullet != null:
 		bullet_scene.bullet = configure.refer_bullet.duplicate();
@@ -125,7 +123,17 @@ func configure_bullet(configure: Shoot_configure ) ->Bullet_controller:
 	elif configure.color == Shoot_configure.ColorType.RED: 
 		bullet_scene.bullet.current_color = Bullet.BulletColor.RED;
 	#bullet_scene.bullet.move_configure = configure.move_configure;
-	bullet_scene.bullet.faction = bullet_scene.bullet.Faction.ENEMY;
+	if configure.origin != null and "team" in configure.origin and int(configure.origin.team) == Character_controller.TEAM.PLAYER:
+		bullet_scene.bullet.faction = bullet_scene.bullet.Faction.PLAYER;
+	else:
+		bullet_scene.bullet.faction = bullet_scene.bullet.Faction.ENEMY;
+
+	if bullet_scene.bullet.faction == bullet_scene.bullet.Faction.ENEMY:
+		bullet_scene.bullet.current_color = Bullet.BulletColor.RED
+		bullet_scene.bullet.is_red = true
+	else:
+		bullet_scene.bullet.current_color = Bullet.BulletColor.BLUE
+		bullet_scene.bullet.is_red = false
 	
 	return bullet_scene;
 

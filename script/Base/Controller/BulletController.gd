@@ -20,7 +20,7 @@ var controller_id :int;#id
 var _dissolving := false;
 #vfx
 @onready var _vfx: Array[VFX_request];
-@onready var vfx_spawner:VFX_controller_spawner = $VFXSpawner
+@onready var vfx_spawner: VFX_controller_spawner = _resolve_vfx_spawner()
 #var task_queue: Array[Order];
 var _logic:Bullet_logic;
 
@@ -50,6 +50,11 @@ func _ready() -> void:
 	_logic.set_up_scheduler(scheduler);
 	_make_material_unique()
 
+func _resolve_vfx_spawner() -> VFX_controller_spawner:
+	var node = get_node_or_null("VFXSpawner")
+	if node == null:
+		node = get_node_or_null("VFXParser/VFXSpawner")
+	return node as VFX_controller_spawner
 
 func _on_area_entered(area: Area2D) -> void:
 	if not bullet.is_active:
@@ -70,14 +75,26 @@ func _on_area_entered(area: Area2D) -> void:
 
 
 func set_skin()->void:
-	if texture_controller == null:
+	var skin_controller := texture_controller
+	if skin_controller == null:
+		skin_controller = sprite as Bullet_texture_controller
+	if skin_controller == null:
 		return
 	if bullet == null:
-		texture_controller.set_skin(0);
+		skin_controller.set_skin(0);
 	elif bullet.is_red:
-		texture_controller.set_skin(1);
+		skin_controller.set_skin(1);
+	elif bullet.current_color == Bullet.BulletColor.GREEN:
+		skin_controller.set_skin(2);
 	else:
-		texture_controller.set_skin(0);
+		skin_controller.set_skin(0);
+
+	var shader_material := sprite.material as ShaderMaterial
+	if shader_material:
+		if bullet != null and bullet.is_red:
+			shader_material.set_shader_parameter("edge_color", Color(1.0, 0.35, 0.35, 1.0))
+		else:
+			shader_material.set_shader_parameter("edge_color", Color(0.5, 0.9, 1.0, 1.0))
 		
 
 #func _set_up_state()->void:
@@ -109,7 +126,8 @@ func _on_body_entered(body: Node) -> void:
 		var enemy := body as Enemy_controller
 		
 		enemy.behit(bullet);
-		vfx_spawner.spawn(bullet.explosion_vfx);
+		if vfx_spawner:
+			vfx_spawner.spawn(bullet.explosion_vfx);
 		
 		deactivate();
 
