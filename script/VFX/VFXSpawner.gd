@@ -1,13 +1,12 @@
 # VFX_spawner.gd
 extends Node2D
-class_name VFX_spawner
 
 @export var pool_manager_path: NodePath           
 @export var vfx_pool_manager_node_name: String = "VFXPoolManager"
 @export var default_vfx_name: String = ""         
 @export var vfx_container_front:Node2D;
 @export var vfx_container_back:Node2D;
-var _vfx_pool_manager: VFX_pool_manager = null
+var _vfx_pool_manager = null
 var _owner_controller: Node = null
 var spawner_id: int;
 
@@ -16,8 +15,17 @@ func _ready() -> void:
 	
 	_owner_controller = get_parent()
 	_vfx_pool_manager = PoolManager.vfx_pool_manager; 
-	vfx_container_front = get_tree().current_scene.get_node("VFXContainerFront");
-	vfx_container_back = get_tree().current_scene.get_node("VFXContainerBack")
+	var scene = get_tree().current_scene
+	vfx_container_front = scene.get_node_or_null("VFXContainerFront") as Node2D
+	vfx_container_back = scene.get_node_or_null("VFXContainerBack") as Node2D
+	if vfx_container_front == null:
+		vfx_container_front = scene.get_node_or_null("VFXContainer") as Node2D
+	if vfx_container_back == null:
+		vfx_container_back = scene.get_node_or_null("VFXContainer") as Node2D
+	if vfx_container_front == null:
+		vfx_container_front = scene
+	if vfx_container_back == null:
+		vfx_container_back = scene
 	GameManager.vfx_manager.register_vfx_spawner(self);
 # Main API: spawn by configure
 func spawn(cfg: VFX_request) -> VFX_instance:
@@ -28,25 +36,42 @@ func spawn(cfg: VFX_request) -> VFX_instance:
 		# no vfx specified -> do nothing, but still "valid"
 		return null
 
-	var pool := _vfx_pool_manager.get_pool(key)
+	var pool = _vfx_pool_manager.get_pool(key)
 	if pool == null:
 		push_warning("VFX_spawner: pool not found for vfx_name = " + key)
 		return null
 
-	var inst := pool.spawn() as VFX_instance
+	var raw_inst = pool.spawn()
+	if raw_inst == null:
+		return null
+
+	var inst := raw_inst as VFX_instance
 	if inst == null:
+		if raw_inst is CanvasItem:
+			raw_inst.visible = false
+		if pool.has_method("recycle"):
+			pool.recycle(raw_inst)
+		push_warning("VFX_spawner: vfx root must extend VFX_instance for vfx_name = " + key)
 		return null
 
 	# Decide parent: attach to owner or to current scene / vfx container
+	var target_parent: Node = null
 	if cfg.attach_to_owner and _owner_controller != null:
-		_owner_controller.add_child(inst)
+		target_parent = _owner_controller
 	else:
 		# preferred: put VFX under a global VFX container if you have one
-		
-		if cfg.is_front :
-			vfx_container_front.add_child(inst)
+		if cfg.is_front:
+			target_parent = vfx_container_front
 		else:
-			vfx_container_back.add_child(inst)
+			target_parent = vfx_container_back
+
+	if target_parent == null:
+		target_parent = get_tree().current_scene
+
+	if inst.get_parent() != target_parent:
+		if inst.get_parent() != null:
+			inst.get_parent().remove_child(inst)
+		target_parent.add_child(inst)
 
 	# Apply transform
 	var pos := cfg.spawn_position

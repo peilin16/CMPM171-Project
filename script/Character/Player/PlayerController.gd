@@ -3,7 +3,7 @@ class_name Player_controller
 
 # 获取组件引用
 @onready var hurtbox: Area2D = $HurtBox
-@onready var vfx_parser: VFX_spawner = $VFXSpawner
+@onready var vfx_parser = _resolve_vfx_spawner()
 @onready var scheduler: Scheduler = $Scheduler
 @onready var state_hub: State_hub = $StateHub
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D 
@@ -23,6 +23,12 @@ var can_dash: bool = true
 
 # 声明 Move_data 变量
 var move_data: Move_data = Move_data.new()
+
+func _resolve_vfx_spawner():
+	var node = get_node_or_null("VFXSpawner")
+	if node == null:
+		node = get_node_or_null("VFXParser/VFXSpawner")
+	return node
 
 func _init() -> void:
 	_character = Player.new()

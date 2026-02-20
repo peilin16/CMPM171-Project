@@ -38,7 +38,10 @@ func stop() -> void:
 	is_finished = true
 
 func _physics_process(delta: float) -> void:
-	move_data.record_motion(controller.get_actor_position(),delta);
+	if controller == null:
+		return
+	if move_data != null:
+		move_data.record_motion(controller.get_actor_position(), delta)
 	if not is_running or is_finished:
 		return
 	if current_pattern == null or current_cfg == null or controller == null:

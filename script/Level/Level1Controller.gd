@@ -6,3 +6,31 @@ func _ready() -> void:
 	_level = Level1.new();	
 	GameManager.player_manager._spawn_player(self,Vector2(-200,0));
 	super._ready();
+	await get_tree().process_frame
+	_spawn_enemy_for_test("StoneLionBoss", Vector2(220, 0))
+	_spawn_enemy_for_test("Grunt", Vector2(80, -120))
+	_spawn_enemy_for_test("GruntPlus", Vector2(80, 120))
+
+func _spawn_enemy_for_test(pool_name: String, spawn_pos: Vector2) -> void:
+	var spawn_director = get_node_or_null("WaveDirector/SubDirector/SpawnDirector")
+	if spawn_director and spawn_director.has_method("spawn_enemy"):
+		spawn_director.spawn_enemy(pool_name, spawn_pos)
+		return
+
+	var pool = PoolManager.enemy_pool_manager.get_pool(pool_name)
+	if pool == null:
+		return
+
+	var enemy = pool.spawn_enemy()
+	if enemy == null:
+		return
+
+	var enemy_container = get_node_or_null("EnemyContainer")
+	if enemy.get_parent() != null:
+		enemy.get_parent().remove_child(enemy)
+	if enemy_container:
+		enemy_container.add_child(enemy)
+	else:
+		add_child(enemy)
+	enemy.set_actor_position(spawn_pos)
+	enemy.activate("")

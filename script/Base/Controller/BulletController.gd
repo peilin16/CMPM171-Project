@@ -20,7 +20,7 @@ var controller_id :int;#id
 var _dissolving := false;
 #vfx
 @onready var _vfx: Array[VFX_request];
-@onready var vfx_spawner:VFX_controller_spawner = $VFXSpawner
+@onready var vfx_spawner: VFX_controller_spawner = _resolve_vfx_spawner()
 #var task_queue: Array[Order];
 var _logic:Bullet_logic;
 
@@ -49,6 +49,12 @@ func _ready() -> void:
 	_update_collision()
 	_logic.set_up_scheduler(scheduler);
 	_make_material_unique()
+
+func _resolve_vfx_spawner() -> VFX_controller_spawner:
+	var node = get_node_or_null("VFXSpawner")
+	if node == null:
+		node = get_node_or_null("VFXParser/VFXSpawner")
+	return node as VFX_controller_spawner
 
 func _on_area_entered(area: Area2D) -> void:
 	if not bullet.is_active:
@@ -104,7 +110,8 @@ func _on_body_entered(body: Node) -> void:
 		var enemy := body as Enemy_controller
 		
 		enemy.behit(bullet);
-		vfx_spawner.spawn(bullet.explosion_vfx);
+		if vfx_spawner:
+			vfx_spawner.spawn(bullet.explosion_vfx);
 		
 		deactivate();
 

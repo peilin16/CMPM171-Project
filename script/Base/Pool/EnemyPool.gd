@@ -32,6 +32,9 @@ func spawn_enemy() -> Node:
 
 		character_scene = _create_enemy()
 
+	if character_scene == null:
+		return null
+
 
 	if "visible" in character_scene:
 		character_scene.visible = true
@@ -64,12 +67,17 @@ func _on_enemy_deactivated(character_scene: Node) -> void:
 	if not (character_scene in available_enemies):
 		_deactivate_enemy(character_scene)
 		available_enemies.append(character_scene)
-	character_scene._enemy._init();		
+	if character_scene and character_scene._character:
+		character_scene._character._init();		
 # ---------- singal  deactive ----------
 func _deactivate_enemy(character_scene: Node) -> void:
-	character_scene._enemy._init();
+	if character_scene == null:
+		return
+	if character_scene and character_scene._character:
+		character_scene._character._init();
 	character_scene.visible = false
-	character_scene._enemy.is_active = false
+	if character_scene and character_scene._character:
+		character_scene._character.isActive = false
 
 	if "position" in character_scene:
 		character_scene.global_position  =  Vector2(-9999, -9999) # 

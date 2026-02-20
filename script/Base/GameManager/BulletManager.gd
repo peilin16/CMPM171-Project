@@ -29,6 +29,9 @@ func register_active_bullet(id:int) -> void:
 	#var id = GameIdGenerator.generate_id()
 	if _active_bullets.has(id):
 		return
+	if not _bullets.has(id):
+		push_warning("BulletManager.register_active_bullet: unknown bullet id %s" % id)
+		return
 	_active_bullets[id] = _bullets[id];
 
 func unregister_active_bullet(id) -> void:

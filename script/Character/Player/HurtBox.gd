@@ -2,7 +2,7 @@ extends Node
 class_name Hurt_box
 
 var can_hurt:bool = false;
-@onready var sprite:Sprite2D = $Sprite
+@onready var sprite: Sprite2D = get_node_or_null("Sprite") as Sprite2D
 var tween: Tween
 
 

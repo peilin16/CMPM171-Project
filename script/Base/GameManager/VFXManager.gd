@@ -2,14 +2,14 @@ extends Node
 class_name VFX_manager
 
 var _spawners: Dictionary = {}  # {id: spawner}
-func register_vfx_spawner(e: VFX_spawner) -> int:
+func register_vfx_spawner(e) -> int:
 	var id = ToolBar.gameIDGenerator.generate_id()
 	_spawners[id] = e
 	e.spawner_id = id 
 	#print("Enemy registered:", id, e)
 	return id
 
-func unregister_vfx_spawner(e: VFX_spawner) -> void:
+func unregister_vfx_spawner(e) -> void:
 	# unregister enemy
 	for id in _spawners.keys():
 		if _spawners[id] == e:
@@ -18,7 +18,7 @@ func unregister_vfx_spawner(e: VFX_spawner) -> void:
 			print("VFX unregistered:", id)
 			return
 
-func get_vfx_spawner(id: int) -> VFX_spawner:
+func get_vfx_spawner(id: int):
 	if _spawners.has(id):
 		return _spawners[id]
 	return null
