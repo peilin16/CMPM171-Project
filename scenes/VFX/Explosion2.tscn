@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cdtj3k2247ovo"]
+[gd_scene load_steps=8 format=3 uid="uid://cdtj3k2247ovo"]
 
 [ext_resource type="Texture2D" uid="uid://j3tv3l6s6wd" path="res://assets/particle/smoke_07.png" id="1_odi45"]
+[ext_resource type="Script" uid="uid://c83mjdprgdhrk" path="res://script/VFX/VFXInstance.gd" id="2_kt1j4"]
 
 [sub_resource type="Gradient" id="Gradient_83hnc"]
 offsets = PackedFloat32Array(0, 0.6967822, 1)
@@ -33,6 +34,7 @@ scale_curve = SubResource("CurveTexture_83hnc")
 color_ramp = SubResource("GradientTexture1D_odi45")
 
 [node name="Explosion2" type="Node2D"]
+script = ExtResource("2_kt1j4")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 amount = 30

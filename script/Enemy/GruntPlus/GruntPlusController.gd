@@ -8,8 +8,7 @@ var idle_timer: float = 0.0
 var ready_to_shoot: bool = true
 
 # Dependencies
-# Using a simple preloaded bullet for this example
-var bullet_scene = preload("res://scenes/Bullet/MediumRoundBullet.tscn")
+const BULLET_POOL_NAME := "MEDIUM_ROUND_BULLET"
 
 # Avoidance
 var ray_center: RayCast2D
@@ -53,12 +52,29 @@ func activate(behavoir_code: String = "", sprite_code: int = 0) -> void:
 	super.activate(behavoir_code)
 
 func spawn_bullet() -> void:
-	if not bullet_scene: return
-	
-	# Instantiate Bullet
-	var bullet = bullet_scene.instantiate()
-	get_parent().add_child(bullet)
-	bullet.global_position = global_position
+	if PoolManager == null or PoolManager.bullet_pool_manager == null:
+		return
+
+	var bullet = PoolManager.bullet_pool_manager.spawn_bullet(BULLET_POOL_NAME)
+	if bullet == null:
+		return
+
+	var bullet_container = get_tree().current_scene.get_node_or_null("BulletContainer")
+	if bullet.get_parent() != bullet_container:
+		if bullet.get_parent() != null:
+			bullet.get_parent().remove_child(bullet)
+		if bullet_container != null:
+			bullet_container.add_child(bullet)
+		else:
+			get_parent().add_child(bullet)
+
+	bullet.set_actor_position(global_position)
+	bullet.bullet.origin = self
+	bullet.bullet.owner_id = get_id()
+	bullet.bullet.faction = bullet.bullet.Faction.ENEMY
+	bullet.bullet.current_color = Bullet.BulletColor.RED
+	bullet.bullet.is_red = true
+	bullet._update_collision()
 	
 	# Determine Direction
 	var aim_angle = 0.0
@@ -80,8 +96,8 @@ func spawn_bullet() -> void:
 	
 	# Initialize bullet logic
 	if bullet.has_method("activate"):
-		# Assuming BulletController has a 'scheduler' property (found in docs/research)
-		if bullet.get("scheduler"):
+		if bullet.scheduler:
+			bullet.scheduler.clear()
 			bullet.scheduler.setup(move_script)
 		bullet.activate()
 

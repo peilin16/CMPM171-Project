@@ -60,6 +60,7 @@ func _ready() -> void:
 	#
 	
 	#_task._queue = _logic.queue;
+	set_collision_layer_value(2, true)
 	
 
 func _physics_process(delta: float) -> void:
@@ -80,6 +81,9 @@ func _physics_process(delta: float) -> void:
 	
 func activate(behavoir_code:String = "")->void:
 	is_spawn = true;
+	is_death = false;
+	hitable = true;
+	_set_collision_shapes_disabled(false)
 	_character.isActive = true;
 	_logic.reset();
 	_logic.behavoir = behavoir_code;
@@ -125,13 +129,17 @@ func death() -> void:
 	## 5) start coroutine for delayed "true death"
 	##    1.5s during which it can still be hit and keep getting impulses
 	#await ToolBar.globalDelayCall.delay(_spring.data.combo_window);
-	_call_death_delay()
+	call_deferred("_call_death_delay")
 
 func _call_death_delay() -> void:
-	#await get_tree().create_timer(death_delay).timeout
+	await get_tree().create_timer(max(death_delay, 0.0)).timeout
+	if not is_inside_tree():
+		return
 	hitable = false;          # now bullets should ignore this enemy
+	_set_collision_shapes_disabled(true)
+	deactivate()
 
-	# optional: disable collisions to be safe
+func _set_collision_shapes_disabled(disabled: bool) -> void:
 	for child in get_children():
 		if child is CollisionShape2D:
-			child.set_deferred("disabled", true)
+			child.set_deferred("disabled", disabled)

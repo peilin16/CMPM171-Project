@@ -44,6 +44,12 @@ var _last_cheat_wan: int = -1
 # 声明 Move_data 变量
 var move_data: Move_data = Move_data.new()
 
+func _resolve_vfx_spawner():
+	var node = get_node_or_null("VFXSpawner")
+	if node == null:
+		node = get_node_or_null("VFXParser/VFXSpawner")
+	return node
+
 func _init() -> void:
 	_character = Player.new()
 	logic = Player_logic.new(self, _character)

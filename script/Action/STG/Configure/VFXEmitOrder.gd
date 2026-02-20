@@ -3,11 +3,11 @@ extends Order
 class_name VFX_emit_order
 
 var req: VFX_request
-var spawner: VFX_spawner
+var spawner
 var owner_controller
 var follow: bool = false
 var offset: Vector2 = Vector2.ZERO
-var _inst: VFX_instance = null
+var _inst = null
 var _started := false
 @export var request:Request;
 
@@ -15,7 +15,7 @@ var _started := false
 func _init( r:Request) -> void:
 	request = r;
 	
-func setup(_spawner: VFX_spawner, _req: VFX_request, _owner, _follow: bool, _offset: Vector2) -> void:
+func setup(_spawner, _req: VFX_request, _owner, _follow: bool, _offset: Vector2) -> void:
 	spawner = _spawner
 	req = _req
 	owner_controller = _owner

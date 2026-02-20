@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b2j4wcl4hfor"]
 
 [ext_resource type="Texture2D" uid="uid://b6onun640ug8p" path="res://assets/particle/ShineRound.png" id="1_jgmay"]
-[ext_resource type="Script" uid="uid://c83mjdprgdhrk" path="res://Script/VFX/VFXInstance.gd" id="1_mjq2i"]
+[ext_resource type="Script" uid="uid://c83mjdprgdhrk" path="res://script/VFX/VFXInstance.gd" id="1_mjq2i"]
 
 [sub_resource type="Curve" id="Curve_mjq2i"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.622449, 1), 0.0, 0.0, 0, 0, Vector2(0.664966, 0), 0.0, 0.0, 0, 0]
