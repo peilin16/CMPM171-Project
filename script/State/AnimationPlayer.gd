@@ -32,9 +32,13 @@ func play(animation: Animation_object) -> void:
 			sprite.animation_finished.disconnect(_on_animation_finished)
 
 func anima_hide()->void:
+	if sprite == null:
+		return
 	sprite.visible =false;
 	
 func anima_display()->void:
+	if sprite == null:
+		return
 	sprite.visible =true;
 
 func _on_animation_finished() -> bool:

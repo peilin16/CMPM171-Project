@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bh7y5ror0k5cc"]
 
-[ext_resource type="Script" uid="uid://c83mjdprgdhrk" path="res://Script/VFX/VFXInstance.gd" id="1_gddyc"]
+[ext_resource type="Script" uid="uid://c83mjdprgdhrk" path="res://script/VFX/VFXInstance.gd" id="1_gddyc"]
 [ext_resource type="Texture2D" uid="uid://choderwmdg367" path="res://assets/particle/circle_03.png" id="1_l13rl"]
 
 [sub_resource type="Curve" id="Curve_gddyc"]

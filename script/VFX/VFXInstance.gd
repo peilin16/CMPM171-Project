@@ -8,7 +8,7 @@ class_name VFX_instance
 @onready var particles_array: Array[GPUParticles2D] = []
 
 var _t: float = 0.0
-var _pool: VFX_pool = null
+var _pool = null
 var _is_playing: bool = false
 
 func _ready() -> void:
@@ -53,7 +53,7 @@ func set_up_amount(_amount:float) -> void:
 		p.amount = _amount;
 		
 		
-func bind_pool(p: VFX_pool) -> void:
+func bind_pool(p) -> void:
 	_pool = p
 
 func set_lifetime(t: float) -> void:

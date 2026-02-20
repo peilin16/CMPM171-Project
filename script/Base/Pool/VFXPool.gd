@@ -7,8 +7,8 @@ class_name VFX_pool
 @export var preload_count: int = 10
 
 # inactive instances (stored under this pool node)
-var _free_list: Array[VFX_instance] = []
-var _active_list: Array[VFX_instance] = []
+var _free_list: Array = []
+var _active_list: Array = []
 
 
 
@@ -20,12 +20,12 @@ func _preload(count:int = 10) -> void:
 	if vfx_scene == null:
 		return
 	for i in preload_count:
-		var inst := _create_one()
+		var inst = _create_one()
 		if inst != null:
 			_free_list.append(inst)
 
-func spawn() -> VFX_instance:
-	var inst: VFX_instance
+func spawn():
+	var inst = null
 	if _free_list.is_empty():
 		inst = _create_one()
 	else:
@@ -39,17 +39,19 @@ func spawn() -> VFX_instance:
 	inst.process_mode = Node.PROCESS_MODE_INHERIT
 	return inst
 
-func _create_one() -> VFX_instance:
+func _create_one():
 	if vfx_scene == null:
 		return null
-	var inst := vfx_scene.instantiate() as VFX_instance
+	var inst = vfx_scene.instantiate()
+	if inst == null:
+		return null
 	add_child(inst)
 	inst.visible = false
 	inst.process_mode = Node.PROCESS_MODE_DISABLED
 	return inst
 
 
-func recycle(inst: VFX_instance) -> void:
+func recycle(inst) -> void:
 	if inst == null:
 		return
 

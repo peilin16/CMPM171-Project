@@ -1,5 +1,5 @@
 # VFX_controller_spawner.gd
-extends VFX_spawner
+extends "res://script/VFX/VFXSpawner.gd"
 class_name VFX_controller_spawner
 
 @export var default_offset: Vector2 = Vector2.ZERO
@@ -65,7 +65,7 @@ func start_follow(vfx_name: String, offset: Vector2 = Vector2.ZERO, is_front: bo
 	cfg.follow_owner = true
 	cfg.local_offset = offset
 
-	var inst := spawn(cfg)
+	var inst = spawn(cfg)
 	if inst == null:
 		return null
 

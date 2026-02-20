@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://47kkw4p18u4w"]
 
-[ext_resource type="Script" uid="uid://c83mjdprgdhrk" path="res://Script/VFX/VFXInstance.gd" id="1_4gs1g"]
+[ext_resource type="Script" uid="uid://c83mjdprgdhrk" path="res://script/VFX/VFXInstance.gd" id="1_4gs1g"]
 [ext_resource type="Texture2D" uid="uid://efliiuu0m05x" path="res://assets/particle/Dot1.png" id="1_pqwhj"]
 [ext_resource type="Texture2D" uid="uid://da7r6kttr5hsn" path="res://assets/particle/Dot2.png" id="2_bhkwt"]
 [ext_resource type="Texture2D" uid="uid://ctm55hchdw65i" path="res://assets/particle/Dot3.png" id="3_pa1xj"]

@@ -3,7 +3,7 @@ extends Node2D
 class_name VFX_parser
 
 #@onready var task_runner: Task_runner = $TaskRunner
-@onready var spawner: VFX_spawner = $VFXSpawner
+@onready var spawner = $VFXSpawner
 var _built_request: VFX_request;
 var parent_controller
 
@@ -38,7 +38,11 @@ func _apply_base(d: Dictionary) -> void:
 
 	_built_request.lifetime =  float(d.get("life", 0.15))
 	_built_request.is_front = bool(d.get("front", true));
-	_built_request.rotation_rad =  d.get("rotate", d.get("rad", d.get("rotate_rad", Vector2.ZERO)))
+	var raw_rotation = d.get("rotate", d.get("rad", d.get("rotate_rad", 0.0)))
+	if raw_rotation is Vector2:
+		_built_request.rotation_rad = raw_rotation.angle()
+	else:
+		_built_request.rotation_rad = float(raw_rotation)
 	_built_request.attach_to_owner = bool(d.get("follow", d.get("attach", false)))
 
 func _build_simple_request(d: Dictionary) -> void:

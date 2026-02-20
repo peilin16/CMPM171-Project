@@ -16,7 +16,8 @@ func _init() -> void:
 		"MEDIUM_ROUND_BULLET": 20
 	}
 	enemy_order = {
-		"generic_fiary1": 4,
+		"Grunt": 4,
+		"StoneLionBoss": 1,
 	}
 	vfx_order = {
 		"generic_fiary1": 4,
