@@ -42,6 +42,11 @@ func  _build_enemy_wave(d: Dictionary) -> void:
 	_built_wave.enemy_name = d.get("name", d.get("enemy_name", "GENERIC_FAIRY_1"))
 	_built_wave.spawn_count =  d.get("count", d.get("num", 1))
 	_built_wave.spawn_interval =  d.get("interval", d.get("spawn_interval", 0))
-	_built_wave.position =  d.get("position", d.get("position", Vector2.ZERO))
+	#_built_wave.position =  d.get("position", d.get("position", [Vector2.ZERO]));
+	var pos = d.get("positions", d.get("position", [Vector2.ZERO]));
+	if pos is Vector2:
+		_built_wave.positions.add_item(pos)
+	else:
+		_built_wave.positions.setup(pos);	
 	_built_wave.behavior_code =  d.get("behavior", d.get("behavior_code", ""))
 	_built_wave.override =  d.get("override", d.get("enemy", null))

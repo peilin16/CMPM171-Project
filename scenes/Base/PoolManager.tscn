@@ -5,13 +5,13 @@
 [ext_resource type="Script" uid="uid://whrqv3ln4v1r" path="res://script/Bullet/RoundBullet/MediumRoundBulletPool.gd" id="2_3ulbt"]
 [ext_resource type="PackedScene" uid="uid://bfwcdh78eqhc0" path="res://scenes/Bullet/MediumRoundBullet.tscn" id="3_iv2jh"]
 [ext_resource type="Script" uid="uid://dsxf0cioy76ts" path="res://script/Base/Pool/EnemyPoolManager.gd" id="4_7qdiy"]
-[ext_resource type="Script" uid="uid://bgh2ba5puwfbw" path="res://script/Base/Pool/VFXPoolManager.gd" id="7_cyrnx"]
-[ext_resource type="Script" path="res://script/Enemy/Grunt/GruntPool.gd" id="5_grunt_pool"]
-[ext_resource type="PackedScene" path="res://scenes/Character/Grunt.tscn" id="6_grunt_scene"]
-[ext_resource type="Script" path="res://script/Enemy/GruntPlus/GruntPlusPool.gd" id="6_grunt_plus_pool"]
+[ext_resource type="Script" uid="uid://c047b7l83dec7" path="res://script/Enemy/Grunt/GruntPool.gd" id="5_grunt_pool"]
+[ext_resource type="Script" uid="uid://h66ra4ylancl" path="res://script/Enemy/GruntPlus/GruntPlusPool.gd" id="6_grunt_plus_pool"]
 [ext_resource type="PackedScene" path="res://scenes/Character/GruntPlus.tscn" id="6_grunt_plus_scene"]
-[ext_resource type="Script" path="res://script/Enemy/StoneLion/StoneLionPool.gd" id="6_stone_lion_pool"]
+[ext_resource type="PackedScene" uid="uid://cjvsrt1bnutfd" path="res://scenes/Character/Grunt.tscn" id="6_grunt_scene"]
+[ext_resource type="Script" uid="uid://6lnayul54y2l" path="res://script/Enemy/StoneLion/StoneLionPool.gd" id="6_stone_lion_pool"]
 [ext_resource type="PackedScene" path="res://scenes/Character/StoneLionBoss.tscn" id="6_stone_lion_scene"]
+[ext_resource type="Script" uid="uid://bgh2ba5puwfbw" path="res://script/Base/Pool/VFXPoolManager.gd" id="7_cyrnx"]
 [ext_resource type="Script" uid="uid://52tf2dol7w7s" path="res://script/VFX/Muzzle/MuzzleFlash1Pool.gd" id="8_v3vmm"]
 [ext_resource type="PackedScene" uid="uid://b1w1mp7uru7xv" path="res://scenes/VFX/MuzzleFlash1.tscn" id="9_jeoll"]
 [ext_resource type="Script" uid="uid://bp6uddlt4s6un" path="res://script/VFX/Muzzle/MuzzleFlash2Pool.gd" id="11_lnn2d"]
@@ -55,8 +55,6 @@ character_scene = ExtResource("6_stone_lion_scene")
 [node name="VFXPoolManager" type="Node" parent="."]
 script = ExtResource("7_cyrnx")
 
-[node name="WidgetPoolManager" type="Node" parent="."]
-
 [node name="MuzzleFlash1Pool" type="Node" parent="VFXPoolManager"]
 script = ExtResource("8_v3vmm")
 vfx_scene = ExtResource("9_jeoll")
@@ -87,3 +85,5 @@ vfx_scene = ExtResource("21_qdgr7")
 
 [node name="Explosion3Pool" type="Node" parent="VFXPoolManager"]
 script = ExtResource("22_sftd1")
+
+[node name="WidgetPoolManager" type="Node" parent="."]

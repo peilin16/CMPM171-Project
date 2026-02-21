@@ -38,10 +38,10 @@ func start() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if not is_run or waves.is_empty():
+	if not is_run :
 		return
 
-	if current_wave == null:
+	if current_wave == null and waves.is_empty():
 		return
 
 	current_wave.update(sub_director, delta)
@@ -79,5 +79,5 @@ func set_up_config() ->void:
 func create_wave_from_config(config: Array) -> void:
 	for w in config:
 		var wave:= parser.setup(w);
-		wave.wave_director = self;
+		#wave.wave_director = self;
 		waves.append(wave);

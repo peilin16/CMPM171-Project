@@ -19,7 +19,7 @@ func preload_enemies(count: int) -> void:
 	for i in range(count):
 		var b = _create_enemy()
 		deactivate_enemy(b)
-		available_enemies.append(b)
+		#available_enemies.append(b)
 
 # spawn
 func spawn_enemy() -> Node:

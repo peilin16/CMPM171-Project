@@ -6,13 +6,24 @@ class_name Spawn_director
 @export var bullet_container:Node2D ;
 var enemy_pool_manager: Enemy_pool_manager;
 
+
+var spawn_points:Dictionary[int,Spawn_point] = {}
+
+
+
+
+
 func _ready() -> void:
 	enemy_pool_manager = PoolManager.enemy_pool_manager;
 	if enemy_container == null:
 		enemy_container = get_tree().current_scene.get_node_or_null("EnemyContainer") as Node2D
 	if bullet_container == null:
 		bullet_container = get_tree().current_scene.get_node_or_null("BulletContainer") as Node2D
-
+	var id:int = 0;
+	for child in get_children():
+		if child.name.begins_with("SpawnPoint"):
+			spawn_points[id] = child;
+			id +=1;
 
 
 

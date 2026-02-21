@@ -8,9 +8,9 @@ func _ready() -> void:
 	GameManager.player_manager._spawn_player(self,Vector2(-200,0));
 	super._ready();
 	await get_tree().process_frame
-	_spawn_enemy_for_test("StoneLionBoss", Vector2(220, 0))
-	_spawn_enemy_for_test("Grunt", Vector2(80, -120))
-	_spawn_enemy_for_test("GruntPlus", Vector2(80, 120))
+	#_spawn_enemy_for_test("StoneLionBoss", Vector2(220, 0))
+	#_spawn_enemy_for_test("Grunt", Vector2(80, -120))
+	#_spawn_enemy_for_test("GruntPlus", Vector2(80, 120))
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("stop"):
@@ -18,6 +18,8 @@ func _physics_process(delta: float) -> void:
 			pause_menu.visible = true;
 		pause_menu.global_position = GameManager.camera_manager.get_center()
 		get_tree().paused = true;
+
+
 func _spawn_enemy_for_test(pool_name: String, spawn_pos: Vector2) -> void:
 	var spawn_director = get_node_or_null("WaveDirector/SubDirector/SpawnDirector")
 	if spawn_director and spawn_director.has_method("spawn_enemy"):
