@@ -8,10 +8,13 @@ class_name Player_controller
 @onready var state_hub: State_hub = $StateHub
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D 
 
+
+
 # 逻辑与状态变量
 @export var logic: Player_logic
 var input_vector := Vector2.ZERO
 var screen_size: Vector2 
+var power_point_num:float;
 
 # 冲刺相关变量
 var is_dashing: bool = false

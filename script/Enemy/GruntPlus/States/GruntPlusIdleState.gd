@@ -26,4 +26,3 @@ func exit(controller, hub: State_hub, anim: Animation_player) -> void:
 	var c = get_grunt_plus_controller(controller)
 	if c:
 		c.ready_to_shoot = true # Enable shooting again after idle sequence
-
