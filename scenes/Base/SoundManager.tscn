@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bo1i43mp1pqa8"]
+[gd_scene load_steps=29 format=3 uid="uid://bo1i43mp1pqa8"]
 
 [ext_resource type="Script" uid="uid://dm8qv6ok17wlu" path="res://script/Sound/SoundManager.gd" id="1_oqudx"]
 [ext_resource type="AudioStream" uid="uid://bfrrak3qrk4fb" path="res://assets/Sound/sfx/158956__carlmartin__jembay-hit-13-rim.wav" id="2_4wqie"]
@@ -13,19 +13,20 @@
 [ext_resource type="AudioStream" uid="uid://y528bftlinh8" path="res://assets/Sound/sfx/833077__zeltbolt__status_burn.wav" id="9_mli17"]
 [ext_resource type="AudioStream" uid="uid://doad5p5qdjnh7" path="res://assets/Sound/BGM/Test2.wav" id="10_6brhb"]
 [ext_resource type="Script" uid="uid://njrte2ni14yr" path="res://script/Sound/BGMInstance.gd" id="10_j8vmf"]
-[ext_resource type="AudioStream" uid="uid://o5u4rlpuflai" path="res://assets/Sound/sfx/Start.wav" id="10_uwqrj"]
+[ext_resource type="AudioStream" uid="uid://do7v755jv0m3f" path="res://assets/Sound/sfx/Start.wav" id="10_uwqrj"]
 [ext_resource type="AudioStream" uid="uid://d17u2g0wx4hkg" path="res://assets/Sound/sfx/SFX (2).wav" id="11_djqt4"]
-[ext_resource type="AudioStream" uid="uid://ig4ltpeo0u3w" path="res://assets/Sound/sfx/Die.wav" id="12_bis00"]
-[ext_resource type="AudioStream" uid="uid://c48uxqcwh8qeg" path="res://assets/Sound/sfx/Click.wav" id="13_t7ibp"]
-[ext_resource type="AudioStream" uid="uid://bkaunuqlyjx24" path="res://assets/Sound/BGM/BGM1.wav" id="14_tgro2"]
+[ext_resource type="AudioStream" uid="uid://csgcqsx03xlv6" path="res://assets/Sound/sfx/Die.wav" id="12_bis00"]
+[ext_resource type="AudioStream" uid="uid://cp4wmcawewmxy" path="res://assets/Sound/sfx/Click.wav" id="13_t7ibp"]
+[ext_resource type="AudioStream" uid="uid://cm21w8w7ioatr" path="res://assets/Sound/BGM/BGM1.wav" id="14_tgro2"]
 [ext_resource type="AudioStream" uid="uid://spepdpjc370n" path="res://assets/Sound/sfx/SFX (5).wav" id="14_xr7ke"]
 [ext_resource type="AudioStream" uid="uid://bslxsacxtcrdu" path="res://assets/Sound/sfx/SFX (6).wav" id="15_ikhlq"]
-[ext_resource type="AudioStream" uid="uid://iuacrq6tqw41" path="res://assets/Sound/BGM/BGM2.wav" id="15_touho"]
-[ext_resource type="AudioStream" uid="uid://ci6vgqv5li1k3" path="res://assets/Sound/BGM/BGM3.wav" id="16_7bykp"]
+[ext_resource type="AudioStream" uid="uid://blh7wsl5ljtqo" path="res://assets/Sound/BGM/BGM2.wav" id="15_touho"]
+[ext_resource type="AudioStream" uid="uid://di7baxmitnr5w" path="res://assets/Sound/BGM/BGM3.wav" id="16_7bykp"]
 [ext_resource type="AudioStream" uid="uid://dakne3ks2p38h" path="res://assets/Sound/sfx/SFX (7).wav" id="16_y1p1q"]
 [ext_resource type="AudioStream" uid="uid://dlahalcfbwx0j" path="res://assets/Sound/sfx/SFX (8).wav" id="17_ktq2h"]
-[ext_resource type="AudioStream" uid="uid://csi6314gspyj4" path="res://assets/Sound/BGM/BGM4.wav" id="17_wo0ax"]
-[ext_resource type="AudioStream" uid="uid://cvtqrr265jqyf" path="res://assets/Sound/BGM/Tittle_Menu.wav" id="18_na203"]
+[ext_resource type="AudioStream" uid="uid://b0bbwj7v8o7vo" path="res://assets/Sound/BGM/BGM4.wav" id="17_wo0ax"]
+[ext_resource type="AudioStream" uid="uid://cnw3ijjrnnqj7" path="res://assets/Sound/sfx/behit.wav" id="18_djqt4"]
+[ext_resource type="AudioStream" uid="uid://bxroni7sweofr" path="res://assets/Sound/BGM/Tittle_Menu.wav" id="18_na203"]
 [ext_resource type="AudioStream" uid="uid://cu4t46ku0bim" path="res://assets/Sound/BGM/BossFIght.wav" id="22_uwqrj"]
 
 [node name="SoundManager" type="Node"]
@@ -100,6 +101,10 @@ stream = ExtResource("16_y1p1q")
 
 [node name="Sfx(8)" type="AudioStreamPlayer" parent="SFX/Templates"]
 stream = ExtResource("17_ktq2h")
+
+[node name="behit" type="AudioStreamPlayer2D" parent="SFX/Templates"]
+stream = ExtResource("18_djqt4")
+script = ExtResource("4_hs8v2")
 
 [node name="Voice" type="Node" parent="SFX"]
 

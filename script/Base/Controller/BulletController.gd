@@ -121,10 +121,12 @@ func _on_body_entered(body: Node) -> void:
 		return;
 	if not body.hitable:
 		return;
-		
+	if body is Player_controller:
+		pass
+		return;
 	if body is Enemy_controller :
 		var enemy := body as Enemy_controller
-		
+		SoundManager.command(bullet.hit_script);
 		enemy.behit(bullet);
 		if vfx_spawner:
 			vfx_spawner.spawn(bullet.explosion_vfx);
