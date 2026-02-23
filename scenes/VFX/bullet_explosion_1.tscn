@@ -34,7 +34,9 @@ script = ExtResource("1_c8ogc")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_agltp")
+emitting = false
 amount = 5
 texture = ExtResource("1_agltp")
 lifetime = 0.4
+one_shot = true
 process_material = SubResource("ParticleProcessMaterial_agltp")

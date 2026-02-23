@@ -28,7 +28,7 @@ enum Faction { PLAYER, ENEMY }
 @export var is_off_screen := true;
 @export var knockback_force: float = 300.0     # force
 @export var hit_torque_deg: float = 45.0       # rotate
-@export var hit_script={
+@export var hit_sfx={
 		  "sound":"sfx",
 		  "name":"behit",
 		  "pitch_scale": 1,
@@ -38,7 +38,12 @@ enum Faction { PLAYER, ENEMY }
 		  "polyphony": 2,
 		  "max_voices": 12
 		}
-
+@export var hit_vfx = {
+	 "name":"BulletExplosion2",
+	 "life":0.4,
+	"front":true, 
+	"scale":0.3
+}
 
 var origin; # shooter
 

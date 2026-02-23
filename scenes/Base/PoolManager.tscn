@@ -1,15 +1,15 @@
-[gd_scene load_steps=27 format=3 uid="uid://r057xmkcna5b"]
+[gd_scene load_steps=28 format=3 uid="uid://r057xmkcna5b"]
 
 [ext_resource type="Script" uid="uid://cjjxviid7c87j" path="res://script/Base/Pool/PoolManager.gd" id="1_3ulbt"]
 [ext_resource type="Script" uid="uid://b8crcgnfawqk4" path="res://script/Base/Pool/BulletPoolManager.gd" id="1_4hjfb"]
 [ext_resource type="Script" uid="uid://whrqv3ln4v1r" path="res://script/Bullet/RoundBullet/MediumRoundBulletPool.gd" id="2_3ulbt"]
 [ext_resource type="PackedScene" uid="uid://bfwcdh78eqhc0" path="res://scenes/Bullet/MediumRoundBullet.tscn" id="3_iv2jh"]
 [ext_resource type="Script" uid="uid://dsxf0cioy76ts" path="res://script/Base/Pool/EnemyPoolManager.gd" id="4_7qdiy"]
-[ext_resource type="Script" uid="uid://c047b7l83dec7" path="res://script/Enemy/Grunt/GruntPool.gd" id="5_grunt_pool"]
-[ext_resource type="Script" uid="uid://h66ra4ylancl" path="res://script/Enemy/GruntPlus/GruntPlusPool.gd" id="6_grunt_plus_pool"]
+[ext_resource type="Script" uid="uid://08uilskqe7ey" path="res://script/Enemy/Grunt/GruntPool.gd" id="5_grunt_pool"]
+[ext_resource type="Script" uid="uid://dsktjaut7i71b" path="res://script/Enemy/GruntPlus/GruntPlusPool.gd" id="6_grunt_plus_pool"]
 [ext_resource type="PackedScene" path="res://scenes/Character/GruntPlus.tscn" id="6_grunt_plus_scene"]
 [ext_resource type="PackedScene" uid="uid://cjvsrt1bnutfd" path="res://scenes/Character/Grunt.tscn" id="6_grunt_scene"]
-[ext_resource type="Script" uid="uid://6lnayul54y2l" path="res://script/Enemy/StoneLion/StoneLionPool.gd" id="6_stone_lion_pool"]
+[ext_resource type="Script" uid="uid://crqy0emlds8ua" path="res://script/Enemy/StoneLion/StoneLionPool.gd" id="6_stone_lion_pool"]
 [ext_resource type="PackedScene" path="res://scenes/Character/StoneLionBoss.tscn" id="6_stone_lion_scene"]
 [ext_resource type="Script" uid="uid://bgh2ba5puwfbw" path="res://script/Base/Pool/VFXPoolManager.gd" id="7_cyrnx"]
 [ext_resource type="Script" uid="uid://52tf2dol7w7s" path="res://script/VFX/Muzzle/MuzzleFlash1Pool.gd" id="8_v3vmm"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://47kkw4p18u4w" path="res://scenes/VFX/Explosion1.tscn" id="19_fgo7a"]
 [ext_resource type="Script" uid="uid://b3koibo7v1i74" path="res://script/VFX/Explosion/Explosion2Pool.gd" id="20_odcso"]
 [ext_resource type="PackedScene" uid="uid://cdtj3k2247ovo" path="res://scenes/VFX/Explosion2.tscn" id="21_qdgr7"]
+[ext_resource type="Script" uid="uid://dhhwebvbu4qy1" path="res://script/VFX/Explosion/BulletExplosion2Pool.gd" id="21_y5gy8"]
 [ext_resource type="Script" uid="uid://llulee3ye6n5" path="res://script/VFX/Explosion/Explosion3Pool.gd" id="22_sftd1"]
 
 [node name="PoolManager" type="Node"]
@@ -72,7 +73,7 @@ script = ExtResource("14_jeoll")
 vfx_scene = ExtResource("16_jeoll")
 
 [node name="BulletExplosion2Pool" type="Node" parent="VFXPoolManager"]
-script = ExtResource("13_v3vmm")
+script = ExtResource("21_y5gy8")
 vfx_scene = ExtResource("17_jeoll")
 
 [node name="Explosion1Pool" type="Node" parent="VFXPoolManager"]

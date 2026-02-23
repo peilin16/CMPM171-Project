@@ -3,5 +3,5 @@ class_name Bullet_explosion1_pool
 
 
 func _ready() -> void:
-	effect_id = "BulletExplosion2"
+	effect_id = "BulletExplosion1"
 	

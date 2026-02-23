@@ -19,7 +19,8 @@ var controller_id :int;#id
 @onready var sprite: Sprite2D = $BulletSprite
 var _dissolving := false;
 #vfx
-@onready var _vfx: Array[VFX_request];
+
+@onready var vfx_parser:VFX_parser = $VFXParser
 @onready var vfx_spawner: VFX_controller_spawner = _resolve_vfx_spawner()
 #var task_queue: Array[Order];
 var _logic:Bullet_logic;
@@ -126,10 +127,11 @@ func _on_body_entered(body: Node) -> void:
 		return;
 	if body is Enemy_controller :
 		var enemy := body as Enemy_controller
-		SoundManager.command(bullet.hit_script);
+		SoundManager.command(bullet.hit_sfx);
 		enemy.behit(bullet);
-		if vfx_spawner:
-			vfx_spawner.spawn(bullet.explosion_vfx);
+		vfx_parser.execute(bullet.hit_vfx)
+		#if vfx_spawner:
+			#vfx_spawner.spawn(bullet.explosion_vfx);
 		
 		deactivate();
 

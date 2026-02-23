@@ -17,7 +17,7 @@ func get_request()->VFX_request:
 
 func setup(d: Dictionary) -> VFX_request:
 	_built_request = VFX_request.new();
-	_build_request_from_dict(d);
+	execute(d);
 	return _built_request;
 
 
@@ -48,7 +48,7 @@ func _apply_base(d: Dictionary) -> void:
 func _build_simple_request(d: Dictionary) -> void:
 	_built_request = VFX_request.new();
 	_apply_base(d);
-	spawner.spawn(_built_request);
+	
 
 
 func  _build_shoot_request(d: Dictionary) -> void:
@@ -59,14 +59,14 @@ func  _build_shoot_request(d: Dictionary) -> void:
 		_built_request.block_time = _built_request.lifetime;
 	spawner.spawn(_built_request);
 
-func _build_request_from_dict(d: Dictionary) :
+func execute(d: Dictionary) :
 	var mode := str(d.get("mode", "vfx"))
 	match  mode:
 		"vfx","simple":
 			_build_simple_request(d);
 		"shoot","shooting":
 			_build_shoot_request(d);
-
+	spawner.spawn(_built_request);
 
 
 # -------------------------
