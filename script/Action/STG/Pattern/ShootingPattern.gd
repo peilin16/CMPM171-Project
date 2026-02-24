@@ -118,10 +118,10 @@ func configure_bullet(configure: Shoot_configure ) ->Bullet_controller:
 	bullet_scene.bullet.is_reflect = false;
 	
 	bullet_scene.bullet.damage = configure.damage;
-	if configure.color == Shoot_configure.ColorType.BLUE:
-		bullet_scene.bullet.current_color = Bullet.BulletColor.BLUE;
-	else: 
+	if configure.color == Shoot_configure.ColorType.RED:
 		bullet_scene.bullet.current_color = Bullet.BulletColor.RED;
+	else: 
+		bullet_scene.bullet.current_color = Bullet.BulletColor.BLUE;
 	#bullet_scene.bullet.move_configure = configure.move_configure;
 	#if configure.origin != null and "team" in configure.origin and int(configure.origin.team) == Character_controller.TEAM.PLAYER:
 		#bullet_scene.bullet.faction = bullet_scene.bullet.Faction.PLAYER;

@@ -236,4 +236,24 @@ func handle_fire_mode_hotkeys() -> void:
 
 
 func death()->void:
-	get_tree().change_scene_to_file("res://scenes/UI/GameOverMenu.tscn")
+	if not is_death:
+		vfx_parser.execute({
+			 "name":"Explosion1",
+			 "life":3,
+			"front":true, 
+			"scale":0.5
+		});#explosion1
+		SoundManager.command({
+				"sound":"sfx",
+			  "name":"explosion1",
+			  "pitch_scale": 1,
+			  "volume_mul":[0.4, 1.05],
+			  "timbre_variant" : [0, 4],
+			  "priority": 9,
+			  "polyphony": 2,
+			  "max_voices": 12
+			});
+		is_death = true;
+		await ToolBar.globalDelayCall.delay(2);
+		get_tree().change_scene_to_file("res://scenes/UI/GameOverMenu.tscn")
+	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://08lpdmfnvg3f"]
+[gd_scene load_steps=24 format=3 uid="uid://08lpdmfnvg3f"]
 
 [ext_resource type="Script" uid="uid://c83mjdprgdhrk" path="res://script/VFX/VFXInstance.gd" id="1_ickgh"]
 [ext_resource type="Texture2D" uid="uid://efliiuu0m05x" path="res://assets/particle/Dot1.png" id="1_t6c5u"]
@@ -84,9 +84,14 @@ point_count = 2
 _data = [Vector2(0.014888335, 0.05104971), 0.0, 0.0, 0, 0, Vector2(1, 0.1254772), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="Curve" id="Curve_8al5n"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="CurveXYZTexture" id="CurveXYZTexture_3kw3o"]
 curve_x = SubResource("Curve_fhkrm")
 curve_y = SubResource("Curve_frvvo")
+curve_z = SubResource("Curve_8al5n")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ydxbm"]
 particle_flag_disable_z = true

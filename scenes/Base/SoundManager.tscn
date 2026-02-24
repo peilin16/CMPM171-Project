@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bo1i43mp1pqa8"]
+[gd_scene load_steps=30 format=3 uid="uid://bo1i43mp1pqa8"]
 
 [ext_resource type="Script" uid="uid://dm8qv6ok17wlu" path="res://script/Sound/SoundManager.gd" id="1_oqudx"]
 [ext_resource type="AudioStream" uid="uid://bfrrak3qrk4fb" path="res://assets/Sound/sfx/158956__carlmartin__jembay-hit-13-rim.wav" id="2_4wqie"]
@@ -27,6 +27,7 @@
 [ext_resource type="AudioStream" uid="uid://b0bbwj7v8o7vo" path="res://assets/Sound/BGM/BGM4.wav" id="17_wo0ax"]
 [ext_resource type="AudioStream" uid="uid://cnw3ijjrnnqj7" path="res://assets/Sound/sfx/behit.wav" id="18_djqt4"]
 [ext_resource type="AudioStream" uid="uid://bxroni7sweofr" path="res://assets/Sound/BGM/Tittle_Menu.wav" id="18_na203"]
+[ext_resource type="AudioStream" uid="uid://b4fxvdmnq0tes" path="res://assets/Sound/sfx/Explosion.wav" id="19_bis00"]
 [ext_resource type="AudioStream" uid="uid://cu4t46ku0bim" path="res://assets/Sound/BGM/BossFIght.wav" id="22_uwqrj"]
 
 [node name="SoundManager" type="Node"]
@@ -104,6 +105,10 @@ stream = ExtResource("17_ktq2h")
 
 [node name="behit" type="AudioStreamPlayer2D" parent="SFX/Templates"]
 stream = ExtResource("18_djqt4")
+script = ExtResource("4_hs8v2")
+
+[node name="explosion1" type="AudioStreamPlayer2D" parent="SFX/Templates"]
+stream = ExtResource("19_bis00")
 script = ExtResource("4_hs8v2")
 
 [node name="Voice" type="Node" parent="SFX"]
