@@ -1,0 +1,2 @@
+extends Area2D
+class_name Widget_controller
