@@ -22,7 +22,8 @@ func _ready() -> void:
 		"loop_end_sec":18.0,
 		"volume_mul":0.4,
 		"pitch_scale":1.0
-	})	
+	});
+	spawn_widget(Vector2.ZERO, 4);
 	#_spawn_enemy_for_test("StoneLionBoss", Vector2(220, 0))
 	#_spawn_enemy_for_test("Grunt", Vector2(80, -120))
 	#_spawn_enemy_for_test("GruntPlus", Vector2(80, 120))
@@ -60,4 +61,7 @@ func _spawn_enemy_for_test(pool_name: String, spawn_pos: Vector2) -> void:
 	enemy.activate("")
 
 func spawn_widget(target:Vector2, num:int)->void:
-	pass
+	var w:Widget_controller =  PoolManager.widget_pool_manager.spawn_widget("PowerPointPool");
+	
+	widget_container.add_child(w);
+	w.global_position = Vector2(100,300);

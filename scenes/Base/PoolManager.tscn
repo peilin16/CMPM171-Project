@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://r057xmkcna5b"]
+[gd_scene load_steps=31 format=3 uid="uid://r057xmkcna5b"]
 
 [ext_resource type="Script" uid="uid://cjjxviid7c87j" path="res://script/Base/Pool/PoolManager.gd" id="1_3ulbt"]
 [ext_resource type="Script" uid="uid://b8crcgnfawqk4" path="res://script/Base/Pool/BulletPoolManager.gd" id="1_4hjfb"]
@@ -29,6 +29,7 @@
 [ext_resource type="Script" uid="uid://llulee3ye6n5" path="res://script/VFX/Explosion/Explosion3Pool.gd" id="22_sftd1"]
 [ext_resource type="Script" uid="uid://bberdg173kbxo" path="res://script/Base/Pool/WidgetPoolManager.gd" id="28_mih24"]
 [ext_resource type="Script" uid="uid://cbem8sd2f0p3p" path="res://script/Base/Pool/PowerPointPool.gd" id="29_dut2i"]
+[ext_resource type="PackedScene" uid="uid://jbvb3fu2vjlb" path="res://scenes/Bullet/PowerPoint.tscn" id="30_dut2i"]
 
 [node name="PoolManager" type="Node"]
 script = ExtResource("1_3ulbt")
@@ -94,3 +95,4 @@ script = ExtResource("28_mih24")
 
 [node name="PowerPointPool" type="Node" parent="WidgetPoolManager"]
 script = ExtResource("29_dut2i")
+main_scene = ExtResource("30_dut2i")
