@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=4 uid="uid://okvl3jg17a5h"]
+[gd_scene load_steps=64 format=4 uid="uid://okvl3jg17a5h"]
 
 [ext_resource type="Script" uid="uid://dghk1chdkrxqs" path="res://script/Level/Level1Controller.gd" id="1_h32uy"]
 [ext_resource type="Script" uid="uid://cdj8cw7oe3du7" path="res://script/Base/Other/Main_camera.gd" id="2_p0hel"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://dd5bpmb6vyu5g" path="res://script/Level/Level1WaveDirector.gd" id="13_mf1cp"]
 [ext_resource type="Script" uid="uid://yd3lu0oib4w3" path="res://script/Level/Base/SpawnDirector.gd" id="14_67qcy"]
 [ext_resource type="Script" uid="uid://c4isnf8bgipw3" path="res://script/Level/Base/SpawnPoint.gd" id="16_u85d8"]
+[ext_resource type="Script" uid="uid://bnqjtyqh6byuh" path="res://script/Level/Base/WidgetSpawner.gd" id="17_ti1q0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p27p8"]
 texture = ExtResource("3_6ch66")
@@ -6389,3 +6390,7 @@ script = ExtResource("16_u85d8")
 [node name="SpawnPoint4" type="Marker2D" parent="WaveDirector/SubDirector/SpawnDirector"]
 position = Vector2(57, -30)
 script = ExtResource("16_u85d8")
+
+[node name="WidgetSpawner" type="Node2D" parent="."]
+z_index = 800
+script = ExtResource("17_ti1q0")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://kks7ir0kgg1a"]
+[gd_scene load_steps=35 format=3 uid="uid://kks7ir0kgg1a"]
 
 [ext_resource type="Script" uid="uid://csieovs421mxl" path="res://script/Character/Player/PlayerController.gd" id="1_beklg"]
 [ext_resource type="Script" uid="uid://bj7f4p0ml38qw" path="res://script/State/StateHub.gd" id="2_4mqus"]
@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://u1lc0lg311dn" path="res://script/Action/STG/ShootRunner.gd" id="8_mpo6r"]
 [ext_resource type="Texture2D" uid="uid://dbv01t24uelp5" path="res://assets/character/Player/standing.png" id="11_h3n2c"]
 [ext_resource type="Script" uid="uid://cdj8cw7oe3du7" path="res://script/Base/Other/Main_camera.gd" id="12_hdh7n"]
-[ext_resource type="Script" uid="uid://cxfkslvu2cvn0" path="res://script/Character/Player/PlayerUI.gd" id="13_g7g3w"]
+[ext_resource type="Script" uid="uid://doj6f5trje884" path="res://script/Character/Player/PlayerUI.gd" id="13_g7g3w"]
 [ext_resource type="Texture2D" uid="uid://c6i23ml3me37h" path="res://assets/UI/Untitled 04-04-2025 04-50-10.png" id="14_hpedc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8fgnd"]
@@ -155,6 +155,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_g7g3w"]
+radius = 70.5762
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_beklg")
 base_shoot_cooldown = 0.55
@@ -250,3 +253,12 @@ sprite_frames = SubResource("SpriteFrames_y2idx")
 script = ExtResource("3_hxpvn")
 sprite = NodePath("../../AnimatedSprite2D")
 metadata/_custom_type_script = "uid://drv02ar36c0qi"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_g7g3w")
+
+[connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_area_entered"]
