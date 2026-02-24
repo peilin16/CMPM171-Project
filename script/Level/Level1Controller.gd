@@ -6,7 +6,7 @@ func _ready() -> void:
 	level = Level1.new();	
 	pause_menu.visible =false;
 	
-	
+	GameManager.level_manager.setup(self);
 	GameManager.player_manager._spawn_player(self,Vector2(-200,0));
 	super._ready();
 	await get_tree().process_frame
@@ -58,3 +58,6 @@ func _spawn_enemy_for_test(pool_name: String, spawn_pos: Vector2) -> void:
 		add_child(enemy)
 	enemy.set_actor_position(spawn_pos)
 	enemy.activate("")
+
+func spawn_widget(target:Vector2, num:int)->void:
+	pass
