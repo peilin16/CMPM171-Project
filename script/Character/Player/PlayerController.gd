@@ -65,14 +65,15 @@ func _ready() -> void:
 	# 2. 注册玩家
 	if GameManager.player_manager:
 		GameManager.player_manager.register_player(self)
-	
+
+
 	# 3. 初始化状态机
 	state_hub.set_up_root(Player_state.new())
 	
 	# 4. 绑定射击事件
 	if GameManager.cursor_manager:
 		GameManager.cursor_manager.on(GameManager.cursor_manager.EVT_LMB_DOWN, "player_shoot", Callable(self, "player_shooting"))
-	
+		
 	# 5. 初始化 MoveData (以当前位置为起点)
 	move_data.reset(global_position)
 
@@ -81,6 +82,10 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	# ✅ 每帧更新射击冷却
+	if hurtbox.player_hp<= 0:
+		death();
+		return; 
+	
 	if shoot_timer > 0.0:
 		shoot_timer -= delta
 
@@ -113,7 +118,7 @@ func _physics_process(delta: float) -> void:
 			"loop_end_sec":48.0,
 			"volume_mul":0.5,
 			"pitch_scale":1.0
-		})	
+		});
 	
 	handle_dash_cooldown(delta)
 
@@ -228,3 +233,7 @@ func handle_fire_mode_hotkeys() -> void:
 		logic.manual_fire_mode_override = true
 		logic.set_fire_mode(Player_logic.FireMode.MULTI)
 		print("[FireMode] MANUAL ", logic.get_fire_mode_name())
+
+
+func death()->void:
+	get_tree().change_scene_to_file("res://scenes/UI/GameOverMenu.tscn")

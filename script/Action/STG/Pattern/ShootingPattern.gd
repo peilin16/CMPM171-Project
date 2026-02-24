@@ -120,20 +120,24 @@ func configure_bullet(configure: Shoot_configure ) ->Bullet_controller:
 	bullet_scene.bullet.damage = configure.damage;
 	if configure.color == Shoot_configure.ColorType.BLUE:
 		bullet_scene.bullet.current_color = Bullet.BulletColor.BLUE;
-	elif configure.color == Shoot_configure.ColorType.RED: 
+	else: 
 		bullet_scene.bullet.current_color = Bullet.BulletColor.RED;
 	#bullet_scene.bullet.move_configure = configure.move_configure;
-	if configure.origin != null and "team" in configure.origin and int(configure.origin.team) == Character_controller.TEAM.PLAYER:
-		bullet_scene.bullet.faction = bullet_scene.bullet.Faction.PLAYER;
-	else:
-		bullet_scene.bullet.faction = bullet_scene.bullet.Faction.ENEMY;
-
-	if bullet_scene.bullet.faction == bullet_scene.bullet.Faction.ENEMY:
-		bullet_scene.bullet.current_color = Bullet.BulletColor.RED
-		bullet_scene.bullet.is_red = true
-	else:
-		bullet_scene.bullet.current_color = Bullet.BulletColor.BLUE
-		bullet_scene.bullet.is_red = false
+	#if configure.origin != null and "team" in configure.origin and int(configure.origin.team) == Character_controller.TEAM.PLAYER:
+		#bullet_scene.bullet.faction = bullet_scene.bullet.Faction.PLAYER;
+	#else:
+		#bullet_scene.bullet.faction = bullet_scene.bullet.Faction.ENEMY;
+#
+	#if bullet_scene.bullet.faction == bullet_scene.bullet.Faction.ENEMY:
+		#bullet_scene.bullet.current_color = Bullet.BulletColor.RED
+		#bullet_scene.bullet.is_red = true
+	#else:
+		#bullet_scene.bullet.current_color = Bullet.BulletColor.BLUE
+		#bullet_scene.bullet.is_red = false
+	
+	bullet_scene.bullet.faction = configure.faction;
+	
+	
 	
 	return bullet_scene;
 

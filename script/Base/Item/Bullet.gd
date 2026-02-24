@@ -17,11 +17,7 @@ enum Faction { PLAYER, ENEMY }
 @export var can_hurt:bool = true;
 @export var current_color := BulletColor.BLUE;
 @export var move_data:Move_data; #pattern recorder
-#@export var position: Vector2;
-#@export var speed: int = 300
 
-#move pattern
-#@export var move_cfg:Move_configure;
 @export var bullet_scene: PackedScene
 @export var pool_name: String;
 @export var is_reflect = false;

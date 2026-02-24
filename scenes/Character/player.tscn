@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://cdj8cw7oe3du7" path="res://script/Base/Other/Main_camera.gd" id="12_hdh7n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8fgnd"]
-size = Vector2(11, 19)
+size = Vector2(13, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hdh7n"]
 atlas = ExtResource("11_h3n2c")
@@ -69,10 +69,12 @@ sprite = NodePath("../../AnimatedSprite2D")
 metadata/_custom_type_script = "uid://drv02ar36c0qi"
 
 [node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 16
 script = ExtResource("3_8fgnd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(0.5, 3.5)
+position = Vector2(1.5, 2)
 shape = SubResource("RectangleShape2D_8fgnd")
 
 [node name="Scheduler" type="Node2D" parent="."]

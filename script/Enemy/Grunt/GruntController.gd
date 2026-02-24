@@ -17,11 +17,15 @@ func _init() -> void:
 	_logic = enemy_logic.new(self, _character)
 	team = TEAM.ENEMY
 
+
+
 func _ready() -> void:
 	super._ready()
 	
 	_setup_avoidance()
 	print("Grunt Ready with Stats: ", stats)
+
+
 
 func activate(behavoir_code: String = "", sprite_code: int = 0) -> void:
 	# Set up the State Machine with our Chase State
@@ -29,8 +33,9 @@ func activate(behavoir_code: String = "", sprite_code: int = 0) -> void:
 	# that chooses between Chase and Attack.
 	var state = GruntChaseState.new()
 	state_hub.set_up_root(state)
-	
 	super.activate(behavoir_code)
+
+
 
 func _setup_avoidance() -> void:
 	if stats.get("avoidance_enabled", false) == false: return
@@ -53,6 +58,12 @@ func _setup_avoidance() -> void:
 	container.add_child(ray_center)
 	container.add_child(ray_left)
 	container.add_child(ray_right)
+
+
+
+
+
+
 
 func _create_ray(angle: float, length: float) -> RayCast2D:
 	var ray = RayCast2D.new()

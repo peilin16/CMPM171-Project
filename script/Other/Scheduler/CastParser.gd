@@ -43,7 +43,7 @@ func _set_up_base(cfg: Shoot_configure, step: Dictionary) -> void:
 	cfg.damage = int(step.get("damage", 5))
 	cfg.color_random_seed_index = int(step.get("color_seed", 0))
 	cfg.controller = parent_controller;
-
+	cfg.faction = step.get("faction", step.get("team", Bullet.Faction.PLAYER))
 
 
 

@@ -230,13 +230,12 @@ func _update_collision() -> void:
 	## place in bullet layer
 	match bullet.faction:
 		bullet.Faction.PLAYER:
-			set_collision_layer_value(3, true)  # player_bullet
-			set_collision_mask_value(2, true)   # enemy
+			set_collision_layer_value(6, true)  # player_bullet
+			set_collision_mask_value(4, true)   # enemy
 		bullet.Faction.ENEMY:
-			set_collision_layer_value(4, true)  # enemy_bullet
-			set_collision_mask_value(5, true)   # player
-			set_collision_mask_value(6, true)   # player
-			##set_collision_mask_value(5, true)   # environment
+			set_collision_layer_value(5, true)  # enemy_bullet
+			set_collision_mask_value(3, true)   # player
+
 
 
 

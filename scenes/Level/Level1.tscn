@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=4 uid="uid://okvl3jg17a5h"]
+[gd_scene load_steps=63 format=4 uid="uid://okvl3jg17a5h"]
 
 [ext_resource type="Script" uid="uid://dghk1chdkrxqs" path="res://script/Level/Level1Controller.gd" id="1_h32uy"]
 [ext_resource type="Script" uid="uid://cdj8cw7oe3du7" path="res://script/Base/Other/Main_camera.gd" id="2_p0hel"]
@@ -13,9 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://xrsjlanlasuf" path="res://assets/Map/vectoraith_tileset_terrains_3x3.png" id="10_hfknj"]
 [ext_resource type="Texture2D" uid="uid://btalcwb63141i" path="res://assets/Map/vectoraith_tileset_water_temperate_autotile_rpgmaker.png" id="11_67qcy"]
 [ext_resource type="PackedScene" uid="uid://sbu784eu31i5" path="res://scenes/UI/PauseMenu.tscn" id="12_pause"]
-[ext_resource type="Script" uid="uid://bcpdv34wfigjx" path="res://script/Level/Level1WaveDirector.gd" id="13_mf1cp"]
+[ext_resource type="Script" uid="uid://dd5bpmb6vyu5g" path="res://script/Level/Level1WaveDirector.gd" id="13_mf1cp"]
 [ext_resource type="Script" uid="uid://yd3lu0oib4w3" path="res://script/Level/Base/SpawnDirector.gd" id="14_67qcy"]
-[ext_resource type="Script" uid="uid://dsy06pdgaq0c5" path="res://script/Level/Base/SpawnPoint.gd" id="16_u85d8"]
+[ext_resource type="Script" uid="uid://c4isnf8bgipw3" path="res://script/Level/Base/SpawnPoint.gd" id="16_u85d8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p27p8"]
 texture = ExtResource("3_6ch66")
@@ -6116,7 +6116,7 @@ sources/7 = SubResource("TileSetAtlasSource_mf1cp")
 sources/8 = SubResource("TileSetAtlasSource_u85d8")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mf1cp"]
-size = Vector2(72.53125, 123)
+size = Vector2(74.53125, 111)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u85d8"]
 size = Vector2(145.8125, 85.875)
@@ -6166,12 +6166,6 @@ size = Vector2(16.5, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jrrlw"]
 size = Vector2(43.875, 42.5)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3q85i"]
-size = Vector2(34.75, 31)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rbypt"]
-size = Vector2(30.5, 22)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6laxy"]
 size = Vector2(63.25, 63)
 
@@ -6192,9 +6186,6 @@ size = Vector2(31.15625, 31.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m430h"]
 size = Vector2(46.367188, 47.859375)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lb7yv"]
-size = Vector2(28.8125, 52.625)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_67qcy"]
 
@@ -6243,7 +6234,7 @@ position = Vector2(-258, 44)
 collision_layer = 41
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier/Building/Building1"]
-position = Vector2(26.734375, -18.5)
+position = Vector2(27.734375, -24.5)
 shape = SubResource("RectangleShape2D_mf1cp")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Barrier/Building/Building1"]
@@ -6312,14 +6303,6 @@ shape = SubResource("RectangleShape2D_g824q")
 position = Vector2(-376, 276)
 shape = SubResource("RectangleShape2D_jrrlw")
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Barrier/ShortBarrier"]
-position = Vector2(-237, 273)
-shape = SubResource("RectangleShape2D_3q85i")
-
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="Barrier/ShortBarrier"]
-position = Vector2(129.75, 258)
-shape = SubResource("RectangleShape2D_rbypt")
-
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="Barrier/ShortBarrier"]
 position = Vector2(-472, -150)
 shape = SubResource("RectangleShape2D_6laxy")
@@ -6347,10 +6330,6 @@ shape = SubResource("RectangleShape2D_gnnbo")
 [node name="CollisionShape2D12" type="CollisionShape2D" parent="Barrier/ShortBarrier"]
 position = Vector2(-216, -213.92969)
 shape = SubResource("RectangleShape2D_m430h")
-
-[node name="CollisionShape2D13" type="CollisionShape2D" parent="Barrier/ShortBarrier"]
-position = Vector2(-129.40625, 113.6875)
-shape = SubResource("RectangleShape2D_lb7yv")
 
 [node name="Boundary" type="Node2D" parent="Barrier"]
 
@@ -6410,3 +6389,16 @@ script = ExtResource("16_u85d8")
 [node name="SpawnPoint4" type="Marker2D" parent="WaveDirector/SubDirector/SpawnDirector"]
 position = Vector2(57, -30)
 script = ExtResource("16_u85d8")
+
+[node name="PlayerUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TabBar" type="TabBar" parent="PlayerUI"]
+layout_mode = 0
+offset_left = 359.0
+offset_top = -16.0
+offset_right = 501.0
+offset_bottom = 9.0

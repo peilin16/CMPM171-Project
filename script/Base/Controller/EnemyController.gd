@@ -40,7 +40,7 @@ func _ready() -> void:
 		if stats.has("max_hp") and _character:
 			_character.max_hp = stats["max_hp"]
 			_character.hp = _character.max_hp
-
+	
 	#spring
 	if _character == null:
 		_character = Enemy.new();
@@ -54,7 +54,6 @@ func _ready() -> void:
 	_ai_brain_hub = get_node_or_null("StateHub")
 	if _ai_brain_hub and _ai_brain_hub.root_state:
 		_ai_brain_hub.root_state.enter(self, _ai_brain_hub, _ai_brain_hub.anim_player)
-		
 	#_task._start(_logic.get_queue());
 	hitable = true;
 	#
@@ -95,6 +94,8 @@ func deactivate()->void:
 	hitable = false;
 	GameManager.enemy_manager.unregister_active_enemy(controller_id);
 	emit_signal("enemy_deactivated", self);
+	
+	
 func apply_hit_by_float(damage:float):
 	if not is_death:
 		_logic.apply_damage(damage);
@@ -102,7 +103,7 @@ func apply_hit_by_float(damage:float):
 func behit(bullet:Bullet):
 	if not is_death:
 		_logic.behit(bullet);
-		
+	
 
 
 func death() -> void:
