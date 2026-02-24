@@ -23,7 +23,7 @@ func _ready() -> void:
 		"volume_mul":0.4,
 		"pitch_scale":1.0
 	});
-	widget_spawner.spawn_widget(Vector2(100,200), 4);
+	#widget_spawner.spawn_widget(Vector2(100,200), 4);
 	#_spawn_enemy_for_test("StoneLionBoss", Vector2(220, 0))
 	#_spawn_enemy_for_test("Grunt", Vector2(80, -120))
 	#_spawn_enemy_for_test("GruntPlus", Vector2(80, 120))

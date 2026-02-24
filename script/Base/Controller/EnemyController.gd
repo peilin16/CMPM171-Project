@@ -109,6 +109,10 @@ func behit(bullet:Bullet):
 func death() -> void:
 	if is_death:
 		return
+	
+	var level:Level_controller = GameManager.level_manager.current_level;
+	if level != null:
+		level.widget_spawner.spawn_widget(global_position, 4);
 	#spawn score;
 	#widget_spawner.spawn_widget(Widget_request.new("PowerPoint"));
 		

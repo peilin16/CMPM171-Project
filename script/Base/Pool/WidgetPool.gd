@@ -66,9 +66,9 @@ func _on_item_deactivated(_scene: Widget_controller) -> void:
 	_scene.global_position = Vector2(999999,999999);
 # ---------- singal  deactive ----------
 func _deactivate_item(new_scene: Node) -> void:
-	new_scene.widget._init();
+	#new_scene.widget._init();
 	new_scene.visible = false
-	new_scene.widget.is_active = false
+	#new_scene.widget.is_active = false
 
 	
 	new_scene.global_position  =  Vector2(-9999, -9999) # 

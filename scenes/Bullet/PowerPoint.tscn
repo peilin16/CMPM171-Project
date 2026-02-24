@@ -19,3 +19,5 @@ shape = SubResource("RectangleShape2D_ww2nt")
 position = Vector2(-4.7683716e-07, -4.7683716e-07)
 scale = Vector2(0.45, 0.45)
 texture = ExtResource("1_qkdyl")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
