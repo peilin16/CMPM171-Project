@@ -1,7 +1,17 @@
-[gd_scene format=3 uid="uid://jbvb3fu2vjlb"]
+[gd_scene load_steps=4 format=3 uid="uid://jbvb3fu2vjlb"]
+
+[ext_resource type="Texture2D" uid="uid://bnfcn3xgju3qi" path="res://assets/bullet/widget/ScorePoint.png" id="1_qkdyl"]
+[ext_resource type="Script" uid="uid://lreayqrccmt8" path="res://script/Other/WidgetController.gd" id="1_ww2nt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ww2nt"]
 
 [node name="PowerPoint" type="Area2D"]
+collision_layer = 256
+collision_mask = 256
+script = ExtResource("1_ww2nt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ww2nt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qkdyl")

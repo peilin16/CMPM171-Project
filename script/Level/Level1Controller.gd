@@ -5,6 +5,8 @@ class_name Level1_controller
 func _ready() -> void:
 	level = Level1.new();	
 	pause_menu.visible =false;
+	
+	
 	GameManager.player_manager._spawn_player(self,Vector2(-200,0));
 	super._ready();
 	await get_tree().process_frame
