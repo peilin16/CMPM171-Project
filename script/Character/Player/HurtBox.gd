@@ -1,4 +1,4 @@
-extends Node
+extends Area2D
 class_name Hurt_box
 
 var can_hurt:bool = false;

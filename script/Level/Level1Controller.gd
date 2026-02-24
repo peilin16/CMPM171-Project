@@ -31,7 +31,7 @@ func _physics_process(delta: float) -> void:
 			pause_menu.visible = true;
 		pause_menu.global_position = GameManager.camera_manager.get_center()
 		get_tree().paused = true;
-
+	
 
 func _spawn_enemy_for_test(pool_name: String, spawn_pos: Vector2) -> void:
 	var spawn_director = get_node_or_null("WaveDirector/SubDirector/SpawnDirector")

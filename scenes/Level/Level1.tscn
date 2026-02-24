@@ -6389,16 +6389,3 @@ script = ExtResource("16_u85d8")
 [node name="SpawnPoint4" type="Marker2D" parent="WaveDirector/SubDirector/SpawnDirector"]
 position = Vector2(57, -30)
 script = ExtResource("16_u85d8")
-
-[node name="PlayerUI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="TabBar" type="TabBar" parent="PlayerUI"]
-layout_mode = 0
-offset_left = 359.0
-offset_top = -16.0
-offset_right = 501.0
-offset_bottom = 9.0

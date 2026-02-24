@@ -92,7 +92,7 @@ func _physics_process(delta: float) -> void:
 	# ✅ 每帧检查 cheat 是否变更（你改 Inspector 就能生效）
 	_apply_cheat_if_needed(false)
 
-	# 你之前的 1/2/3/4 手动切模式仍可保留（但默认由筒子控制）
+	
 	handle_fire_mode_hotkeys()
 	
 	if Input.is_action_just_pressed("Test"):
