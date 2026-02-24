@@ -2,7 +2,7 @@ extends Node2D
 class_name Level_controller
 
 @export var pause_menu:Pause_menu;
-@onready var widget_container:Node2D = $WidgetContainer
+@onready var widget_spawner:Node2D = $WidgetSpawner
 var level:Level;
 func _ready() -> void:
 	if level == null:

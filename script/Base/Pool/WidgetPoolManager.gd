@@ -41,14 +41,19 @@ func spawn_widget(pool_name: String):
 	
 	
 # 
-#func spawn_widgets(pool_name: String, num: int):
-	#if pools.has(pool_name):
-		#return pools[pool_name].spawn_bullets(num);
-	#push_warning("Bullet pool not found: %s" % pool_name)
-	#return null
+func spawn_widgets(pool_name: String, num: int)->Array:
+	if pools.has(pool_name):
+		var arr:Array[Widget_controller]= []
+		var pool:Widget_pool = pools[pool_name];
+		for i in range(num):
+			arr.append(pool.spawn_item());
+		return arr;
+		
+	push_warning("Bullet pool not found: %s" % pool_name)
+	return []
 	
 
-func _deactivate_widget(pool_name: String, widget: Node) -> void:
+func _deactivate_widget(pool_name: String, widget: Widget_controller) -> void:
 	var pool = get_pool(pool_name);
 	if pool:
 		pool._on_item_deactivated(widget);

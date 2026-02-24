@@ -54,7 +54,7 @@ func _create_item() -> Node:
 	return new_scene
 
 # ---------- deactivated ----------
-func _on_item_deactivated(_scene: Node) -> void:
+func _on_item_deactivated(_scene: Widget_controller) -> void:
 	# remove from active array
 	if _scene in active_items:
 		active_items.erase(_scene)
@@ -62,7 +62,8 @@ func _on_item_deactivated(_scene: Node) -> void:
 	if not (_scene in available_items):
 		_deactivate_item(_scene)
 		available_items.append(_scene)
-	_scene.widget._init();		
+	#_scene.widget._init();		
+	_scene.global_position = Vector2(999999,999999);
 # ---------- singal  deactive ----------
 func _deactivate_item(new_scene: Node) -> void:
 	new_scene.widget._init();

@@ -27,8 +27,8 @@
 [ext_resource type="PackedScene" uid="uid://cdtj3k2247ovo" path="res://scenes/VFX/Explosion2.tscn" id="21_qdgr7"]
 [ext_resource type="Script" uid="uid://dhhwebvbu4qy1" path="res://script/VFX/Explosion/BulletExplosion2Pool.gd" id="21_y5gy8"]
 [ext_resource type="Script" uid="uid://llulee3ye6n5" path="res://script/VFX/Explosion/Explosion3Pool.gd" id="22_sftd1"]
-[ext_resource type="Script" uid="uid://bberdg173kbxo" path="res://script/Base/Pool/WidgetPoolManager.gd" id="28_mih24"]
-[ext_resource type="Script" uid="uid://cbem8sd2f0p3p" path="res://script/Base/Pool/PowerPointPool.gd" id="29_dut2i"]
+[ext_resource type="Script" uid="uid://dxvkxhq7ki8n6" path="res://script/Base/Pool/WidgetPoolManager.gd" id="28_mih24"]
+[ext_resource type="Script" uid="uid://c7w1r7erp8dqj" path="res://script/Base/Pool/PowerPointPool.gd" id="29_dut2i"]
 [ext_resource type="PackedScene" uid="uid://jbvb3fu2vjlb" path="res://scenes/Bullet/PowerPoint.tscn" id="30_dut2i"]
 
 [node name="PoolManager" type="Node"]

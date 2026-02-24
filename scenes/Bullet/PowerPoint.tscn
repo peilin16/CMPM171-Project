@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://jbvb3fu2vjlb"]
 
 [ext_resource type="Texture2D" uid="uid://bnfcn3xgju3qi" path="res://assets/bullet/widget/ScorePoint.png" id="1_qkdyl"]
-[ext_resource type="Script" uid="uid://lreayqrccmt8" path="res://script/Other/WidgetController.gd" id="1_ww2nt"]
+[ext_resource type="Script" uid="uid://o258qdk3132u" path="res://script/Other/WidgetController.gd" id="1_ww2nt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ww2nt"]
 size = Vector2(9.5, 9)
 
 [node name="PowerPoint" type="Area2D"]
-collision_layer = 256
+collision_layer = 272
 collision_mask = 256
 script = ExtResource("1_ww2nt")
 

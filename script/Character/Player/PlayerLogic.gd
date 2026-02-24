@@ -24,6 +24,14 @@ var fire_mode: FireMode = FireMode.SINGLE
 # FAN 动态 count（由筒子决定）
 var _fan_count: int = 2
 
+
+var current_score:float = 0;
+
+
+func add_score(score:float = 5)->void:
+	current_score += score
+
+
 func set_fire_mode(m: FireMode) -> void:
 	fire_mode = m
 
