@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cjvsrt1bnutfd"]
+[gd_scene format=3 uid="uid://cjvsrt1bnutfd"]
 
 [ext_resource type="Script" uid="uid://dvum0413mp866" path="res://script/Enemy/Grunt/GruntController.gd" id="1_grunt_ctrl"]
 [ext_resource type="Script" uid="uid://bj7f4p0ml38qw" path="res://script/State/StateHub.gd" id="2_state_hub"]
