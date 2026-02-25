@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://b68pmqxc8g3ms"]
+[gd_scene load_steps=2 format=3 uid="uid://b68pmqxc8g3ms"]
 
 [ext_resource type="Script" uid="uid://rya6s3u2u8oe" path="res://script/UI/ShopMenu.gd" id="1_gm0i7"]
-[ext_resource type="Texture2D" uid="uid://bmd23p4gggkh" path="res://assets/UI/shopowner.png" id="2_adeea"]
 
 [node name="ShopMenu" type="Control"]
 process_mode = 3
@@ -37,13 +36,16 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -80.285706
+offset_top = 0.2857208
+offset_right = -80.285706
+offset_bottom = 0.28570557
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ShopOwner" type="TextureRect" parent="CenterContainer/Panel/MainHBox"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-texture = ExtResource("2_adeea")
 expand_mode = 1
 stretch_mode = 5
 
