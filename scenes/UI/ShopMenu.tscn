@@ -1,0 +1,86 @@
+[gd_scene load_steps=3 format=3 uid="uid://b68pmqxc8g3ms"]
+
+[ext_resource type="Script" uid="uid://rya6s3u2u8oe" path="res://script/UI/ShopMenu.gd" id="1_gm0i7"]
+[ext_resource type="Texture2D" uid="uid://bmd23p4gggkh" path="res://assets/UI/shopowner.png" id="2_adeea"]
+
+[node name="ShopMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gm0i7")
+
+[node name="BackGround" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 0.49019608)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+
+[node name="Panel" type="Panel" parent="CenterContainer"]
+custom_minimum_size = Vector2(700, 400)
+layout_mode = 2
+
+[node name="MainHBox" type="HBoxContainer" parent="CenterContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShopOwner" type="TextureRect" parent="CenterContainer/Panel/MainHBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+texture = ExtResource("2_adeea")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel/MainHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="Title" type="Label" parent="CenterContainer/Panel/MainHBox/VBoxContainer"]
+layout_mode = 2
+text = "Wave Cleared. Click & continue with your favorite mahjong tile!"
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Panel/MainHBox/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="TileContainer" type="HBoxContainer" parent="CenterContainer/Panel/MainHBox/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Option1" type="Button" parent="CenterContainer/Panel/MainHBox/VBoxContainer/TileContainer"]
+custom_minimum_size = Vector2(100, 150)
+layout_mode = 2
+
+[node name="Option2" type="Button" parent="CenterContainer/Panel/MainHBox/VBoxContainer/TileContainer"]
+custom_minimum_size = Vector2(100, 150)
+layout_mode = 2
+
+[node name="Option3" type="Button" parent="CenterContainer/Panel/MainHBox/VBoxContainer/TileContainer"]
+custom_minimum_size = Vector2(100, 150)
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="CenterContainer/Panel/MainHBox/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="SkipButton" type="Button" parent="CenterContainer/Panel/MainHBox/VBoxContainer"]
+layout_mode = 2
+text = "Skip"

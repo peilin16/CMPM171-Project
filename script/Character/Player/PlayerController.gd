@@ -124,8 +124,8 @@ func _physics_process(delta: float) -> void:
 
 # --- 核心移动逻辑 ---
 func move(delta: float, speed: float = _character.player_velocity) -> void:
-	input_vector = Input.get_vector("left", "right", "up", "down")
 	
+	input_vector = Input.get_vector("left", "right", "up", "down")
 	if Input.is_action_just_pressed("avoid") and can_dash and input_vector != Vector2.ZERO:
 		start_dash()
 

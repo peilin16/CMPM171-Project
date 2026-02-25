@@ -2,6 +2,8 @@
 extends State_object
 class_name Player_idle_state
 
+
+
 func _init(hub: State_hub = null) -> void:
 	state_name = "Idle"
 	priority = 1
@@ -18,6 +20,7 @@ func enter(controller, hub: State_hub, anim: Animation_player) -> void:
 	anim.play(state_animation);
 	print(state_name)
 func update(controller, hub: State_hub, anim: Animation_player, delta: float) -> void:
+	
 	controller.move(delta)
 
 func is_done(controller, hub: State_hub, anim: Animation_player) -> bool:

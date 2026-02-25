@@ -13,7 +13,8 @@ var parser:Wave_parser = Wave_parser.new(self);
 func _ready() -> void:
 	pass
 	
-	
+
+
 # 一次性预加载所有 wave（比如关卡开始时）
 func _preload_waves(arr: Array[Wave]) -> void:
 	waves.clear()
@@ -30,6 +31,7 @@ func _append_wave(w: Wave) -> void:
 
 
 func start() -> void:
+	config_waves();
 	if waves.is_empty():
 		return
 

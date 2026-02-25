@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://kks7ir0kgg1a"]
+[gd_scene load_steps=32 format=3 uid="uid://kks7ir0kgg1a"]
 
 [ext_resource type="Script" uid="uid://csieovs421mxl" path="res://script/Character/Player/PlayerController.gd" id="1_beklg"]
 [ext_resource type="Script" uid="uid://bj7f4p0ml38qw" path="res://script/State/StateHub.gd" id="2_4mqus"]
@@ -22,36 +22,25 @@ size = Vector2(13, 32)
 atlas = ExtResource("11_h3n2c")
 region = Rect2(110, 195, 410, 545)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mpo6r"]
-atlas = ExtResource("11_h3n2c")
-region = Rect2(595, 195, 410, 545)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g7g3w"]
-atlas = ExtResource("11_h3n2c")
-region = Rect2(1080, 195, 410, 545)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hpedc"]
-atlas = ExtResource("11_h3n2c")
-region = Rect2(1565, 195, 410, 545)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_gc4mm"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hdh7n")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mpo6r")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g7g3w")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hpedc")
 }],
 "loop": false,
-"name": &"rumia_idle",
+"name": &"idle",
 "speed": 12.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"right",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hdh7n"]
@@ -208,7 +197,7 @@ metadata/_custom_type_script = "uid://b566wwblvpd6x"
 position = Vector2(1.3552527e-20, 1.9999999)
 scale = Vector2(0.08780488, 0.06559634)
 sprite_frames = SubResource("SpriteFrames_gc4mm")
-animation = &"rumia_idle"
+animation = &"idle"
 
 [node name="BulletContainer" type="Node2D" parent="."]
 
