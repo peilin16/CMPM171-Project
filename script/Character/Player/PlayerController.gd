@@ -92,7 +92,7 @@ func _physics_process(delta: float) -> void:
 	# ✅ 每帧检查 cheat 是否变更（你改 Inspector 就能生效）
 	_apply_cheat_if_needed(false)
 
-	
+	#print(move_data.moveX);
 	handle_fire_mode_hotkeys()
 	
 	if Input.is_action_just_pressed("Test"):
@@ -124,8 +124,8 @@ func _physics_process(delta: float) -> void:
 
 # --- 核心移动逻辑 ---
 func move(delta: float, speed: float = _character.player_velocity) -> void:
-	input_vector = Input.get_vector("left", "right", "up", "down")
 	
+	input_vector = Input.get_vector("left", "right", "up", "down")
 	if Input.is_action_just_pressed("avoid") and can_dash and input_vector != Vector2.ZERO:
 		start_dash()
 
@@ -136,8 +136,8 @@ func move(delta: float, speed: float = _character.player_velocity) -> void:
 	velocity = input_vector * current_speed
 	move_and_slide()
 	
-	if input_vector.x != 0:
-		animated_sprite.flip_h = input_vector.x < 0
+	#if input_vector.x != 0:
+		#animated_sprite.flip_h = input_vector.x < 0
 	
 	move_data.record_motion(global_position, delta)
 

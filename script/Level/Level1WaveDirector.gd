@@ -2,11 +2,6 @@ extends Wave_director
 class_name Level1_wave_director
 
 
-func _ready() -> void:
-	
-	config_waves();
-	
-	start();
 
 
 func config_waves() -> void:

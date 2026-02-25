@@ -15,8 +15,10 @@
 [ext_resource type="PackedScene" uid="uid://sbu784eu31i5" path="res://scenes/UI/PauseMenu.tscn" id="12_pause"]
 [ext_resource type="Script" uid="uid://d1plw2hk7smfo" path="res://script/Level/Level1WaveDirector.gd" id="13_mf1cp"]
 [ext_resource type="Script" uid="uid://yd3lu0oib4w3" path="res://script/Level/Base/SpawnDirector.gd" id="14_67qcy"]
-[ext_resource type="Script" uid="uid://dmn3828q278so" path="res://script/Level/Base/SpawnPoint.gd" id="16_u85d8"]
-[ext_resource type="Script" uid="uid://bvhfbart6omhf" path="res://script/Level/Base/WidgetSpawner.gd" id="17_ti1q0"]
+[ext_resource type="Script" uid="uid://c4isnf8bgipw3" path="res://script/Level/Base/SpawnPoint.gd" id="16_u85d8"]
+[ext_resource type="Script" uid="uid://c3s17tc73vbrt" path="res://script/Level/Base/WidgetSpawner.gd" id="17_ti1q0"]
+[ext_resource type="PackedScene" uid="uid://b68pmqxc8g3ms" path="res://scenes/UI/ShopMenu.tscn" id="18_p27p8"]
+[ext_resource type="PackedScene" uid="uid://c3cnfks53qo0f" path="res://scenes/UI/StartMenu.tscn" id="19_fwmiw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p27p8"]
 texture = ExtResource("3_6ch66")
@@ -6118,7 +6120,6 @@ sources/8 = SubResource("TileSetAtlasSource_u85d8")
 
 [node name="Level1" type="Node2D" unique_id=266729257 node_paths=PackedStringArray("pause_menu")]
 script = ExtResource("1_h32uy")
-pause_menu = NodePath("PauseMenu")
 
 [node name="Main_camera" type="Camera2D" parent="." unique_id=1276819857]
 script = ExtResource("2_p0hel")
@@ -6177,3 +6178,9 @@ script = ExtResource("16_u85d8")
 [node name="WidgetSpawner" type="Node2D" parent="." unique_id=1681640225]
 z_index = 800
 script = ExtResource("17_ti1q0")
+
+[node name="ShopMenu" parent="." instance=ExtResource("18_p27p8")]
+visible = false
+focus_behavior_recursive = 1
+
+[node name="StartMenu" parent="." instance=ExtResource("19_fwmiw")]

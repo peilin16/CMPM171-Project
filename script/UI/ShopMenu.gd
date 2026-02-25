@@ -1,5 +1,5 @@
 extends Control
-
+class_name Shop_menu
 signal tile_chosen(suit: int, value: int)
 
 @onready var option_1: Button = $CenterContainer/Panel/MainHBox/VBoxContainer/TileContainer/Option1

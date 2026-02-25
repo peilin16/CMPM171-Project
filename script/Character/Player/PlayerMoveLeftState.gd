@@ -1,20 +1,20 @@
 # RumiaIdleState.gd
 extends State_object
-class_name Player_idle_state
-
+class_name Player_move_left_state
 
 
 func _init(hub: State_hub = null) -> void:
-	state_name = "Idle"
-	priority = 1
+	state_name = "MoveLeft"
+	priority = 2
 	can_be_interrupted = true
 	state_animation = Animation_object.new();
-	state_animation.animation_name = "idle"
+	state_animation.animation_name = "left"
 	state_animation.is_loop = true
-
+	state_animation.animation_speed = 4
 func trigger(controller) -> bool:
 	# default fallback
-	return true
+	return controller.move_data.moveX == Move_data.X.LEFT or controller.move_data.moveY == Move_data.Y.TOP;
+
 
 func enter(controller, hub: State_hub, anim: Animation_player) -> void:
 	anim.play(state_animation);
@@ -24,4 +24,5 @@ func update(controller, hub: State_hub, anim: Animation_player, delta: float) ->
 	controller.move(delta)
 
 func is_done(controller, hub: State_hub, anim: Animation_player) -> bool:
-	return false
+	#anim
+	return controller.move_data.moveX != Move_data.X.LEFT or controller.move_data.moveY != Move_data.Y.TOP;
