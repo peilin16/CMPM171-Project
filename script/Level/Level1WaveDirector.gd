@@ -14,36 +14,75 @@ func config_waves() -> void:
 			"mode":"enemy_spawn",
 			"type":"group",
 			"name":"Grunt",
-			"count":2,
+			"count":12,
 			"behavior":"---",
-			"positions":[0,1],
+			"positions":[0,1,2,3,4],
 					
 		},
-		#{
-			#"mode":"timer",
-			#"delay":6,
-		#},
-		#{
-			#"mode":"enemy_spawn",
-			#"type":"group",
-			#"name":"Fairy1Group",
-			#"interval":1,
-			#"behavior":"top_line_move_level1",
-			#"members":[
-				#{
-					#"template":"",
-					#"name":"GENERIC_FAIRY_1",
-					#"num":8,
-					#"ac":[32,40],
-					#"dc":[32,40],
-					#"textures":[0,3],
-					#"positions":[Vector2(900,-200)]
-				#}
-			#]			
-		#},
+		{
+			"mode":"clear",
+		},
 		
+		{
+			"mode":"shop"
+		},
+		{
+			"mode":"enemy_spawn",
+			"type":"group",
+			"name":"GruntPlus",
+			"count":5,
+			"behavior":"---",
+			"positions":[0,1,2,3,4],
+					
+		},
+		{
+			"mode":"timer",
+			"delay":12,
+		},
+		{
+			"mode":"enemy_spawn",
+			"type":"group",
+			"name":"Grunt",
+			"count":13,
+			"behavior":"---",
+			"positions":[0,1,2,3,4],
+					
+		},
+		{
+			"mode":"clear",
+		},
 		
-		
+		{
+			"mode":"enemy_spawn",
+			"name":"GruntPlus",
+			"count":4,
+			"behavior":"---",
+			"positions":[2,3,4],
+		},
+		{
+			"mode":"timer",
+			"delay":7,
+		},
+		{
+			"mode":"enemy_spawn",
+			"type":"group",
+			"name":"Grunt",
+			"count":13,
+			"behavior":"---",
+			"positions":[0,1,2,3,4],
+					
+		},
+		{
+			"mode":"enemy_spawn",
+			"type":"group",
+			"name":"StoneLionBoss",
+			"count":1,
+			"behavior":"---",
+			"positions":[3],
+		},
+		{
+			"mode":"shop"
+		}
 		#{
 			#"mode":"timer",
 			#"delay":9,

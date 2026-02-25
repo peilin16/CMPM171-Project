@@ -26,7 +26,16 @@ func _build_wave_from_dict(d: Dictionary) :
 			_build_timer_wave(d);
 		"enemy","spawn","enemy_spawn":
 			_build_enemy_wave(d);
+		"shop":
+			_build_shop_wave(d);
+		"clear":
+			_build_clear_wave(d);
 
+func _build_clear_wave(d: Dictionary) -> void:
+	_built_wave = Clear_condition_wave.new();
+	
+func _build_shop_wave(d: Dictionary) -> void:
+	_built_wave = Shop_wave.new();
 
 func _apply_base(d: Dictionary) -> void:
 	_built_wave._is_ready = false;

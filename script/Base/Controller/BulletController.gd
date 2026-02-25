@@ -60,7 +60,12 @@ func _resolve_vfx_spawner() -> VFX_controller_spawner:
 func _on_area_entered(area: Area2D) -> void:
 	if not bullet.is_active:
 		return;
-	
+	if area is Hurt_box :
+		var hurt := area as Hurt_box
+		SoundManager.command(bullet.hit_sfx);
+		hurt.hurt(3);
+		vfx_parser.execute(bullet.hit_vfx)
+		deactivate();
 	#if area.component == Rumia_controller.Component.HEALTHYRANGE:
 		#var player := area.get_parent() as Rumia_controller
 		#

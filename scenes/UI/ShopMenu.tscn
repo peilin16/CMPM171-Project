@@ -1,7 +1,6 @@
-[gd_scene format=3 uid="uid://b68pmqxc8g3ms"]
+[gd_scene load_steps=2 format=3 uid="uid://b68pmqxc8g3ms"]
 
-[ext_resource type="Script" uid="uid://cm0j0h7d1ajkd" path="res://script/UI/ShopMenu.gd" id="1_gm0i7"]
-[ext_resource type="Texture2D" uid="uid://bmd23p4gggkh" path="res://assets/UI/shopowner.png" id="2_adeea"]
+[ext_resource type="Script" uid="uid://rya6s3u2u8oe" path="res://script/UI/ShopMenu.gd" id="1_gm0i7"]
 
 [node name="ShopMenu" type="Control"]
 process_mode = 3
@@ -11,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.7, 0.7)
 script = ExtResource("1_gm0i7")
 
 [node name="BackGround" type="ColorRect" parent="."]
@@ -26,7 +26,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.7, 0.7)
 
 [node name="Panel" type="Panel" parent="CenterContainer"]
 custom_minimum_size = Vector2(700, 400)

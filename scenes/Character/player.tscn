@@ -234,7 +234,7 @@ metadata/_custom_type_script = "uid://drv02ar36c0qi"
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 16
+collision_mask = 24
 script = ExtResource("3_8fgnd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
@@ -323,3 +323,4 @@ collision_mask = 256
 shape = SubResource("CircleShape2D_g7g3w")
 
 [connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_area_entered"]
+[connection signal="body_entered" from="HurtBox" to="HurtBox" method="_on_body_entered"]

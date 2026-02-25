@@ -1,6 +1,6 @@
 extends Control
 
-const START_MENU_PATH = "res://scenes/UI/StartMenu.tscn"
+const START_MENU_PATH = "res://scenes/Level/Level1.tscn"
 
 @onready var score_label: Label = $Panel/VBoxContainer/ScoreLabel
 @onready var wave_label: Label = $Panel/VBoxContainer/WaveLabel
@@ -20,7 +20,7 @@ func set_stats(score: int, waves: int) -> void:
 
 func _on_restart_pressed() -> void:
 	get_tree().paused = false
-	get_tree().reload_current_scene()
+	get_tree().change_scene_to_file(START_MENU_PATH)
 
 func _on_quit_pressed() -> void:
 	get_tree().paused = false

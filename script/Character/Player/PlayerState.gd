@@ -17,13 +17,13 @@ func on_ready(controller, hub: State_hub, anim: Animation_player) -> void:
 	var idle := Player_idle_state.new(hub);
 	var move_left := Player_move_left_state.new(hub);
 	var move_right := Player_move_right_state.new(hub);
-	#var redeploy := Rumia_redeploy_sequence.new(hub);
+	var behit := Player_behit_state.new(hub);
 	#var spell:= Luna_scraper_state.new(hub);
 	append_state(idle,hub);
 	
 	append_state(move_left,hub);
 	append_state(move_right,hub);
-	#append_state(redeploy,hub);
+	append_state(behit,hub);
 	#append_state(spell,hub);
 	default_state = idle;
 	current_state = idle;
