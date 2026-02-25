@@ -31,7 +31,19 @@ func start_game()->void:
 	GameManager.player_manager._spawn_player(self,Vector2(-200,0));
 	director.start();
 	start_menu.visible = false;
-
+	SoundManager.command({
+		"sound":"bgm",
+		"command":"start",
+		"name":"BGM3",
+		"fade_in":0.2,
+		"fade_out":0.7,
+		"transfer_fade_out":0.2,
+		"use_loop_segment":true,
+		"loop_start_sec":0.3,
+		"loop_end_sec":18.0,
+		"volume_mul":0.4,
+		"pitch_scale":1.0
+	});
 func _spawn_enemy_for_test(pool_name: String, spawn_pos: Vector2) -> void:
 	var spawn_director = get_node_or_null("WaveDirector/SubDirector/SpawnDirector")
 	if spawn_director and spawn_director.has_method("spawn_enemy"):

@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://cjvsrt1bnutfd"]
+[gd_scene load_steps=13 format=3 uid="uid://cjvsrt1bnutfd"]
 
-[ext_resource type="Script" uid="uid://dvum0413mp866" path="res://script/Enemy/Grunt/GruntController.gd" id="1_grunt_ctrl"]
+[ext_resource type="Script" uid="uid://bsy1o5yg4txul" path="res://script/Enemy/Grunt/GruntController.gd" id="1_grunt_ctrl"]
 [ext_resource type="Script" uid="uid://bj7f4p0ml38qw" path="res://script/State/StateHub.gd" id="2_state_hub"]
 [ext_resource type="Script" uid="uid://drv02ar36c0qi" path="res://script/State/AnimationPlayer.gd" id="3_anim_player"]
 [ext_resource type="Script" uid="uid://b8na7bb7sjrx3" path="res://script/Other/Scheduler/Scheduler.gd" id="4_scheduler"]
@@ -16,6 +16,7 @@
 radius = 17.029387
 
 [node name="Grunt" type="CharacterBody2D"]
+collision_layer = 8
 script = ExtResource("1_grunt_ctrl")
 
 [node name="StateHub" type="Node2D" parent="."]
