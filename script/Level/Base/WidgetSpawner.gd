@@ -44,7 +44,13 @@ func spawn_widget(target: Vector2, num: int) -> void:
 				best_offset = off
 
 		var pos := target + best_offset
-		add_child(wc)
+		if not is_instance_valid(wc):
+			continue
+		if wc.get_parent() == null:
+			add_child(wc)
+		elif wc.get_parent() != self:
+			wc.get_parent().remove_child(wc)
+			add_child(wc)
 
 		
 		wc.global_position = pos

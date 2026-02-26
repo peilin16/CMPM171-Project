@@ -63,6 +63,7 @@ func _ready() -> void:
 	
 
 func _physics_process(delta: float) -> void:
+	rotation = 0.0
 	#_spring.update_spring(delta)
 	if _character.hp <= 0 :
 		death()
@@ -98,10 +99,14 @@ func deactivate()->void:
 	
 func apply_hit_by_float(damage:float):
 	if not is_death:
+		if damage > 0:
+			play_hurt_flash()
 		_logic.apply_damage(damage);
 
 func behit(bullet:Bullet):
 	if not is_death:
+		if bullet and bullet.damage > 0:
+			play_hurt_flash()
 		_logic.behit(bullet);
 	
 

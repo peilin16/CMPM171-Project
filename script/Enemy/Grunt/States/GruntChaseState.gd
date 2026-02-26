@@ -18,12 +18,6 @@ func update(controller, hub: State_hub, anim: Animation_player, delta: float) ->
 		
 	controller.velocity = desired_velocity
 	controller.move_and_slide()
-	
-	# Rotate towards velocity
-	if controller.velocity.length() > 0.1:
-		var target_angle = controller.velocity.angle()
-		var turn_speed = stats.get("turn_speed", 5.0)
-		controller.rotation = lerp_angle(controller.rotation, target_angle, turn_speed * delta)
 
 func _apply_avoidance(controller: GruntController, velocity: Vector2, stats: Dictionary) -> Vector2:
 	if not controller.ray_center: return velocity

@@ -25,11 +25,13 @@ func preload_enemies(count: int) -> void:
 func spawn_enemy() -> Node:
 	var character_scene: Enemy_controller = null
 
+	while available_enemies.size() > 0 and character_scene == null:
+		var candidate = available_enemies.pop_back()
+		if not is_instance_valid(candidate):
+			continue
+		character_scene = candidate as Enemy_controller
 
-	if available_enemies.size() > 0:
-		character_scene = available_enemies.pop_back()
-	else:
-
+	if character_scene == null:
 		character_scene = _create_enemy()
 
 	if character_scene == null:
@@ -68,6 +70,8 @@ func _on_enemy_deactivated(character_scene: Node) -> void:
 func deactivate_enemy(character_scene: Node) -> void:
 	if character_scene == null:
 		return
+	if not is_instance_valid(character_scene):
+		return
 	if character_scene and character_scene._character:
 		character_scene._character._init();
 	character_scene.visible = false
@@ -87,6 +91,8 @@ func deactivate_enemy(character_scene: Node) -> void:
 # ---------- recycle enemy ----------
 func _deactivate_all() -> void:
 	for b in active_enemies:
+		if not is_instance_valid(b):
+			continue
 		deactivate_enemy(b)
 		if not (b in available_enemies):
 			available_enemies.append(b)
@@ -95,10 +101,14 @@ func _deactivate_all() -> void:
 # ---------- free all scene ----------
 func clear() -> void:
 	for b in active_enemies:
+		if not is_instance_valid(b):
+			continue
 		ToolBar.Game_Id_generator.recycle_id(b.controller_id);
 		GameManager.enemy_manager.unregister_enemy(b);
 		b.queue_free()
 	for b in available_enemies:
+		if not is_instance_valid(b):
+			continue
 		ToolBar.Game_Id_generator.recycle_id(b.controller_id);
 		GameManager.enemy_manager.unregister_enemy(b);
 		b.queue_free()

@@ -24,10 +24,17 @@ func _physics_process(delta: float) -> void:
 
 	
 func display_shop()->void:
+	if not is_instance_valid(shop_menu):
+		shop_menu = get_node_or_null("ShopMenu") as Shop_menu
+	if shop_menu == null:
+		return
+	if shop_menu.has_method("setup_shop"):
+		shop_menu.setup_shop()
 	shop_menu.global_position = GameManager.camera_manager.get_center()
 	shop_menu.visible = true;
 	get_tree().paused = true;
 	
 func undisplay_shop()->void:
-	shop_menu.visible = false;
+	if is_instance_valid(shop_menu):
+		shop_menu.visible = false;
 	get_tree().paused = false;
