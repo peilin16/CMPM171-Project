@@ -36,12 +36,18 @@ func spawn_enemy(name:String, _position:Vector2 ,behavior_code:String = "", text
 	var enemy = _enemy_pool.spawn_enemy();
 	if enemy == null:
 		return
+	if not is_instance_valid(enemy):
+		return
 	
 	if not override == null:
 		enemy.override_data(override);
 	
-	enemy.set_actor_position(_position);
 	if enemy_container == null:
 		enemy_container = get_tree().current_scene
-	enemy_container.add_child(enemy);
+	if enemy.get_parent() == null:
+		enemy_container.add_child(enemy)
+	elif enemy.get_parent() != enemy_container:
+		enemy.get_parent().remove_child(enemy)
+		enemy_container.add_child(enemy)
+	enemy.set_actor_position(_position);
 	enemy.activate(behavior_code,texture_code);

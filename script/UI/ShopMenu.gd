@@ -81,4 +81,4 @@ func _on_skip_pressed() -> void:
 
 func _close_shop() -> void:
 	get_tree().paused = false
-	queue_free()
+	visible = false

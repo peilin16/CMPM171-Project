@@ -8,8 +8,10 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	level=get_parent();
 	# 连接信号（也可以在编辑器界面的 Node 面板手动连接）
-	$MenuContainer/StartButton.pressed.connect(_on_start_button_pressed)
-	$MenuContainer/QuitButton.pressed.connect(_on_quit_button_pressed)
+	if not $MenuContainer/StartButton.pressed.is_connected(_on_start_button_pressed):
+		$MenuContainer/StartButton.pressed.connect(_on_start_button_pressed)
+	if not $MenuContainer/QuitButton.pressed.is_connected(_on_quit_button_pressed):
+		$MenuContainer/QuitButton.pressed.connect(_on_quit_button_pressed)
 	
 func _on_start_button_pressed() -> void:
 	# 切换到游戏关卡
