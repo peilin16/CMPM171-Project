@@ -129,8 +129,9 @@ func do_slam_impact() -> void:
 	if target != null and target.global_position.distance_to(global_position) <= slam_radius:
 		if target is Player_controller:
 			var player = target as Player_controller
-			if "_character" in player and player._character != null:
-				player._character.hp = max(0.0, player._character.hp - slam_damage)
+			var hurtbox := player.hurtbox as Hurt_box
+			if hurtbox != null:
+				hurtbox.hurt(slam_damage)
 
 	if vfx_parser:
 		vfx_parser.setup({

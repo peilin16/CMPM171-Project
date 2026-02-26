@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c3oae4xoha0jr"]
+[gd_scene load_steps=15 format=3 uid="uid://c3oae4xoha0jr"]
 
 [ext_resource type="Script" uid="uid://fheq3m4o6cfb" path="res://script/Enemy/GruntPlus/GruntPlusController.gd" id="1_grunt_plus_ctrl"]
 [ext_resource type="Script" uid="uid://bj7f4p0ml38qw" path="res://script/State/StateHub.gd" id="2_state_hub"]
@@ -11,9 +11,21 @@
 [ext_resource type="Script" uid="uid://bfrklaksr3n7b" path="res://script/Action/Rotate/RotateRunner.gd" id="9_rotate_runner"]
 [ext_resource type="Script" uid="uid://c6e2v8pq72rv8" path="res://script/VFX/VFXParser.gd" id="10_vfx_parser"]
 [ext_resource type="Script" uid="uid://b566wwblvpd6x" path="res://script/VFX/VFXSpawner.gd" id="11_vfx_spawner"]
+[ext_resource type="Texture2D" path="res://assets/character/Enemy/GruntPlus/332f739a-0dc6-468c-8d56-88aa8bac9efb.png" id="12_grunt_plus_tex"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 14.0
+
+[sub_resource type="SpriteFrames" id="2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_grunt_plus_tex")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [node name="GruntPlus" type="CharacterBody2D"]
 collision_layer = 8
@@ -54,8 +66,7 @@ script = ExtResource("11_vfx_spawner")
 shape = SubResource("1")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
 modulate = Color(1, 0.8, 0.8, 1)
-
-[node name="DebugBody" type="Polygon2D" parent="."]
-color = Color(0.95, 0.55, 0.55, 1)
-polygon = PackedVector2Array(-16, -12, 16, -12, 20, 12, -20, 12)
+sprite_frames = SubResource("2")
+animation = &"idle"

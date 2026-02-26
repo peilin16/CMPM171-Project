@@ -4,6 +4,10 @@ class_name Character_controller
 var _character:Character;
 var controller_id:int;#id
 var is_death:bool = false;
+var _hurt_flash_tween: Tween
+
+@export var hurt_flash_color: Color = Color(1.0, 0.25, 0.25, 1.0)
+@export var hurt_flash_duration: float = 0.12
 
 enum TEAM {
 	PLAYER,
@@ -47,3 +51,12 @@ func get_id() ->int:
 
 func override_data(o) -> void:
 	_character = o;
+
+func play_hurt_flash() -> void:
+	if not is_inside_tree():
+		return
+	if _hurt_flash_tween and _hurt_flash_tween.is_running():
+		_hurt_flash_tween.kill()
+	modulate = hurt_flash_color
+	_hurt_flash_tween = create_tween()
+	_hurt_flash_tween.tween_property(self, "modulate", Color(1, 1, 1, 1), max(hurt_flash_duration, 0.01))
