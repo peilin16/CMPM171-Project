@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=4 uid="uid://okvl3jg17a5h"]
+[gd_scene load_steps=105 format=4 uid="uid://okvl3jg17a5h"]
 
 [ext_resource type="Script" uid="uid://dghk1chdkrxqs" path="res://script/Level/Level1Controller.gd" id="1_h32uy"]
 [ext_resource type="Script" uid="uid://cdj8cw7oe3du7" path="res://script/Base/Other/Main_camera.gd" id="2_p0hel"]
@@ -17239,6 +17239,8 @@ sources/21 = SubResource("TileSetAtlasSource_kxp0q")
 sources/22 = SubResource("TileSetAtlasSource_bf70b")
 sources/23 = SubResource("TileSetAtlasSource_ccp1w")
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_f5v21"]
+
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_h32uy")
 
@@ -17328,3 +17330,36 @@ texture = ExtResource("33_6laxy")
 [node name="ShopMenu" parent="." instance=ExtResource("34_5r1um")]
 
 [node name="StartMenu" parent="." instance=ExtResource("35_f5v21")]
+
+[node name="Border" type="Node2D" parent="."]
+
+[node name="BottomBorder" type="StaticBody2D" parent="Border"]
+position = Vector2(34, 545)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Border/BottomBorder"]
+position = Vector2(2, 1)
+shape = SubResource("WorldBoundaryShape2D_f5v21")
+
+[node name="LeftBorder" type="StaticBody2D" parent="Border"]
+position = Vector2(-960, 171)
+rotation = 1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Border/LeftBorder"]
+position = Vector2(2, 1)
+shape = SubResource("WorldBoundaryShape2D_f5v21")
+
+[node name="RightBorder" type="StaticBody2D" parent="Border"]
+position = Vector2(976, 329)
+rotation = 4.712389
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Border/RightBorder"]
+position = Vector2(2, 1)
+shape = SubResource("WorldBoundaryShape2D_f5v21")
+
+[node name="TopBorder" type="StaticBody2D" parent="Border"]
+position = Vector2(-7, -673)
+rotation = 3.1415927
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Border/TopBorder"]
+position = Vector2(2, 1)
+shape = SubResource("WorldBoundaryShape2D_f5v21")
