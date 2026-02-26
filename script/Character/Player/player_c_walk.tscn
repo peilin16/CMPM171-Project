@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cw7dfff2s33q8"]
+[gd_scene format=3 uid="uid://cw7dfff2s33q8"]
 
 [ext_resource type="Texture2D" uid="uid://crddyy73r881q" path="res://assets/character/Player/Dash_Gun.png" id="1_k38sc"]
 [ext_resource type="Texture2D" uid="uid://dxhbqcn6lra3y" path="res://assets/character/Player/walk_Gun.png" id="2_60ahc"]

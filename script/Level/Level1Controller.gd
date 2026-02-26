@@ -5,13 +5,15 @@ class_name Level1_controller
 func _ready() -> void:
 	level = Level1.new();	
 	pause_menu.visible =false;
-	shop_menu.visible = false;
-	start_menu.visible = true;
+	
+	#start_menu.visible = true;
 	#get_tree().paused = true;
 	
 	GameManager.level_manager.setup(self);
 	
 	super._ready();
+	await ToolBar.globalDelayCall.delay(0.3)
+	shop_menu.visible = false;
 	await get_tree().process_frame
 	SoundManager.command({
 		"sound":"bgm",
