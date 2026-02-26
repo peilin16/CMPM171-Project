@@ -19,7 +19,7 @@ var _elapsed:float = 0 ;
 var is_finish:bool = false;
 var current_texture_code:int = 0
 var is_random:bool = false;
-var spawn_points:Dictionary;
+var spawn_points:Cyclic_list = Cyclic_list.new();
 var is_point_spawn:bool = false;
 #func enemy_spawn_wave_configure(name:String, _position:Vector2, _behavior_code:String,  count:int = 1, interval:float = 0, _override:Enemy = null)-> void:
 	#enemy_name = name;
@@ -36,7 +36,7 @@ func start(sub: Sub_director) -> void:
 		is_random =false
 		random_generator.set_seed_index(random_seed);
 		random_generator.setting(texture_type_range_min,texture_type_range_max);
-	spawn_points = sub.spawn_director.spawn_points;
+	spawn_points.setup(sub.spawn_director.spawn_points.values())
 	if positions.get_value(0, false) is int:
 		is_point_spawn = true;
 	else:
@@ -54,7 +54,7 @@ func update(sub: Sub_director, delta: float) -> void:
 		var pos:Vector2 = Vector2.ZERO;
 		if is_point_spawn:
 			var name:int = positions.get_value();
-			pos = spawn_points[name].global_position;
+			pos = spawn_points.get_value_by_index(name).global_position;
 		else:
 			pos = positions.get_value();
 		sub.spawn_director.spawn_enemy(enemy_name, pos ,behavior_code,current_texture_code ,override);

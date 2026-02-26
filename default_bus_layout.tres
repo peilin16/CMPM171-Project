@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" format=3 uid="uid://btl302fqnx18h"]
+[gd_resource type="AudioBusLayout" load_steps=6 format=3 uid="uid://btl302fqnx18h"]
 
 [sub_resource type="AudioEffectEQ21" id="AudioEffectEQ21_j3pel"]
 resource_name = "EQ21"

@@ -8,7 +8,8 @@ var available_bullets: Array = []
 var active_bullets: Array = []
 
 
-
+func _ready() -> void:
+	pass
 func get_pool_name() -> String:
 	return pool_name   # Unique Pool Name
 
@@ -17,6 +18,8 @@ func get_pool_name() -> String:
 func preload_bullets(count: int) -> void:
 	for i in range(count):
 		var b = _create_bullet()
+		if b == null:
+			return;
 		_deactivate_bullet(b)
 		available_bullets.append(b)
 

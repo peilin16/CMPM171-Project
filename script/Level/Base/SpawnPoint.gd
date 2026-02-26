@@ -5,3 +5,4 @@ class_name Spawn_point;
 
 func set_up_id(d:int)->void:
 	id = d;
+	

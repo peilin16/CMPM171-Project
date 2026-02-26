@@ -11,9 +11,14 @@ func _init(initial_items: Array = []):
 func setup(i:Array)->void:
 	items = i;
 
-
-func get_value(index:int = -1, is_move:bool = true):
+func get_value_by_index(index:int = -1):
+	if index < 0 :
+		return null;
+	while index >= items.size():
+		index -= items.size()
 	
+	return items[index];
+func get_value(index:int = -1, is_move:bool = true):
 	if items.is_empty():
 		return null
 	var value

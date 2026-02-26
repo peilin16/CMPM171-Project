@@ -1,7 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://bfwcdh78eqhc0"]
+[gd_scene load_steps=14 format=3 uid="uid://bfwcdh78eqhc0"]
 
 [ext_resource type="Script" uid="uid://8mfw6sc2fmo6" path="res://script/Bullet/RoundBullet/MediumRoundBulletController.gd" id="1_2rsdx"]
-[ext_resource type="Shader" uid="uid://csge0h8sy48lv" path="res://shader/MediumRoundBullet.gdshader" id="2_6s3kd"]
 [ext_resource type="Script" uid="uid://c2wnvavvwt3f1" path="res://script/Other/Tool/BulletTextureController.gd" id="3_btjht"]
 [ext_resource type="Texture2D" uid="uid://dhwx0du1y4qxi" path="res://assets/bullet/RoundBullet/Blue/Bullet_1_2.png" id="5_jlwld"]
 [ext_resource type="Script" uid="uid://cr0h73xvntvj0" path="res://script/Other/Tool/SubsystemHub.gd" id="6_f54a7"]
@@ -13,14 +12,6 @@
 [ext_resource type="Script" uid="uid://by12krurtjnq5" path="res://script/Action/Base/TaskRunner.gd" id="10_ywnlv"]
 [ext_resource type="Script" uid="uid://c6e2v8pq72rv8" path="res://script/VFX/VFXParser.gd" id="12_iv77o"]
 [ext_resource type="Script" uid="uid://b566wwblvpd6x" path="res://script/VFX/VFXSpawner.gd" id="13_8hha0"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jlwld"]
-shader = ExtResource("2_6s3kd")
-shader_parameter/dissolve = 0.0
-shader_parameter/edge_width = 0.08
-shader_parameter/edge_color = Color(0.5, 0.9, 1, 1)
-shader_parameter/noise_strength = 0.08
-shader_parameter/noise_scale = 24.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_djc4k"]
 
@@ -35,7 +26,6 @@ metadata/_edit_horizontal_guides_ = [-203.0]
 [node name="BulletSprite" type="Sprite2D" parent="."]
 light_mask = 8
 visibility_layer = 8
-material = SubResource("ShaderMaterial_jlwld")
 position = Vector2(0, 3.2311743e-27)
 scale = Vector2(1.4375, 1.53125)
 texture = ExtResource("5_jlwld")
