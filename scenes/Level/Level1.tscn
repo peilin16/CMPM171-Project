@@ -16,9 +16,26 @@
 [ext_resource type="Script" uid="uid://d1plw2hk7smfo" path="res://script/Level/Level1WaveDirector.gd" id="13_mf1cp"]
 [ext_resource type="Script" uid="uid://yd3lu0oib4w3" path="res://script/Level/Base/SpawnDirector.gd" id="14_67qcy"]
 [ext_resource type="Script" uid="uid://c4isnf8bgipw3" path="res://script/Level/Base/SpawnPoint.gd" id="16_u85d8"]
+<<<<<<< Updated upstream
 [ext_resource type="Script" uid="uid://c3s17tc73vbrt" path="res://script/Level/Base/WidgetSpawner.gd" id="17_ti1q0"]
 [ext_resource type="PackedScene" uid="uid://b68pmqxc8g3ms" path="res://scenes/UI/ShopMenu.tscn" id="18_p27p8"]
 [ext_resource type="PackedScene" uid="uid://c3cnfks53qo0f" path="res://scenes/UI/StartMenu.tscn" id="19_fwmiw"]
+=======
+[ext_resource type="Texture2D" uid="uid://dkckikund85b" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_5C.png" id="17_8svs3"]
+[ext_resource type="Script" uid="uid://bnqjtyqh6byuh" path="res://script/Level/Base/WidgetSpawner.gd" id="17_ti1q0"]
+[ext_resource type="Texture2D" uid="uid://b0pdymppgldu7" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_5D.png" id="18_gnnbo"]
+[ext_resource type="Texture2D" uid="uid://bdqffp2lvnf18" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_6A.png" id="19_m430h"]
+[ext_resource type="Texture2D" uid="uid://dfgpenfvfltla" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_0_C.png" id="20_lb7yv"]
+[ext_resource type="Texture2D" uid="uid://ddpu8841dnak0" path="res://assets/Map/vectoraith_tileset_terrains_temperate_autotile_rpgmaker.png" id="21_ib63i"]
+[ext_resource type="Texture2D" uid="uid://dxbjmixl1x5y8" path="res://assets/Map/vectoraith_tileset_walls_chinese_medieval_autotile_rpgmaker.png" id="22_t4i2a"]
+[ext_resource type="Texture2D" uid="uid://b3hdnlvwh0bm5" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_1A.png" id="23_88b0h"]
+[ext_resource type="Texture2D" uid="uid://dykjb7cg3va76" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_1B.png" id="24_b6vod"]
+[ext_resource type="Texture2D" uid="uid://ck25cmo5pg4nj" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_1C.png" id="25_pgp6g"]
+[ext_resource type="Texture2D" uid="uid://by420k64e2thk" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_3A.png" id="26_2043i"]
+[ext_resource type="Texture2D" uid="uid://bac0d0goqcy3h" path="res://assets/Map/Gemini_Generated_Image_c0irphc0irphc0ir.png" id="33_6laxy"]
+[ext_resource type="PackedScene" uid="uid://b68pmqxc8g3ms" path="res://scenes/UI/ShopMenu.tscn" id="34_5r1um"]
+[ext_resource type="PackedScene" uid="uid://c3cnfks53qo0f" path="res://scenes/UI/StartMenu.tscn" id="35_f5v21"]
+>>>>>>> Stashed changes
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p27p8"]
 texture = ExtResource("3_6ch66")

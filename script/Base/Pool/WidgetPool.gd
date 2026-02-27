@@ -73,7 +73,7 @@ func _deactivate_item(new_scene: Node) -> void:
 	
 	new_scene.global_position  =  Vector2(-9999, -9999) # 
 	
-	new_scene.position = Vector2(-9999, -9999);	
+	#new_scene.position = Vector2(-9999, -9999);	
 		
 # ---------- recycle enemy ----------
 func _deactivate_all() -> void:
@@ -85,11 +85,14 @@ func _deactivate_all() -> void:
 
 # ---------- free all scene ----------
 func clear() -> void:
+	
 	for b in active_items:
-		ToolBar.Game_Id_generator.recycle_id(b.controller_id);
-		b.queue_free()
+		if b:
+			#ToolBar.Game_Id_generator.recycle_id(b.controller_id);
+			b.queue_free()
 	for b in available_items:
-		ToolBar.Game_Id_generator.recycle_id(b.controller_id);
-		b.queue_free()
+		if b:
+			#ToolBar.Game_Id_generator.recycle_id(b.controller_id);
+			b.queue_free()
 	active_items.clear()
 	available_items.clear()

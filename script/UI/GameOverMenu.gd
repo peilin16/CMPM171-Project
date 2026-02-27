@@ -19,8 +19,13 @@ func set_stats(score: int, waves: int) -> void:
 	wave_label.text = "Waves Survived: %d" % waves
 
 func _on_restart_pressed() -> void:
+<<<<<<< Updated upstream
 	get_tree().paused = false
 	get_tree().reload_current_scene()
+=======
+	get_tree().paused = false 
+	get_tree().change_scene_to_file(START_MENU_PATH)
+>>>>>>> Stashed changes
 
 func _on_quit_pressed() -> void:
 	get_tree().paused = false
