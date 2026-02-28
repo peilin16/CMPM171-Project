@@ -2,7 +2,7 @@ extends Character
 #Player.gd
 class_name Player
 #speed
-@export  var player_velocity :float= 320.0;
+@export  var player_velocity :float= 200.0;
 #@export var rumia_slow_velocity:float = 80;
 #@export  var rumia_accleration :float= 400.0;
 
