@@ -30,6 +30,10 @@ ToolBar="*res://scenes/Base/toolbar.tscn"
 PoolManager="*res://scenes/Base/PoolManager.tscn"
 SoundManager="*res://scenes/Base/SoundManager.tscn"
 
+[display]
+
+window/stretch/mode="viewport"
+
 [editor]
 
 movie_writer/movie_file="C:/Users/haoji/Desktop/class/CMPM171/CMPM171-Project/record.avi"
