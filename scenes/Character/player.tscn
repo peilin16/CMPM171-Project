@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://kks7ir0kgg1a"]
+[gd_scene load_steps=45 format=3 uid="uid://kks7ir0kgg1a"]
 
 [ext_resource type="Script" uid="uid://csieovs421mxl" path="res://script/Character/Player/PlayerController.gd" id="1_beklg"]
 [ext_resource type="Script" uid="uid://bj7f4p0ml38qw" path="res://script/State/StateHub.gd" id="2_4mqus"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://doj6f5trje884" path="res://script/Character/Player/PlayerUI.gd" id="13_g7g3w"]
 [ext_resource type="Texture2D" uid="uid://dujkpikywewtf" path="res://assets/character/Player/0b3e924a-75dc-4011-b0a2-3ba4416bf4b2-sheet.png" id="13_pwi7n"]
 [ext_resource type="Texture2D" uid="uid://c6i23ml3me37h" path="res://assets/UI/Untitled 04-04-2025 04-50-10.png" id="14_hpedc"]
+[ext_resource type="PackedScene" uid="uid://d1y7ojjnsuu0r" path="res://scenes/UI/MahjongInventory.tscn" id="17_pwi7n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8fgnd"]
 size = Vector2(13, 32)
@@ -321,6 +322,12 @@ collision_mask = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_g7g3w")
+
+[node name="MahjongInventory" parent="." instance=ExtResource("17_pwi7n")]
+offset_left = 1.0
+offset_top = 79.0
+offset_right = 1.0
+offset_bottom = 159.0
 
 [connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_area_entered"]
 [connection signal="body_entered" from="HurtBox" to="HurtBox" method="_on_body_entered"]

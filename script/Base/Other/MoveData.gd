@@ -7,7 +7,7 @@ enum Y { TOP, NONE, DOWN }
 @export var _current_direction_deg: float = 0.0
 @export var _current_math_deg: float = 0.0
 @export var _current_speed: float = 0.0
-
+@export var _current_rad:float = 0.0;
 @export var moved_distance: float = 0.0
 @export var moved_time: float = 0.0
 
@@ -34,8 +34,9 @@ func print_data()->void:
 	print("_current_math_deg",_current_math_deg);
 	print("moveY",moveY);
 	print("moveX",moveX);
-	print("_current_direction_deg",_current_direction_deg);
+	print("_current_godot_deg",_current_direction_deg);
 	print("_last_position",_last_position);
+
 func reset(pos: Vector2) -> void:
 	_last_position = pos
 	_has_last = true
@@ -47,7 +48,8 @@ func reset(pos: Vector2) -> void:
 	moveX = X.NONE
 	moveY = Y.NONE
 
-
+func get_rad()->float:
+	return _current_rad;
 func record_motion(curr_pos: Vector2, delta: float) -> void:
 	if delta <= 0.0:
 		return
@@ -65,6 +67,7 @@ func record_motion(curr_pos: Vector2, delta: float) -> void:
 
 	# direction
 	if dist > 0.0001:
+		_current_rad = offset.angle();
 		_current_direction_deg = rad_to_deg(offset.angle())
 		_current_math_deg = fposmod(_current_direction_deg, 360.0)
 
