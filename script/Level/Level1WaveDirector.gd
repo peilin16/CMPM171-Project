@@ -22,9 +22,16 @@ func config_waves() -> void:
 		{
 			"mode":"clear",
 		},
-		
+		{
+			"mode":"timer",
+			"delay":2,
+		},
 		{
 			"mode":"shop"
+		},
+		{
+			"mode":"timer",
+			"delay":2,
 		},
 		{
 			"mode":"enemy_spawn",
@@ -79,6 +86,13 @@ func config_waves() -> void:
 			"count":1,
 			"behavior":"---",
 			"positions":[3],
+		},
+		{
+			"mode":"clear",
+		},
+		{
+			"mode":"timer",
+			"delay":2,
 		},
 		{
 			"mode":"shop"
