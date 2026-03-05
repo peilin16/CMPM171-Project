@@ -18,6 +18,12 @@ signal enemy_deactivated(enemy);
 #@export var config: EnemyConfiguration
 var stats: Dictionary = {}
 
+@export var horde_enemy_collision_layer: int = 2
+@export var horde_collision_player_range: float = 420.0
+@export var horde_separation_player_range: float = 260.0
+@export var horde_separation_radius: float = 42.0
+@export var horde_separation_strength: float = 0.28
+
 @export var death_gravity: float = 100.0       # how fast enemy falls when dying
 @export var death_delay: float = 1.0          # how long it can still be hit after hp <= 0
 
@@ -68,6 +74,7 @@ func _physics_process(delta: float) -> void:
 	if _character.hp <= 0 :
 		death()
 		return;
+	_update_horde_collision_mode()
 		
 	if _ai_brain_hub and _ai_brain_hub.root_state:
 		_ai_brain_hub.root_state.update(self, _ai_brain_hub, _ai_brain_hub.anim_player, delta)
@@ -153,3 +160,54 @@ func _set_collision_shapes_disabled(disabled: bool) -> void:
 	for child in get_children():
 		if child is CollisionShape2D:
 			child.set_deferred("disabled", disabled)
+
+func _get_player_distance() -> float:
+	if not GameManager.player_manager or GameManager.player_manager.player == null:
+		return INF
+	var target: Node2D = GameManager.player_manager.player
+	return global_position.distance_to(target.global_position)
+
+func _update_horde_collision_mode() -> void:
+	var dist := _get_player_distance()
+	var should_collide_enemy := dist <= horde_collision_player_range
+	set_collision_mask_value(horde_enemy_collision_layer, should_collide_enemy)
+
+func apply_horde_separation(desired_velocity: Vector2) -> Vector2:
+	if desired_velocity.length() <= 0.001:
+		return desired_velocity
+	if _get_player_distance() > horde_separation_player_range:
+		return desired_velocity
+	if not GameManager.enemy_manager:
+		return desired_velocity
+
+	var active: Dictionary = GameManager.enemy_manager.get_all_active_enemies()
+	if active.is_empty():
+		return desired_velocity
+
+	var push := Vector2.ZERO
+	var count := 0
+	for e in active.values():
+		if e == null or not is_instance_valid(e):
+			continue
+		if e == self:
+			continue
+		if e is not Enemy_controller:
+			continue
+		var other := e as Enemy_controller
+		if other.is_death:
+			continue
+		var d := global_position.distance_to(other.global_position)
+		if d <= 0.001 or d >= horde_separation_radius:
+			continue
+		var w := 1.0 - (d / horde_separation_radius)
+		push += (global_position - other.global_position).normalized() * w
+		count += 1
+
+	if count == 0:
+		return desired_velocity
+
+	push /= float(count)
+	var speed := desired_velocity.length()
+	var base_dir := desired_velocity.normalized()
+	var blended := (base_dir + push * horde_separation_strength).normalized()
+	return blended * speed

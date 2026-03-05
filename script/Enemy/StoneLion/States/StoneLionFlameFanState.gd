@@ -21,6 +21,7 @@ func enter(controller, hub: State_hub, anim: Animation_player) -> void:
 	if c == null:
 		return
 
+	c.set_visual_state("shoot")
 	c.velocity = Vector2.ZERO
 	c.request_flame_fan()
 	_active = true
@@ -34,12 +35,20 @@ func update(controller, hub: State_hub, anim: Animation_player, delta: float) ->
 
 	_timeout -= delta
 	if c.scheduler and c.scheduler.is_finish():
-		_active = false
+		_finish_flame(c)
 	if _timeout <= 0.0:
-		_active = false
+		_finish_flame(c)
+
+func _finish_flame(c: StoneLionController) -> void:
+	if not _active:
+		return
+	_active = false
+	c.set_visual_state("idle")
+	c.recover_timer = float(c.stats.get("flame_recover", 0.8))
+	c.flame_cooldown = float(c.stats.get("flame_cooldown", 3.8))
 
 func exit(controller, hub: State_hub, anim: Animation_player) -> void:
 	var c = get_stone_lion_controller(controller)
 	if c:
-		c.recover_timer = float(c.stats.get("flame_recover", 0.8))
-		c.flame_cooldown = float(c.stats.get("flame_cooldown", 3.8))
+		if _active:
+			_finish_flame(c)

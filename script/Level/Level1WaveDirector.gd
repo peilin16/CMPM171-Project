@@ -13,10 +13,10 @@ func config_waves() -> void:
 		{
 			"mode":"enemy_spawn",
 			"type":"group",
-			"name":"Grunt",
-			"count":12,
+			"name":"StoneLionBoss",
+			"count":1,
 			"behavior":"---",
-			"positions":[0,1,2,3,4],
+			"positions":[3],
 					
 		},
 		{

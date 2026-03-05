@@ -37,8 +37,9 @@ func _apply_base(d: Dictionary) -> void:
 		_built_request.scale_max= float(d.get("scale_max",  d.get("max",  1.0)))
 
 	_built_request.lifetime =  float(d.get("life", 0.15))
+	_built_request.speed_mul = float(d.get("speed", d.get("speed_mul", 1.0)))
 	_built_request.is_front = bool(d.get("front", true));
-	var raw_rotation = d.get("rotate", d.get("rad", d.get("rotate_rad", 0.0)))
+	var raw_rotation: Variant = d.get("rotate", d.get("rad", d.get("rotate_rad", 0.0)))
 	if raw_rotation is Vector2:
 		_built_request.rotation_rad = raw_rotation.angle()
 	else:
@@ -60,7 +61,7 @@ func  _build_shoot_request(d: Dictionary) -> void:
 	spawner.spawn(_built_request);
 
 func execute(d: Dictionary) :
-	var mode := str(d.get("mode", "vfx"))
+	var mode: String = str(d.get("mode", "vfx"))
 	match  mode:
 		"vfx","simple":
 			_build_simple_request(d);
