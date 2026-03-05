@@ -13,6 +13,7 @@ class_name VFX_request
 @export var scale_min: float = 1;
 @export var scale_max: float = 1;
 @export var lifetime: float = 0.5
+@export var speed_mul: float = 1.0
 
 # Optional rotation (radians)
 @export var rotation_rad: float = 0.0

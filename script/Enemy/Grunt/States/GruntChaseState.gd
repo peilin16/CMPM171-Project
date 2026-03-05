@@ -15,6 +15,8 @@ func update(controller, hub: State_hub, anim: Animation_player, delta: float) ->
 	# Avoidance
 	if stats.get("avoidance_enabled", false):
 		desired_velocity = _apply_avoidance(grunt_ctrl, desired_velocity, stats)
+	if grunt_ctrl != null:
+		desired_velocity = grunt_ctrl.apply_horde_separation(desired_velocity)
 		
 	controller.velocity = desired_velocity
 	controller.move_and_slide()

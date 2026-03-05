@@ -12,7 +12,12 @@ var _finish_mode: bool = false
 
 func _ready() -> void:
 	super._ready()
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	bus = "BGM"
+	# BGM should be non-spatial (avoid volume dropping when listener/camera moves away)
+	attenuation = 0.0
+	max_distance = 1000000.0
+	panning_strength = 0.0
 
 func apply_request(req: BGM_request) -> void:
 	# base params
@@ -60,11 +65,17 @@ func _physics_process(delta: float) -> void:
 	if not playing:
 		return
 
-	var t := get_playback_position()
+	var t: float = get_playback_position()
 
 	# loop segment
-	if loop_enabled and loop_end_sec > loop_start_sec:
-		if t >= loop_end_sec:
+	if loop_enabled:
+		var effective_end: float = loop_end_sec
+		if stream != null:
+			var stream_len: float = max(float(stream.get_length()), 0.0)
+			if stream_len > 0.0:
+				if effective_end <= loop_start_sec or effective_end > stream_len:
+					effective_end = max(stream_len - 0.02, loop_start_sec + 0.01)
+		if effective_end > loop_start_sec and t >= effective_end:
 			seek(loop_start_sec)
 
 	# stop at time (cut segment)
