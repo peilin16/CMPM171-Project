@@ -73,6 +73,16 @@ func spawn(cfg: VFX_request) -> VFX_instance:
 			inst.get_parent().remove_child(inst)
 		target_parent.add_child(inst)
 
+	# Keep z relative to chosen parent container.
+	# This prevents "back" effects from dropping behind the map while still rendering behind characters.
+	inst.z_as_relative = true
+	if cfg.attach_to_owner and _owner_controller is CanvasItem:
+		# when attached to owner, place just behind/in front of owner
+		inst.z_index = (1 if cfg.is_front else -1)
+	else:
+		# when using global VFX containers, container z-order already separates front/back
+		inst.z_index = 0
+
 	# Apply transform
 	var pos := cfg.spawn_position
 	#if not cfg.use_global_position:
@@ -99,6 +109,7 @@ func spawn(cfg: VFX_request) -> VFX_instance:
 	#inst.particles.process_material.scale_min = cfg.scale_min
 	#inst.particles.process_material.scale_max = cfg.scale_max
 	inst.set_up_scale(cfg.scale_min, cfg.scale_max);
+	inst.set_up_speed(cfg.speed_mul)
 	if cfg.amount > 0:
 		inst.set_up_amount(cfg.amount);
 

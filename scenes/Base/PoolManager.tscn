@@ -1,14 +1,16 @@
-[gd_scene load_steps=31 format=3 uid="uid://r057xmkcna5b"]
+[gd_scene load_steps=33 format=3 uid="uid://r057xmkcna5b"]
 
 [ext_resource type="Script" uid="uid://cjjxviid7c87j" path="res://script/Base/Pool/PoolManager.gd" id="1_3ulbt"]
 [ext_resource type="Script" uid="uid://b8crcgnfawqk4" path="res://script/Base/Pool/BulletPoolManager.gd" id="1_4hjfb"]
 [ext_resource type="Script" uid="uid://whrqv3ln4v1r" path="res://script/Bullet/RoundBullet/MediumRoundBulletPool.gd" id="2_3ulbt"]
 [ext_resource type="PackedScene" uid="uid://bfwcdh78eqhc0" path="res://scenes/Bullet/MediumRoundBullet.tscn" id="3_iv2jh"]
 [ext_resource type="Script" uid="uid://dsxf0cioy76ts" path="res://script/Base/Pool/EnemyPoolManager.gd" id="4_7qdiy"]
+[ext_resource type="Script" uid="uid://cttpu7e45nckm" path="res://script/Base/Pool/MahjongBulletPool.gd" id="5_g1v3t"]
 [ext_resource type="Script" uid="uid://08uilskqe7ey" path="res://script/Enemy/Grunt/GruntPool.gd" id="5_grunt_pool"]
 [ext_resource type="Script" uid="uid://dsktjaut7i71b" path="res://script/Enemy/GruntPlus/GruntPlusPool.gd" id="6_grunt_plus_pool"]
 [ext_resource type="PackedScene" uid="uid://c3oae4xoha0jr" path="res://scenes/Character/GruntPlus.tscn" id="6_grunt_plus_scene"]
 [ext_resource type="PackedScene" uid="uid://cjvsrt1bnutfd" path="res://scenes/Character/Grunt.tscn" id="6_grunt_scene"]
+[ext_resource type="PackedScene" uid="uid://wi7eu1v2xvi3" path="res://scenes/Bullet/mahjongBullet.tscn" id="6_hpist"]
 [ext_resource type="Script" uid="uid://crqy0emlds8ua" path="res://script/Enemy/StoneLion/StoneLionPool.gd" id="6_stone_lion_pool"]
 [ext_resource type="PackedScene" uid="uid://didjiww2dncla" path="res://scenes/Character/StoneLionBoss.tscn" id="6_stone_lion_scene"]
 [ext_resource type="Script" uid="uid://bgh2ba5puwfbw" path="res://script/Base/Pool/VFXPoolManager.gd" id="7_cyrnx"]
@@ -40,6 +42,10 @@ script = ExtResource("1_4hjfb")
 [node name="MediumRoundBulletPool" type="Node" parent="BulletPoolManager"]
 script = ExtResource("2_3ulbt")
 bullet_scene = ExtResource("3_iv2jh")
+
+[node name="MahjongBullet" type="Node" parent="BulletPoolManager"]
+script = ExtResource("5_g1v3t")
+bullet_scene = ExtResource("6_hpist")
 
 [node name="EnemyPoolManager" type="Node" parent="."]
 script = ExtResource("4_7qdiy")

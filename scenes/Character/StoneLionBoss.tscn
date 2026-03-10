@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://didjiww2dncla"]
+[gd_scene load_steps=16 format=3 uid="uid://didjiww2dncla"]
 
 [ext_resource type="Script" uid="uid://2n73ooyroojb" path="res://script/Enemy/StoneLion/StoneLionController.gd" id="1_stone_lion_ctrl"]
 [ext_resource type="Script" uid="uid://bj7f4p0ml38qw" path="res://script/State/StateHub.gd" id="2_state_hub"]
@@ -11,9 +11,30 @@
 [ext_resource type="Script" uid="uid://bfrklaksr3n7b" path="res://script/Action/Rotate/RotateRunner.gd" id="9_rotate_runner"]
 [ext_resource type="Script" uid="uid://c6e2v8pq72rv8" path="res://script/VFX/VFXParser.gd" id="10_vfx_parser"]
 [ext_resource type="Script" uid="uid://b566wwblvpd6x" path="res://script/VFX/VFXSpawner.gd" id="11_vfx_spawner"]
+[ext_resource type="Texture2D" path="res://assets/character/Enemy/StoneLion/bossidle.png" id="12_boss_idle_tex"]
+[ext_resource type="Texture2D" path="res://assets/character/Enemy/StoneLion/BossShoot.png" id="13_boss_shoot_tex"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 26.0
+
+[sub_resource type="SpriteFrames" id="2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_boss_idle_tex")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_boss_shoot_tex")
+}],
+"loop": true,
+"name": &"shoot",
+"speed": 5.0
+}]
 
 [node name="StoneLionBoss" type="CharacterBody2D"]
 collision_layer = 8
@@ -54,8 +75,5 @@ script = ExtResource("11_vfx_spawner")
 shape = SubResource("1")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-modulate = Color(0.6, 0.6, 0.6, 1)
-
-[node name="DebugBody" type="Polygon2D" parent="."]
-color = Color(0.45, 0.45, 0.45, 1)
-polygon = PackedVector2Array(-26, -18, 26, -18, 30, 18, -30, 18)
+sprite_frames = SubResource("2")
+animation = &"idle"

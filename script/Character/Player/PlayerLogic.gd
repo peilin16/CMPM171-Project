@@ -105,7 +105,7 @@ func get_shoot_script(target: Vector2) -> Array:
 			return [{
 				"action": "shoot",
 				"type": "single",
-				"pool": "MEDIUM_ROUND_BULLET",
+				"pool": "MAHJONG_BULLET",
 				"aim": "TARGET",
 				"target": target,
 				"speed": 350,
@@ -121,7 +121,7 @@ func get_shoot_script(target: Vector2) -> Array:
 				"type": "multi",
 				"num": 5,
 				"interval": 0.08,
-				"pool": "MEDIUM_ROUND_BULLET",
+				"pool": "MAHJONG_BULLET",
 				"aim": "TARGET",
 				"target": target,
 				"speed": 240,
@@ -137,7 +137,7 @@ func get_shoot_script(target: Vector2) -> Array:
 				"count": _fan_count,     # ✅ 筒子动态控制
 				"time": 1,
 				"interval": 0.0,
-				"pool": "MEDIUM_ROUND_BULLET",
+				"pool": "MAHJONG_BULLET",
 				"aim": "TARGET",
 				"target": target,
 				"speed": 200,
@@ -156,7 +156,7 @@ func get_shoot_script(target: Vector2) -> Array:
 				"overlap": true,
 				"fan_seed": -1,      # ✅ 每次随机
 				"base_one": false,   # ✅ 更随机
-				"pool": "MEDIUM_ROUND_BULLET",
+				"pool": "MAHJONG_BULLET",
 				"aim": "TARGET",
 				"target": target,
 				"speed": 220,

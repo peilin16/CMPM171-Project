@@ -1,0 +1,58 @@
+[gd_scene load_steps=11 format=3 uid="uid://wi7eu1v2xvi3"]
+
+[ext_resource type="Texture2D" uid="uid://c6xgwtymlyq8j" path="res://assets/mahjung_tiles/three_suites/yitong.png" id="1_j1mlo"]
+[ext_resource type="Script" uid="uid://bxwhbiqifa4ks" path="res://script/Bullet/MahjongBullet/MahjongBulletController.gd" id="1_l3sbu"]
+[ext_resource type="Script" uid="uid://c2wnvavvwt3f1" path="res://script/Other/Tool/BulletTextureController.gd" id="3_u0lpv"]
+[ext_resource type="Script" uid="uid://b8na7bb7sjrx3" path="res://script/Other/Scheduler/Scheduler.gd" id="4_5ediu"]
+[ext_resource type="Script" uid="uid://by12krurtjnq5" path="res://script/Action/Base/TaskRunner.gd" id="5_78raj"]
+[ext_resource type="Script" uid="uid://cr0h73xvntvj0" path="res://script/Other/Tool/SubsystemHub.gd" id="6_0xbgw"]
+[ext_resource type="Script" uid="uid://df6qec5acffqb" path="res://script/Action/Move/MoveRunner.gd" id="7_jk34u"]
+[ext_resource type="Script" uid="uid://c6e2v8pq72rv8" path="res://script/VFX/VFXParser.gd" id="8_8mb5y"]
+[ext_resource type="Script" uid="uid://b566wwblvpd6x" path="res://script/VFX/VFXSpawner.gd" id="9_cndha"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xbgw"]
+size = Vector2(22.50003, 29.230724)
+
+[node name="MahjongBullet" type="Area2D"]
+script = ExtResource("1_l3sbu")
+
+[node name="BulletSprite" type="Sprite2D" parent="."]
+position = Vector2(-1.9073486e-06, -1.9073486e-06)
+rotation = 1.5675154
+scale = Vector2(0.020000033, 0.019930068)
+texture = ExtResource("1_j1mlo")
+script = ExtResource("3_u0lpv")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rotation = 1.5684011
+scale = Vector2(1.75, 1.5)
+rect = Rect2(-4.571429, -6.6666665, 9.142857, 12.666667)
+
+[node name="Scheduler" type="Node2D" parent="."]
+script = ExtResource("4_5ediu")
+metadata/_custom_type_script = "uid://b8na7bb7sjrx3"
+
+[node name="TaskRunner" type="Node2D" parent="Scheduler"]
+script = ExtResource("5_78raj")
+metadata/_custom_type_script = "uid://by12krurtjnq5"
+
+[node name="SubActionHub" type="Node2D" parent="Scheduler/TaskRunner"]
+script = ExtResource("6_0xbgw")
+metadata/_custom_type_script = "uid://cr0h73xvntvj0"
+
+[node name="MoveRunner" type="Node2D" parent="Scheduler/TaskRunner/SubActionHub"]
+script = ExtResource("7_jk34u")
+metadata/_custom_type_script = "uid://df6qec5acffqb"
+
+[node name="VFXParser" type="Node2D" parent="."]
+script = ExtResource("8_8mb5y")
+metadata/_custom_type_script = "uid://c6e2v8pq72rv8"
+
+[node name="VFXSpawner" type="Node2D" parent="VFXParser"]
+script = ExtResource("9_cndha")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2.3841858e-07)
+rotation = 1.5676372
+scale = Vector2(0.4799989, 0.52000123)
+shape = SubResource("RectangleShape2D_0xbgw")

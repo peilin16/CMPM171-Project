@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://kks7ir0kgg1a"]
+[gd_scene load_steps=45 format=3 uid="uid://kks7ir0kgg1a"]
 
 [ext_resource type="Script" uid="uid://csieovs421mxl" path="res://script/Character/Player/PlayerController.gd" id="1_beklg"]
 [ext_resource type="Script" uid="uid://bj7f4p0ml38qw" path="res://script/State/StateHub.gd" id="2_4mqus"]
@@ -12,10 +12,11 @@
 [ext_resource type="Script" uid="uid://u1lc0lg311dn" path="res://script/Action/STG/ShootRunner.gd" id="8_mpo6r"]
 [ext_resource type="Texture2D" uid="uid://dbv01t24uelp5" path="res://assets/character/Player/standing.png" id="11_h3n2c"]
 [ext_resource type="Script" uid="uid://cdj8cw7oe3du7" path="res://script/Base/Other/Main_camera.gd" id="12_hdh7n"]
-[ext_resource type="Texture2D" uid="uid://ds1sxh7alhbtx" path="res://assets/character/Player/左/5ba1c1e4-01f9-4c68-8a78-0f99dbb82083-sheet.png" id="12_sygsy"]
-[ext_resource type="Script" uid="uid://c0qpqq4d0l2rc" path="res://script/Character/Player/PlayerUI.gd" id="13_g7g3w"]
-[ext_resource type="Texture2D" uid="uid://uvwx4w58d8un" path="res://assets/character/Player/0b3e924a-75dc-4011-b0a2-3ba4416bf4b2-sheet.png" id="13_pwi7n"]
-[ext_resource type="Texture2D" uid="uid://kmy04qvjavv6" path="res://assets/UI/Untitled 04-04-2025 04-50-10.png" id="14_hpedc"]
+[ext_resource type="Texture2D" uid="uid://fkjm0ipc4gto" path="res://assets/character/Player/左/5ba1c1e4-01f9-4c68-8a78-0f99dbb82083-sheet.png" id="12_sygsy"]
+[ext_resource type="Script" uid="uid://doj6f5trje884" path="res://script/Character/Player/PlayerUI.gd" id="13_g7g3w"]
+[ext_resource type="Texture2D" uid="uid://dujkpikywewtf" path="res://assets/character/Player/0b3e924a-75dc-4011-b0a2-3ba4416bf4b2-sheet.png" id="13_pwi7n"]
+[ext_resource type="Texture2D" uid="uid://c6i23ml3me37h" path="res://assets/UI/Untitled 04-04-2025 04-50-10.png" id="14_hpedc"]
+[ext_resource type="PackedScene" uid="uid://d1y7ojjnsuu0r" path="res://scenes/UI/MahjongInventory.tscn" id="17_pwi7n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8fgnd"]
 size = Vector2(13, 32)
@@ -219,73 +220,72 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_g7g3w"]
 radius = 70.5762
 
-[node name="Player" type="CharacterBody2D" unique_id=1150888872]
-z_index = 100
+[node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_beklg")
 base_shoot_cooldown = 0.55
 
-[node name="StateHub" type="Node2D" parent="." unique_id=829886498]
+[node name="StateHub" type="Node2D" parent="."]
 script = ExtResource("2_4mqus")
 metadata/_custom_type_script = "uid://bj7f4p0ml38qw"
 
-[node name="AnimationPlayer" type="Node2D" parent="StateHub" unique_id=91112932 node_paths=PackedStringArray("sprite")]
+[node name="AnimationPlayer" type="Node2D" parent="StateHub" node_paths=PackedStringArray("sprite")]
 script = ExtResource("3_hxpvn")
 sprite = NodePath("../../AnimatedSprite2D")
 metadata/_custom_type_script = "uid://drv02ar36c0qi"
 
-[node name="HurtBox" type="Area2D" parent="." unique_id=818286074]
+[node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 24
 script = ExtResource("3_8fgnd")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=167843885]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(1.5, 2)
 shape = SubResource("RectangleShape2D_8fgnd")
 
-[node name="Scheduler" type="Node2D" parent="." unique_id=309024050]
+[node name="Scheduler" type="Node2D" parent="."]
 script = ExtResource("3_i7wy1")
 metadata/_custom_type_script = "uid://b8na7bb7sjrx3"
 
-[node name="TaskRunner" type="Node2D" parent="Scheduler" unique_id=1202917040]
+[node name="TaskRunner" type="Node2D" parent="Scheduler"]
 script = ExtResource("6_85mch")
 metadata/_custom_type_script = "uid://by12krurtjnq5"
 
-[node name="SubActionHub" type="Node2D" parent="Scheduler/TaskRunner" unique_id=1930113628]
+[node name="SubActionHub" type="Node2D" parent="Scheduler/TaskRunner"]
 script = ExtResource("7_h3n2c")
 metadata/_custom_type_script = "uid://cr0h73xvntvj0"
 
-[node name="ShootRunner" type="Node2D" parent="Scheduler/TaskRunner/SubActionHub" unique_id=1792641767]
+[node name="ShootRunner" type="Node2D" parent="Scheduler/TaskRunner/SubActionHub"]
 script = ExtResource("8_mpo6r")
 metadata/_custom_type_script = "uid://u1lc0lg311dn"
 
-[node name="VFXParser" type="Node2D" parent="." unique_id=1015765735]
+[node name="VFXParser" type="Node2D" parent="."]
 script = ExtResource("4_i7wy1")
 metadata/_custom_type_script = "uid://c6e2v8pq72rv8"
 
-[node name="VFXSpawner" type="Node2D" parent="VFXParser" unique_id=1001457597]
+[node name="VFXSpawner" type="Node2D" parent="VFXParser"]
 script = ExtResource("4_8fgnd")
 metadata/_custom_type_script = "uid://b566wwblvpd6x"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=560459769]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1.3552527e-20, 1.9999999)
 scale = Vector2(0.08780488, 0.06559634)
 sprite_frames = SubResource("SpriteFrames_gc4mm")
 animation = &"left"
 
-[node name="BulletContainer" type="Node2D" parent="." unique_id=1522148369]
+[node name="BulletContainer" type="Node2D" parent="."]
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=305198318]
+[node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2, -9)
 zoom = Vector2(2, 2)
 script = ExtResource("12_hdh7n")
 lock_position = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1653920715]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 3
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_hdh7n")
 
-[node name="PlayerUI" type="Control" parent="." unique_id=697566506]
+[node name="PlayerUI" type="Control" parent="."]
 z_index = 800
 layout_mode = 3
 anchors_preset = 0
@@ -295,7 +295,7 @@ offset_right = -111.0
 offset_bottom = -48.0
 script = ExtResource("13_g7g3w")
 
-[node name="HealthBar" type="ProgressBar" parent="PlayerUI" unique_id=919649663]
+[node name="HealthBar" type="ProgressBar" parent="PlayerUI"]
 layout_mode = 0
 offset_left = 11.0
 offset_top = 3.0
@@ -306,22 +306,28 @@ theme_override_styles/background = SubResource("StyleBoxFlat_sygsy")
 theme_override_styles/fill = SubResource("StyleBoxFlat_pwi7n")
 value = 55.0
 
-[node name="ShootBar" type="AnimatedSprite2D" parent="PlayerUI" unique_id=1842011565]
+[node name="ShootBar" type="AnimatedSprite2D" parent="PlayerUI"]
 position = Vector2(30.999996, 41.000004)
 scale = Vector2(1.4687498, 0.90624976)
 sprite_frames = SubResource("SpriteFrames_y2idx")
 
-[node name="AnimationPlayer" type="Node2D" parent="PlayerUI" unique_id=2114831506 node_paths=PackedStringArray("sprite")]
+[node name="AnimationPlayer" type="Node2D" parent="PlayerUI" node_paths=PackedStringArray("sprite")]
 script = ExtResource("3_hxpvn")
 sprite = NodePath("../../AnimatedSprite2D")
 metadata/_custom_type_script = "uid://drv02ar36c0qi"
 
-[node name="Area2D" type="Area2D" parent="." unique_id=795692159]
+[node name="Area2D" type="Area2D" parent="."]
 collision_layer = 256
 collision_mask = 256
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=778860376]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_g7g3w")
+
+[node name="MahjongInventory" parent="." instance=ExtResource("17_pwi7n")]
+offset_left = 1.0
+offset_top = 79.0
+offset_right = 1.0
+offset_bottom = 159.0
 
 [connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_area_entered"]
 [connection signal="body_entered" from="HurtBox" to="HurtBox" method="_on_body_entered"]

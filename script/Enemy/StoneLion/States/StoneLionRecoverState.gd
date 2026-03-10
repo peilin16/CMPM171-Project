@@ -12,6 +12,7 @@ func trigger(controller) -> bool:
 func enter(controller, hub: State_hub, anim: Animation_player) -> void:
 	var c = get_stone_lion_controller(controller)
 	if c:
+		c.set_visual_state("idle")
 		c.velocity = Vector2.ZERO
 
 func update(controller, hub: State_hub, anim: Animation_player, delta: float) -> void:

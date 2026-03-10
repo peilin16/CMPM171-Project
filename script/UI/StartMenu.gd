@@ -12,6 +12,22 @@ func _ready() -> void:
 		$MenuContainer/StartButton.pressed.connect(_on_start_button_pressed)
 	if not $MenuContainer/QuitButton.pressed.is_connected(_on_quit_button_pressed):
 		$MenuContainer/QuitButton.pressed.connect(_on_quit_button_pressed)
+
+	LanguageManager.language_changed.connect(_refresh_text)
+	_refresh_text()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("toggle_language"):
+		LanguageManager.toggle_language()
+		get_viewport().set_input_as_handled()
+
+
+func _refresh_text() -> void:
+	$MenuContainer/StartButton.text = tr("menu_new_game")
+	$MenuContainer/QuitButton.text = tr("menu_quit_game")
+
+
+
 	
 func _on_start_button_pressed() -> void:
 	# 切换到游戏关卡
@@ -20,3 +36,4 @@ func _on_start_button_pressed() -> void:
 func _on_quit_button_pressed() -> void:
 	# 退出游戏
 	get_tree().quit()
+

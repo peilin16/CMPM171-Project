@@ -40,6 +40,13 @@ func register_enemy(e: Enemy_controller) -> int:
 	return id
 
 func unregister_enemy(e: Enemy_controller) -> void:
+	if e == null:
+		return
+	# also remove from active table if present
+	for active_id in _active_enemies.keys():
+		if _active_enemies[active_id] == e:
+			_active_enemies.erase(active_id)
+			break
 	# unregister enemy
 	for id in _enemies.keys():
 		if _enemies[id] == e:
@@ -61,6 +68,8 @@ func get_all_enemies() -> Dictionary:
 
 
 func register_active_enemy(id:int) -> void:
+	if not _enemies.has(id):
+		return
 	var enemy = _enemies[id]
 	if enemy == null:
 		return;
@@ -77,4 +86,24 @@ func get_active_enemy_by_id(id: int) -> Enemy_controller:
 		return _active_enemies[id]
 	return null		
 func get_all_active_enemies() -> Dictionary:
+	_cleanup_active_enemies()
 	return _active_enemies;
+
+func get_active_enemy_count() -> int:
+	_cleanup_active_enemies()
+	return _active_enemies.size()
+
+func _cleanup_active_enemies() -> void:
+	var to_remove: Array = []
+	for id in _active_enemies.keys():
+		var enemy = _active_enemies[id]
+		if enemy == null:
+			to_remove.append(id)
+			continue
+		if not is_instance_valid(enemy):
+			to_remove.append(id)
+			continue
+		if enemy.is_death:
+			to_remove.append(id)
+	for id in to_remove:
+		_active_enemies.erase(id)

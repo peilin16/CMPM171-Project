@@ -14,7 +14,7 @@ var _is_playing: bool = false
 func _ready() -> void:
 	# 自动收集所有GPUParticles2D子节点
 	_collect_particles()
-	z_index = 500
+	z_index = 0
 	if auto_play:
 		play()
 
@@ -51,6 +51,11 @@ func set_up_scale(scale_min:float, scale_max:float)->void:
 func set_up_amount(_amount:float) -> void:
 	for p in particles_array:
 		p.amount = _amount;
+
+func set_up_speed(speed_mul: float) -> void:
+	var value: float = max(speed_mul, 0.01)
+	for p in particles_array:
+		p.speed_scale = value
 		
 		
 func bind_pool(p) -> void:

@@ -46,6 +46,7 @@ func start_game()->void:
 		"volume_mul":0.4,
 		"pitch_scale":1.0
 	});
+
 func _spawn_enemy_for_test(pool_name: String, spawn_pos: Vector2) -> void:
 	var spawn_director = get_node_or_null("WaveDirector/SubDirector/SpawnDirector")
 	if spawn_director and spawn_director.has_method("spawn_enemy"):
@@ -69,3 +70,6 @@ func _spawn_enemy_for_test(pool_name: String, spawn_pos: Vector2) -> void:
 		add_child(enemy)
 	enemy.set_actor_position(spawn_pos)
 	enemy.activate("")
+
+func _exit_tree() -> void:
+	PoolManager.widget_pool_manager.clear_all();
