@@ -1,7 +1,7 @@
 extends Control
 class_name Start_menu
 # 预加载第一个关卡，方便切换
-const LEVEL_1_PATH = "res://scenes/Level/Level1.tscn"
+#const LEVEL_1_PATH = "res://scenes/Level/Level1.tscn"
 var level:Level1_controller;
 func _ready() -> void:
 	# 确保一开始鼠标是可见的（以防游戏里隐藏了鼠标）
@@ -36,4 +36,3 @@ func _on_start_button_pressed() -> void:
 func _on_quit_button_pressed() -> void:
 	# 退出游戏
 	get_tree().quit()
-
