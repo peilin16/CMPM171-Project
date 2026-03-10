@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://cjvsrt1bnutfd"]
 
-[ext_resource type="Script" path="res://script/Enemy/Grunt/GruntController.gd" id="1_grunt_ctrl"]
+[ext_resource type="Script" uid="uid://bsy1o5yg4txul" path="res://script/Enemy/Grunt/GruntController.gd" id="1_grunt_ctrl"]
 [ext_resource type="Script" uid="uid://bj7f4p0ml38qw" path="res://script/State/StateHub.gd" id="2_state_hub"]
 [ext_resource type="Script" uid="uid://drv02ar36c0qi" path="res://script/State/AnimationPlayer.gd" id="3_anim_player"]
 [ext_resource type="Script" uid="uid://b8na7bb7sjrx3" path="res://script/Other/Scheduler/Scheduler.gd" id="4_scheduler"]
@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://bfrklaksr3n7b" path="res://script/Action/Rotate/RotateRunner.gd" id="9_rotate_runner"]
 [ext_resource type="Script" uid="uid://c6e2v8pq72rv8" path="res://script/VFX/VFXParser.gd" id="10_vfx_parser"]
 [ext_resource type="Script" uid="uid://b566wwblvpd6x" path="res://script/VFX/VFXSpawner.gd" id="11_vfx_spawner"]
-[ext_resource type="Texture2D" path="res://assets/character/Enemy/Grunt/5865f1ee-71a8-4e6e-a83e-8b18af7ee0f6.png" id="12_grunt_tex"]
+[ext_resource type="Texture2D" uid="uid://bfthkajd68hfs" path="res://assets/character/Enemy/Grunt/5865f1ee-71a8-4e6e-a83e-8b18af7ee0f6.png" id="12_grunt_tex"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 17.029387
@@ -67,7 +67,7 @@ script = ExtResource("11_vfx_spawner")
 shape = SubResource("1")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.1, 0.1)
 modulate = Color(0.8, 0.9, 1, 1)
+scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("2")
 animation = &"idle"

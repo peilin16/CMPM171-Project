@@ -1,9 +1,8 @@
 extends Wave_director
-class_name Level1_wave_director
-
+class_name Level2_wave_director
 
 func _ready() -> void:
-	next_level_scenes = "res://scenes/Level/Level2.tscn";
+	next_level_scenes = "res://scenes/Level/Level3.tscn";
 
 func config_waves() -> void:
 	var config = [
@@ -15,7 +14,7 @@ func config_waves() -> void:
 			"mode":"enemy_spawn",
 			"type":"group",
 			"name":"GruntPlus",
-			"count":5,
+			"count":12,
 			"behavior":"---",
 			"positions":[0,1,2,3,4],
 					
@@ -25,14 +24,27 @@ func config_waves() -> void:
 		},
 		{
 			"mode":"timer",
-			"delay":2,
+			"delay":1,
 		},
 		{
 			"mode":"shop"
 		},
 		{
 			"mode":"timer",
-			"delay":2,
+			"delay":1.2,
+		},
+		{
+			"mode":"enemy_spawn",
+			"type":"group",
+			"name":"Grunt",
+			"count":15,
+			"behavior":"---",
+			"positions":[0,1,2,3,4],
+					
+		},
+		{
+			"mode":"timer",
+			"delay":5,
 		},
 		{
 			"mode":"enemy_spawn",
@@ -51,34 +63,13 @@ func config_waves() -> void:
 			"mode":"enemy_spawn",
 			"type":"group",
 			"name":"Grunt",
-			"count":13,
+			"count":8,
 			"behavior":"---",
 			"positions":[0,1,2,3,4],
 					
 		},
 		{
 			"mode":"clear",
-		},
-		
-		{
-			"mode":"enemy_spawn",
-			"name":"GruntPlus",
-			"count":4,
-			"behavior":"---",
-			"positions":[2,3,4],
-		},
-		{
-			"mode":"timer",
-			"delay":7,
-		},
-		{
-			"mode":"enemy_spawn",
-			"type":"group",
-			"name":"Grunt",
-			"count":13,
-			"behavior":"---",
-			"positions":[0,1,2,3,4],
-					
 		},
 		{
 			"mode":"enemy_spawn",
@@ -88,6 +79,45 @@ func config_waves() -> void:
 			"behavior":"---",
 			"positions":[3],
 		},
+		{
+			"mode":"enemy_spawn",
+			"type":"group",
+			"name":"GruntPlus",
+			"count":3,
+			"behavior":"---",
+			"positions":[0,1,2,3,4],
+					
+		},
+		{
+			"mode":"clear"
+		},
+		{
+			"mode":"shop"
+		}
+		,
+		{
+			"mode":"enemy_spawn",
+			"type":"group",
+			"name":"Grunt",
+			"count":18,
+			"behavior":"---",
+			"positions":[0,1,2,3,4],
+					
+		},
+		{
+			"mode":"timer",
+			"delay":7,
+		},
+		{
+			"mode":"enemy_spawn",
+			"type":"group",
+			"name":"GruntPlus",
+			"count":23,
+			"behavior":"---",
+			"positions":[0,1,2,3,4],
+					
+		},
+		
 		{
 			"mode":"clear",
 		},
@@ -100,9 +130,7 @@ func config_waves() -> void:
 		},
 		{
 			"mode":"timer",
-			"delay":1.1,
+			"delay":1.2,
 		}
-		
-		
 	]
-	create_wave_from_config(config)
+	create_wave_from_config(config);

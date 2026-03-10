@@ -30,13 +30,12 @@ func _ready() -> void:
 	});
 	
 func start_game()->void:
-	GameManager.player_manager._spawn_player(self,Vector2(-200,0));
-	director.start();
+	super.start_game();
 	start_menu.visible = false;
 	SoundManager.command({
 		"sound":"bgm",
 		"command":"start",
-		"name":"BGM3",
+		"name":"BGM2",
 		"fade_in":0.2,
 		"fade_out":0.7,
 		"transfer_fade_out":0.2,
@@ -70,6 +69,3 @@ func _spawn_enemy_for_test(pool_name: String, spawn_pos: Vector2) -> void:
 		add_child(enemy)
 	enemy.set_actor_position(spawn_pos)
 	enemy.activate("")
-
-func _exit_tree() -> void:
-	PoolManager.widget_pool_manager.clear_all();

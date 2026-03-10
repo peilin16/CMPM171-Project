@@ -109,10 +109,10 @@ func _deactivate_all() -> void:
 # ---------- free all scene ----------
 func clear() -> void:
 	for b in active_bullets:
-		ToolBar.Game_Id_generator.recycle_id(b.controller_id);
+		ToolBar.gameIDGenerator.recycle_id(b.controller_id);
 		b.queue_free()
 	for b in available_bullets:
-		ToolBar.Game_Id_generator.recycle_id(b.controller_id);
+		ToolBar.gameIDGenerator.recycle_id(b.controller_id);
 		b.queue_free()
 	active_bullets.clear()
 	available_bullets.clear()

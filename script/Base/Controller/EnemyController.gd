@@ -96,14 +96,16 @@ func activate(behavoir_code:String = "")->void:
 	_logic.behavoir = behavoir_code;
 	GameManager.enemy_manager.register_active_enemy(controller_id);
 	_logic.apply_behavior();
+
+
 #be spawn
 func deactivate()->void:
 	is_spawn = false;
 	hitable = false;
 	GameManager.enemy_manager.unregister_active_enemy(controller_id);
 	emit_signal("enemy_deactivated", self);
-	
-	
+
+
 func apply_hit_by_float(damage:float):
 	if not is_death:
 		if damage > 0:
