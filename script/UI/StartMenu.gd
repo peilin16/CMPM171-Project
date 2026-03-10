@@ -20,6 +20,10 @@ func _ready() -> void:
 		$MenuContainer/QuitButton.pressed.connect(_on_quit_button_pressed)
 
 	_setup_colorblind_option()
+	if not LanguageManager.language_changed.is_connected(_refresh_text):
+		LanguageManager.language_changed.connect(_refresh_text)
+	_refresh_text()
+
 
 func _setup_colorblind_option() -> void:
 	colorblind_option.clear()
@@ -34,6 +38,16 @@ func _setup_colorblind_option() -> void:
 
 	if not colorblind_option.item_selected.is_connected(_on_colorblind_selected):
 		colorblind_option.item_selected.connect(_on_colorblind_selected)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("toggle_language"):
+		LanguageManager.toggle_language()
+		get_viewport().set_input_as_handled()
+
+
+func _refresh_text() -> void:
+	$MenuContainer/StartButton.text = tr("menu_new_game")
+	$MenuContainer/QuitButton.text = tr("menu_quit_game")
 	
 func _on_start_button_pressed() -> void:
 	# 切换到游戏关卡
