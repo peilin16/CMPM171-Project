@@ -1,6 +1,10 @@
 [gd_scene load_steps=0 format=3 uid="uid://cpq3vas04r1nf"]
 
+<<<<<<< Updated upstream
 [ext_resource type="Script" uid="uid://dif206l50gyjm" path="res://script/UI/GameOverMenu.gd" id="1_swtv1"]
+=======
+[ext_resource type="Script" uid="uid://blssm8f0nofdm" path="res://script/UI/GameOverMenu.gd" id="1_swtv1"]
+>>>>>>> Stashed changes
 [ext_resource type="FontFile" uid="uid://ddyg7xlxgvfuu" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="2_ls16c"]
 
 [node name="GameOverMenu" type="Control"]
@@ -30,9 +34,24 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+<<<<<<< Updated upstream
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+=======
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.0
+offset_top = -68.0
+offset_right = 121.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+>>>>>>> Stashed changes
 
 [node name="TitleLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2

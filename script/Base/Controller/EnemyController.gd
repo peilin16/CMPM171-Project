@@ -141,7 +141,9 @@ func death() -> void:
 	
 	scheduler.cancel();
 
-
+	#add score
+	GameManager.player_manager.add_score(_character.death_score);
+	
 	## 4)  give a small downward push so it starts to fall
 	#velocity.y += 20.0
 #

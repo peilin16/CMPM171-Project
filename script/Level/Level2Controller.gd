@@ -11,6 +11,7 @@ func _ready() -> void:
 	await ToolBar.globalDelayCall.delay(0.3)
 	shop_menu.visible = false;
 	await get_tree().process_frame
+	name = "Forest";
 	SoundManager.command({
 		"sound":"bgm",
 		"command":"start",

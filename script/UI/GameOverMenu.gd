@@ -40,11 +40,11 @@ func _refresh_text() -> void:
 	quit_button.text = tr("game_over_title_screen")
 
 	score_label.text = tr("game_over_score").format({
-		"score": final_score
+		"score": GameManager.player_manager.player_score
 	})
 
 	wave_label.text = tr("game_over_waves").format({
-		"waves": survived_waves
+		"level": survived_waves
 	})
 
 # --- [API] 供外部调用的设置函数 ---
