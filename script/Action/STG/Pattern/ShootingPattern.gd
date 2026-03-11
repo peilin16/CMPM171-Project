@@ -90,10 +90,10 @@ func shoot_one(runner: Shoot_runner)->void:
 	
 func configure_bullet(configure: Shoot_configure ) ->Bullet_controller:
 	var bullet_scene:Bullet_controller = _bullets.pop_front();
-	#if bullet_scene.get_parent() != shoot_runner.container:
-		#if bullet_scene.get_parent() != null:
-			#bullet_scene.get_parent().remove_child(bullet_scene)
-	shoot_runner.container.add_child(bullet_scene)
+	if bullet_scene.get_parent() != shoot_runner.container:
+		if bullet_scene.get_parent() != null:
+			bullet_scene.get_parent().remove_child(bullet_scene)
+		shoot_runner.container.add_child(bullet_scene)
 	bullet_scene.set_actor_position(shoot_configure.origin.get_actor_position());
 	if configure.refer_bullet != null:
 		bullet_scene.bullet = configure.refer_bullet.duplicate();
