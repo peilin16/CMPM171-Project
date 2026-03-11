@@ -15,7 +15,7 @@ func config_waves() -> void:
 			"mode":"enemy_spawn",
 			"type":"group",
 			"name":"GruntPlus",
-			"count":5,
+			"count":8,
 			"behavior":"---",
 			"positions":[0,1,2,3,4],
 					
