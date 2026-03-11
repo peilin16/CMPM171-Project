@@ -35,10 +35,6 @@
 [ext_resource type="Texture2D" uid="uid://bac0d0goqcy3h" path="res://assets/Map/Gemini_Generated_Image_c0irphc0irphc0ir.png" id="33_6laxy"]
 [ext_resource type="PackedScene" uid="uid://b68pmqxc8g3ms" path="res://scenes/UI/ShopMenu.tscn" id="34_5r1um"]
 [ext_resource type="PackedScene" uid="uid://c3cnfks53qo0f" path="res://scenes/UI/StartMenu.tscn" id="35_f5v21"]
-<<<<<<< Updated upstream
-=======
-[ext_resource type="Script" uid="uid://dcspl06om83pg" path="res://script/UI/ColorBlindFilterOverlay.gd" id="36_cbf"]
->>>>>>> Stashed changes
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p27p8"]
 texture = ExtResource("3_6ch66")
