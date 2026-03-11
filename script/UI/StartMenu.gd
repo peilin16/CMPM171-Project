@@ -5,9 +5,15 @@ const LEVEL_1_PATH = "res://scenes/Level/Level1.tscn"
 var level: Level1_controller = null
 
 const COLORBLIND_MODES := ["off", "protanopia", "deuteranopia", "tritanopia"]
-const COLORBLIND_LABELS := ["Off", "Protanopia", "Deuteranopia", "Tritanopia"]
+const COLORBLIND_KEYS := [
+	"colorblind_off",
+	"colorblind_protanopia",
+	"colorblind_deuteranopia",
+	"colorblind_tritanopia"
+]
 
 @onready var colorblind_option: OptionButton = $AccessibilityContainer/ColorBlindOption
+@onready var colorblind_label: Label = $AccessibilityContainer/ColorBlindLabel
 
 func _ready() -> void:
 	# 确保一开始鼠标是可见的（以防游戏里隐藏了鼠标）
@@ -27,10 +33,10 @@ func _ready() -> void:
 
 func _setup_colorblind_option() -> void:
 	colorblind_option.clear()
-	for i in range(COLORBLIND_LABELS.size()):
-		colorblind_option.add_item(COLORBLIND_LABELS[i], i)
 
-	# Reflect current mode
+	for i in range(COLORBLIND_KEYS.size()):
+		colorblind_option.add_item(tr(COLORBLIND_KEYS[i]), i)
+
 	var current_mode: String = GameManager.get_colorblind_mode()
 	var idx := COLORBLIND_MODES.find(current_mode)
 	if idx >= 0:
@@ -48,6 +54,9 @@ func _unhandled_input(event: InputEvent) -> void:
 func _refresh_text() -> void:
 	$MenuContainer/StartButton.text = tr("menu_new_game")
 	$MenuContainer/QuitButton.text = tr("menu_quit_game")
+
+	colorblind_label.text = tr("menu_colorblind_title")
+	_setup_colorblind_option()
 	
 func _on_start_button_pressed() -> void:
 	# 切换到游戏关卡
