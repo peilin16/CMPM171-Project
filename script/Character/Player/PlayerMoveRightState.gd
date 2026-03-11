@@ -15,7 +15,7 @@ func trigger(controller) -> bool:
 
 func enter(controller, hub: State_hub, anim: Animation_player) -> void:
 	anim.play(state_animation);
-	print(state_name)
+	#print(state_name)
 func update(controller, hub: State_hub, anim: Animation_player, delta: float) -> void:
 	
 	controller.move(delta)

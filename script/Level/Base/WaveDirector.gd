@@ -9,9 +9,10 @@ var waves: Array[Wave] = []
 var is_run: bool = false
 var parser:Wave_parser = Wave_parser.new(self);
 
+var next_level_scenes:String;
 
 func _ready() -> void:
-	pass
+	next_level_scenes = "";
 	
 
 
@@ -23,7 +24,6 @@ func _preload_waves(arr: Array[Wave]) -> void:
 			waves.append(w)
 
 
-# 中途追加一波（比如中间插入 Boss 波）
 func _append_wave(w: Wave) -> void:
 	if w == null:
 		return
@@ -44,7 +44,7 @@ func _physics_process(delta: float) -> void:
 		return
 
 	if current_wave == null and waves.is_empty():
-		return
+		return;
 
 	current_wave.update(sub_director, delta)
 	if current_wave.is_done(sub_director):
@@ -56,6 +56,7 @@ func _next() -> void:
 	if waves.is_empty():
 		is_run = false
 		current_wave = null
+		_next_level();
 		return
 
 	current_wave = waves.pop_front()
@@ -83,3 +84,7 @@ func create_wave_from_config(config: Array) -> void:
 		var wave:= parser.setup(w);
 		#wave.wave_director = self;
 		waves.append(wave);
+
+func _next_level()->void:
+	if next_level_scenes != "":
+		get_tree().change_scene_to_file(next_level_scenes);

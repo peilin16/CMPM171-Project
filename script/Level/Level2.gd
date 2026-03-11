@@ -1,5 +1,5 @@
 extends Level
-class_name Level1
+class_name Level2
 
 #Level
 #- BackgroundLayer     (z_index = 0)
@@ -8,12 +8,12 @@ class_name Level1
 #- PlayerLayer         (z_index = 300)
 #- BulletLayer         (z_index = 400)
 #- VFXBackLayer        (z_index = 450)
-#- VFXFrontLayer       (z_index = 650)sssssssssd
+#- VFXFrontLayer       (z_index = 650)
 #- UILayer (CanvasLayer)
 func _init() -> void:
 	level_name = "test_level"
 	bullet_order = {
-		"MEDIUM_ROUND_BULLET": 20
+		"MEDIUM_ROUND_BULLET": 30
 	}
 	enemy_order = {
 		"Grunt": 12,

@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://bfrklaksr3n7b" path="res://script/Action/Rotate/RotateRunner.gd" id="9_rotate_runner"]
 [ext_resource type="Script" uid="uid://c6e2v8pq72rv8" path="res://script/VFX/VFXParser.gd" id="10_vfx_parser"]
 [ext_resource type="Script" uid="uid://b566wwblvpd6x" path="res://script/VFX/VFXSpawner.gd" id="11_vfx_spawner"]
-[ext_resource type="Texture2D" path="res://assets/character/Enemy/GruntPlus/332f739a-0dc6-468c-8d56-88aa8bac9efb.png" id="12_grunt_plus_tex"]
+[ext_resource type="Texture2D" uid="uid://c7mpxr323tc0l" path="res://assets/character/Enemy/GruntPlus/332f739a-0dc6-468c-8d56-88aa8bac9efb.png" id="12_grunt_plus_tex"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 14.0
@@ -66,7 +66,7 @@ script = ExtResource("11_vfx_spawner")
 shape = SubResource("1")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.1, 0.1)
 modulate = Color(1, 0.8, 0.8, 1)
+scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("2")
 animation = &"idle"
