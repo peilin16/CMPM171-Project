@@ -307,6 +307,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_pwi7n")
 value = 55.0
 
 [node name="ShootBar" type="AnimatedSprite2D" parent="PlayerUI"]
+visible = false
 position = Vector2(30.999996, 41.000004)
 scale = Vector2(1.4687498, 0.90624976)
 sprite_frames = SubResource("SpriteFrames_y2idx")

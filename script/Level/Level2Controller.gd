@@ -26,5 +26,6 @@ func _ready() -> void:
 		"pitch_scale":1.0
 	});
 	start_game();
+	level = Level2.new();
 func start_game()->void:
 	super.start_game();

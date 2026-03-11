@@ -24,9 +24,11 @@ func _ready() -> void:
 
 	if not LanguageManager.language_changed.is_connected(_refresh_text):
 		LanguageManager.language_changed.connect(_refresh_text)
-
-	_refresh_text()
-
+	_refresh_text();
+	#
+#func show_menu()->void:
+	
+	
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_language"):
@@ -42,10 +44,8 @@ func _refresh_text() -> void:
 	score_label.text = tr("game_over_score").format({
 		"score": GameManager.player_manager.player_score
 	})
-
-	wave_label.text = tr("game_over_waves").format({
-		"level": survived_waves
-	})
+	wave_label.text ="Level :"+ GameManager.level_manager.get_level_name()
+	
 
 # --- [API] 供外部调用的设置函数 ---
 # 这里的参数可以根据你们之后的数据结构扩展
