@@ -23,13 +23,10 @@ func preload_enemies(count: int) -> void:
 
 # spawn
 func spawn_enemy() -> Node:
-	var character_scene: Enemy_controller = null
+	var character_scene; #: Enemy_controller = null
 
-	while available_enemies.size() > 0 and character_scene == null:
-		var candidate = available_enemies.pop_back()
-		if not is_instance_valid(candidate):
-			continue
-		character_scene = candidate # as Enemy_controller
+	if available_enemies.size() > 0:
+		character_scene = available_enemies.pop_back()
 
 	if character_scene == null:
 		character_scene = _create_enemy()
@@ -46,7 +43,7 @@ func spawn_enemy() -> Node:
 	#character_scene.activate();
 	active_enemies.append(character_scene)
 	return character_scene
-		
+
 	
 func _create_enemy() -> Node:
 	if character_scene == null:
