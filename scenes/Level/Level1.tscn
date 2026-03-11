@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=4 uid="uid://okvl3jg17a5h"]
+[gd_scene load_steps=106 format=4 uid="uid://okvl3jg17a5h"]
 
 [ext_resource type="Script" uid="uid://dghk1chdkrxqs" path="res://script/Level/Level1Controller.gd" id="1_h32uy"]
 [ext_resource type="Script" uid="uid://cdj8cw7oe3du7" path="res://script/Base/Other/Main_camera.gd" id="2_p0hel"]
@@ -35,6 +35,7 @@
 [ext_resource type="Texture2D" uid="uid://bac0d0goqcy3h" path="res://assets/Map/Gemini_Generated_Image_c0irphc0irphc0ir.png" id="33_6laxy"]
 [ext_resource type="PackedScene" uid="uid://b68pmqxc8g3ms" path="res://scenes/UI/ShopMenu.tscn" id="34_5r1um"]
 [ext_resource type="PackedScene" uid="uid://c3cnfks53qo0f" path="res://scenes/UI/StartMenu.tscn" id="35_f5v21"]
+[ext_resource type="Script" path="res://script/UI/ColorBlindFilterOverlay.gd" id="36_cbf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p27p8"]
 texture = ExtResource("3_6ch66")
@@ -17362,3 +17363,7 @@ rotation = 3.1415927
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Border/TopBorder"]
 position = Vector2(2, 1)
 shape = SubResource("WorldBoundaryShape2D_f5v21")
+
+[node name="ColorBlindFilter" type="CanvasLayer" parent="."]
+layer = 100
+script = ExtResource("36_cbf")
