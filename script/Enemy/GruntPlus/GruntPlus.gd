@@ -6,3 +6,4 @@ func _init() -> void:
 	max_hp = 30
 	hp = max_hp
 	move_data = Move_data.new()
+	death_score = 30;

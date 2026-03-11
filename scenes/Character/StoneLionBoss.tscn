@@ -11,8 +11,8 @@
 [ext_resource type="Script" uid="uid://bfrklaksr3n7b" path="res://script/Action/Rotate/RotateRunner.gd" id="9_rotate_runner"]
 [ext_resource type="Script" uid="uid://c6e2v8pq72rv8" path="res://script/VFX/VFXParser.gd" id="10_vfx_parser"]
 [ext_resource type="Script" uid="uid://b566wwblvpd6x" path="res://script/VFX/VFXSpawner.gd" id="11_vfx_spawner"]
-[ext_resource type="Texture2D" path="res://assets/character/Enemy/StoneLion/bossidle.png" id="12_boss_idle_tex"]
-[ext_resource type="Texture2D" path="res://assets/character/Enemy/StoneLion/BossShoot.png" id="13_boss_shoot_tex"]
+[ext_resource type="Texture2D" uid="uid://blgibn8mjetyi" path="res://assets/character/Enemy/StoneLion/bossidle.png" id="12_boss_idle_tex"]
+[ext_resource type="Texture2D" uid="uid://xvnndmhjyyu0" path="res://assets/character/Enemy/StoneLion/BossShoot.png" id="13_boss_shoot_tex"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 26.0

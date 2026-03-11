@@ -10,7 +10,7 @@ func _ready() -> void:
 	if level == null:
 		level = Level.new();
 	print(level.level_name)
-
+	
 	
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("stop"):

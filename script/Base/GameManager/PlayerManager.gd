@@ -4,7 +4,7 @@ class_name  PlayerManager
 
 var player: Player_controller = null
 @export var player_scene: PackedScene
-
+var player_score:float = 0
 
 func _ready() -> void:
 	await get_tree().process_frame
@@ -20,7 +20,8 @@ func get_player() -> Player_controller:
 func get_player_position() -> Vector2:
 	return player.get_actor_position();
 
-
+func add_score(s:float)->void:
+	player_score += s;
 
 func _spawn_player(level: Level_controller, position:Vector2 = Vector2.ZERO):
 	if player: player.queue_free()
@@ -28,3 +29,4 @@ func _spawn_player(level: Level_controller, position:Vector2 = Vector2.ZERO):
 	#var actors := _get_actors_root()
 	level.add_child(player);
 	player.global_position = position
+	player_score = 0;

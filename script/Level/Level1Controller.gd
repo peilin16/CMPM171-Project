@@ -5,7 +5,7 @@ class_name Level1_controller
 func _ready() -> void:
 	level = Level1.new();	
 	pause_menu.visible =false;
-	
+	name = "Town";
 	#start_menu.visible = true;
 	#get_tree().paused = true;
 	
