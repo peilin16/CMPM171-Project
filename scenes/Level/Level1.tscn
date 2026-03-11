@@ -15,14 +15,14 @@
 [ext_resource type="PackedScene" uid="uid://sbu784eu31i5" path="res://scenes/UI/PauseMenu.tscn" id="12_pause"]
 [ext_resource type="Texture2D" uid="uid://boapb1hgmrpvk" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_0_B.png" id="12_rbypt"]
 [ext_resource type="Texture2D" uid="uid://dxqcdabimp0w4" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_3B.png" id="13_6laxy"]
-[ext_resource type="Script" uid="uid://df1dv6kqinjjt" path="res://script/Level/Level1WaveDirector.gd" id="13_mf1cp"]
+[ext_resource type="Script" uid="uid://dd5bpmb6vyu5g" path="res://script/Level/Level1WaveDirector.gd" id="13_mf1cp"]
 [ext_resource type="Texture2D" uid="uid://8aw6t87s2pd1" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_3C.png" id="14_5r1um"]
 [ext_resource type="Script" uid="uid://yd3lu0oib4w3" path="res://script/Level/Base/SpawnDirector.gd" id="14_67qcy"]
 [ext_resource type="Texture2D" uid="uid://cm57dvumhd0wx" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_4B.png" id="15_f5v21"]
 [ext_resource type="Texture2D" uid="uid://bcqwy22hmh7is" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_5B.png" id="16_e1xui"]
-[ext_resource type="Script" uid="uid://opbq166jvj76" path="res://script/Level/Base/SpawnPoint.gd" id="16_u85d8"]
+[ext_resource type="Script" uid="uid://c4isnf8bgipw3" path="res://script/Level/Base/SpawnPoint.gd" id="16_u85d8"]
 [ext_resource type="Texture2D" uid="uid://dkckikund85b" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_5C.png" id="17_8svs3"]
-[ext_resource type="Script" uid="uid://cq5lfyq6tq8p6" path="res://script/Level/Base/WidgetSpawner.gd" id="17_ti1q0"]
+[ext_resource type="Script" uid="uid://c3s17tc73vbrt" path="res://script/Level/Base/WidgetSpawner.gd" id="17_ti1q0"]
 [ext_resource type="Texture2D" uid="uid://b0pdymppgldu7" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_5D.png" id="18_gnnbo"]
 [ext_resource type="Texture2D" uid="uid://bdqffp2lvnf18" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_6A.png" id="19_m430h"]
 [ext_resource type="Texture2D" uid="uid://dfgpenfvfltla" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_0_C.png" id="20_lb7yv"]
@@ -17278,7 +17278,6 @@ tile_set = SubResource("TileSet_4hsrp")
 [node name="UIContainer" type="Node2D" parent="."]
 
 [node name="PauseMenu" parent="." instance=ExtResource("12_pause")]
-visible = false
 z_index = 4096
 
 [node name="VFXContainerBack" type="Node2D" parent="."]
