@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://d1y7ojjnsuu0r"]
 
-[ext_resource type="Script" uid="uid://bn8q56en4s1o1" path="res://script/UI/MahjongInventory.gd" id="1_34lew"]
+[ext_resource type="Script" uid="uid://hbmtt5bs1lg7" path="res://script/UI/MahjongInventory.gd" id="1_34lew"]
 
 [node name="MahjongInventory" type="Control"]
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 3
 anchors_preset = 12
 anchor_top = 1.0

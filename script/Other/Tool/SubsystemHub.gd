@@ -2,7 +2,7 @@
 extends Node2D
 class_name Sub_action_hub
 
-@onready var shoot_runner: Shoot_runner = $ShootRunner
+@onready var shoot_runner: Shoot_runner = get_node_or_null("ShootRunner") as Shoot_runner
 @onready var move_runner: Move_runner = get_node_or_null("MoveRunner") as Move_runner
 @onready var rotate_runner:Rotate_runner = get_node_or_null("RotateRunner") as Rotate_runner
 #@export var anim_runner: AnimRunner

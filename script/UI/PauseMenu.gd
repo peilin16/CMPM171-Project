@@ -1,7 +1,7 @@
 extends Control
 class_name Pause_menu
 # 预加载主菜单和当前关卡（方便重启）
-const START_MENU_PATH = "res://scenes/UI/StartMenu.tscn"
+const START_MENU_PATH = "res://scenes/Level/Level1.tscn"
 # 注意：正式版可能需要动态获取当前关卡，这里暂时写死或者留空
 const LEVEL_1_PATH = "res://scenes/Level/Level1.tscn"
 
