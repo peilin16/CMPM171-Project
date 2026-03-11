@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b68pmqxc8g3ms"]
+[gd_scene load_steps=3 format=3 uid="uid://b68pmqxc8g3ms"]
 
-[ext_resource type="Script" uid="uid://rya6s3u2u8oe" path="res://script/UI/ShopMenu.gd" id="1_gm0i7"]
+[ext_resource type="Script" uid="uid://s1b10fb3swql" path="res://script/UI/ShopMenu.gd" id="1_gm0i7"]
+[ext_resource type="FontFile" uid="uid://ddyg7xlxgvfuu" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="2_adeea"]
 
 [node name="ShopMenu" type="Control"]
 process_mode = 3
@@ -56,6 +57,7 @@ size_flags_vertical = 4
 
 [node name="Title" type="Label" parent="CenterContainer/Panel/MainHBox/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_adeea")
 text = "Wave Cleared. Click & continue with your favorite mahjong tile!"
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Panel/MainHBox/VBoxContainer"]
@@ -85,4 +87,5 @@ layout_mode = 2
 
 [node name="SkipButton" type="Button" parent="CenterContainer/Panel/MainHBox/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_adeea")
 text = "Skip"
