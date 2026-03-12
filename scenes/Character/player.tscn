@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://cdj8cw7oe3du7" path="res://script/Base/Other/Main_camera.gd" id="12_hdh7n"]
 [ext_resource type="Texture2D" uid="uid://fkjm0ipc4gto" path="res://assets/character/Player/左/5ba1c1e4-01f9-4c68-8a78-0f99dbb82083-sheet.png" id="12_sygsy"]
 [ext_resource type="Script" uid="uid://doj6f5trje884" path="res://script/Character/Player/PlayerUI.gd" id="13_g7g3w"]
+[ext_resource type="Script" path="res://script/Character/Player/PlayerMahjong.gd" id="14_mahjong"]
 [ext_resource type="Texture2D" uid="uid://dujkpikywewtf" path="res://assets/character/Player/0b3e924a-75dc-4011-b0a2-3ba4416bf4b2-sheet.png" id="13_pwi7n"]
 [ext_resource type="Texture2D" uid="uid://c6i23ml3me37h" path="res://assets/UI/Untitled 04-04-2025 04-50-10.png" id="14_hpedc"]
 [ext_resource type="PackedScene" uid="uid://d1y7ojjnsuu0r" path="res://scenes/UI/MahjongInventory.tscn" id="17_pwi7n"]
@@ -328,6 +329,9 @@ offset_left = 1.0
 offset_top = 79.0
 offset_right = 1.0
 offset_bottom = 159.0
+
+[node name="PlayerMahjong" type="Node" parent="."]
+script = ExtResource("14_mahjong")
 
 [connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_area_entered"]
 [connection signal="body_entered" from="HurtBox" to="HurtBox" method="_on_body_entered"]

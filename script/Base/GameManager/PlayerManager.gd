@@ -4,6 +4,8 @@ class_name  PlayerManager
 
 var player: Player_controller = null
 @export var player_scene: PackedScene
+var _saved_mahjong_hand: Array = []
+var _has_saved_mahjong_state: bool = false
 
 
 func _ready() -> void:
@@ -19,6 +21,20 @@ func get_player() -> Player_controller:
 	
 func get_player_position() -> Vector2:
 	return player.get_actor_position();
+
+func save_mahjong_hand(hand: Array) -> void:
+	_saved_mahjong_hand = hand.duplicate(true)
+	_has_saved_mahjong_state = true
+
+func get_saved_mahjong_hand() -> Array:
+	return _saved_mahjong_hand.duplicate(true)
+
+func has_saved_mahjong_hand() -> bool:
+	return _has_saved_mahjong_state
+
+func clear_saved_mahjong_hand() -> void:
+	_saved_mahjong_hand.clear()
+	_has_saved_mahjong_state = false
 
 
 

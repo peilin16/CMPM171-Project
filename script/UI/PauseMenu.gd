@@ -21,8 +21,12 @@ func _on_resume_pressed() -> void:
 func _on_restart_pressed() -> void:
 	# 重启前务必先解除暂停，否则新场景加载出来也是暂停的！
 	get_tree().paused = false
+	if GameManager.player_manager:
+		GameManager.player_manager.clear_saved_mahjong_hand()
 	get_tree().reload_current_scene()
 
 func _on_quit_pressed() -> void:
 	get_tree().paused = false
+	if GameManager.player_manager:
+		GameManager.player_manager.clear_saved_mahjong_hand()
 	get_tree().change_scene_to_file(START_MENU_PATH)
