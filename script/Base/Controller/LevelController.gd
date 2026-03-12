@@ -11,6 +11,7 @@ func _ready() -> void:
 		level = Level.new();
 	# Move shop into a CanvasLayer so it renders in screen space (not affected by camera)
 	if is_instance_valid(shop_menu):
+		shop_menu.visible = false
 		var shop_layer := CanvasLayer.new()
 		shop_layer.name = "ShopCanvasLayer"
 		shop_layer.layer = 100

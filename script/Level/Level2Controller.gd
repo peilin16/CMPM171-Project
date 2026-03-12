@@ -6,6 +6,7 @@ class_name Level2_controller
 
 
 func _ready() -> void:
+	level = Level2.new();
 	GameManager.level_manager.setup(self);
 	super._ready();
 	await ToolBar.globalDelayCall.delay(0.3)
@@ -26,6 +27,5 @@ func _ready() -> void:
 		"pitch_scale":1.0
 	});
 	start_game();
-	level = Level2.new();
 func start_game()->void:
 	super.start_game();

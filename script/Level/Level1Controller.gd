@@ -7,6 +7,11 @@ func _ready() -> void:
 	level = Level1.new();	
 	pause_menu.visible =false;
 	name = "Town";
+	var should_auto_start := false
+	if GameManager.level_manager:
+		should_auto_start = GameManager.level_manager.consume_auto_start_next_level()
+	if start_menu:
+		start_menu.visible = not should_auto_start
 	#start_menu.visible = true;
 	#get_tree().paused = true;
 	
@@ -29,6 +34,8 @@ func _ready() -> void:
 		"volume_mul":0.4,
 		"pitch_scale":1.0
 	});
+	if should_auto_start:
+		start_game()
 	
 func start_game()->void:
 	super.start_game();

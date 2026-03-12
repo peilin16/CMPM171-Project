@@ -31,6 +31,9 @@ func _create_translations() -> void:
 	en_translation.locale = LOCALE_EN
 	en_translation.add_message("menu_new_game", "New Game")
 	en_translation.add_message("menu_quit_game", "Quit Game")
+	en_translation.add_message("menu_instructions_button", "Instructions")
+	en_translation.add_message("menu_instructions_title", "How to Play")
+	en_translation.add_message("menu_close", "Close")
 
 	en_translation.add_message("game_over_title", "GAME OVER")
 	en_translation.add_message("game_over_score", "Final Score: {score}")
@@ -45,13 +48,16 @@ func _create_translations() -> void:
 	en_translation.add_message("colorblind_tritanopia", "Tritanopia")
 
 	en_translation.add_message("menu_instructions",
-	"Use the mouse wheel to scroll down for more.\nUse WASD to move up, down, left, and right.\nUse the Left Mouse Button to fire bullets.\nDodge enemies and incoming bullets. Taking a hit from a bullet or touching an enemy will reduce your health.\nKill enemies to earn points to buy Mahjong tiles.\nDifferent Mahjong tiles grant different buffs:\nBamboo tiles (Souzu): Increase fire rate.\nCircle tiles (Pinzu): Change the number of bullets fired.\nCharacter tiles (Manzu): Increase attack power.\nCollecting specific tile combinations will trigger even stronger effects.\nPress the T key to switch languages (English - Chinese - Japanese).")
+	"Move with WASD.\nFire with the Left Mouse Button.\nAvoid enemies and incoming bullets. Contact damage and bullet hits both cost HP.\nClear waves to reach the shop and build your Mahjong hand.\nYour Mahjong hand now determines your shot pattern.\nTiao (Bamboo): increases attack speed and favors rapid multi-shot fire.\nTong (Circles): pushes your shots toward spread and fan patterns.\nWan (Characters): increases damage and favors focused shots.\nSpecial tiles and completed sets unlock stronger combo patterns and bonuses.\nPress T to switch languages.")
 
 	# Chinese
 	zh_translation = Translation.new()
 	zh_translation.locale = LOCALE_ZH
 	zh_translation.add_message("menu_new_game", "开始游戏")
 	zh_translation.add_message("menu_quit_game", "退出游戏")
+	zh_translation.add_message("menu_instructions_button", "游戏说明")
+	zh_translation.add_message("menu_instructions_title", "玩法说明")
+	zh_translation.add_message("menu_close", "关闭")
 
 	zh_translation.add_message("game_over_title", "游戏结束")
 	zh_translation.add_message("game_over_score", "最终得分：{score}")
@@ -66,13 +72,16 @@ func _create_translations() -> void:
 	zh_translation.add_message("colorblind_tritanopia", "蓝色盲")
 
 	zh_translation.add_message("menu_instructions",
-	"使用鼠标滚轮向下滚动查看更多内容。\n使用 WASD 上下左右移动。\n使用鼠标左键发射子弹。\n躲避敌人和敌人的子弹。被子弹击中或碰到敌人都会扣血。\n击杀敌人可获得分数，并使用分数购买麻将牌。\n不同麻将牌会提供不同增益：\n条子：增加射速。\n筒子：改变发射子弹的数量。\n万子：增加攻击力。\n收集特定牌型组合后，会触发更强力的效果。\n按 T 键可切换语言（英文 - 中文 - 日文）。")
+	"使用 WASD 上下左右移动。\n使用鼠标左键发射子弹。\n躲避敌人和敌方弹幕。接触敌人或被子弹击中都会损失生命值。\n清完波次后可以进入商店，补充你的麻将牌组。\n你的整副麻将手牌现在会决定射击模式。\n条子：提升攻速，并更偏向连续多发。\n筒子：让射击更偏向扩散与扇形。\n万子：提升伤害，并更偏向集中射击。\n特殊牌与成套组合会触发更强的弹幕形态与连携增益。\n按 T 键切换语言。")
 
 	# Japanese
 	ja_translation = Translation.new()
 	ja_translation.locale = LOCALE_JA
 	ja_translation.add_message("menu_new_game", "ゲーム開始")
 	ja_translation.add_message("menu_quit_game", "ゲーム終了")
+	ja_translation.add_message("menu_instructions_button", "遊び方")
+	ja_translation.add_message("menu_instructions_title", "操作説明")
+	ja_translation.add_message("menu_close", "閉じる")
 
 	ja_translation.add_message("game_over_title", "ゲームオーバー")
 	ja_translation.add_message("game_over_score", "最終スコア：{score}")
@@ -86,7 +95,7 @@ func _create_translations() -> void:
 	ja_translation.add_message("colorblind_deuteranopia", "2型色覚")
 	ja_translation.add_message("colorblind_tritanopia", "3型色覚")
 	ja_translation.add_message("menu_instructions",
-	"マウスホイールを下にスクロールして続きをご覧ください。\nWASDキーで上下左右に移動します。\nマウスの左クリックで弾を発射します。\n敵と敵の弾を避けてください。被弾したり、敵に触れたりするとHPが減少します。\n敵を倒してスコアを獲得し、そのスコアで麻雀牌を購入できます。\n麻雀牌の種類によって異なる強化効果が得られます：\n索子（ソーズ）：発射速度が上昇します。\n筒子（ピンズ）：発射する弾の数が変化します。\n萬子（マンズ）：攻撃力が上昇します。\n特定の牌の組み合わせを揃えると、さらに強力な効果が発動します。\nTキーを押すと、言語を切り替えることができます（英語 - 中国語 - 日本語）。")
+	"WASDキーで移動します。\nマウス左クリックで弾を撃ちます。\n敵本体と敵弾の両方に注意してください。接触や被弾でHPが減少します。\nウェーブを突破するとショップで麻雀牌を追加できます。\n手牌全体でショットパターンが決まるようになりました。\n索子（ソーズ）：攻撃速度が上がり、連射寄りになります。\n筒子（ピンズ）：拡散や扇形ショット寄りになります。\n萬子（マンズ）：ダメージが上がり、集中ショット寄りになります。\n特殊牌や完成したセットで、より強い弾幕パターンとコンボ効果が発動します。\nTキーで言語を切り替えます。")
 
 func toggle_language() -> void:
 	var current_index := LANGUAGE_ORDER.find(current_locale)
