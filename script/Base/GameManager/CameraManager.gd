@@ -3,11 +3,24 @@ class_name Camera_manager
 
 @export var current_camera: Camera2D
 
+var last_shake_time: float = -2.0
+
 func register_camera(c: Camera2D) -> void:
 	current_camera = c
 
 func has_camera() -> bool:
 	return current_camera != null and is_instance_valid(current_camera)
+
+func shake(intensity: float = 8.0, duration: float = 0.2) -> void:
+	if not has_camera(): return
+	var current_time = Time.get_ticks_msec() / 1000.0
+	if current_time - last_shake_time < 2.0: return
+	last_shake_time = current_time
+	
+	var tween = create_tween()
+	tween.tween_property(current_camera, "offset", Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * intensity, duration / 3.0)
+	tween.tween_property(current_camera, "offset", Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * intensity * -0.5, duration / 3.0)
+	tween.tween_property(current_camera, "offset", Vector2.ZERO, duration / 3.0)
 
 # -------- Viewport size (world units) --------
 func get_view_size() -> Vector2:
