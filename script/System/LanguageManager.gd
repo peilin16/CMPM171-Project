@@ -33,6 +33,16 @@ func _create_translations() -> void:
 	en_translation.add_message("game_over_restart", "Restart")
 	en_translation.add_message("game_over_title_screen", "Title Screen")
 
+
+
+	en_translation.add_message("menu_colorblind_title", "Color-Blind Filter")
+	en_translation.add_message("colorblind_off", "Off")
+	en_translation.add_message("colorblind_protanopia", "Protanopia")
+	en_translation.add_message("colorblind_deuteranopia", "Deuteranopia")
+	en_translation.add_message("colorblind_tritanopia", "Tritanopia")
+	
+
+
 	# Chinese
 	zh_translation = Translation.new()
 	zh_translation.locale = LOCALE_ZH
@@ -44,6 +54,12 @@ func _create_translations() -> void:
 	zh_translation.add_message("game_over_waves", "生存波数：{waves}")
 	zh_translation.add_message("game_over_restart", "重新开始")
 	zh_translation.add_message("game_over_title_screen", "返回标题")
+
+	zh_translation.add_message("menu_colorblind_title", "色盲滤镜")
+	zh_translation.add_message("colorblind_off", "关闭")
+	zh_translation.add_message("colorblind_protanopia", "红色盲")
+	zh_translation.add_message("colorblind_deuteranopia", "绿色盲")
+	zh_translation.add_message("colorblind_tritanopia", "蓝色盲")
 
 
 func toggle_language() -> void:

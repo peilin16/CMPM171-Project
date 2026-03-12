@@ -1,6 +1,6 @@
 [gd_scene load_steps=108 format=4 uid="uid://cqxr6ba5ymx8n"]
 
-[ext_resource type="Script" uid="uid://caeuq7ybtlts0" path="res://script/Level/Level3Controller.gd" id="1_w7m4p"]
+[ext_resource type="Script" uid="uid://dghk1chdkrxqs" path="res://script/Level/Level1Controller.gd" id="1_w7m4p"]
 [ext_resource type="Script" uid="uid://cdj8cw7oe3du7" path="res://script/Base/Other/Main_camera.gd" id="2_0k3as"]
 [ext_resource type="Texture2D" uid="uid://sptq6n7l8481" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_2.png" id="3_f76kl"]
 [ext_resource type="Texture2D" uid="uid://b8gqx4cg5pfsb" path="res://assets/Map/Water+.png" id="3_w7m4p"]
@@ -28,8 +28,8 @@
 [ext_resource type="Texture2D" uid="uid://ck25cmo5pg4nj" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_1C.png" id="25_t12kh"]
 [ext_resource type="Texture2D" uid="uid://by420k64e2thk" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_3A.png" id="26_rugif"]
 [ext_resource type="PackedScene" uid="uid://sbu784eu31i5" path="res://scenes/UI/PauseMenu.tscn" id="27_e01e7"]
+[ext_resource type="Script" uid="uid://dd5bpmb6vyu5g" path="res://script/Level/Level1WaveDirector.gd" id="28_yotaw"]
 [ext_resource type="Script" uid="uid://dkfayiq4hb6yc" path="res://script/Level/Base/SubDirector.gd" id="29_qfgq8"]
-[ext_resource type="Script" uid="uid://bwjb2qb1r35cf" path="res://script/Level/Level3WaveDirector.gd" id="29_w7m4p"]
 [ext_resource type="Script" uid="uid://yd3lu0oib4w3" path="res://script/Level/Base/SpawnDirector.gd" id="30_v882j"]
 [ext_resource type="Script" uid="uid://c4isnf8bgipw3" path="res://script/Level/Base/SpawnPoint.gd" id="31_jntrq"]
 [ext_resource type="Script" uid="uid://c3s17tc73vbrt" path="res://script/Level/Base/WidgetSpawner.gd" id="32_y7lto"]
@@ -18446,7 +18446,7 @@ sources/23 = SubResource("TileSetAtlasSource_ccp1w")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_f5v21"]
 
-[node name="Level3" type="Node2D"]
+[node name="Level1" type="Node2D"]
 script = ExtResource("1_w7m4p")
 
 [node name="Main_camera" type="Camera2D" parent="."]
@@ -18486,7 +18486,7 @@ z_index = 4096
 [node name="VFXContainerBack" type="Node2D" parent="."]
 
 [node name="WaveDirector" type="Node2D" parent="."]
-script = ExtResource("29_w7m4p")
+script = ExtResource("28_yotaw")
 
 [node name="SubDirector" type="Node2D" parent="WaveDirector"]
 script = ExtResource("29_qfgq8")

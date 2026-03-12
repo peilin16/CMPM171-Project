@@ -191,8 +191,8 @@ func handle_fire_mode_hotkeys() -> void:
 func death()->void:
 	if not is_death:
 		vfx_parser.execute({
-			 "name":"Explosion1",
-			 "life":3,
+			"name":"Explosion1",
+			"life":3,
 			"front":true, 
 			"scale":0.5
 		});#explosion1

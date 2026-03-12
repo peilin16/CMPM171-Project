@@ -17272,6 +17272,7 @@ tile_set = SubResource("TileSet_4hsrp")
 [node name="BulletContainer" type="Node2D" parent="."]
 
 [node name="VFXContainerFront" type="Node2D" parent="."]
+z_index = 800
 
 [node name="EnemyContainer" type="Node2D" parent="."]
 

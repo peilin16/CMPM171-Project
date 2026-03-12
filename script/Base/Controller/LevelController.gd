@@ -12,7 +12,7 @@ func _ready() -> void:
 	if is_instance_valid(shop_menu) and not shop_menu.tile_chosen.is_connected(_on_shop_tile_chosen):
 		shop_menu.tile_chosen.connect(_on_shop_tile_chosen)
 	print(level.level_name)
-
+	
 	
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("stop"):
