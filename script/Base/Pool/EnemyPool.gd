@@ -37,6 +37,10 @@ func spawn_enemy() -> Node:
 
 	if "visible" in character_scene:
 		character_scene.visible = true
+	if character_scene is CanvasItem:
+		(character_scene as CanvasItem).modulate = Color(1, 1, 1, 1)
+	if character_scene.has_method("_restore_visual_state"):
+		character_scene._restore_visual_state()
 
 	#character_scene._character.is_active = true
 	#character_scene._character.is_off_screen = false;
@@ -73,6 +77,8 @@ func deactivate_enemy(character_scene: Node) -> void:
 	if character_scene and character_scene._character:
 		character_scene._character._init();
 	character_scene.visible = false
+	if character_scene is CanvasItem:
+		(character_scene as CanvasItem).modulate = Color(1, 1, 1, 1)
 	if character_scene and character_scene._character:
 		character_scene._character.isActive = false
 

@@ -78,9 +78,13 @@ func cancel_all() ->void:
 	
 	
 func cancel()->void:
+	_stop = true;
+	is_all_done = true;
+	is_current_done = true;
 	if _current:
 		_current.cancel();
 		_current = null;
+	_queue.clear();
 	
 #interrupt
 func interrupt() -> void:
