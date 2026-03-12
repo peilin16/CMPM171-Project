@@ -8,9 +8,12 @@ var tween: Tween;
 var controller:Player_controller;
 @export var contact_damage: float = 3.0
 @export var contact_damage_interval: float = 1.0
+@export var min_contact_damage_interval: float = 0.2
+@export var spawn_grace_period: float = 0.75
 
 var _contact_damage_timer: float = 0.0
 var _touching_enemies: Array[Enemy_controller] = []
+var _spawn_grace_timer: float = 0.0
 func open()->void:
 	can_hurt = true;
 
@@ -23,7 +26,10 @@ func _ready():
 	if sprite:
 		sprite.modulate = Color(1, 1, 1, 0)  
 		sprite.visible = false  # hide
-	can_hurt = true;
+	can_hurt = false;
+	_spawn_grace_timer = max(spawn_grace_period, 0.0)
+	_touching_enemies.clear()
+	_contact_damage_timer = 0.0
 	controller = get_parent();
 	if not is_connected("body_entered", Callable(self, "_on_body_entered")):
 		connect("body_entered", Callable(self, "_on_body_entered"))
@@ -49,6 +55,17 @@ func hurt(num:float)->void:
 		GameManager.camera_manager.shake(10.0, 10.0, 0.2) 
 
 func _physics_process(delta: float) -> void:
+	if _spawn_grace_timer > 0.0:
+		_spawn_grace_timer -= delta
+		if _spawn_grace_timer <= 0.0:
+			can_hurt = true
+		else:
+			_clear_invalid_enemies()
+			if not _touching_enemies.is_empty():
+				_touching_enemies.clear()
+			_contact_damage_timer = 0.0
+			return
+
 	if not can_hurt:
 		return
 
@@ -58,7 +75,7 @@ func _physics_process(delta: float) -> void:
 		return;
 
 	_contact_damage_timer += delta
-	if _contact_damage_timer >= contact_damage_interval:
+	if _contact_damage_timer >= _get_effective_contact_damage_interval():
 		_apply_contact_damage()
 		_contact_damage_timer = 0.0
 
@@ -89,3 +106,7 @@ func _apply_contact_damage() -> void:
 	if _touching_enemies.is_empty():
 		return
 	hurt(contact_damage)
+
+func _get_effective_contact_damage_interval() -> float:
+	var enemy_count: int = max(_touching_enemies.size(), 1)
+	return max(min_contact_damage_interval, contact_damage_interval / float(enemy_count))

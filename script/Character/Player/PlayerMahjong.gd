@@ -73,6 +73,7 @@ func _on_mahjong_inventory_changed(hand: Array, tiao: int, tong: int, wan: int) 
 		_player.shoot_cooldown = _player.base_shoot_cooldown / max(mult, 0.01)
 
 		print("[Mahjong] tiao=", tiao, " tong=", tong, " wan=", wan,
+			" | combos=", _logic.get_active_combo_names(),
 			" | mode=", _logic.get_fire_mode_name(),
 			" | dmg=", _logic.get_damage_value(),
 			" | cooldown=", _player.shoot_cooldown,

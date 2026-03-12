@@ -6,6 +6,8 @@ var player: Player_controller = null
 @export var player_scene: PackedScene
 var _saved_mahjong_hand: Array = []
 var _has_saved_mahjong_state: bool = false
+var _saved_player_hp: float = 100.0
+var _has_saved_player_hp: bool = false
 var player_score:float = 0
 
 func _ready() -> void:
@@ -47,6 +49,31 @@ func has_saved_mahjong_hand() -> bool:
 func clear_saved_mahjong_hand() -> void:
 	_saved_mahjong_hand.clear()
 	_has_saved_mahjong_state = false
+	clear_saved_player_hp()
+
+func save_player_hp(hp: float) -> void:
+	_saved_player_hp = max(hp, 0.0)
+	_has_saved_player_hp = true
+
+func consume_saved_player_hp(default_hp: float = 100.0) -> float:
+	if not _has_saved_player_hp:
+		return default_hp
+	var hp := _saved_player_hp
+	_has_saved_player_hp = false
+	_saved_player_hp = default_hp
+	return hp
+
+func clear_saved_player_hp() -> void:
+	_saved_player_hp = 100.0
+	_has_saved_player_hp = false
+
+func save_current_player_state() -> void:
+	var current_player := get_player()
+	if current_player == null:
+		return
+	var hurt_box := current_player.get_node_or_null("HurtBox") as Hurt_box
+	if hurt_box:
+		save_player_hp(hurt_box.player_hp)
 
 func add_score(s:float)->void:
 	player_score += s;
@@ -60,4 +87,7 @@ func _spawn_player(level: Level_controller, position:Vector2 = Vector2.ZERO):
 	#var actors := _get_actors_root()
 	level.add_child(player);
 	player.global_position = position
+	var hurt_box := player.get_node_or_null("HurtBox") as Hurt_box
+	if hurt_box:
+		hurt_box.player_hp = consume_saved_player_hp(hurt_box.player_hp)
 	player_score = 0;

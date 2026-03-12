@@ -90,17 +90,22 @@ func create_wave_from_config(config: Array) -> void:
 
 func _next_level()->void:
 	if next_level_scenes != "":
+		get_tree().paused = false
+		if GameManager.player_manager:
+			GameManager.player_manager.save_current_player_state()
+		if GameManager.level_manager:
+			GameManager.level_manager.request_auto_start_next_level()
 		get_tree().change_scene_to_file(next_level_scenes);
 
 # --- Infinite wave generation helpers ---
 func _generate_infinite_waves() -> void:
 	var config: Array = []
 	for i in range(WAVES_PER_LEVEL):
-		_append_wave_config(config, Wave_director.global_wave_num)
+		_append_wave_config(config, Wave_director.global_wave_num, true)
 		Wave_director.global_wave_num += 1
 	create_wave_from_config(config)
 
-func _append_wave_config(config: Array, wave_num: int) -> void:
+func _append_wave_config(config: Array, wave_num: int, include_shop: bool = true) -> void:
 	var enemy_count: int = 6 + wave_num * 2
 
 	config.append({"mode": "timer", "delay": 1.0})
@@ -125,7 +130,8 @@ func _append_wave_config(config: Array, wave_num: int) -> void:
 		config.append(_make_spawn("StoneLionBoss", boss_count, [3]))
 
 	config.append({"mode": "clear"})
-	config.append({"mode": "shop"})
+	if include_shop:
+		config.append({"mode": "shop"})
 	config.append({"mode": "timer", "delay": 1.0})
 
 func _make_spawn(p_enemy_name: String, count: int, positions: Array = [0, 1, 2, 3, 4]) -> Dictionary:

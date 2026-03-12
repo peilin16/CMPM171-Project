@@ -21,30 +21,34 @@ const SPECIAL_TILE_CHANCE = 0.25
 const SPECIAL_TILES = [
 	# Dora (suit 3): counts as 2 of its base suit
 	[3, 0, "Dora Wan", "res://assets/mahjung_tiles/dora_bonus/wuwanRed.png", "Counts as 2 Wan tiles (+damage)"],
-	[3, 1, "Dora Tong", "res://assets/mahjung_tiles/dora_bonus/wutongRed.png", "Counts as 2 Tong tiles (pattern)"],
+	[3, 1, "Dora Tong", "res://assets/mahjung_tiles/dora_bonus/wutongRed.png", "Counts as 2 Tong tiles (stronger spread / fan patterns)"],
 	[3, 2, "Dora Tiao", "res://assets/mahjung_tiles/dora_bonus/wutiaoRed.png", "Counts as 2 Tiao tiles (+atk speed)"],
 	# Winds (suit 4)
-	[4, 0, "East Wind", "res://assets/mahjung_tiles/winds_&_dragons/East.png", "+15% move speed"],
-	[4, 1, "South Wind", "res://assets/mahjung_tiles/winds_&_dragons/South.png", "+12% damage"],
-	[4, 2, "West Wind", "res://assets/mahjung_tiles/winds_&_dragons/West.png", "15% damage reduction"],
-	[4, 3, "North Wind", "res://assets/mahjung_tiles/winds_&_dragons/North.png", "+15% attack speed"],
+	[4, 0, "East Wind", "res://assets/mahjung_tiles/winds_&_dragons/East.png", "+15% move speed. Collect all 4 Winds for a major mobility/defense combo."],
+	[4, 1, "South Wind", "res://assets/mahjung_tiles/winds_&_dragons/South.png", "+12% damage. Collect all 4 Winds for a major mobility/defense combo."],
+	[4, 2, "West Wind", "res://assets/mahjung_tiles/winds_&_dragons/West.png", "15% damage reduction. Collect all 4 Winds for a major mobility/defense combo."],
+	[4, 3, "North Wind", "res://assets/mahjung_tiles/winds_&_dragons/North.png", "+15% attack speed. Collect all 4 Winds for a major mobility/defense combo."],
 	# Dragons (suit 5)
-	[5, 0, "Red Dragon", "res://assets/mahjung_tiles/winds_&_dragons/Red.png", "+25% damage"],
-	[5, 1, "Green Dragon", "res://assets/mahjung_tiles/winds_&_dragons/Green.png", "+25% score gain"],
-	[5, 2, "White Dragon", "res://assets/mahjung_tiles/winds_&_dragons/White.png", "+15% bullet speed"],
+	[5, 0, "Red Dragon", "res://assets/mahjung_tiles/winds_&_dragons/Red.png", "+25% damage. Collect all 3 Dragons for a major offensive combo."],
+	[5, 1, "Green Dragon", "res://assets/mahjung_tiles/winds_&_dragons/Green.png", "+25% score gain. Collect all 3 Dragons for a major offensive combo."],
+	[5, 2, "White Dragon", "res://assets/mahjung_tiles/winds_&_dragons/White.png", "+15% bullet speed. Collect all 3 Dragons for a major offensive combo."],
 	# Flowers (suit 6)
-	[6, 0, "Plum", "res://assets/mahjung_tiles/flowers_&_seasons/plum.png", "+8% attack speed"],
-	[6, 1, "Orchid", "res://assets/mahjung_tiles/flowers_&_seasons/orchid.png", "+8% move speed"],
-	[6, 2, "Bamboo", "res://assets/mahjung_tiles/flowers_&_seasons/bamboo.png", "+10% bullet speed"],
-	[6, 3, "Chrysanthemum", "res://assets/mahjung_tiles/flowers_&_seasons/chrysanthemum.png", "+8% damage"],
+	[6, 0, "Plum", "res://assets/mahjung_tiles/flowers_&_seasons/plum.png", "+8% attack speed. Collect all 4 Flowers for a utility combo."],
+	[6, 1, "Orchid", "res://assets/mahjung_tiles/flowers_&_seasons/orchid.png", "+8% move speed. Collect all 4 Flowers for a utility combo."],
+	[6, 2, "Bamboo", "res://assets/mahjung_tiles/flowers_&_seasons/bamboo.png", "+10% bullet speed. Collect all 4 Flowers for a utility combo."],
+	[6, 3, "Chrysanthemum", "res://assets/mahjung_tiles/flowers_&_seasons/chrysanthemum.png", "+8% damage. Collect all 4 Flowers for a utility combo."],
 	# Seasons (suit 7)
-	[7, 0, "Spring", "res://assets/mahjung_tiles/flowers_&_seasons/spring.png", "+10% attack speed"],
-	[7, 1, "Summer", "res://assets/mahjung_tiles/flowers_&_seasons/summer.png", "+10% damage"],
-	[7, 2, "Fall", "res://assets/mahjung_tiles/flowers_&_seasons/fall.png", "+8% bullet speed"],
-	[7, 3, "Winter", "res://assets/mahjung_tiles/flowers_&_seasons/winter.png", "+10% move speed"],
+	[7, 0, "Spring", "res://assets/mahjung_tiles/flowers_&_seasons/spring.png", "+10% attack speed. Collect all 4 Seasons for a tempo combo."],
+	[7, 1, "Summer", "res://assets/mahjung_tiles/flowers_&_seasons/summer.png", "+10% damage. Collect all 4 Seasons for a tempo combo."],
+	[7, 2, "Fall", "res://assets/mahjung_tiles/flowers_&_seasons/fall.png", "+8% bullet speed. Collect all 4 Seasons for a tempo combo."],
+	[7, 3, "Winter", "res://assets/mahjung_tiles/flowers_&_seasons/winter.png", "+10% move speed. Collect all 4 Seasons for a tempo combo."],
 ]
 
-const SUITE_TOOLTIPS = ["Wan: +1 damage per tile", "Tong: Changes bullet pattern", "Tiao: +5% attack speed per tile"]
+const SUITE_TOOLTIPS = [
+	"Wan: +1 damage per tile and favors focused single shots. Mixing suits unlocks combo patterns.",
+	"Tong: pushes your hand toward spread and fan patterns. Matching numbers across suits unlocks extra combo patterns.",
+	"Tiao: +5% attack speed per tile and favors rapid multi-shot patterns. Runs across all 3 suits unlock extra combo patterns."
+]
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS

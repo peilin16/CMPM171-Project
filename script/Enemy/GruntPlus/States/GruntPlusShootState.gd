@@ -3,6 +3,7 @@ class_name GruntPlusShootState
 
 var _shoot_timer: float = 0.0
 var _duration: float = 0.5
+const ATTACK_START_RANGE_FACTOR := 0.8
 
 func _init() -> void:
 	state_name = "Shoot"
@@ -29,7 +30,7 @@ func trigger(controller) -> bool:
 		
 	var dist = controller.global_position.distance_to(GameManager.player_manager.get_player_position())
 	
-	if dist <= range_val:
+	if dist <= range_val * ATTACK_START_RANGE_FACTOR:
 		return true
 		
 	return false
