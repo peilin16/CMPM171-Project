@@ -1,4 +1,4 @@
-[gd_scene load_steps=340 format=3 uid="uid://kks7ir0kgg1a"]
+[gd_scene load_steps=341 format=3 uid="uid://kks7ir0kgg1a"]
 
 [ext_resource type="Script" uid="uid://csieovs421mxl" path="res://script/Character/Player/PlayerController.gd" id="1_beklg"]
 [ext_resource type="Script" uid="uid://bj7f4p0ml38qw" path="res://script/State/StateHub.gd" id="2_4mqus"]
@@ -16,11 +16,11 @@
 [ext_resource type="Texture2D" uid="uid://btlvoo7fn1024" path="res://assets/character/Player/death_Gun.png" id="12_kutdn"]
 [ext_resource type="Texture2D" uid="uid://fkjm0ipc4gto" path="res://assets/character/Player/左/5ba1c1e4-01f9-4c68-8a78-0f99dbb82083-sheet.png" id="12_sygsy"]
 [ext_resource type="Script" uid="uid://doj6f5trje884" path="res://script/Character/Player/PlayerUI.gd" id="13_g7g3w"]
-[ext_resource type="Script" path="res://script/Character/Player/PlayerMahjong.gd" id="14_mahjong"]
 [ext_resource type="Texture2D" uid="uid://dujkpikywewtf" path="res://assets/character/Player/0b3e924a-75dc-4011-b0a2-3ba4416bf4b2-sheet.png" id="13_pwi7n"]
 [ext_resource type="Texture2D" uid="uid://c6i23ml3me37h" path="res://assets/UI/Untitled 04-04-2025 04-50-10.png" id="14_hpedc"]
 [ext_resource type="Texture2D" uid="uid://vfospd0joynt" path="res://assets/character/Player/Idle_Gun.png" id="14_hv7ts"]
 [ext_resource type="Texture2D" uid="uid://dxhbqcn6lra3y" path="res://assets/character/Player/walk_Gun.png" id="14_jl10t"]
+[ext_resource type="Script" uid="uid://b6sq5fsrwy735" path="res://script/Character/Player/PlayerMahjong.gd" id="14_mahjong"]
 [ext_resource type="Texture2D" uid="uid://t2mblk6oqnu6" path="res://assets/character/Player/Shooting.png" id="14_vi0dm"]
 [ext_resource type="FontFile" uid="uid://ddyg7xlxgvfuu" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="16_eg56r"]
 [ext_resource type="Texture2D" uid="uid://dfwmvjmrrxeha" path="res://assets/character/Player/walk_Shooting.png" id="17_hv7ts"]
@@ -2471,8 +2471,7 @@ script = ExtResource("4_8fgnd")
 metadata/_custom_type_script = "uid://b566wwblvpd6x"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(2.9802322e-08, 2.3841858e-07)
-scale = Vector2(0.5208333, 0.6875)
+scale = Vector2(1.2604165, 1.3593749)
 sprite_frames = SubResource("SpriteFrames_gc4mm")
 animation = &"walking-up"
 frame_progress = 0.39754277
