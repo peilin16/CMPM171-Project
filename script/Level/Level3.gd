@@ -11,14 +11,15 @@ class_name Level3
 #- VFXFrontLayer       (z_index = 650)
 #- UILayer (CanvasLayer)
 func _init() -> void:
-	level_name = "test_level"
+	level_name = "Quay"
 	bullet_order = {
-		"MEDIUM_ROUND_BULLET": 30
+		"MEDIUM_ROUND_BULLET": 30,
+		"MAHJONG_BULLET":40
 	}
 	enemy_order = {
-		"Grunt": 12,
-		"StoneLionBoss": 1,
-		"GruntPlus":15
+		"Grunt": 22,
+		"StoneLionBoss": 2,
+		"GruntPlus":25
 	}
 	#vfx_order = {
 		#"generic_fiary1": 4,

@@ -31,19 +31,6 @@ var can_dash: bool = true
 var shoot_cooldown: float = 0.35              # 实际射速（会被条子加成影响）
 var shoot_timer: float = 0.0
 
-# =========================
-# Cheat code (临时替代商店/拾取)
-# 你在 Inspector 随便填条/筒/万数量即可
-# =========================
-@export var cheat_enabled: bool = true
-@export_range(0, 9) var cheat_tiao: int = 0
-@export_range(0, 9) var cheat_tong: int = 0
-@export_range(0, 9) var cheat_wan: int = 0
-
-var _last_cheat_tiao: int = -1
-var _last_cheat_tong: int = -1
-var _last_cheat_wan: int = -1
-
 # 声明 Move_data 变量
 var move_data: Move_data = Move_data.new()
 
@@ -77,9 +64,6 @@ func _ready() -> void:
 	# 5. 初始化 MoveData (以当前位置为起点)
 	move_data.reset(global_position)
 
-	# ✅ 初始化应用 cheat（没有商店时用）
-	_apply_cheat_if_needed(true)
-
 func _physics_process(delta: float) -> void:
 	# ✅ 每帧更新射击冷却
 	if hurtbox.player_hp<= 0:
@@ -88,9 +72,6 @@ func _physics_process(delta: float) -> void:
 	
 	if shoot_timer > 0.0:
 		shoot_timer -= delta
-
-	# ✅ 每帧检查 cheat 是否变更（你改 Inspector 就能生效）
-	_apply_cheat_if_needed(false)
 
 	#print(move_data.moveX);
 	handle_fire_mode_hotkeys()
@@ -184,34 +165,6 @@ func shoot(bullet_script:Array)->void:
 		scheduler.start()
 
 # =========================
-# Cheat apply / stat update
-# =========================
-func _apply_cheat_if_needed(force: bool) -> void:
-	if not cheat_enabled:
-		return
-
-	if force \
-	or cheat_tiao != _last_cheat_tiao \
-	or cheat_tong != _last_cheat_tong \
-	or cheat_wan != _last_cheat_wan:
-
-		_last_cheat_tiao = cheat_tiao
-		_last_cheat_tong = cheat_tong
-		_last_cheat_wan = cheat_wan
-
-		# 把麻将数量应用到 PlayerLogic（后续你接入拾取/商店时，也只需要调用这个 API）
-		logic.apply_tiles(cheat_tiao, cheat_tong, cheat_wan)
-
-		# 条子影响射速：cooldown = base / multiplier
-		var mult := logic.get_attack_speed_multiplier()
-		shoot_cooldown = base_shoot_cooldown / max(mult, 0.01)
-
-		print("[Mahjong] tiao=", cheat_tiao, " tong=", cheat_tong, " wan=", cheat_wan,
-			" | mode=", logic.get_fire_mode_name(),
-			" | dmg=", logic.get_damage_value(),
-			" | cooldown=", shoot_cooldown)
-
-# =========================
 # Manual fire mode hotkeys (保留)
 # 说明：如果你想“完全由筒子控制”，把 PlayerLogic.gd 里的 manual_fire_mode_override 保持 false 即可
 # =========================
@@ -240,8 +193,8 @@ func handle_fire_mode_hotkeys() -> void:
 func death()->void:
 	if not is_death:
 		vfx_parser.execute({
-			 "name":"Explosion1",
-			 "life":3,
+			"name":"Explosion1",
+			"life":3,
 			"front":true, 
 			"scale":0.5
 		});#explosion1

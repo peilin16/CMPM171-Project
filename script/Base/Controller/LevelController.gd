@@ -9,8 +9,17 @@ var level:Level;
 func _ready() -> void:
 	if level == null:
 		level = Level.new();
+	# Move shop into a CanvasLayer so it renders in screen space (not affected by camera)
+	if is_instance_valid(shop_menu):
+		var shop_layer := CanvasLayer.new()
+		shop_layer.name = "ShopCanvasLayer"
+		shop_layer.layer = 100
+		add_child(shop_layer)
+		shop_menu.reparent(shop_layer, false)
+	if is_instance_valid(shop_menu) and not shop_menu.tile_chosen.is_connected(_on_shop_tile_chosen):
+		shop_menu.tile_chosen.connect(_on_shop_tile_chosen)
 	print(level.level_name)
-
+	
 	
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("stop"):
@@ -28,12 +37,13 @@ func start_game()->void:
 	
 func display_shop()->void:
 	if not is_instance_valid(shop_menu):
-		shop_menu = get_node_or_null("ShopMenu") as Shop_menu
+		var layer = get_node_or_null("ShopCanvasLayer")
+		if layer:
+			shop_menu = layer.get_node_or_null("ShopMenu") as Shop_menu
 	if shop_menu == null:
 		return
 	if shop_menu.has_method("setup_shop"):
 		shop_menu.setup_shop()
-	shop_menu.global_position = GameManager.camera_manager.get_center()
 	shop_menu.visible = true;
 	get_tree().paused = true;
 
@@ -42,6 +52,17 @@ func undisplay_shop()->void:
 	if is_instance_valid(shop_menu):
 		shop_menu.visible = false;
 	get_tree().paused = false;
+
+func _on_shop_tile_chosen(suit: int, value: int) -> void:
+	if not GameManager.player_manager:
+		return
+	var player: Player_controller = GameManager.player_manager.get_player()
+	if player == null:
+		return
+	var player_mahjong := player.get_node_or_null("PlayerMahjong") as Player_mahjong
+	if player_mahjong == null:
+		return
+	player_mahjong.add_tile(suit, value)
 
 func _exit_tree() -> void:
 	PoolManager.widget_pool_manager.clear_all();

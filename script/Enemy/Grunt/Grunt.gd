@@ -7,3 +7,4 @@ func _init() -> void:
 	max_hp = 10
 	hp = max_hp
 	move_data = Move_data.new() # Ensure move data exists
+	death_score = 20;

@@ -28,8 +28,8 @@
 [ext_resource type="Texture2D" uid="uid://ck25cmo5pg4nj" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_1C.png" id="25_t12kh"]
 [ext_resource type="Texture2D" uid="uid://by420k64e2thk" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_3A.png" id="26_rugif"]
 [ext_resource type="PackedScene" uid="uid://sbu784eu31i5" path="res://scenes/UI/PauseMenu.tscn" id="27_e01e7"]
+[ext_resource type="Script" uid="uid://bwjb2qb1r35cf" path="res://script/Level/Level3WaveDirector.gd" id="29_0k3as"]
 [ext_resource type="Script" uid="uid://dkfayiq4hb6yc" path="res://script/Level/Base/SubDirector.gd" id="29_qfgq8"]
-[ext_resource type="Script" uid="uid://bwjb2qb1r35cf" path="res://script/Level/Level3WaveDirector.gd" id="29_w7m4p"]
 [ext_resource type="Script" uid="uid://yd3lu0oib4w3" path="res://script/Level/Base/SpawnDirector.gd" id="30_v882j"]
 [ext_resource type="Script" uid="uid://c4isnf8bgipw3" path="res://script/Level/Base/SpawnPoint.gd" id="31_jntrq"]
 [ext_resource type="Script" uid="uid://c3s17tc73vbrt" path="res://script/Level/Base/WidgetSpawner.gd" id="32_y7lto"]
@@ -18486,7 +18486,7 @@ z_index = 4096
 [node name="VFXContainerBack" type="Node2D" parent="."]
 
 [node name="WaveDirector" type="Node2D" parent="."]
-script = ExtResource("29_w7m4p")
+script = ExtResource("29_0k3as")
 
 [node name="SubDirector" type="Node2D" parent="WaveDirector"]
 script = ExtResource("29_qfgq8")

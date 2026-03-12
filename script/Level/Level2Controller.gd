@@ -11,6 +11,7 @@ func _ready() -> void:
 	await ToolBar.globalDelayCall.delay(0.3)
 	shop_menu.visible = false;
 	await get_tree().process_frame
+	name = "Forest";
 	SoundManager.command({
 		"sound":"bgm",
 		"command":"start",
@@ -25,5 +26,6 @@ func _ready() -> void:
 		"pitch_scale":1.0
 	});
 	start_game();
+	level = Level2.new();
 func start_game()->void:
 	super.start_game();

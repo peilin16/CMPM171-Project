@@ -24,7 +24,7 @@ void fragment() {
 				-0.003882 * rgb.r - 0.048116 * rgb.g + 1.051998 * rgb.b
 			);
 			vec3 err = rgb - sim;
-			correction = vec3(0.0, 2.4 * err.r, 2.4 * err.r);
+			correction = vec3(0.0, 1.0 * err.r, 1.0 * err.r);
 		} else if (mode < 2.5) {
 			// Deuteranopia
 			sim = vec3(
@@ -33,7 +33,7 @@ void fragment() {
 				-0.011820 * rgb.r + 0.042940 * rgb.g + 0.968881 * rgb.b
 			);
 			vec3 err = rgb - sim;
-			correction = vec3(0.0, 2.4 * err.r, 2.4 * err.r);
+			correction = vec3(0.0, 1.0 * err.r, 1.0 * err.r);
 		} else {
 			// Tritanopia
 			sim = vec3(
@@ -42,7 +42,7 @@ void fragment() {
 				0.004733 * rgb.r + 0.691367 * rgb.g + 0.303900 * rgb.b
 			);
 			vec3 err = rgb - sim;
-			correction = vec3(2.4 * err.b, 2.4 * err.b, 0.0);
+			correction = vec3(1.0 * err.b, 1.0 * err.b, 0.0);
 		}
 
 		COLOR = vec4(clamp(rgb + correction, vec3(0.0), vec3(1.0)), tex.a);
