@@ -14,6 +14,7 @@ const COLORBLIND_KEYS := [
 
 @onready var colorblind_option: OptionButton = $AccessibilityContainer/ColorBlindOption
 @onready var colorblind_label: Label = $AccessibilityContainer/ColorBlindLabel
+@onready var instruction_label: RichTextLabel = $InstructionPanel/InstructionLabel
 
 func _ready() -> void:
 	# 确保一开始鼠标是可见的（以防游戏里隐藏了鼠标）
@@ -57,6 +58,8 @@ func _refresh_text() -> void:
 
 	colorblind_label.text = tr("menu_colorblind_title")
 	_setup_colorblind_option()
+
+	instruction_label.text = tr("menu_instructions")
 	
 func _on_start_button_pressed() -> void:
 	# 切换到游戏关卡

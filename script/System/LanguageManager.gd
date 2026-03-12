@@ -44,6 +44,9 @@ func _create_translations() -> void:
 	en_translation.add_message("colorblind_deuteranopia", "Deuteranopia")
 	en_translation.add_message("colorblind_tritanopia", "Tritanopia")
 
+	en_translation.add_message("menu_instructions",
+	"Use the mouse wheel to scroll down for more.\nUse WASD to move up, down, left, and right.\nUse the Left Mouse Button to fire bullets.\nDodge enemies and incoming bullets. Taking a hit from a bullet or touching an enemy will reduce your health.\nKill enemies to earn points to buy Mahjong tiles.\nDifferent Mahjong tiles grant different buffs:\nBamboo tiles (Souzu): Increase fire rate.\nCircle tiles (Pinzu): Change the number of bullets fired.\nCharacter tiles (Manzu): Increase attack power.\nCollecting specific tile combinations will trigger even stronger effects.\nPress the T key to switch languages (English - Chinese - Japanese).")
+
 	# Chinese
 	zh_translation = Translation.new()
 	zh_translation.locale = LOCALE_ZH
@@ -62,6 +65,9 @@ func _create_translations() -> void:
 	zh_translation.add_message("colorblind_deuteranopia", "绿色盲")
 	zh_translation.add_message("colorblind_tritanopia", "蓝色盲")
 
+	zh_translation.add_message("menu_instructions",
+	"使用鼠标滚轮向下滚动查看更多内容。\n使用 WASD 上下左右移动。\n使用鼠标左键发射子弹。\n躲避敌人和敌人的子弹。被子弹击中或碰到敌人都会扣血。\n击杀敌人可获得分数，并使用分数购买麻将牌。\n不同麻将牌会提供不同增益：\n条子：增加射速。\n筒子：改变发射子弹的数量。\n万子：增加攻击力。\n收集特定牌型组合后，会触发更强力的效果。\n按 T 键可切换语言（英文 - 中文 - 日文）。")
+
 	# Japanese
 	ja_translation = Translation.new()
 	ja_translation.locale = LOCALE_JA
@@ -79,7 +85,8 @@ func _create_translations() -> void:
 	ja_translation.add_message("colorblind_protanopia", "1型色覚")
 	ja_translation.add_message("colorblind_deuteranopia", "2型色覚")
 	ja_translation.add_message("colorblind_tritanopia", "3型色覚")
-
+	ja_translation.add_message("menu_instructions",
+	"マウスホイールを下にスクロールして続きをご覧ください。\nWASDキーで上下左右に移動します。\nマウスの左クリックで弾を発射します。\n敵と敵の弾を避けてください。被弾したり、敵に触れたりするとHPが減少します。\n敵を倒してスコアを獲得し、そのスコアで麻雀牌を購入できます。\n麻雀牌の種類によって異なる強化効果が得られます：\n索子（ソーズ）：発射速度が上昇します。\n筒子（ピンズ）：発射する弾の数が変化します。\n萬子（マンズ）：攻撃力が上昇します。\n特定の牌の組み合わせを揃えると、さらに強力な効果が発動します。\nTキーを押すと、言語を切り替えることができます（英語 - 中国語 - 日本語）。")
 
 func toggle_language() -> void:
 	var current_index := LANGUAGE_ORDER.find(current_locale)

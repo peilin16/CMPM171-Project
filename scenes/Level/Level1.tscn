@@ -15,14 +15,14 @@
 [ext_resource type="PackedScene" uid="uid://sbu784eu31i5" path="res://scenes/UI/PauseMenu.tscn" id="12_pause"]
 [ext_resource type="Texture2D" uid="uid://boapb1hgmrpvk" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_0_B.png" id="12_rbypt"]
 [ext_resource type="Texture2D" uid="uid://dxqcdabimp0w4" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_3B.png" id="13_6laxy"]
-[ext_resource type="Script" uid="uid://dd5bpmb6vyu5g" path="res://script/Level/Level1WaveDirector.gd" id="13_mf1cp"]
+[ext_resource type="Script" uid="uid://cn554pcgm44xw" path="res://script/Level/Level1WaveDirector.gd" id="13_mf1cp"]
 [ext_resource type="Texture2D" uid="uid://8aw6t87s2pd1" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_3C.png" id="14_5r1um"]
 [ext_resource type="Script" uid="uid://yd3lu0oib4w3" path="res://script/Level/Base/SpawnDirector.gd" id="14_67qcy"]
 [ext_resource type="Texture2D" uid="uid://cm57dvumhd0wx" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_4B.png" id="15_f5v21"]
 [ext_resource type="Texture2D" uid="uid://bcqwy22hmh7is" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_5B.png" id="16_e1xui"]
-[ext_resource type="Script" uid="uid://c4isnf8bgipw3" path="res://script/Level/Base/SpawnPoint.gd" id="16_u85d8"]
+[ext_resource type="Script" uid="uid://opbq166jvj76" path="res://script/Level/Base/SpawnPoint.gd" id="16_u85d8"]
 [ext_resource type="Texture2D" uid="uid://dkckikund85b" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_5C.png" id="17_8svs3"]
-[ext_resource type="Script" uid="uid://c3s17tc73vbrt" path="res://script/Level/Base/WidgetSpawner.gd" id="17_ti1q0"]
+[ext_resource type="Script" uid="uid://cq5lfyq6tq8p6" path="res://script/Level/Base/WidgetSpawner.gd" id="17_ti1q0"]
 [ext_resource type="Texture2D" uid="uid://b0pdymppgldu7" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_5D.png" id="18_gnnbo"]
 [ext_resource type="Texture2D" uid="uid://bdqffp2lvnf18" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_6A.png" id="19_m430h"]
 [ext_resource type="Texture2D" uid="uid://dfgpenfvfltla" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_0_C.png" id="20_lb7yv"]
@@ -35,7 +35,7 @@
 [ext_resource type="Texture2D" uid="uid://bac0d0goqcy3h" path="res://assets/Map/Gemini_Generated_Image_c0irphc0irphc0ir.png" id="33_6laxy"]
 [ext_resource type="PackedScene" uid="uid://b68pmqxc8g3ms" path="res://scenes/UI/ShopMenu.tscn" id="34_5r1um"]
 [ext_resource type="PackedScene" uid="uid://c3cnfks53qo0f" path="res://scenes/UI/StartMenu.tscn" id="35_f5v21"]
-[ext_resource type="Script" path="res://script/UI/ColorBlindFilterOverlay.gd" id="36_cbf"]
+[ext_resource type="Script" uid="uid://dcspl06om83pg" path="res://script/UI/ColorBlindFilterOverlay.gd" id="36_cbf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p27p8"]
 texture = ExtResource("3_6ch66")
@@ -17331,6 +17331,22 @@ texture = ExtResource("33_6laxy")
 [node name="ShopMenu" parent="." instance=ExtResource("34_5r1um")]
 
 [node name="StartMenu" parent="." instance=ExtResource("35_f5v21")]
+
+[node name="InstructionPanel" type="Panel" parent="StartMenu"]
+layout_mode = 0
+offset_left = 566.0
+offset_top = 604.0
+offset_right = 714.0
+offset_bottom = 719.0
+
+[node name="InstructionLabel" type="RichTextLabel" parent="StartMenu/InstructionPanel"]
+layout_mode = 0
+offset_left = -1127.0
+offset_top = -917.0
+offset_right = -754.0
+offset_bottom = -717.0
+theme_override_colors/default_color = Color(0.9227369, 0.32616445, 0.2805773, 1)
+autowrap_mode = 2
 
 [node name="Border" type="Node2D" parent="."]
 
