@@ -4,11 +4,15 @@ signal language_changed
 
 const LOCALE_EN := "en"
 const LOCALE_ZH := "zh_CN"
+const LOCALE_JA := "ja"
+
+const LANGUAGE_ORDER := [LOCALE_EN, LOCALE_ZH, LOCALE_JA]
 
 var current_locale: String = LOCALE_EN
 
 var en_translation: Translation
 var zh_translation: Translation
+var ja_translation: Translation
 
 
 func _ready() -> void:
@@ -16,6 +20,7 @@ func _ready() -> void:
 
 	TranslationServer.add_translation(en_translation)
 	TranslationServer.add_translation(zh_translation)
+	TranslationServer.add_translation(ja_translation)
 
 	set_language(LOCALE_EN)
 
@@ -33,15 +38,11 @@ func _create_translations() -> void:
 	en_translation.add_message("game_over_restart", "Restart")
 	en_translation.add_message("game_over_title_screen", "Title Screen")
 
-
-
 	en_translation.add_message("menu_colorblind_title", "Color-Blind Filter")
 	en_translation.add_message("colorblind_off", "Off")
 	en_translation.add_message("colorblind_protanopia", "Protanopia")
 	en_translation.add_message("colorblind_deuteranopia", "Deuteranopia")
 	en_translation.add_message("colorblind_tritanopia", "Tritanopia")
-	
-
 
 	# Chinese
 	zh_translation = Translation.new()
@@ -61,12 +62,34 @@ func _create_translations() -> void:
 	zh_translation.add_message("colorblind_deuteranopia", "绿色盲")
 	zh_translation.add_message("colorblind_tritanopia", "蓝色盲")
 
+	# Japanese
+	ja_translation = Translation.new()
+	ja_translation.locale = LOCALE_JA
+	ja_translation.add_message("menu_new_game", "ゲーム開始")
+	ja_translation.add_message("menu_quit_game", "ゲーム終了")
+
+	ja_translation.add_message("game_over_title", "ゲームオーバー")
+	ja_translation.add_message("game_over_score", "最終スコア：{score}")
+	ja_translation.add_message("game_over_waves", "生存ウェーブ数：{waves}")
+	ja_translation.add_message("game_over_restart", "リスタート")
+	ja_translation.add_message("game_over_title_screen", "タイトルへ戻る")
+
+	ja_translation.add_message("menu_colorblind_title", "色覚フィルター")
+	ja_translation.add_message("colorblind_off", "オフ")
+	ja_translation.add_message("colorblind_protanopia", "1型色覚")
+	ja_translation.add_message("colorblind_deuteranopia", "2型色覚")
+	ja_translation.add_message("colorblind_tritanopia", "3型色覚")
+
 
 func toggle_language() -> void:
-	if current_locale == LOCALE_EN:
-		set_language(LOCALE_ZH)
-	else:
+	var current_index := LANGUAGE_ORDER.find(current_locale)
+
+	if current_index == -1:
 		set_language(LOCALE_EN)
+		return
+
+	var next_index := (current_index + 1) % LANGUAGE_ORDER.size()
+	set_language(LANGUAGE_ORDER[next_index])
 
 
 func set_language(locale: String) -> void:
