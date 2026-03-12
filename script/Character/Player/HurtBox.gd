@@ -43,7 +43,7 @@ func hurt(num:float)->void:
 	if controller:
 		controller.play_hurt_flash()
 	if GameManager.camera_manager:
-		GameManager.camera_manager.shake(8.0, 0.2)
+		GameManager.camera_manager.shake(10.0, 10.0, 0.2) 
 
 func _physics_process(delta: float) -> void:
 	if not can_hurt:
