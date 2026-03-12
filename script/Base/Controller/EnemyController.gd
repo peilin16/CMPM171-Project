@@ -25,13 +25,15 @@ var stats: Dictionary = {}
 @export var horde_separation_strength: float = 0.28
 
 @export var death_gravity: float = 100.0       # how fast enemy falls when dying
-@export var death_delay: float = 1.0          # how long it can still be hit after hp <= 0
+@export var death_delay: float = 0.0          # optional corpse linger time after interactions stop
 
 
 var death_time: float = 0.0       # death time
 var is_spawn:bool = false;
 
 var is_dying:bool = false;
+var _default_collision_layer: int = 0
+var _default_collision_mask: int = 0
 
 
 
@@ -66,6 +68,8 @@ func _ready() -> void:
 	
 	#_task._queue = _logic.queue;
 	set_collision_layer_value(2, true)
+	_default_collision_layer = collision_layer
+	_default_collision_mask = collision_mask
 	
 
 func _physics_process(delta: float) -> void:
@@ -89,8 +93,12 @@ func _physics_process(delta: float) -> void:
 func activate(behavoir_code:String = "")->void:
 	is_spawn = true;
 	is_death = false;
+	is_dying = false;
 	hitable = true;
-	_set_collision_shapes_disabled(false)
+	velocity = Vector2.ZERO
+	modulate = Color(1, 1, 1, 1)
+	_restore_collision_state()
+	_restore_visual_state()
 	_character.isActive = true;
 	_logic.reset();
 	_logic.behavoir = behavoir_code;
@@ -102,6 +110,7 @@ func activate(behavoir_code:String = "")->void:
 func deactivate()->void:
 	is_spawn = false;
 	hitable = false;
+	velocity = Vector2.ZERO
 	GameManager.enemy_manager.unregister_active_enemy(controller_id);
 	emit_signal("enemy_deactivated", self);
 
@@ -132,14 +141,17 @@ func death() -> void:
 		
 	GameManager.enemy_manager.unregister_active_enemy(controller_id);
 	is_death = true
+	is_dying = true
+	hitable = false
 	#hitable = true         
 	#_spring.in_death_mode()
 	# 1) enemy becomes lighter
 	_character.weight = max(_character.weight * 0.3, 0.1)
+	velocity = Vector2.ZERO
 
 	# 2) stop AI / task logic
-	
-	scheduler.cancel();
+	_stop_runtime_behavior()
+	_disable_interactions()
 
 	#add score
 	GameManager.player_manager.add_score(_character.death_score);
@@ -150,20 +162,52 @@ func death() -> void:
 	## 5) start coroutine for delayed "true death"
 	##    1.5s during which it can still be hit and keep getting impulses
 	#await ToolBar.globalDelayCall.delay(_spring.data.combo_window);
+	if death_delay <= 0.0:
+		deactivate()
+		return
 	call_deferred("_call_death_delay")
 
 func _call_death_delay() -> void:
 	await get_tree().create_timer(max(death_delay, 0.0)).timeout
 	if not is_inside_tree():
 		return
-	hitable = false;          # now bullets should ignore this enemy
-	_set_collision_shapes_disabled(true)
 	deactivate()
 
 func _set_collision_shapes_disabled(disabled: bool) -> void:
-	for child in get_children():
+	_set_collision_shapes_disabled_recursive(self, disabled)
+
+func _set_collision_shapes_disabled_recursive(node: Node, disabled: bool) -> void:
+	for child in node.get_children():
 		if child is CollisionShape2D:
 			child.set_deferred("disabled", disabled)
+		_set_collision_shapes_disabled_recursive(child, disabled)
+
+func _disable_interactions() -> void:
+	collision_layer = 0
+	collision_mask = 0
+	_set_collision_shapes_disabled(true)
+
+func _restore_collision_state() -> void:
+	collision_layer = _default_collision_layer
+	collision_mask = _default_collision_mask
+	_set_collision_shapes_disabled(false)
+
+func _restore_visual_state() -> void:
+	_restore_canvas_item_state(self)
+
+func _restore_canvas_item_state(node: Node) -> void:
+	if node is CanvasItem:
+		var canvas_item := node as CanvasItem
+		canvas_item.visible = true
+		canvas_item.modulate = Color(1, 1, 1, 1)
+	for child in node.get_children():
+		_restore_canvas_item_state(child)
+
+func _stop_runtime_behavior() -> void:
+	if scheduler:
+		scheduler.stop()
+		scheduler.cancel()
+		scheduler.clear()
 
 func _get_player_distance() -> float:
 	if not GameManager.player_manager or GameManager.player_manager.player == null:

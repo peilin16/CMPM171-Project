@@ -43,8 +43,8 @@ func _refresh_text() -> void:
 
 	score_label.text = tr("game_over_score").format({
 		"score": GameManager.player_manager.player_score
-	})
-	wave_label.text ="Level :"+ GameManager.level_manager.get_level_name()
+	});
+	#wave_label.text ="Level :"+ GameManager.level_manager.get_level_name()
 	
 
 # --- [API] 供外部调用的设置函数 ---
@@ -57,6 +57,8 @@ func set_stats(score: int, waves: int) -> void:
 
 func _on_restart_pressed() -> void:
 	get_tree().paused = false
+	if GameManager.player_manager:
+		GameManager.player_manager.clear_saved_mahjong_hand()
 	get_tree().change_scene_to_file(START_MENU_PATH)
 
 

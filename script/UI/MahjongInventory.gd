@@ -8,17 +8,6 @@ const SUIT_NAMES = ["wan", "tong", "tiao"]
 
 func _ready() -> void:
 	clear_inventory()
-	
-	# --- 临时测试代码开始 (测试完记得删) ---
-	var test_hand = [
-		{"suit": 0, "value": 1}, # 一万
-		{"suit": 0, "value": 2}, # 二万
-		{"suit": 0, "value": 3}, # 三万
-		{"suit": 1, "value": 9}, # 九筒
-		{"suit": 2, "value": 5}  # 五条
-	]
-	update_inventory(test_hand)
-	# --- 临时测试代码结束 ---
 
 # --- 核心接口：更新手牌显示 ---
 func update_inventory(hand_array: Array) -> void:
@@ -39,8 +28,15 @@ func _add_tile_to_ui(tile_data) -> void:
 	texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	texture_rect.custom_minimum_size = Vector2(45, 65) 
 	
-	var num_str = PINYIN_NUMS[tile_data.value]
-	var suit_str = SUIT_NAMES[tile_data.suit]
+	var value := int(tile_data.get("value", 0))
+	var suit := int(tile_data.get("suit", -1))
+	if value < 1 or value >= PINYIN_NUMS.size():
+		return
+	if suit < 0 or suit >= SUIT_NAMES.size():
+		return
+
+	var num_str = PINYIN_NUMS[value]
+	var suit_str = SUIT_NAMES[suit]
 	var file_name = num_str + suit_str + ".png"
 	var path = "res://assets/mahjung_tiles/three_suites/" + file_name
 	
