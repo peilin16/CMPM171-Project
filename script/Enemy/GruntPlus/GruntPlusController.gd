@@ -10,21 +10,17 @@ var ready_to_shoot: bool = true
 # Dependencies
 const BULLET_POOL_NAME := "MEDIUM_ROUND_BULLET"
 
-# Avoidance
-var ray_center: RayCast2D
-var ray_left: RayCast2D
-var ray_right: RayCast2D
+
 
 func _init() -> void:
 	name = "GruntPlus"
+	enemy_type_name = "GruntPlus"
 	_character = GruntPlus.new()
 	_logic = enemy_logic.new(self, _character)
 	team = TEAM.ENEMY
 
 func _ready() -> void:
 	super._ready()
-	_setup_avoidance()
-	print("GruntPlus Ready with stats: ", stats)
 
 func activate(behavoir_code: String = "", sprite_code: int = 0) -> void:
 	# Build State Machine
@@ -101,29 +97,4 @@ func spawn_bullet() -> void:
 			bullet.scheduler.setup(move_script)
 		bullet.activate()
 
-func _setup_avoidance() -> void:
-	if stats.get("avoidance_enabled", false) == false: return
-	if has_node("AvoidanceRays"): return
-		
-	var container = Node2D.new()
-	container.name = "AvoidanceRays"
-	add_child(container)
-	
-	var ray_length = stats.get("ray_length", 60.0)
-	var side_angle = stats.get("side_ray_angle", 30.0)
 
-	ray_center = _create_ray(0, ray_length)
-	ray_left = _create_ray(-deg_to_rad(side_angle), ray_length)
-	ray_right = _create_ray(deg_to_rad(side_angle), ray_length)
-	
-	container.add_child(ray_center)
-	container.add_child(ray_left)
-	container.add_child(ray_right)
-
-func _create_ray(angle: float, length: float) -> RayCast2D:
-	var ray = RayCast2D.new()
-	ray.target_position = Vector2.RIGHT.rotated(angle) * length
-	ray.enabled = true
-	ray.collision_mask = 1 
-	ray.add_exception(self)
-	return ray

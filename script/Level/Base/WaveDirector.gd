@@ -11,6 +11,9 @@ var parser:Wave_parser = Wave_parser.new(self);
 
 var next_level_scenes:String;
 
+static var global_wave_num: int = 0
+const WAVES_PER_LEVEL: int = 3
+
 func _ready() -> void:
 	next_level_scenes = "";
 	
@@ -87,4 +90,56 @@ func create_wave_from_config(config: Array) -> void:
 
 func _next_level()->void:
 	if next_level_scenes != "":
+		get_tree().paused = false
+		if GameManager.player_manager:
+			GameManager.player_manager.save_current_player_state()
+		if GameManager.level_manager:
+			GameManager.level_manager.request_auto_start_next_level()
 		get_tree().change_scene_to_file(next_level_scenes);
+
+# --- Infinite wave generation helpers ---
+func _generate_infinite_waves() -> void:
+	var config: Array = []
+	for i in range(WAVES_PER_LEVEL):
+		_append_wave_config(config, Wave_director.global_wave_num, true)
+		Wave_director.global_wave_num += 1
+	create_wave_from_config(config)
+
+func _append_wave_config(config: Array, wave_num: int, include_shop: bool = true) -> void:
+	var enemy_count: int = 6 + wave_num * 2
+
+	config.append({"mode": "timer", "delay": 1.0})
+
+	# GruntPlus ratio: 0% at wave 0-2, ramps to 100% by wave 10
+	var grunt_plus_ratio: float = clampf(float(wave_num - 2) / 8.0, 0.0, 1.0)
+	var grunt_plus_count: int = int(enemy_count * grunt_plus_ratio)
+	var grunt_count: int = enemy_count - grunt_plus_count
+
+	if grunt_count > 0:
+		config.append(_make_spawn("Grunt", grunt_count))
+		if grunt_plus_count > 0:
+			config.append({"mode": "timer", "delay": 3.0})
+
+	if grunt_plus_count > 0:
+		config.append(_make_spawn("GruntPlus", grunt_plus_count))
+
+	# Boss appears from wave 5 onward, count increases every 6 waves
+	if wave_num >= 5:
+		config.append({"mode": "timer", "delay": 5.0})
+		var boss_count: int = 1 + (wave_num - 5) / 6
+		config.append(_make_spawn("StoneLionBoss", boss_count, [3]))
+
+	config.append({"mode": "clear"})
+	if include_shop:
+		config.append({"mode": "shop"})
+	config.append({"mode": "timer", "delay": 1.0})
+
+func _make_spawn(p_enemy_name: String, count: int, positions: Array = [0, 1, 2, 3, 4]) -> Dictionary:
+	return {
+		"mode": "enemy_spawn",
+		"type": "group",
+		"name": p_enemy_name,
+		"count": count,
+		"behavior": "---",
+		"positions": positions,
+	}

@@ -2,10 +2,16 @@ extends Level_controller
 class_name Level1_controller
 
 @onready var start_menu:Start_menu = $StartMenu
+@onready var weather_filter = $WeatherFilter
 func _ready() -> void:
 	level = Level1.new();	
 	pause_menu.visible =false;
 	name = "Town";
+	var should_auto_start := false
+	if GameManager.level_manager:
+		should_auto_start = GameManager.level_manager.consume_auto_start_next_level()
+	if start_menu:
+		start_menu.visible = not should_auto_start
 	#start_menu.visible = true;
 	#get_tree().paused = true;
 	
@@ -28,10 +34,16 @@ func _ready() -> void:
 		"volume_mul":0.4,
 		"pitch_scale":1.0
 	});
+	if should_auto_start:
+		start_game()
 	
 func start_game()->void:
 	super.start_game();
 	start_menu.visible = false;
+	if weather_filter:
+		var color_rect = weather_filter.get_node_or_null("ColorRect")
+		if color_rect and color_rect.has_method("apply_weather"):
+			color_rect.apply_weather()
 	SoundManager.command({
 		"sound":"bgm",
 		"command":"start",

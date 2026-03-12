@@ -61,6 +61,12 @@ theme_override_fonts/font = ExtResource("2_yi547")
 theme_override_font_sizes/font_size = 50
 text = "Quit Game"
 
+[node name="InstructionsButton" type="Button" parent="MenuContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_yi547")
+theme_override_font_sizes/font_size = 38
+text = "Instructions"
+
 [node name="AccessibilityContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 7
@@ -79,14 +85,14 @@ grow_vertical = 0
 layout_mode = 2
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("2_yi547")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 24
 text = "Color-Blind Filter"
 horizontal_alignment = 1
 
 [node name="ColorBlindOption" type="OptionButton" parent="AccessibilityContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_yi547")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 24
 
 [connection signal="pressed" from="MenuContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MenuContainer/QuitButton" to="." method="_on_quit_button_pressed"]

@@ -17,7 +17,6 @@ func _ready() -> void:
 	runner = scheduler.get_runner_for(System.Belong.MOVE);
 
 func _physics_process(delta: float) -> void:
-	print();
 	
 	if _current_rad == 0:
 		_current_rad = runner.get_data().get_rad()

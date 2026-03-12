@@ -13,6 +13,15 @@ var _last_cheat_tiao: int = -1
 var _last_cheat_tong: int = -1
 var _last_cheat_wan: int = -1
 
+# Special tile names for logging
+const SPECIAL_TILE_NAMES = {
+	"3_0": "Dora Wan", "3_1": "Dora Tong", "3_2": "Dora Tiao",
+	"4_0": "East Wind", "4_1": "South Wind", "4_2": "West Wind", "4_3": "North Wind",
+	"5_0": "Red Dragon", "5_1": "Green Dragon", "5_2": "White Dragon",
+	"6_0": "Plum", "6_1": "Orchid", "6_2": "Bamboo", "6_3": "Chrysanthemum",
+	"7_0": "Spring", "7_1": "Summer", "7_2": "Fall", "7_3": "Winter",
+}
+
 func _ready() -> void:
 	_player = get_parent() as Player_controller
 	if _player == null:
@@ -40,7 +49,11 @@ func add_tile(suit: int, value: int) -> void:
 	if _logic == null:
 		return
 	_logic.add_tile(suit, value)
-	var tile_name: String = MahjongInventory.PINYIN_NUMS[value] + MahjongInventory.SUIT_NAMES[suit]
+	var tile_name: String
+	if suit >= 0 and suit <= 2:
+		tile_name = MahjongInventory.PINYIN_NUMS[value] + MahjongInventory.SUIT_NAMES[suit]
+	else:
+		tile_name = SPECIAL_TILE_NAMES.get(str(suit) + "_" + str(value), "Unknown")
 	print("[Mahjong] picked ", tile_name)
 
 func get_hand_tiles() -> Array:
@@ -60,9 +73,13 @@ func _on_mahjong_inventory_changed(hand: Array, tiao: int, tong: int, wan: int) 
 		_player.shoot_cooldown = _player.base_shoot_cooldown / max(mult, 0.01)
 
 		print("[Mahjong] tiao=", tiao, " tong=", tong, " wan=", wan,
+			" | combos=", _logic.get_active_combo_names(),
 			" | mode=", _logic.get_fire_mode_name(),
 			" | dmg=", _logic.get_damage_value(),
-			" | cooldown=", _player.shoot_cooldown)
+			" | cooldown=", _player.shoot_cooldown,
+			" | move_spd=", _logic.get_move_speed_multiplier(),
+			" | bullet_spd=", _logic.get_bullet_speed_multiplier(),
+			" | defense=", _logic.get_damage_reduction())
 
 func _apply_cheat_if_needed(force: bool) -> void:
 	if not cheat_enabled or _logic == null:

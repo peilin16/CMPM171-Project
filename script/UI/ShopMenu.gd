@@ -14,6 +14,42 @@ var current_options: Array = []
 const PINYIN_NUMS = ["", "yi", "er", "san", "si", "wu", "liu", "qi", "ba", "jiu"]
 const SUIT_NAMES = ["wan", "tong", "tiao"]
 
+# Probability that each shop slot offers a special tile
+const SPECIAL_TILE_CHANCE = 0.25
+
+# Special tile definitions: [suit, value, display_name, image_path, tooltip]
+const SPECIAL_TILES = [
+	# Dora (suit 3): counts as 2 of its base suit
+	[3, 0, "Dora Wan", "res://assets/mahjung_tiles/dora_bonus/wuwanRed.png", "Counts as 2 Wan tiles (+damage)"],
+	[3, 1, "Dora Tong", "res://assets/mahjung_tiles/dora_bonus/wutongRed.png", "Counts as 2 Tong tiles (stronger spread / fan patterns)"],
+	[3, 2, "Dora Tiao", "res://assets/mahjung_tiles/dora_bonus/wutiaoRed.png", "Counts as 2 Tiao tiles (+atk speed)"],
+	# Winds (suit 4)
+	[4, 0, "East Wind", "res://assets/mahjung_tiles/winds_&_dragons/East.png", "+15% move speed. Collect all 4 Winds for a major mobility/defense combo."],
+	[4, 1, "South Wind", "res://assets/mahjung_tiles/winds_&_dragons/South.png", "+12% damage. Collect all 4 Winds for a major mobility/defense combo."],
+	[4, 2, "West Wind", "res://assets/mahjung_tiles/winds_&_dragons/West.png", "15% damage reduction. Collect all 4 Winds for a major mobility/defense combo."],
+	[4, 3, "North Wind", "res://assets/mahjung_tiles/winds_&_dragons/North.png", "+15% attack speed. Collect all 4 Winds for a major mobility/defense combo."],
+	# Dragons (suit 5)
+	[5, 0, "Red Dragon", "res://assets/mahjung_tiles/winds_&_dragons/Red.png", "+25% damage. Collect all 3 Dragons for a major offensive combo."],
+	[5, 1, "Green Dragon", "res://assets/mahjung_tiles/winds_&_dragons/Green.png", "+25% score gain. Collect all 3 Dragons for a major offensive combo."],
+	[5, 2, "White Dragon", "res://assets/mahjung_tiles/winds_&_dragons/White.png", "+15% bullet speed. Collect all 3 Dragons for a major offensive combo."],
+	# Flowers (suit 6)
+	[6, 0, "Plum", "res://assets/mahjung_tiles/flowers_&_seasons/plum.png", "+8% attack speed. Collect all 4 Flowers for a utility combo."],
+	[6, 1, "Orchid", "res://assets/mahjung_tiles/flowers_&_seasons/orchid.png", "+8% move speed. Collect all 4 Flowers for a utility combo."],
+	[6, 2, "Bamboo", "res://assets/mahjung_tiles/flowers_&_seasons/bamboo.png", "+10% bullet speed. Collect all 4 Flowers for a utility combo."],
+	[6, 3, "Chrysanthemum", "res://assets/mahjung_tiles/flowers_&_seasons/chrysanthemum.png", "+8% damage. Collect all 4 Flowers for a utility combo."],
+	# Seasons (suit 7)
+	[7, 0, "Spring", "res://assets/mahjung_tiles/flowers_&_seasons/spring.png", "+10% attack speed. Collect all 4 Seasons for a tempo combo."],
+	[7, 1, "Summer", "res://assets/mahjung_tiles/flowers_&_seasons/summer.png", "+10% damage. Collect all 4 Seasons for a tempo combo."],
+	[7, 2, "Fall", "res://assets/mahjung_tiles/flowers_&_seasons/fall.png", "+8% bullet speed. Collect all 4 Seasons for a tempo combo."],
+	[7, 3, "Winter", "res://assets/mahjung_tiles/flowers_&_seasons/winter.png", "+10% move speed. Collect all 4 Seasons for a tempo combo."],
+]
+
+const SUITE_TOOLTIPS = [
+	"Wan: +1 damage per tile and favors focused single shots. Mixing suits unlocks combo patterns.",
+	"Tong: pushes your hand toward spread and fan patterns. Matching numbers across suits unlocks extra combo patterns.",
+	"Tiao: +5% attack speed per tile and favors rapid multi-shot patterns. Runs across all 3 suits unlock extra combo patterns."
+]
+
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	
@@ -35,11 +71,15 @@ func _ready() -> void:
 func setup_shop() -> void:
 	current_options.clear()
 	
-	# 随机生成3张牌
+	# 随机生成3张牌 (each has a chance to be special)
 	for i in range(3):
-		var random_suit = randi() % 3  # 0:万, 1:筒, 2:条
-		var random_value = (randi() % 9) + 1 # 1-9
-		current_options.append({"suit": random_suit, "value": random_value})
+		if randf() < SPECIAL_TILE_CHANCE:
+			var special = SPECIAL_TILES[randi() % SPECIAL_TILES.size()]
+			current_options.append({"suit": special[0], "value": special[1]})
+		else:
+			var random_suit = randi() % 3  # 0:万, 1:筒, 2:条
+			var random_value = (randi() % 9) + 1 # 1-9
+			current_options.append({"suit": random_suit, "value": random_value})
 	
 	# 应用图片到按钮上
 	_apply_tile_to_button(option_1, current_options[0])
@@ -48,29 +88,65 @@ func setup_shop() -> void:
 
 # 将随机出的数据转换为图片加载到按钮上
 func _apply_tile_to_button(btn: Button, tile_data: Dictionary) -> void:
-	# 拼接文件名，例如： "yi" + "wan" + ".png" -> "yiwan.png"
-	var num_str = PINYIN_NUMS[tile_data.value]
-	var suit_str = SUIT_NAMES[tile_data.suit]
-	var file_name = num_str + suit_str + ".png"
-	
-	# 拼接完整路径 (请确保这个路径和你 Godot 里的实际路径一致)
-	var path = "res://assets/mahjung_tiles/three_suites/" + file_name
+	var path := _get_tile_image_path(tile_data)
+	var display_name := _get_tile_display_name(tile_data)
 	
 	if ResourceLoader.exists(path):
 		var texture = load(path)
 		btn.icon = texture
-		btn.text = "" # 找到了图片，就清空原本的测试文字
+		btn.text = ""
 	else:
 		print("Warning: Tile image not found at -> ", path)
-		# 如果找不到图片（可能是路径不对），降级显示拼音文字
-		btn.text = num_str + suit_str
+		btn.text = display_name
+	
+	btn.tooltip_text = _get_tile_tooltip(tile_data)
+
+func _get_tile_image_path(tile_data: Dictionary) -> String:
+	var suit: int = tile_data.get("suit", 0)
+	var value: int = tile_data.get("value", 0)
+	
+	if suit <= 2:
+		var num_str = PINYIN_NUMS[value]
+		var suit_str = SUIT_NAMES[suit]
+		return "res://assets/mahjung_tiles/three_suites/" + num_str + suit_str + ".png"
+	
+	for special in SPECIAL_TILES:
+		if special[0] == suit and special[1] == value:
+			return special[3]
+	
+	return ""
+
+func _get_tile_display_name(tile_data: Dictionary) -> String:
+	var suit: int = tile_data.get("suit", 0)
+	var value: int = tile_data.get("value", 0)
+	
+	if suit <= 2:
+		return PINYIN_NUMS[value] + SUIT_NAMES[suit]
+	
+	for special in SPECIAL_TILES:
+		if special[0] == suit and special[1] == value:
+			return special[2]
+	
+	return "?"
+
+func _get_tile_tooltip(tile_data: Dictionary) -> String:
+	var suit: int = tile_data.get("suit", 0)
+	var value: int = tile_data.get("value", 0)
+	
+	if suit <= 2:
+		return SUITE_TOOLTIPS[suit]
+	
+	for special in SPECIAL_TILES:
+		if special[0] == suit and special[1] == value:
+			return special[2] + ": " + special[4]
+	
+	return ""
 
 # --- 交互事件 ---
 
 func _on_option_selected(index: int) -> void:
 	var chosen_tile = current_options[index]
-	var tile_name = PINYIN_NUMS[chosen_tile.value] + SUIT_NAMES[chosen_tile.suit]
-	print("Player chose: ", tile_name)
+	print("Player chose: ", _get_tile_display_name(chosen_tile))
 	
 	tile_chosen.emit(chosen_tile.suit, chosen_tile.value)
 	_close_shop()

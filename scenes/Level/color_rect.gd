@@ -7,9 +7,12 @@ var weather_filters = [
 	"" 
 ]
 func _ready():
+	material = null
+
+func apply_weather():
 	var picked_filter = weather_filters.pick_random()
 	if picked_filter != "":
 		material = ShaderMaterial.new()
 		material.shader = load(picked_filter)
 	else:
-		material = null 
+		material = null

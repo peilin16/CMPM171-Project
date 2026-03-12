@@ -36,7 +36,6 @@ func register_enemy(e: Enemy_controller) -> int:
 	var id = ToolBar.gameIDGenerator.generate_id()
 	_enemies[id] = e
 	e.controller_id = id   # 把 id 回写给敌人本身
-	print("Enemy registered:", id, e)
 	return id
 
 func unregister_enemy(e: Enemy_controller) -> void:
@@ -52,7 +51,6 @@ func unregister_enemy(e: Enemy_controller) -> void:
 		if _enemies[id] == e:
 			_enemies.erase(id)
 			ToolBar.gameIDGenerator.recycle_id(id)
-			print("Enemy unregistered:", id)
 			return
 
 func get_enemy_by_id(id: int) -> Enemy_controller:
@@ -104,6 +102,10 @@ func _cleanup_active_enemies() -> void:
 			to_remove.append(id)
 			continue
 		if enemy.is_death:
+			to_remove.append(id)
+			continue
+		# Remove enemies stuck at deactivation position (off-screen)
+		if enemy.global_position.x <= -9000 or enemy.global_position.y <= -9000:
 			to_remove.append(id)
 	for id in to_remove:
 		_active_enemies.erase(id)

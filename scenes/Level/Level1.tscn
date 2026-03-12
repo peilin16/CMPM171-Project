@@ -37,6 +37,21 @@
 [ext_resource type="PackedScene" uid="uid://c3cnfks53qo0f" path="res://scenes/UI/StartMenu.tscn" id="35_f5v21"]
 [ext_resource type="Script" uid="uid://dcspl06om83pg" path="res://script/UI/ColorBlindFilterOverlay.gd" id="36_cbf"]
 [ext_resource type="PackedScene" uid="uid://b3egx7xvmh74y" path="res://scenes/VFX/weather_filter.tscn" id="37_8svs3"]
+[ext_resource type="FontFile" uid="uid://ddyg7xlxgvfuu" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="38_instrfont"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_instruction_popup"]
+bg_color = Color(0.08, 0.08, 0.08, 0.94)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.95, 0.95, 0.95, 0.9)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 12
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p27p8"]
 texture = ExtResource("3_6ch66")
@@ -17334,19 +17349,65 @@ texture = ExtResource("33_6laxy")
 [node name="StartMenu" parent="." unique_id=849495470 instance=ExtResource("35_f5v21")]
 
 [node name="InstructionPanel" type="Panel" parent="StartMenu"]
-layout_mode = 0
-offset_left = 566.0
-offset_top = 604.0
-offset_right = 714.0
-offset_bottom = 719.0
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = -210.0
+offset_right = 460.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_instruction_popup")
+
+[node name="InstructionTitle" type="Label" parent="StartMenu/InstructionPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -180.0
+offset_top = 18.0
+offset_right = 180.0
+offset_bottom = 62.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("38_instrfont")
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+text = "How to Play"
+
+[node name="CloseButton" type="Button" parent="StartMenu/InstructionPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -128.0
+offset_top = 18.0
+offset_right = -24.0
+offset_bottom = 58.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("38_instrfont")
+theme_override_font_sizes/font_size = 22
+text = "Close"
 
 [node name="InstructionLabel" type="RichTextLabel" parent="StartMenu/InstructionPanel"]
-layout_mode = 0
-offset_left = -1127.0
-offset_top = -917.0
-offset_right = -754.0
-offset_bottom = -717.0
-theme_override_colors/default_color = Color(0.9227369, 0.32616445, 0.2805773, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = 78.0
+offset_right = -28.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("38_instrfont")
+theme_override_font_sizes/normal_font_size = 24
 autowrap_mode = 2
 
 [node name="Border" type="Node2D" parent="." unique_id=287620552]

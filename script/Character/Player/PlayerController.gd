@@ -23,6 +23,8 @@ var dash_timer: float = 0.0
 var dash_duration: float = 0.15 
 var dash_cooldown: float = 0.5 
 var can_dash: bool = true
+@export var enemy_push_radius: float = 18.0
+@export var enemy_push_strength: float = 28.0
 
 # =========================
 # Fire rate control
@@ -48,6 +50,8 @@ func _init() -> void:
 func _ready() -> void:
 	# 1. 获取屏幕大小
 	screen_size = get_viewport_rect().size
+	# Player movement should not be blocked by enemy bodies.
+	set_collision_mask_value(4, false)
 	
 	# 2. 注册玩家
 	if GameManager.player_manager:
@@ -63,6 +67,10 @@ func _ready() -> void:
 		
 	# 5. 初始化 MoveData (以当前位置为起点)
 	move_data.reset(global_position)
+
+func _exit_tree() -> void:
+	if GameManager.player_manager:
+		GameManager.player_manager.unregister_player(self)
 
 func _physics_process(delta: float) -> void:
 	# ✅ 每帧更新射击冷却
@@ -110,17 +118,49 @@ func move(delta: float, speed: float = _character.player_velocity) -> void:
 	if Input.is_action_just_pressed("avoid") and can_dash and input_vector != Vector2.ZERO:
 		start_dash()
 
-	var current_speed = speed
+	var current_speed = speed * logic.get_move_speed_multiplier()
 	if is_dashing:
 		current_speed *= dash_speed_multiplier
 	
 	velocity = input_vector * current_speed
 	move_and_slide()
+	_push_through_enemies(delta)
 	
 	#if input_vector.x != 0:
 		#animated_sprite.flip_h = input_vector.x < 0
 	
 	move_data.record_motion(global_position, delta)
+
+func _push_through_enemies(delta: float) -> void:
+	if not GameManager.enemy_manager:
+		return
+	var active_enemies: Dictionary = GameManager.enemy_manager.get_all_active_enemies()
+	if active_enemies.is_empty():
+		return
+
+	for entry in active_enemies.values():
+		if entry == null or not is_instance_valid(entry):
+			continue
+		if entry is not Enemy_controller:
+			continue
+		var enemy: Enemy_controller = entry as Enemy_controller
+		if enemy.is_death:
+			continue
+
+		var offset: Vector2 = enemy.global_position - global_position
+		var distance: float = offset.length()
+		if distance >= enemy_push_radius:
+			continue
+
+		var away: Vector2 = Vector2.ZERO
+		if distance > 0.001:
+			away = offset / distance
+		else:
+			away = input_vector.normalized() if input_vector.length() > 0.001 else Vector2.RIGHT
+
+		var overlap: float = enemy_push_radius - distance
+		var push_amount: float = min(overlap, enemy_push_strength * delta)
+		enemy.global_position += away * push_amount
 
 # --- 冲刺/闪避系统 ---
 func start_dash() -> void:

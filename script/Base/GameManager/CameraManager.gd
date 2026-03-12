@@ -3,7 +3,7 @@ class_name Camera_manager
 
 @export var current_camera: Camera2D
 
-var last_shake_time: float = -2.0
+var last_shake_time: float = 2.0
 
 func register_camera(c: Camera2D) -> void:
 	current_camera = c
@@ -14,7 +14,7 @@ func has_camera() -> bool:
 func shake(offset_x: float = 8.0, offset_y: float = 8.0, duration: float = 0.2) -> void:
 	if not has_camera(): return
 	var current_time = Time.get_ticks_msec() / 1000.0
-	if current_time - last_shake_time < 2.0: return
+	if current_time - last_shake_time < 0.5: return
 	last_shake_time = current_time
 	
 	var tween = create_tween()
