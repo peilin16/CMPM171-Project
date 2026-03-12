@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://b3egx7xvmh74y"]
+
+[ext_resource type="Script" uid="uid://b3ekxnuab83qo" path="res://scenes/Level/color_rect.gd" id="1_0uyiq"]
+[ext_resource type="Shader" uid="uid://dse6jmir3434p" path="res://assets/Shaders/Fog.gdshader" id="1_8t0d8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c8net"]
+shader = ExtResource("1_8t0d8")
+shader_parameter/density = 0.51600002451
+shader_parameter/fog_color = Color(0.6121595, 0.74279255, 0.92615867, 1)
+shader_parameter/speed = 1.0
+shader_parameter/scale = Vector2(3, 3)
+
+[node name="WeatherFilter" type="CanvasLayer" unique_id=1458740361]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=40117008]
+light_mask = 512
+visibility_layer = 512
+material = SubResource("ShaderMaterial_c8net")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+script = ExtResource("1_0uyiq")

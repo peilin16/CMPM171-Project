@@ -1,0 +1,3 @@
+
+Rain: https://godotshaders.com/shader/rain-and-snow-with-parallax-scrolling-effect/
+God Rays: https://godotshaders.com/shader/pixelated-god-rays/
