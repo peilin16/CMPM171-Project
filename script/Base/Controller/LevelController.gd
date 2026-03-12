@@ -9,6 +9,8 @@ var level:Level;
 func _ready() -> void:
 	if level == null:
 		level = Level.new();
+	if is_instance_valid(shop_menu) and not shop_menu.tile_chosen.is_connected(_on_shop_tile_chosen):
+		shop_menu.tile_chosen.connect(_on_shop_tile_chosen)
 	print(level.level_name)
 	
 	
@@ -42,6 +44,17 @@ func undisplay_shop()->void:
 	if is_instance_valid(shop_menu):
 		shop_menu.visible = false;
 	get_tree().paused = false;
+
+func _on_shop_tile_chosen(suit: int, value: int) -> void:
+	if not GameManager.player_manager:
+		return
+	var player: Player_controller = GameManager.player_manager.get_player()
+	if player == null:
+		return
+	var player_mahjong := player.get_node_or_null("PlayerMahjong") as Player_mahjong
+	if player_mahjong == null:
+		return
+	player_mahjong.add_tile(suit, value)
 
 func _exit_tree() -> void:
 	PoolManager.widget_pool_manager.clear_all();

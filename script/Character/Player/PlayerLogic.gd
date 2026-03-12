@@ -1,6 +1,8 @@
 extends Character_logic
 class_name Player_logic
 
+signal mahjong_inventory_changed(hand: Array, tiao: int, tong: int, wan: int)
+
 # =========================
 # Mahjong Loadout (0..9)
 # =========================
@@ -23,6 +25,7 @@ var fire_mode: FireMode = FireMode.SINGLE
 
 # FAN 动态 count（由筒子决定）
 var _fan_count: int = 2
+var hand_tiles: Array = []
 
 
 var current_score:float = 0;
@@ -46,13 +49,55 @@ func get_fire_mode_name() -> String:
 # =========================
 # Mahjong API (可维护入口)
 # =========================
-func apply_tiles(tiao: int, tong: int, wan: int) -> void:
+func apply_tiles(tiao: int, tong: int, wan: int, sync_hand: bool = false) -> void:
 	tiao_count = clampi(tiao, 0, 9)
 	tong_count = clampi(tong, 0, 9)
 	wan_count  = clampi(wan, 0, 9)
 
+	if sync_hand:
+		hand_tiles = _build_hand_from_counts(tiao_count, tong_count, wan_count)
+
 	# 根据筒子规则更新弹幕参数
 	_update_pattern_from_tong()
+	_emit_mahjong_inventory_changed()
+
+func add_tile(suit: int, value: int) -> void:
+	if suit < 0 or suit > 2:
+		return
+	if value < 1 or value > 9:
+		return
+
+	hand_tiles.append({"suit": suit, "value": value})
+	_recalculate_counts_from_hand()
+
+func clear_tiles() -> void:
+	hand_tiles.clear()
+	apply_tiles(0, 0, 0)
+
+func get_hand_tiles() -> Array:
+	return hand_tiles.duplicate(true)
+
+func _recalculate_counts_from_hand() -> void:
+	var suit_counts := [0, 0, 0]
+	for tile_data in hand_tiles:
+		var suit := int(tile_data.get("suit", -1))
+		if suit >= 0 and suit < suit_counts.size():
+			suit_counts[suit] += 1
+
+	apply_tiles(suit_counts[2], suit_counts[1], suit_counts[0])
+
+func _build_hand_from_counts(tiao: int, tong: int, wan: int) -> Array:
+	var built_hand: Array = []
+	for index in range(wan):
+		built_hand.append({"suit": 0, "value": (index % 9) + 1})
+	for index in range(tong):
+		built_hand.append({"suit": 1, "value": (index % 9) + 1})
+	for index in range(tiao):
+		built_hand.append({"suit": 2, "value": (index % 9) + 1})
+	return built_hand
+
+func _emit_mahjong_inventory_changed() -> void:
+	mahjong_inventory_changed.emit(get_hand_tiles(), tiao_count, tong_count, wan_count)
 
 func get_attack_speed_multiplier() -> float:
 	# 条子：每张 +5% 攻速，上限 9 张 => 1.45x

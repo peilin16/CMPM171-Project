@@ -57,9 +57,13 @@ func set_stats(score: int, waves: int) -> void:
 
 func _on_restart_pressed() -> void:
 	get_tree().paused = false
+	if GameManager.player_manager:
+		GameManager.player_manager.clear_saved_mahjong_hand()
 	get_tree().change_scene_to_file(START_MENU_PATH)
 
 
 func _on_quit_pressed() -> void:
 	get_tree().paused = false
+	if GameManager.player_manager:
+		GameManager.player_manager.clear_saved_mahjong_hand()
 	get_tree().change_scene_to_file(START_MENU_PATH)
