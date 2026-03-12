@@ -43,7 +43,7 @@ func _apply_base(d: Dictionary) -> void:
 func _build_timer_wave(d: Dictionary) -> void:
 	_built_wave = Timer_wave.new();
 	_apply_base(d);
-	_built_wave._finished = d.get("delay", d.get("finished", 0))
+	_built_wave.duration = d.get("delay", d.get("finished", 3.0))
 	
 func  _build_enemy_wave(d: Dictionary) -> void:
 	_built_wave = Enemy_spawn_wave.new();

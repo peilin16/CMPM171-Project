@@ -11,6 +11,7 @@ var _hit_cooldown_timer: float = 0.0
 
 func _init() -> void:
 	name = "StoneLionBoss"
+	enemy_type_name = "StoneLionBoss"
 	_character = StoneLion.new()
 	_logic = enemy_logic.new(self, _character)
 	team = TEAM.ENEMY

@@ -17,12 +17,13 @@ var _ai_brain_hub: State_hub = null;
 signal enemy_deactivated(enemy);
 #@export var config: EnemyConfiguration
 var stats: Dictionary = {}
+var enemy_type_name: String = ""
 
-@export var horde_enemy_collision_layer: int = 2
-@export var horde_collision_player_range: float = 420.0
-@export var horde_separation_player_range: float = 260.0
-@export var horde_separation_radius: float = 42.0
-@export var horde_separation_strength: float = 0.28
+@export var horde_separation_radius: float = 24.0
+@export var horde_separation_strength: float = 0.4
+@export var horde_overlap_radius: float = 14.0
+@export var horde_overlap_strength: float = 0.3
+@export var horde_velocity_response: float = 8.0
 
 @export var death_gravity: float = 100.0       # how fast enemy falls when dying
 @export var death_delay: float = 0.0          # optional corpse linger time after interactions stop
@@ -41,10 +42,8 @@ func _init() ->void:
 	team = TEAM.ENEMY;
 	
 func _ready() -> void:
-	# Load stats based on name (e.g. "Grunt", "fairy1")
-	# Name is usually set in _init of subclass
-	if GameManager.enemy_manager:
-		stats = GameManager.enemy_manager.get_enemy_stats(name)
+	if GameManager.enemy_manager and enemy_type_name != "":
+		stats = GameManager.enemy_manager.get_enemy_stats(enemy_type_name)
 		if stats.has("max_hp") and _character:
 			_character.max_hp = stats["max_hp"]
 			_character.hp = _character.max_hp
@@ -78,7 +77,6 @@ func _physics_process(delta: float) -> void:
 	if _character.hp <= 0 :
 		death()
 		return;
-	_update_horde_collision_mode()
 		
 	if _ai_brain_hub and _ai_brain_hub.root_state:
 		_ai_brain_hub.root_state.update(self, _ai_brain_hub, _ai_brain_hub.anim_player, delta)
@@ -97,13 +95,27 @@ func activate(behavoir_code:String = "")->void:
 	hitable = true;
 	velocity = Vector2.ZERO
 	modulate = Color(1, 1, 1, 1)
+	# Kill any leftover hurt-flash tween from previous life
+	if _hurt_flash_tween and _hurt_flash_tween.is_running():
+		_hurt_flash_tween.kill()
 	_restore_collision_state()
 	_restore_visual_state()
 	_character.isActive = true;
+	if stats.is_empty() and enemy_type_name != "" and GameManager.enemy_manager:
+		stats = GameManager.enemy_manager.get_enemy_stats(enemy_type_name)
+	# Restore HP from stats so pooled enemies keep correct health
+	if stats.has("max_hp"):
+		_character.max_hp = stats["max_hp"]
+		_character.hp = _character.max_hp
+	else:
+		_character.hp = _character.max_hp
 	_logic.reset();
 	_logic.behavoir = behavoir_code;
 	GameManager.enemy_manager.register_active_enemy(controller_id);
 	_logic.apply_behavior();
+	# Re-enter AI state machine so pooled enemies behave correctly
+	if _ai_brain_hub and _ai_brain_hub.root_state:
+		_ai_brain_hub.root_state.enter(self, _ai_brain_hub, _ai_brain_hub.anim_player)
 
 
 #be spawn
@@ -209,31 +221,27 @@ func _stop_runtime_behavior() -> void:
 		scheduler.cancel()
 		scheduler.clear()
 
-func _get_player_distance() -> float:
-	if not GameManager.player_manager or GameManager.player_manager.player == null:
-		return INF
-	var target: Node2D = GameManager.player_manager.player
-	return global_position.distance_to(target.global_position)
-
-func _update_horde_collision_mode() -> void:
-	var dist := _get_player_distance()
-	var should_collide_enemy := dist <= horde_collision_player_range
-	set_collision_mask_value(horde_enemy_collision_layer, should_collide_enemy)
-
-func apply_horde_separation(desired_velocity: Vector2) -> Vector2:
-	if desired_velocity.length() <= 0.001:
-		return desired_velocity
-	if _get_player_distance() > horde_separation_player_range:
-		return desired_velocity
+func apply_horde_separation(desired_velocity: Vector2, delta: float) -> Vector2:
+	# Horde steering should be soft and stable:
+	# 1) a small anti-overlap push when enemies are too close
+	# 2) mostly lateral flow so packs slide around each other instead of ping-ponging
+	# 3) damp toward the target velocity to avoid per-frame twitching
+	var current_speed := desired_velocity.length()
+	if current_speed <= 0.001:
+		return velocity.move_toward(Vector2.ZERO, horde_velocity_response * max(delta, 0.0))
 	if not GameManager.enemy_manager:
-		return desired_velocity
+		return velocity.move_toward(desired_velocity, current_speed * horde_velocity_response * delta)
 
 	var active: Dictionary = GameManager.enemy_manager.get_all_active_enemies()
 	if active.is_empty():
-		return desired_velocity
+		return velocity.move_toward(desired_velocity, current_speed * horde_velocity_response * delta)
 
-	var push := Vector2.ZERO
-	var count := 0
+	var forward := desired_velocity.normalized()
+	var side_axis := Vector2(-forward.y, forward.x)
+	var lateral_weight := 0.0
+	var overlap_push := Vector2.ZERO
+	var neighbor_count := 0
+
 	for e in active.values():
 		if e == null or not is_instance_valid(e):
 			continue
@@ -244,18 +252,46 @@ func apply_horde_separation(desired_velocity: Vector2) -> Vector2:
 		var other := e as Enemy_controller
 		if other.is_death:
 			continue
-		var d := global_position.distance_to(other.global_position)
-		if d <= 0.001 or d >= horde_separation_radius:
+
+		var offset: Vector2 = global_position - other.global_position
+		var distance: float = offset.length()
+		if distance <= 0.001 or distance >= horde_separation_radius:
 			continue
-		var w := 1.0 - (d / horde_separation_radius)
-		push += (global_position - other.global_position).normalized() * w
-		count += 1
 
-	if count == 0:
-		return desired_velocity
+		var away: Vector2 = offset / distance
+		var proximity: float = 1.0 - (distance / horde_separation_radius)
+		var side_sign: float = sign(away.dot(side_axis))
+		if side_sign == 0.0:
+			if controller_id < other.controller_id:
+				side_sign = -1.0
+			else:
+				side_sign = 1.0
+		lateral_weight += side_sign * proximity
+		neighbor_count += 1
 
-	push /= float(count)
-	var speed := desired_velocity.length()
-	var base_dir := desired_velocity.normalized()
-	var blended := (base_dir + push * horde_separation_strength).normalized()
-	return blended * speed
+		if distance < horde_overlap_radius:
+			var overlap_ratio := 1.0 - (distance / horde_overlap_radius)
+			overlap_push += away * overlap_ratio
+
+	if neighbor_count == 0:
+		return velocity.move_toward(desired_velocity, current_speed * horde_velocity_response * delta)
+
+	var steering: Vector2 = Vector2.ZERO
+	var lateral_strength: float = clamp(lateral_weight / float(neighbor_count), -1.0, 1.0)
+	steering += side_axis * lateral_strength * current_speed * horde_separation_strength
+
+	if overlap_push.length() > 0.001:
+		var overlap_strength: float = min(overlap_push.length(), 1.0)
+		steering += overlap_push.normalized() * current_speed * horde_overlap_strength * overlap_strength
+
+	# Never let separation create a backward component; keep forward pressure constant.
+	var backward_component: float = steering.dot(forward)
+	if backward_component < 0.0:
+		steering -= forward * backward_component
+
+	var target_velocity := desired_velocity + steering
+	var max_speed := current_speed * 1.15
+	if target_velocity.length() > max_speed:
+		target_velocity = target_velocity.normalized() * max_speed
+
+	return velocity.move_toward(target_velocity, current_speed * horde_velocity_response * delta)

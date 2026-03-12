@@ -14,9 +14,14 @@ const COLORBLIND_KEYS := [
 
 @onready var colorblind_option: OptionButton = $AccessibilityContainer/ColorBlindOption
 @onready var colorblind_label: Label = $AccessibilityContainer/ColorBlindLabel
-@onready var instruction_label: RichTextLabel = $InstructionPanel/InstructionLabel
+var instruction_label: RichTextLabel
 
 func _ready() -> void:
+	instruction_label = get_node_or_null("InstructionPanel/InstructionLabel") as RichTextLabel
+	# Only show start menu on Level 1
+	if not get_parent() is Level1_controller:
+		visible = false
+		return
 	# 确保一开始鼠标是可见的（以防游戏里隐藏了鼠标）
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	level = get_parent() as Level1_controller
@@ -56,10 +61,12 @@ func _refresh_text() -> void:
 	$MenuContainer/StartButton.text = tr("menu_new_game")
 	$MenuContainer/QuitButton.text = tr("menu_quit_game")
 
-	colorblind_label.text = tr("menu_colorblind_title")
+	if colorblind_label:
+		colorblind_label.text = tr("menu_colorblind_title")
 	_setup_colorblind_option()
 
-	instruction_label.text = tr("menu_instructions")
+	if instruction_label:
+		instruction_label.text = tr("menu_instructions")
 	
 func _on_start_button_pressed() -> void:
 	# 切换到游戏关卡

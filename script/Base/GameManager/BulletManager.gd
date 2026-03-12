@@ -13,7 +13,6 @@ func unregister_bullet(id) -> void:
 	if _bullets.has(id):
 		_bullets.erase(id)
 		ToolBar.gameIDGenerator.recycle_id(id)
-		print("Enemy unregistered:", id)
 		
 
 func get_bullet_by_id(id: int) -> Bullet_controller:

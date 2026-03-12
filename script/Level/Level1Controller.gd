@@ -2,6 +2,7 @@ extends Level_controller
 class_name Level1_controller
 
 @onready var start_menu:Start_menu = $StartMenu
+@onready var weather_filter = $WeatherFilter
 func _ready() -> void:
 	level = Level1.new();	
 	pause_menu.visible =false;
@@ -32,6 +33,10 @@ func _ready() -> void:
 func start_game()->void:
 	super.start_game();
 	start_menu.visible = false;
+	if weather_filter:
+		var color_rect = weather_filter.get_node_or_null("ColorRect")
+		if color_rect and color_rect.has_method("apply_weather"):
+			color_rect.apply_weather()
 	SoundManager.command({
 		"sound":"bgm",
 		"command":"start",

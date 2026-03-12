@@ -39,7 +39,10 @@ func _on_area_entered(area: Area2D) -> void:
 func hurt(num:float)->void:
 	if num <= 0:
 		return
-	player_hp -= num
+	var reduction := 0.0
+	if controller and controller.logic:
+		reduction = controller.logic.get_damage_reduction()
+	player_hp -= num * (1.0 - reduction)
 	if controller:
 		controller.play_hurt_flash()
 	if GameManager.camera_manager:

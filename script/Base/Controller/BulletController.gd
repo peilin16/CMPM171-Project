@@ -77,7 +77,6 @@ func _on_area_entered(area: Area2D) -> void:
 		#reflect();
 	#elif area.component == Rumia_controller.Component.INITIALSHIELD and area.activate:
 		#deactivate();
-	print(area.name);
 
 
 func set_skin()->void:
