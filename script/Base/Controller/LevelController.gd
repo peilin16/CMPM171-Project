@@ -20,7 +20,7 @@ func _physics_process(delta: float) -> void:
 		get_tree().paused = true;
 
 func start_game()->void:
-	GameManager.player_manager._spawn_player(self,Vector2(-200,0));
+	GameManager.player_manager._spawn_player(self,Vector2(0,0));
 	director.start();
 	PoolManager.bullet_pool_manager._preload_order(level.bullet_order);
 	PoolManager.enemy_pool_manager._preload_order(level.enemy_order);

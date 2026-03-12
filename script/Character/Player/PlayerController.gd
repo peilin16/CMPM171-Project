@@ -161,20 +161,22 @@ func handle_dash_cooldown(delta: float) -> void:
 # --- 射击系统 ---
 func player_shooting(payload: Dictionary) -> void:
 	# 当前有效模式（由筒子决定或手动覆盖决定）
-	var mode := logic.get_effective_fire_mode()
+	var mode := logic.get_effective_fire_mode();
 
 	# ✅ 只有 MULTI 不吃全局冷却，其它（SINGLE/FAN/RANDOM_FAN）都吃冷却
 	if mode != Player_logic.FireMode.MULTI:
 		if shoot_timer > 0.0:
 			# 调试：你想确认被限制时可以打开这一行
-			# print("[Shoot] blocked by cooldown: ", shoot_timer)
-			return
+			# print("[Shoot] blocked by cooldown: ", shoot_timer);
+			return;
+			
 		shoot_timer = shoot_cooldown
 
 	var shoot_script: Array = logic.get_shoot_script(payload["world_pos"])
 	scheduler.preemption(shoot_script)
 
 func shoot(bullet_script:Array)->void:
+	
 	if scheduler.is_running:
 		scheduler.preemption(bullet_script)
 	else:

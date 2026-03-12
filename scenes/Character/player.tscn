@@ -2470,10 +2470,11 @@ script = ExtResource("4_8fgnd")
 metadata/_custom_type_script = "uid://b566wwblvpd6x"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 2)
-scale = Vector2(0.5, 0.375)
+position = Vector2(2.9802322e-08, 2.3841858e-07)
+scale = Vector2(0.5208333, 0.6875)
 sprite_frames = SubResource("SpriteFrames_gc4mm")
-animation = &"walking-left-up"
+animation = &"walking-up"
+frame_progress = 0.39754277
 
 [node name="BulletContainer" type="Node2D" parent="."]
 
