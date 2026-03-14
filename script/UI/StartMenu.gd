@@ -93,8 +93,8 @@ func _refresh_text() -> void:
 func _on_start_button_pressed() -> void:
 	# 切换到游戏关卡
 	_set_instruction_popup_visible(false)
-	if GameManager.player_manager:
-		GameManager.player_manager.clear_saved_mahjong_hand()
+	if GameManager:
+		GameManager.reset_run_state()
 	if level != null and is_instance_valid(level):
 		level.start_game()
 	else:

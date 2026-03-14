@@ -20,6 +20,9 @@ func consume_auto_start_next_level() -> bool:
 	_auto_start_next_level = false
 	return should_auto_start
 
+func reset_run_state() -> void:
+	_auto_start_next_level = false
+
 func get_level_name()->String:
 	return level_name;
 # Called every frame. 'delta' is the elapsed time since the previous frame.

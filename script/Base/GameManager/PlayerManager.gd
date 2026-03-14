@@ -51,6 +51,11 @@ func clear_saved_mahjong_hand() -> void:
 	_has_saved_mahjong_state = false
 	clear_saved_player_hp()
 
+func reset_run_state() -> void:
+	clear_saved_mahjong_hand()
+	clear_saved_player_hp()
+	player_score = 0
+
 func save_player_hp(hp: float) -> void:
 	_saved_player_hp = max(hp, 0.0)
 	_has_saved_player_hp = true
@@ -90,4 +95,3 @@ func _spawn_player(level: Level_controller, position:Vector2 = Vector2.ZERO):
 	var hurt_box := player.get_node_or_null("HurtBox") as Hurt_box
 	if hurt_box:
 		hurt_box.player_hp = consume_saved_player_hp(hurt_box.player_hp)
-	player_score = 0;

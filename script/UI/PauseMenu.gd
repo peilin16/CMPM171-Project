@@ -46,13 +46,13 @@ func _on_resume_pressed() -> void:
 
 func _on_restart_pressed() -> void:
 	get_tree().paused = false
-	if GameManager.player_manager:
-		GameManager.player_manager.clear_saved_mahjong_hand()
+	if GameManager:
+		GameManager.reset_run_state()
 	get_tree().reload_current_scene()
 
 
 func _on_quit_pressed() -> void:
 	get_tree().paused = false
-	if GameManager.player_manager:
-		GameManager.player_manager.clear_saved_mahjong_hand()
+	if GameManager:
+		GameManager.reset_run_state()
 	get_tree().change_scene_to_file(START_MENU_PATH)

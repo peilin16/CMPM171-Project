@@ -69,12 +69,12 @@ func _on_mahjong_inventory_changed(hand: Array, tiao: int, tong: int, wan: int) 
 		GameManager.player_manager.save_mahjong_hand(hand)
 
 	if _player and _logic:
-		var mult := _logic.get_attack_speed_multiplier()
-		_player.shoot_cooldown = _player.base_shoot_cooldown / max(mult, 0.01)
+		_player.shoot_cooldown = _logic.get_effective_shoot_cooldown(_player.base_shoot_cooldown)
 
 		print("[Mahjong] tiao=", tiao, " tong=", tong, " wan=", wan,
 			" | combos=", _logic.get_active_combo_names(),
 			" | mode=", _logic.get_fire_mode_name(),
+			" | atk_spd=", _logic.get_attack_speed_multiplier(),
 			" | dmg=", _logic.get_damage_value(),
 			" | cooldown=", _player.shoot_cooldown,
 			" | move_spd=", _logic.get_move_speed_multiplier(),

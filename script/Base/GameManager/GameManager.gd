@@ -22,3 +22,10 @@ func set_colorblind_mode(mode: String) -> void:
 
 func get_colorblind_mode() -> String:
 	return accessibility_manager.get_colorblind_mode()
+
+func reset_run_state() -> void:
+	if player_manager:
+		player_manager.reset_run_state()
+	if level_manager:
+		level_manager.reset_run_state()
+	Wave_director.reset_global_progress()

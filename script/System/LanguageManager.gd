@@ -48,7 +48,7 @@ func _create_translations() -> void:
 	en_translation.add_message("colorblind_tritanopia", "Tritanopia")
 
 	en_translation.add_message("menu_instructions",
-	"Move with WASD.\nFire with the Left Mouse Button.\nAvoid enemies and incoming bullets. Contact damage and bullet hits both cost HP.\nClear waves to reach the shop and build your Mahjong hand.\nYour Mahjong hand now determines your shot pattern.\nTiao (Bamboo): increases attack speed and favors rapid multi-shot fire.\nTong (Circles): pushes your shots toward spread and fan patterns.\nWan (Characters): increases damage and favors focused shots.\nSpecial tiles and completed sets unlock stronger combo patterns and bonuses.\nPress T to switch languages.")
+	"Move with WASD.\nShoot automatically at nearby enemies.\nAvoid enemies and incoming bullets. Contact damage and bullet hits both cost HP.\nClear waves to reach the shop and build your Mahjong hand.\nYour Mahjong hand now mixes shot traits together.\nTiao (Bamboo): increases attack speed and adds burst repeats.\nTong (Circles): adds spread and fan shaping.\nWan (Characters): increases damage and keeps shots focused.\nSpecial tiles and completed sets unlock stronger pattern combinations and bonuses.\nPress T to switch languages.")
 
 	en_translation.add_message("shop_skip", "Skip")
 	en_translation.add_message("shop_tooltip_wan", "Wan: +1 damage per tile and favors focused single shots. Mixing suits unlocks combo patterns.")
@@ -113,7 +113,7 @@ func _create_translations() -> void:
 	zh_translation.add_message("colorblind_tritanopia", "蓝色盲")
 
 	zh_translation.add_message("menu_instructions",
-	"使用 WASD 上下左右移动。\n使用鼠标左键发射子弹。\n躲避敌人和敌方弹幕。接触敌人或被子弹击中都会损失生命值。\n清完波次后可以进入商店，补充你的麻将牌组。\n你的整副麻将手牌现在会决定射击模式。\n条子：提升攻速，并更偏向连续多发。\n筒子：让射击更偏向扩散与扇形。\n万子：提升伤害，并更偏向集中射击。\n特殊牌与成套组合会触发更强的弹幕形态与连携增益。\n按 T 键切换语言。")
+	"使用 WASD 上下左右移动。\n会自动向附近敌人射击。\n躲避敌人和敌方弹幕。接触敌人或被子弹击中都会损失生命值。\n清完波次后可以进入商店，补充你的麻将牌组。\n你的麻将手牌现在会把不同射击特性混合在一起。\n条子：提升攻速，并增加连发次数。\n筒子：增加扩散与扇形效果。\n万子：提升伤害，并让射击更集中。\n特殊牌与成套组合会触发更强的弹幕组合与连携增益。\n按 T 键切换语言。")
 
 	zh_translation.add_message("shop_skip", "跳过")
 	zh_translation.add_message("shop_tooltip_wan", "万：每张增加 1 点伤害，并偏向单点集中射击。混合花色可解锁组合弹幕。")
@@ -179,7 +179,7 @@ func _create_translations() -> void:
 	ja_translation.add_message("colorblind_deuteranopia", "2型色覚")
 	ja_translation.add_message("colorblind_tritanopia", "3型色覚")
 	ja_translation.add_message("menu_instructions",
-	"WASDキーで移動します。\nマウス左クリックで弾を撃ちます。\n敵本体と敵弾の両方に注意してください。接触や被弾でHPが減少します。\nウェーブを突破するとショップで麻雀牌を追加できます。\n手牌全体でショットパターンが決まるようになりました。\n索子（ソーズ）：攻撃速度が上がり、連射寄りになります。\n筒子（ピンズ）：拡散や扇形ショット寄りになります。\n萬子（マンズ）：ダメージが上がり、集中ショット寄りになります。\n特殊牌や完成したセットで、より強い弾幕パターンとコンボ効果が発動します。\nTキーで言語を切り替えます。")
+	"WASDキーで移動します。\n近くの敵へ自動で弾を撃ちます。\n敵本体と敵弾の両方に注意してください。接触や被弾でHPが減少します。\nウェーブを突破するとショップで麻雀牌を追加できます。\n手牌の効果は組み合わせてショットに反映されます。\n索子（ソーズ）：攻撃速度を上げ、連射バーストを追加します。\n筒子（ピンズ）：拡散や扇形の性質を追加します。\n萬子（マンズ）：ダメージを上げ、ショットを集中寄りにします。\n特殊牌や完成したセットで、より強い弾幕の組み合わせとコンボ効果が発動します。\nTキーで言語を切り替えます。")
 
 	ja_translation.add_message("shop_skip", "スキップ")
 	ja_translation.add_message("shop_tooltip_wan", "萬子：1枚ごとにダメージが+1され、単発集中型の射撃に向きます。異なる種類を混ぜるとコンボ弾幕が解放されます。")

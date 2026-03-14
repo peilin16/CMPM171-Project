@@ -14,6 +14,9 @@ var next_level_scenes:String;
 static var global_wave_num: int = 0
 const WAVES_PER_LEVEL: int = 3
 
+static func reset_global_progress() -> void:
+	global_wave_num = 0
+
 func _ready() -> void:
 	next_level_scenes = "";
 	
@@ -34,6 +37,8 @@ func _append_wave(w: Wave) -> void:
 
 
 func start() -> void:
+	waves.clear()
+	current_wave = null
 	config_waves();
 	if waves.is_empty():
 		return

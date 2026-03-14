@@ -12,9 +12,17 @@ signal mahjong_inventory_changed(hand: Array, tiao: int, tong: int, wan: int)
 
 # 平衡参数（调平衡就改这几行）
 @export var base_damage: int = 10                 # 基础子弹伤害（会写入 shoot step 的 "damage"）
-@export var tiao_as_per_tile: float = 0.5        # 每张条子 +5% 攻速（9张≈+45%）
+@export var tiao_as_per_tile: float = 0.05       # 每张条子 +5% 攻速（9张≈+45%）
+@export var minimum_shoot_cooldown: float = 0.12
+@export var max_attack_speed_multiplier: float = 2.0
 @export var fan_base_spread: float = 20.0         # 扇形 spread
 @export var random_fan_spread: float = 35.0       # 随机扇形 spread
+@export var fan_cooldown_multiplier: float = 1.15
+@export var random_fan_cooldown_multiplier: float = 1.3
+@export var multi_cooldown_multiplier: float = 1.45
+@export var fan_damage_multiplier: float = 0.9
+@export var random_fan_damage_multiplier: float = 0.8
+@export var multi_damage_multiplier: float = 0.75
 
 # 允许手动模式（你之前 1/2/3/4 切模式那套）
 # 现在默认是 false：一切以“麻将手牌”决定弹幕模式
@@ -85,6 +93,8 @@ var fire_mode: FireMode = FireMode.SINGLE
 var _fan_count: int = 2
 var _multi_shot_count: int = 5
 var _random_fan_count: int = 6
+var _burst_repeat_count: int = 1
+var _burst_interval: float = 0.08
 var hand_tiles: Array = []
 
 
@@ -99,7 +109,16 @@ func set_fire_mode(m: FireMode) -> void:
 	fire_mode = m
 
 func get_fire_mode_name() -> String:
-	match get_effective_fire_mode():
+	var mode := get_effective_fire_mode()
+	var mode_name := _get_fire_mode_base_name(mode)
+	if mode == FireMode.MULTI:
+		return mode_name
+	if _burst_repeat_count > 1:
+		return "%s + BURST x%d" % [mode_name, _burst_repeat_count]
+	return mode_name
+
+func _get_fire_mode_base_name(mode: FireMode) -> String:
+	match mode:
 		FireMode.SINGLE: return "SINGLE"
 		FireMode.FAN: return "FAN"
 		FireMode.RANDOM_FAN: return "RANDOM_FAN"
@@ -191,13 +210,42 @@ func _emit_mahjong_inventory_changed() -> void:
 	mahjong_inventory_changed.emit(get_hand_tiles(), tiao_count, tong_count, wan_count)
 
 func get_attack_speed_multiplier() -> float:
-	# 条子：每张 +5% 攻速，上限 9 张 => 1.45x + special bonuses
-	return 1.0 + float(tiao_count) * tiao_as_per_tile + _bonus_atk_speed
+	# 条子：每张 +5% 攻速，上限 9 张，再叠加特殊牌加成，并限制自动射击节奏上限
+	var total_multiplier: float = 1.0 + float(tiao_count) * tiao_as_per_tile + _bonus_atk_speed
+	return min(total_multiplier, max_attack_speed_multiplier)
+
+func get_fire_cooldown_multiplier() -> float:
+	var burst_penalty: float = 1.0 + float(maxi(_burst_repeat_count - 1, 0)) * 0.18
+	match get_effective_fire_mode():
+		FireMode.FAN:
+			return fan_cooldown_multiplier * burst_penalty
+		FireMode.RANDOM_FAN:
+			return random_fan_cooldown_multiplier * burst_penalty
+		FireMode.MULTI:
+			return multi_cooldown_multiplier
+	return burst_penalty
+
+func get_fire_damage_multiplier() -> float:
+	var burst_penalty: float = 1.0 - float(maxi(_burst_repeat_count - 1, 0)) * 0.08
+	burst_penalty = max(burst_penalty, 0.72)
+	match get_effective_fire_mode():
+		FireMode.FAN:
+			return fan_damage_multiplier * burst_penalty
+		FireMode.RANDOM_FAN:
+			return random_fan_damage_multiplier * burst_penalty
+		FireMode.MULTI:
+			return multi_damage_multiplier
+	return burst_penalty
+
+func get_effective_shoot_cooldown(base_cooldown: float) -> float:
+	var effective_cooldown: float = base_cooldown * get_fire_cooldown_multiplier() / max(get_attack_speed_multiplier(), 0.01)
+	return max(effective_cooldown, minimum_shoot_cooldown)
 
 func get_damage_value() -> int:
 	# 万字：每张 +1 伤害，上限 9, then multiply by special damage bonus
-	var raw := float(base_damage + wan_count)
-	return int(raw * (1.0 + _bonus_damage))
+	var raw: float = float(base_damage + wan_count)
+	var scaled_damage: float = raw * (1.0 + _bonus_damage) * get_fire_damage_multiplier()
+	return maxi(1, int(round(scaled_damage)))
 
 func get_move_speed_multiplier() -> float:
 	return 1.0 + _bonus_move_speed
@@ -225,22 +273,14 @@ func _mode_from_mahjong_hand() -> FireMode:
 		return FireMode.RANDOM_FAN
 	if _active_combo_names.has("Three-Suit Run") or _active_combo_names.has("Triple Match"):
 		return FireMode.FAN
-	if _active_combo_names.has("Mixed Hand"):
-		return FireMode.MULTI
 
-	var dominant_suit: int = _get_dominant_regular_suit()
-	match dominant_suit:
-		0:
-			return FireMode.SINGLE
-		1:
-			return FireMode.FAN
-		2:
-			return FireMode.MULTI
+	if tong_count > max(wan_count, tiao_count):
+		return FireMode.FAN
+	if tong_count > 0 and _has_multiple_regular_suits():
+		return FireMode.FAN
 
 	if _has_all_three_regular_suits():
 		return FireMode.RANDOM_FAN
-	if _has_multiple_regular_suits():
-		return FireMode.FAN
 	return FireMode.SINGLE
 
 func _update_pattern_from_hand() -> void:
@@ -248,14 +288,31 @@ func _update_pattern_from_hand() -> void:
 	var distinct_regular_values: int = _count_distinct_regular_values()
 	var combo_bonus: int = mini(_active_combo_names.size(), 2)
 
-	_fan_count = clampi(2 + int(distinct_regular_values / 3) + combo_bonus, 2, 6)
-	_multi_shot_count = clampi(3 + int(tiao_count / 2) + combo_bonus, 3, 8)
-	_random_fan_count = clampi(4 + int(regular_tile_total / 4) + combo_bonus, 4, 9)
+	_fan_count = clampi(2 + int(distinct_regular_values / 4) + combo_bonus, 2, 5)
+	_multi_shot_count = clampi(2 + int(tiao_count / 3) + combo_bonus, 2, 5)
+	_random_fan_count = clampi(4 + int(regular_tile_total / 5) + combo_bonus, 4, 7)
+	_fan_count = _ensure_odd_count(_fan_count)
+	_random_fan_count = _ensure_odd_count(_random_fan_count)
+	_burst_repeat_count = clampi(1 + int(tiao_count / 4), 1, 3)
+	_burst_interval = max(0.045, 0.09 - float(tiao_count) * 0.004)
 
 	if _active_combo_names.has("Three-Suit Run"):
-		_fan_count = maxi(_fan_count, 5)
+		_fan_count = maxi(_fan_count, 4)
+		_fan_count = _ensure_odd_count(_fan_count)
+		_burst_repeat_count = maxi(_burst_repeat_count, 2)
+		_burst_interval = min(_burst_interval, 0.06)
 	if _active_combo_names.has("Three Dragons") or _active_combo_names.has("Four Winds"):
-		_random_fan_count = maxi(_random_fan_count, 7)
+		_random_fan_count = maxi(_random_fan_count, 6)
+		_random_fan_count = _ensure_odd_count(_random_fan_count)
+		_burst_repeat_count = maxi(_burst_repeat_count, 2)
+	if _active_combo_names.has("Mixed Hand") or _active_combo_names.has("Four Flowers"):
+		_burst_repeat_count = maxi(_burst_repeat_count, 2)
+
+func _ensure_odd_count(count: int) -> int:
+	var clamped_count := maxi(1, count)
+	if clamped_count % 2 == 0:
+		clamped_count += 1
+	return clamped_count
 
 func _recalculate_special_buffs() -> void:
 	_bonus_atk_speed = 0.0
@@ -427,9 +484,24 @@ func get_shoot_script(target: Vector2) -> Array:
 	var dmg := get_damage_value()
 	var mode := get_effective_fire_mode()
 	var bspd := get_bullet_speed_multiplier()
+	var burst_repeat := _burst_repeat_count
+	var burst_interval := _burst_interval
 
 	match mode:
 		FireMode.SINGLE:
+			if burst_repeat > 1:
+				return [{
+					"action": "shoot",
+					"type": "multi",
+					"num": burst_repeat,
+					"interval": burst_interval,
+					"pool": "MAHJONG_BULLET",
+					"aim": "TARGET",
+					"target": target,
+					"speed": int(350 * bspd),
+					"color": "RED",
+					"damage": dmg
+				}]
 			return [{
 				"action": "shoot",
 				"type": "single",
@@ -446,7 +518,7 @@ func get_shoot_script(target: Vector2) -> Array:
 				"action": "shoot",
 				"type": "multi",
 				"num": _multi_shot_count,
-				"interval": 0.08,
+				"interval": burst_interval,
 				"pool": "MAHJONG_BULLET",
 				"aim": "TARGET",
 				"target": target,
@@ -461,8 +533,8 @@ func get_shoot_script(target: Vector2) -> Array:
 				"type": "fan",
 				"spread": fan_base_spread,
 				"count": _fan_count,
-				"time": 1,
-				"interval": 0.0,
+				"time": burst_repeat,
+				"interval": burst_interval,
 				"pool": "MAHJONG_BULLET",
 				"aim": "TARGET",
 				"target": target,
@@ -477,11 +549,11 @@ func get_shoot_script(target: Vector2) -> Array:
 				"type": "random_fan",
 				"spread": random_fan_spread,
 				"count": _random_fan_count,
-				"time": 1,
-				"interval": 0.0,
+				"time": burst_repeat,
+				"interval": burst_interval,
 				"overlap": true,
 				"fan_seed": -1,      # ✅ 每次随机
-				"base_one": false,   # ✅ 更随机
+				"base_one": true,
 				"pool": "MAHJONG_BULLET",
 				"aim": "TARGET",
 				"target": target,
