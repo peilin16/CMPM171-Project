@@ -44,8 +44,9 @@ func _refresh_text() -> void:
 	score_label.text = tr("game_over_score").format({
 		"score": GameManager.player_manager.player_score
 	});
+	var s:String = GameManager.level_manager.get_level_name()
 	wave_label.text = tr("game_over_level").format({
-	"level": GameManager.level_manager.get_level_name()
+	"level:": s
 })
 	
 

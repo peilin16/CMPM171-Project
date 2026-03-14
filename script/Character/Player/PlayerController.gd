@@ -7,6 +7,7 @@ class_name Player_controller
 @onready var scheduler: Scheduler = $Scheduler
 @onready var state_hub: State_hub = $StateHub
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D 
+signal shoot_requested(payload: Dictionary)
 
 
 
@@ -25,7 +26,7 @@ var dash_cooldown: float = 0.5
 var can_dash: bool = true
 @export var enemy_push_radius: float = 18.0
 @export var enemy_push_strength: float = 28.0
-@export var auto_fire_range: float = 200.0
+
 
 # =========================
 # Fire rate control
@@ -80,7 +81,8 @@ func _physics_process(delta: float) -> void:
 
 	#print(move_data.moveX);
 	handle_fire_mode_hotkeys()
-	handle_auto_fire()
+
+	handle_auto_fire();
 	
 	if Input.is_action_just_pressed("Test"):
 		SoundManager.command({
@@ -180,52 +182,20 @@ func handle_dash_cooldown(delta: float) -> void:
 		if dash_timer <= 0:
 			can_dash = true
 
-func handle_auto_fire() -> void:
+func handle_auto_fire() -> Enemy_controller:
 	if shoot_timer > 0.0:
 		return
-
-	var target_enemy := _get_nearest_enemy()
-	if target_enemy == null:
-		return
-
-	player_shooting({"world_pos": target_enemy.global_position})
-
-func _get_nearest_enemy() -> Enemy_controller:
-	if not GameManager.enemy_manager:
+	var target_enemy :Array = ToolBar.distanceMeasure.get_controllers_in_range(global_position,GameManager.enemy_manager.get_all_active_enemies().values(),200);
+	if target_enemy.is_empty():
 		return null
-
-	var active_enemies: Dictionary = GameManager.enemy_manager.get_all_active_enemies()
-	if active_enemies.is_empty():
-		return null
-
-	var nearest_enemy: Enemy_controller = null
-	var nearest_distance_sq := INF
-	var auto_fire_range_sq := auto_fire_range * auto_fire_range
-
-	for entry in active_enemies.values():
-		if entry == null or not is_instance_valid(entry):
-			continue
-		if entry is not Enemy_controller:
-			continue
-
-		var enemy := entry as Enemy_controller
-		if enemy.is_death:
-			continue
-
-		var distance_sq := global_position.distance_squared_to(enemy.global_position)
-		if auto_fire_range > 0.0 and distance_sq > auto_fire_range_sq:
-			continue
-		if distance_sq < nearest_distance_sq:
-			nearest_distance_sq = distance_sq
-			nearest_enemy = enemy
-
-	return nearest_enemy
+	player_shooting({"world_pos": target_enemy[0].global_position});
+	return target_enemy[0];
 
 # --- 射击系统 ---
 func player_shooting(payload: Dictionary = {}) -> void:
 	if not payload.has("world_pos"):
 		return
-
+	shoot_requested.emit(payload);
 	if shoot_timer > 0.0:
 		# 调试：你想确认被限制时可以打开这一行
 		# print("[Shoot] blocked by cooldown: ", shoot_timer);

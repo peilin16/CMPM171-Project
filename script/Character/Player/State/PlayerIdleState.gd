@@ -5,6 +5,7 @@ class_name Player_idle_state
 
 var move_data:Move_data;
 var last_move:Player_move_state;
+var fire_state:Player_fire_state;
 var state_anima_dict :Dictionary = {
 	"walking-down":"idle-down",
 	"walking-left":"idle-left",
@@ -33,7 +34,7 @@ func enter(controller, hub: State_hub, anim: Animation_player) -> void:
 	anim.play(state_animation);
 	#print(state_name)
 func update(controller, hub: State_hub, anim: Animation_player, delta: float) -> void:
-	
+	controller.handle_auto_fire();
 	controller.move(delta)
 
 func is_done(controller, hub: State_hub, anim: Animation_player) -> bool:

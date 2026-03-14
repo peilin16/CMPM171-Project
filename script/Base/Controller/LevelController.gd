@@ -6,6 +6,7 @@ class_name Level_controller
 @onready var widget_spawner:Node2D = $WidgetSpawner
 @onready var director:Wave_director = $WaveDirector
 var level:Level;
+var level_name:String
 func _ready() -> void:
 	if level == null:
 		level = Level.new();

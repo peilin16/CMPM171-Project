@@ -2473,8 +2473,7 @@ metadata/_custom_type_script = "uid://b566wwblvpd6x"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.2604165, 1.3593749)
 sprite_frames = SubResource("SpriteFrames_gc4mm")
-animation = &"walking-up"
-frame_progress = 0.39754277
+animation = &"walk-shooting-down"
 
 [node name="BulletContainer" type="Node2D" parent="."]
 

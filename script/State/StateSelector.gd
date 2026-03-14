@@ -6,6 +6,7 @@ class_name State_selector
 
 @export var default_state:State_object;
 var current_state: State_object
+var prev_state: State_object
 func _init(hub: State_hub = null) -> void:
 	state_name = "Selector"
 	type= TYPE.SELECTOR;
@@ -59,9 +60,9 @@ func _require_state(next: State_object, controller, hub: State_hub, anim: Animat
 		return
 	if next == current_state:
 		return
-
+	
 	if current_state != null:
 		current_state.exit(controller, hub, anim)
-
+	prev_state = current_state;
 	current_state = next
 	current_state.enter(controller, hub, anim)

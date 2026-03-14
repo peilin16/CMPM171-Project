@@ -1,6 +1,6 @@
 [gd_scene load_steps=110 format=4 uid="uid://b22ap51tyj1no"]
 
-[ext_resource type="Script" uid="uid://c0glmsjtfed0x" path="res://script/Level/Level2Controller.gd" id="1_mkiph"]
+[ext_resource type="Script" uid="uid://dkj1n5vljw475" path="res://script/Level/Level2Controller.gd" id="1_mkiph"]
 [ext_resource type="Script" uid="uid://cdj8cw7oe3du7" path="res://script/Base/Other/Main_camera.gd" id="2_ehffc"]
 [ext_resource type="Texture2D" uid="uid://sptq6n7l8481" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_2.png" id="3_28sug"]
 [ext_resource type="Texture2D" uid="uid://roc1w8b12eb4" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_3.png" id="4_qsveu"]
@@ -29,7 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://by420k64e2thk" path="res://assets/Map/vectoraith_tileset_buildings_chinese_medieval_3A.png" id="26_81rnk"]
 [ext_resource type="PackedScene" uid="uid://sbu784eu31i5" path="res://scenes/UI/PauseMenu.tscn" id="27_gujhw"]
 [ext_resource type="Script" uid="uid://dkfayiq4hb6yc" path="res://script/Level/Base/SubDirector.gd" id="29_besji"]
-[ext_resource type="Script" uid="uid://cme4v5a5ektkc" path="res://script/Level/Level2WaveDirector.gd" id="29_mkiph"]
+[ext_resource type="Script" uid="uid://cvjphr7hn60yg" path="res://script/Level/Level2WaveDirector.gd" id="29_mkiph"]
 [ext_resource type="Script" uid="uid://yd3lu0oib4w3" path="res://script/Level/Base/SpawnDirector.gd" id="30_q6ks6"]
 [ext_resource type="Script" uid="uid://c4isnf8bgipw3" path="res://script/Level/Base/SpawnPoint.gd" id="31_kqxsv"]
 [ext_resource type="Script" uid="uid://c3s17tc73vbrt" path="res://script/Level/Base/WidgetSpawner.gd" id="32_nou6u"]
@@ -17724,6 +17724,7 @@ tile_set = SubResource("TileSet_4hsrp")
 [node name="BulletContainer" type="Node2D" parent="."]
 
 [node name="VFXContainerFront" type="Node2D" parent="."]
+z_index = 800
 
 [node name="EnemyContainer" type="Node2D" parent="."]
 

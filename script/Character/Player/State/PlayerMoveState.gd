@@ -5,6 +5,7 @@ class_name Player_move_state
 
 var move_data:Move_data;
 var current_move:String;
+var fire_state:Player_fire_state;
 func _init(hub: State_hub = null) -> void:
 	state_name = "Move"
 	priority = 2
@@ -17,6 +18,7 @@ func on_ready(controller, hub: State_hub, anim: Animation_player) -> void:
 
 func trigger(controller) -> bool:
 	# default fallback
+
 	return controller.move_data.moveX != Move_data.X.NONE or controller.move_data.moveY != Move_data.Y.NONE;
 
 
@@ -54,5 +56,7 @@ func update(controller, hub: State_hub, anim: Animation_player, delta: float) ->
 		_modify_anim(anim);
 	controller.move(delta)
 
+	
+	
 func is_done(controller, hub: State_hub, anim: Animation_player) -> bool:
 	return false

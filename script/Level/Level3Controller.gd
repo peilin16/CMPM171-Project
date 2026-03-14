@@ -2,9 +2,11 @@ extends Level_controller
 class_name Level3_controller
 
 func _ready() -> void:
-	GameManager.level_manager.setup(self);
+	
 	super._ready();
-	await ToolBar.globalDelayCall.delay(0.3)
+	level = Level3.new();
+	GameManager.level_manager.setup(self);
+	await ToolBar.globalDelayCall.delay(0.3);
 	shop_menu.visible = false;
 	await get_tree().process_frame
 	name = "Quay";
@@ -21,7 +23,8 @@ func _ready() -> void:
 		"volume_mul":0.4,
 		"pitch_scale":1.0
 	});
-	level = Level3.new();
+	
+	
 	start_game();
 func start_game()->void:
 	super.start_game();

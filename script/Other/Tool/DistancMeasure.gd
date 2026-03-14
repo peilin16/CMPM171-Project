@@ -15,7 +15,6 @@ func get_close_controller(position: Vector2, controllers: Array) -> Object:
 		if d < best_d:
 			best_d = d
 			best = c
-
 	return best
 
 # 最远的 controller（你原型叫 get_distance_controller，这里按“最远”实现）

@@ -10,7 +10,7 @@ func _ready() -> void:
 	
 func setup(level:Level_controller)->void:
 	current_level = level; 
-	#level_name = level.level.level_name;
+	level_name = level.level.level_name;
 
 func request_auto_start_next_level() -> void:
 	_auto_start_next_level = true

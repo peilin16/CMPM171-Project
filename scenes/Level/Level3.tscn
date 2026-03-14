@@ -18493,6 +18493,7 @@ tile_set = SubResource("TileSet_4hsrp")
 [node name="BulletContainer" type="Node2D" parent="."]
 
 [node name="VFXContainerFront" type="Node2D" parent="."]
+z_index = 800
 
 [node name="EnemyContainer" type="Node2D" parent="."]
 
@@ -18515,23 +18516,23 @@ metadata/_custom_type_script = "uid://dkfayiq4hb6yc"
 script = ExtResource("30_v882j")
 
 [node name="SpawnPoint1" type="Marker2D" parent="WaveDirector/SubDirector/SpawnDirector"]
-position = Vector2(-597, 228)
+position = Vector2(-518, 297)
 script = ExtResource("31_jntrq")
 
 [node name="SpawnPoint2" type="Marker2D" parent="WaveDirector/SubDirector/SpawnDirector"]
-position = Vector2(-733, -450)
+position = Vector2(-456, -257)
 script = ExtResource("31_jntrq")
 
 [node name="SpawnPoint3" type="Marker2D" parent="WaveDirector/SubDirector/SpawnDirector"]
-position = Vector2(161, 284)
+position = Vector2(399, 357)
 script = ExtResource("31_jntrq")
 
 [node name="SpawnPoint4" type="Marker2D" parent="WaveDirector/SubDirector/SpawnDirector"]
-position = Vector2(789, -503)
+position = Vector2(532, -171)
 script = ExtResource("31_jntrq")
 
 [node name="SpawnPoint5" type="Marker2D" parent="WaveDirector/SubDirector/SpawnDirector"]
-position = Vector2(801, 218)
+position = Vector2(-80, 430)
 script = ExtResource("31_jntrq")
 
 [node name="WidgetSpawner" type="Node2D" parent="."]
