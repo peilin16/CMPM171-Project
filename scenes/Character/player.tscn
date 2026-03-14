@@ -2473,11 +2473,7 @@ metadata/_custom_type_script = "uid://b566wwblvpd6x"
 position = Vector2(0, 2)
 scale = Vector2(0.5, 0.375)
 sprite_frames = SubResource("SpriteFrames_gc4mm")
-<<<<<<< Updated upstream
 animation = &"walking-left-up"
-=======
-animation = &"idle-right"
->>>>>>> Stashed changes
 
 [node name="BulletContainer" type="Node2D" parent="."]
 
