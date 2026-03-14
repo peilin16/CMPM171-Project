@@ -6,6 +6,7 @@ signal tile_chosen(suit: int, value: int)
 @onready var option_2: Button = $CenterContainer/Panel/MainHBox/VBoxContainer/TileContainer/Option2
 @onready var option_3: Button = $CenterContainer/Panel/MainHBox/VBoxContainer/TileContainer/Option3
 @onready var skip_button: Button = $CenterContainer/Panel/MainHBox/VBoxContainer/SkipButton
+@onready var title_label: Label = $CenterContainer/Panel/MainHBox/VBoxContainer/Title
 
 var current_options: Array = []
 
@@ -18,6 +19,7 @@ const SUIT_NAMES = ["wan", "tong", "tiao"]
 const SPECIAL_TILE_CHANCE = 0.25
 
 # Special tile definitions: [suit, value, display_name, image_path, tooltip]
+# 这里保留原结构，tooltip 字段不再直接用于显示，改为走语言系统
 const SPECIAL_TILES = [
 	# Dora (suit 3): counts as 2 of its base suit
 	[3, 0, "Dora Wan", "res://assets/mahjung_tiles/dora_bonus/wuwanRed.png", "Counts as 2 Wan tiles (+damage)"],
@@ -44,10 +46,10 @@ const SPECIAL_TILES = [
 	[7, 3, "Winter", "res://assets/mahjung_tiles/flowers_&_seasons/winter.png", "+10% move speed. Collect all 4 Seasons for a tempo combo."],
 ]
 
-const SUITE_TOOLTIPS = [
-	"Wan: +1 damage per tile and favors focused single shots. Mixing suits unlocks combo patterns.",
-	"Tong: pushes your hand toward spread and fan patterns. Matching numbers across suits unlocks extra combo patterns.",
-	"Tiao: +5% attack speed per tile and favors rapid multi-shot patterns. Runs across all 3 suits unlock extra combo patterns."
+const SUIT_TOOLTIP_KEYS = [
+	"shop_tooltip_wan",
+	"shop_tooltip_tong",
+	"shop_tooltip_tiao"
 ]
 
 func _ready() -> void:
@@ -63,10 +65,21 @@ func _ready() -> void:
 	option_2.pressed.connect(func(): _on_option_selected(1))
 	option_3.pressed.connect(func(): _on_option_selected(2))
 	skip_button.pressed.connect(_on_skip_pressed)
+
+	if not LanguageManager.language_changed.is_connected(_refresh_text):
+		LanguageManager.language_changed.connect(_refresh_text)
 	
 	setup_shop()
+	_refresh_text()
 
 # --- 核心逻辑 ---
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("toggle_language"):
+		LanguageManager.toggle_language()
+		get_viewport().set_input_as_handled()
+
 
 func setup_shop() -> void:
 	current_options.clear()
@@ -85,6 +98,8 @@ func setup_shop() -> void:
 	_apply_tile_to_button(option_1, current_options[0])
 	_apply_tile_to_button(option_2, current_options[1])
 	_apply_tile_to_button(option_3, current_options[2])
+
+	_refresh_text()
 
 # 将随机出的数据转换为图片加载到按钮上
 func _apply_tile_to_button(btn: Button, tile_data: Dictionary) -> void:
@@ -134,13 +149,52 @@ func _get_tile_tooltip(tile_data: Dictionary) -> String:
 	var value: int = tile_data.get("value", 0)
 	
 	if suit <= 2:
-		return SUITE_TOOLTIPS[suit]
+		return tr(SUIT_TOOLTIP_KEYS[suit])
 	
-	for special in SPECIAL_TILES:
-		if special[0] == suit and special[1] == value:
-			return special[2] + ": " + special[4]
+	var special_key := _get_special_tooltip_key(suit, value)
+	if special_key != "":
+		return tr(special_key)
 	
 	return ""
+
+func _get_special_tooltip_key(suit: int, value: int) -> String:
+	match str(suit) + "_" + str(value):
+		"3_0": return "shop_special_3_0"
+		"3_1": return "shop_special_3_1"
+		"3_2": return "shop_special_3_2"
+
+		"4_0": return "shop_special_4_0"
+		"4_1": return "shop_special_4_1"
+		"4_2": return "shop_special_4_2"
+		"4_3": return "shop_special_4_3"
+
+		"5_0": return "shop_special_5_0"
+		"5_1": return "shop_special_5_1"
+		"5_2": return "shop_special_5_2"
+
+		"6_0": return "shop_special_6_0"
+		"6_1": return "shop_special_6_1"
+		"6_2": return "shop_special_6_2"
+		"6_3": return "shop_special_6_3"
+
+		"7_0": return "shop_special_7_0"
+		"7_1": return "shop_special_7_1"
+		"7_2": return "shop_special_7_2"
+		"7_3": return "shop_special_7_3"
+
+		_: return ""
+
+func _refresh_text() -> void:
+	title_label.text = tr("shop_wave_clear")
+	skip_button.text = tr("shop_skip")
+	_refresh_tooltips()
+
+
+func _refresh_tooltips() -> void:
+	if current_options.size() >= 3:
+		option_1.tooltip_text = _get_tile_tooltip(current_options[0])
+		option_2.tooltip_text = _get_tile_tooltip(current_options[1])
+		option_3.tooltip_text = _get_tile_tooltip(current_options[2])
 
 # --- 交互事件 ---
 

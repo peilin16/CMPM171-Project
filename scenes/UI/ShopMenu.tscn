@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://b68pmqxc8g3ms"]
 
-[ext_resource type="Script" uid="uid://s1b10fb3swql" path="res://script/UI/ShopMenu.gd" id="1_gm0i7"]
+[ext_resource type="Script" uid="uid://dllagrbiavdkr" path="res://script/UI/ShopMenu.gd" id="1_gm0i7"]
 [ext_resource type="FontFile" uid="uid://ddyg7xlxgvfuu" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="2_adeea"]
 
 [node name="ShopMenu" type="Control"]
-visible = false
 process_mode = 3
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,7 +49,6 @@ grow_vertical = 2
 
 [node name="ShopOwner" type="TextureRect" parent="CenterContainer/Panel/MainHBox"]
 visible = false
-custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
@@ -63,8 +62,8 @@ alignment = 1
 [node name="Title" type="Label" parent="CenterContainer/Panel/MainHBox/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_adeea")
-horizontal_alignment = 1
 text = "Wave Cleared. Click & continue with your favorite mahjong tile!"
+horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Panel/MainHBox/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
