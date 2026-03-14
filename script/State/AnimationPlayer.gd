@@ -12,6 +12,7 @@ func play(animation: Animation_object) -> void:
 	sprite.stop();
 	current_animation = animation
 	sprite.speed_scale = animation.animation_speed
+	
 	playing = true;
 	# 设置循环模式
 	if sprite.sprite_frames:
@@ -21,7 +22,7 @@ func play(animation: Animation_object) -> void:
 			sprite.sprite_frames.set_animation_loop(animation.animation_name, animation.is_loop)
 	
 	sprite.play(animation.animation_name)
-	
+	animation.is_playing = true;
 	# 连接动画完成信号
 	if not animation.is_loop:
 		if not sprite.animation_finished.is_connected(_on_animation_finished):
@@ -42,9 +43,9 @@ func anima_display()->void:
 	sprite.visible =true;
 
 func _on_animation_finished() -> bool:
-	# 非循环动画完成时的处理
 	print("Animation finished: ", current_animation.animation_name if current_animation else "")
 	playing = false;
+	current_animation.is_playing = false;
 	return playing;
 
 

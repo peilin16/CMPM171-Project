@@ -1,5 +1,6 @@
 extends Character_controller
 class_name Player_controller
+signal shoot_requested(payload: Dictionary);
 
 # 获取组件引用
 @onready var hurtbox: Area2D = $HurtBox
@@ -161,7 +162,14 @@ func handle_dash_cooldown(delta: float) -> void:
 # --- 射击系统 ---
 func player_shooting(payload: Dictionary) -> void:
 	# 当前有效模式（由筒子决定或手动覆盖决定）
+<<<<<<< Updated upstream
 	var mode := logic.get_effective_fire_mode()
+=======
+	shoot_requested.emit(payload)
+
+	
+	var mode := logic.get_effective_fire_mode();
+>>>>>>> Stashed changes
 
 	# ✅ 只有 MULTI 不吃全局冷却，其它（SINGLE/FAN/RANDOM_FAN）都吃冷却
 	if mode != Player_logic.FireMode.MULTI:
