@@ -13,7 +13,7 @@ func _ready() -> void:
 	SoundManager.command({
 		"sound":"bgm",
 		"command":"start",
-		"name":"BGM3",
+		"name":"BGM2",
 		"fade_in":0.2,
 		"fade_out":0.7,
 		"transfer_fade_out":0.2,
