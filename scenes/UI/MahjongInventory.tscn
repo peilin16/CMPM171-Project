@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1y7ojjnsuu0r"]
+[gd_scene format=3 uid="uid://d1y7ojjnsuu0r"]
 
-[ext_resource type="Script" uid="uid://hbmtt5bs1lg7" path="res://script/UI/MahjongInventory.gd" id="1_34lew"]
+[ext_resource type="Script" uid="uid://bn8q56en4s1o1" path="res://script/UI/MahjongInventory.gd" id="1_34lew"]
 
-[node name="MahjongInventory" type="Control"]
+[node name="MahjongInventory" type="Control" unique_id=1680046872]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 3
 anchors_preset = 12
@@ -13,20 +13,23 @@ grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("1_34lew")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=481721369]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -25.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 color = Color(0, 0, 0, 0.49803922)
 
-[node name="TileContainer" type="HBoxContainer" parent="."]
+[node name="TileContainer" type="HBoxContainer" parent="." unique_id=746655901]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
