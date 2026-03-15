@@ -41,8 +41,17 @@ func _refresh_text() -> void:
 	restart_button.text = tr("game_over_restart")
 	quit_button.text = tr("game_over_title_screen")
 
-	score_label.text = "score :"+ str( GameManager.player_manager.player_score)
-	wave_label.text = "level "+ str(GameManager.level_manager.get_level_index())
+	var score_value := 0
+	var level_value := 0
+
+	if GameManager and GameManager.player_manager:
+		score_value = GameManager.player_manager.player_score
+
+	if GameManager and GameManager.level_manager:
+		level_value = GameManager.level_manager.get_level_index()
+
+	score_label.text = tr("game_over_score").format({"score": score_value})
+	wave_label.text = tr("game_over_level").format({"level": level_value})
 	
 
 # --- [API] 供外部调用的设置函数 ---
