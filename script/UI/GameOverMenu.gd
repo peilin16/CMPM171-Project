@@ -42,7 +42,7 @@ func _refresh_text() -> void:
 	quit_button.text = tr("game_over_title_screen")
 
 	score_label.text = "score :"+ str( GameManager.player_manager.player_score)
-	wave_label.text = "level "+ GameManager.level_manager.get_level_name();
+	wave_label.text = "level "+ str(GameManager.level_manager.get_level_index())
 	
 
 # --- [API] 供外部调用的设置函数 ---

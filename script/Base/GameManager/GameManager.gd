@@ -29,3 +29,4 @@ func reset_run_state() -> void:
 	if level_manager:
 		level_manager.reset_run_state()
 	Wave_director.reset_global_progress()
+	

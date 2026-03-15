@@ -6,7 +6,8 @@ class_name Player_controller
 @onready var vfx_parser: VFX_parser = $VFXParser
 @onready var scheduler: Scheduler = $Scheduler
 @onready var state_hub: State_hub = $StateHub
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D 
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+
 signal shoot_requested(payload: Dictionary)
 
 
@@ -272,5 +273,5 @@ func death()->void:
 			});
 		is_death = true;
 		await ToolBar.globalDelayCall.delay(2);
-		get_tree().change_scene_to_file("res://scenes/UI/GameOverMenu.tscn")
+		get_tree().change_scene_to_file("res://scenes/UI/GameOverMenu.tscn");
 	
