@@ -39,8 +39,55 @@ func _ready() -> void:
 # --- 核心接口：更新手牌显示 ---
 func update_inventory(hand_array: Array) -> void:
 	clear_inventory()
-	for tile_data in hand_array:
-		_add_tile_to_ui(tile_data)
+	
+	if hand_array.is_empty():
+		return
+		
+	# 1. 自动理牌 (先克隆一份数组，避免影响底层的真实手牌顺序)
+	var sorted_hand = hand_array.duplicate()
+	sorted_hand.sort_custom(_sort_tiles)
+	
+	# 2. 动态计算缩放尺寸 (防溢出)
+	var tile_count = sorted_hand.size()
+	var max_w = 20.0
+	var max_h = 40.0
+	var separation = 5.0 # 假设 HBoxContainer 间距为 5，可根据你的真实 Theme 调整
+	
+	# 获取当前界面的可用宽度 (留 20px 安全边距)
+	# 如果 UI 尚未完全渲染导致 size.x 为 0，则回退使用屏幕宽度
+	var available_width = size.x - 20.0
+	if available_width <= 0:
+		available_width = get_viewport_rect().size.x - 20.0
+		
+	var target_w = max_w
+	var target_h = max_h
+	
+	var required_width = (max_w * tile_count) + (separation * (tile_count - 1))
+	
+	# 如果所需宽度超过了屏幕可用宽度，进行等比例缩小
+	if required_width > available_width:
+		# 计算压缩后的宽度 (保证最小不低于 5px)
+		target_w = max((available_width - (separation * (tile_count - 1))) / tile_count, 5.0)
+		# 维持 1:2 的长宽比例
+		target_h = target_w * 2.0 
+		
+	var target_size = Vector2(target_w, target_h)
+	
+	# 3. 按理好的顺序和计算好的尺寸生成 UI
+	for tile_data in sorted_hand:
+		_add_tile_to_ui(tile_data, target_size)
+
+# --- 辅助排序函数 ---
+# 规则：先比较花色 (suit)，花色相同的再比较点数 (value)
+func _sort_tiles(a: Dictionary, b: Dictionary) -> bool:
+	var suit_a = int(a.get("suit", -1))
+	var suit_b = int(b.get("suit", -1))
+	if suit_a != suit_b:
+		return suit_a < suit_b
+		
+	var val_a = int(a.get("value", 0))
+	var val_b = int(b.get("value", 0))
+	return val_a < val_b
 
 # 清空当前显示的牌
 func clear_inventory() -> void:
@@ -48,12 +95,13 @@ func clear_inventory() -> void:
 		child.queue_free()
 
 # 动态生成一张牌并添加到 UI 中
-func _add_tile_to_ui(tile_data) -> void:
+func _add_tile_to_ui(tile_data: Dictionary, target_size: Vector2) -> void:
 	var texture_rect = TextureRect.new()
 	
 	texture_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	texture_rect.custom_minimum_size = Vector2(20, 40) 
+	# 应用刚刚计算出来的动态尺寸
+	texture_rect.custom_minimum_size = target_size 
 	
 	var value := int(tile_data.get("value", 0))
 	var suit := int(tile_data.get("suit", -1))
