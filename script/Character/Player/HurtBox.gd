@@ -43,6 +43,9 @@ func _on_area_entered(area: Area2D) -> void:
 		return;
 	 # Replace with function body.
 
+func heal_full() -> void:
+	player_hp = 100.0
+
 func hurt(num:float)->void:
 	if _is_damage_blocked():
 		return

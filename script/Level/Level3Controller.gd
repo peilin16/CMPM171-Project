@@ -1,6 +1,8 @@
 extends Level_controller
 class_name Level3_controller
 
+@onready var weather_filter = $WeatherFilter
+
 func _ready() -> void:
 	
 	super._ready();
@@ -28,3 +30,7 @@ func _ready() -> void:
 	start_game();
 func start_game()->void:
 	super.start_game();
+	if weather_filter:
+		var color_rect = weather_filter.get_node_or_null("ColorRect")
+		if color_rect and color_rect.has_method("apply_weather"):
+			color_rect.apply_weather()

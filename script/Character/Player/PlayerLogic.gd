@@ -57,26 +57,26 @@ const SUIT_SEASON = 7
 @export var season_move_spd: float = 0.10      # Winter: +10% move speed
 
 # Balance: hand combo bonuses
-@export var combo_mixed_hand_damage: float = 0.10
-@export var combo_mixed_hand_atk_speed: float = 0.10
-@export var combo_mixed_hand_bullet_speed: float = 0.10
-@export var combo_mixed_triple_damage: float = 0.25
-@export var combo_mixed_triple_atk_speed: float = 0.15
-@export var combo_mixed_run_atk_speed: float = 0.20
-@export var combo_mixed_run_bullet_speed: float = 0.20
-@export var combo_mixed_run_move_speed: float = 0.10
-@export var combo_four_winds_move_speed: float = 0.20
-@export var combo_four_winds_atk_speed: float = 0.20
-@export var combo_four_winds_defense: float = 0.10
-@export var combo_three_dragons_damage: float = 0.35
-@export var combo_three_dragons_bullet_speed: float = 0.20
-@export var combo_three_dragons_score: float = 0.25
-@export var combo_four_flowers_atk_speed: float = 0.12
-@export var combo_four_flowers_bullet_speed: float = 0.12
-@export var combo_four_flowers_move_speed: float = 0.12
-@export var combo_four_seasons_damage: float = 0.12
-@export var combo_four_seasons_atk_speed: float = 0.12
-@export var combo_four_seasons_move_speed: float = 0.12
+@export var combo_mixed_hand_damage: float = 0.18
+@export var combo_mixed_hand_atk_speed: float = 0.18
+@export var combo_mixed_hand_bullet_speed: float = 0.15
+@export var combo_mixed_triple_damage: float = 0.40
+@export var combo_mixed_triple_atk_speed: float = 0.25
+@export var combo_mixed_run_atk_speed: float = 0.35
+@export var combo_mixed_run_bullet_speed: float = 0.30
+@export var combo_mixed_run_move_speed: float = 0.18
+@export var combo_four_winds_move_speed: float = 0.35
+@export var combo_four_winds_atk_speed: float = 0.35
+@export var combo_four_winds_defense: float = 0.20
+@export var combo_three_dragons_damage: float = 0.55
+@export var combo_three_dragons_bullet_speed: float = 0.35
+@export var combo_three_dragons_score: float = 0.40
+@export var combo_four_flowers_atk_speed: float = 0.20
+@export var combo_four_flowers_bullet_speed: float = 0.20
+@export var combo_four_flowers_move_speed: float = 0.20
+@export var combo_four_seasons_damage: float = 0.20
+@export var combo_four_seasons_atk_speed: float = 0.20
+@export var combo_four_seasons_move_speed: float = 0.20
 
 # Computed bonus multipliers from special tiles
 var _bonus_atk_speed: float = 0.0
@@ -288,7 +288,7 @@ func _update_pattern_from_hand() -> void:
 	var distinct_regular_values: int = _count_distinct_regular_values()
 	var combo_bonus: int = mini(_active_combo_names.size(), 2)
 
-	_fan_count = clampi(2 + int(distinct_regular_values / 4) + combo_bonus, 2, 5)
+	_fan_count = clampi(1 + tong_count * 2 + combo_bonus, 1, 9)
 	_multi_shot_count = clampi(2 + int(tiao_count / 3) + combo_bonus, 2, 5)
 	_random_fan_count = clampi(4 + int(regular_tile_total / 5) + combo_bonus, 4, 7)
 	_fan_count = _ensure_odd_count(_fan_count)

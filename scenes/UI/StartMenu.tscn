@@ -1,10 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3cnfks53qo0f"]
+[gd_scene format=3 uid="uid://c3cnfks53qo0f"]
 
 [ext_resource type="Script" uid="uid://c62mvqdyaihqt" path="res://script/UI/StartMenu.gd" id="1_g18el"]
-[ext_resource type="Texture2D" uid="uid://ba4lbqlr1sra1" path="res://assets/UI/temp_background.png" id="2_ghpp4"]
 [ext_resource type="FontFile" uid="uid://ddyg7xlxgvfuu" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="2_yi547"]
 
-[node name="StartMenu" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_settings_panel"]
+bg_color = Color(0.08, 0.09, 0.12, 0.94)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.82, 0.76, 0.58, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 8
+
+[node name="StartMenu" type="Control" unique_id=1651609316]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,19 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g18el")
 
-[node name="Background" type="TextureRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_ghpp4")
-expand_mode = 3
-stretch_mode = 6
-
-[node name="MenuContainer" type="VBoxContainer" parent="."]
+[node name="MenuContainer" type="VBoxContainer" parent="." unique_id=1937340487]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -39,60 +40,118 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Title" type="Label" parent="MenuContainer"]
+[node name="Title" type="Label" parent="MenuContainer" unique_id=1584021616]
 layout_mode = 2
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_yi547")
 theme_override_font_sizes/font_size = 100
 text = "Ron & Gun"
 
-[node name="Control" type="Control" parent="MenuContainer"]
+[node name="Control" type="Control" parent="MenuContainer" unique_id=482162065]
 layout_mode = 2
 
-[node name="StartButton" type="Button" parent="MenuContainer"]
+[node name="StartButton" type="Button" parent="MenuContainer" unique_id=1119655360]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_yi547")
 theme_override_font_sizes/font_size = 50
 text = "New Game"
 
-[node name="QuitButton" type="Button" parent="MenuContainer"]
+[node name="QuitButton" type="Button" parent="MenuContainer" unique_id=49594524]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_yi547")
 theme_override_font_sizes/font_size = 50
 text = "Quit Game"
 
-[node name="InstructionsButton" type="Button" parent="MenuContainer"]
+[node name="InstructionsButton" type="Button" parent="MenuContainer" unique_id=619889237]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_yi547")
 theme_override_font_sizes/font_size = 38
 text = "Instructions"
 
-[node name="AccessibilityContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -120.0
-offset_top = -200.0
-offset_right = 120.0
-offset_bottom = -130.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="ColorBlindLabel" type="Label" parent="AccessibilityContainer"]
+[node name="SettingsButton" type="Button" parent="MenuContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_yi547")
+theme_override_font_sizes/font_size = 38
+text = "Settings"
+
+[node name="SettingsPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -140.0
+offset_right = 180.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_settings_panel")
+
+[node name="SettingsTitle" type="Label" parent="SettingsPanel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 350.0
+offset_bottom = 45.0
+theme_override_fonts/font = ExtResource("2_yi547")
+theme_override_font_sizes/font_size = 30
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="LanguageLabel" type="Label" parent="SettingsPanel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 60.0
+offset_right = 340.0
+offset_bottom = 85.0
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("2_yi547")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 22
+text = "Language"
+horizontal_alignment = 1
+
+[node name="LanguageOption" type="OptionButton" parent="SettingsPanel"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 90.0
+offset_right = 300.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("2_yi547")
+theme_override_font_sizes/font_size = 22
+
+[node name="ColorBlindLabel" type="Label" parent="SettingsPanel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 135.0
+offset_right = 340.0
+offset_bottom = 160.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("2_yi547")
+theme_override_font_sizes/font_size = 22
 text = "Color-Blind Filter"
 horizontal_alignment = 1
 
-[node name="ColorBlindOption" type="OptionButton" parent="AccessibilityContainer"]
-layout_mode = 2
+[node name="ColorBlindOption" type="OptionButton" parent="SettingsPanel"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 165.0
+offset_right = 300.0
+offset_bottom = 195.0
 theme_override_fonts/font = ExtResource("2_yi547")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 22
+
+[node name="CloseButton" type="Button" parent="SettingsPanel"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 215.0
+offset_right = 260.0
+offset_bottom = 250.0
+theme_override_fonts/font = ExtResource("2_yi547")
+theme_override_font_sizes/font_size = 22
+text = "Close"
 
 [connection signal="pressed" from="MenuContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MenuContainer/QuitButton" to="." method="_on_quit_button_pressed"]

@@ -25,7 +25,7 @@ func _attach_to_ui_layer() -> void:
 	anchors_preset = Control.PRESET_TOP_LEFT
 	offset_left = 20.0
 	offset_top = 20.0
-	offset_right = 184.0
+	offset_right = 314.0
 	offset_bottom = 134.0
 	
 
