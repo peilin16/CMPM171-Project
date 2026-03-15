@@ -8,6 +8,12 @@ var _cleanup_timer: float = 0.0
 func start(sub: Sub_director) -> void:
 	_cleanup_timer = 0.0
 
+func end(sub: Sub_director) -> void:
+	if GameManager.player_manager and GameManager.player_manager.player:
+		var hurtbox = GameManager.player_manager.player.hurtbox
+		if hurtbox:
+			hurtbox.heal_full()
+
 func update(sub: Sub_director, delta: float) -> void:
 	_cleanup_timer += delta
 	# Periodically clean up broken enemies (invisible, off-screen, no HP)

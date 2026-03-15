@@ -3,6 +3,20 @@
 [ext_resource type="Script" uid="uid://c62mvqdyaihqt" path="res://script/UI/StartMenu.gd" id="1_g18el"]
 [ext_resource type="FontFile" uid="uid://ddyg7xlxgvfuu" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="2_yi547"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_settings_panel"]
+bg_color = Color(0.08, 0.09, 0.12, 0.94)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.82, 0.76, 0.58, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 8
+
 [node name="StartMenu" type="Control" unique_id=1651609316]
 layout_mode = 3
 anchors_preset = 15
@@ -54,31 +68,90 @@ theme_override_fonts/font = ExtResource("2_yi547")
 theme_override_font_sizes/font_size = 38
 text = "Instructions"
 
-[node name="AccessibilityContainer" type="VBoxContainer" parent="." unique_id=1056613853]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -120.0
-offset_top = -200.0
-offset_right = 120.0
-offset_bottom = -130.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="ColorBlindLabel" type="Label" parent="AccessibilityContainer" unique_id=675602414]
+[node name="SettingsButton" type="Button" parent="MenuContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_yi547")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 38
+text = "Settings"
+
+[node name="SettingsPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -140.0
+offset_right = 180.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_settings_panel")
+
+[node name="SettingsTitle" type="Label" parent="SettingsPanel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 350.0
+offset_bottom = 45.0
+theme_override_fonts/font = ExtResource("2_yi547")
+theme_override_font_sizes/font_size = 30
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="LanguageLabel" type="Label" parent="SettingsPanel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 60.0
+offset_right = 340.0
+offset_bottom = 85.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("2_yi547")
+theme_override_font_sizes/font_size = 22
+text = "Language"
+horizontal_alignment = 1
+
+[node name="LanguageOption" type="OptionButton" parent="SettingsPanel"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 90.0
+offset_right = 300.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("2_yi547")
+theme_override_font_sizes/font_size = 22
+
+[node name="ColorBlindLabel" type="Label" parent="SettingsPanel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 135.0
+offset_right = 340.0
+offset_bottom = 160.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("2_yi547")
+theme_override_font_sizes/font_size = 22
 text = "Color-Blind Filter"
 horizontal_alignment = 1
 
-[node name="ColorBlindOption" type="OptionButton" parent="AccessibilityContainer" unique_id=63457358]
-layout_mode = 2
+[node name="ColorBlindOption" type="OptionButton" parent="SettingsPanel"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 165.0
+offset_right = 300.0
+offset_bottom = 195.0
 theme_override_fonts/font = ExtResource("2_yi547")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 22
+
+[node name="CloseButton" type="Button" parent="SettingsPanel"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 215.0
+offset_right = 260.0
+offset_bottom = 250.0
+theme_override_fonts/font = ExtResource("2_yi547")
+theme_override_font_sizes/font_size = 22
+text = "Close"
 
 [connection signal="pressed" from="MenuContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MenuContainer/QuitButton" to="." method="_on_quit_button_pressed"]

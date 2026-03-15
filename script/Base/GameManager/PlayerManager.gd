@@ -88,6 +88,8 @@ func _spawn_player(level: Level_controller, position:Vector2 = Vector2.ZERO):
 	if existing_player:
 		existing_player.queue_free()
 	player = null
+	if player_scene == null:
+		player_scene = load("res://scenes/Character/player.tscn")
 	player = player_scene.instantiate()
 	#var actors := _get_actors_root()
 	level.add_child(player);

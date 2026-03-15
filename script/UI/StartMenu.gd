@@ -12,9 +12,18 @@ const COLORBLIND_KEYS := [
 	"colorblind_tritanopia"
 ]
 
-@onready var colorblind_option: OptionButton = $AccessibilityContainer/ColorBlindOption
-@onready var colorblind_label: Label = $AccessibilityContainer/ColorBlindLabel
+const LANGUAGE_MODES := ["en", "zh_CN", "ja"]
+const LANGUAGE_KEYS := ["lang_en", "lang_zh", "lang_ja"]
+
+@onready var colorblind_option: OptionButton = $SettingsPanel/ColorBlindOption
+@onready var colorblind_label: Label = $SettingsPanel/ColorBlindLabel
+@onready var language_option: OptionButton = $SettingsPanel/LanguageOption
+@onready var language_label: Label = $SettingsPanel/LanguageLabel
 @onready var instructions_button: Button = $MenuContainer/InstructionsButton
+@onready var settings_button: Button = $MenuContainer/SettingsButton
+var settings_panel: Panel
+var settings_title: Label
+var settings_close_button: Button
 var instruction_label: RichTextLabel
 var instruction_panel: Panel
 var instruction_title: Label
@@ -25,6 +34,9 @@ func _ready() -> void:
 	instruction_title = get_node_or_null("InstructionPanel/InstructionTitle") as Label
 	instruction_label = get_node_or_null("InstructionPanel/InstructionLabel") as RichTextLabel
 	instruction_close_button = get_node_or_null("InstructionPanel/CloseButton") as Button
+	settings_panel = get_node_or_null("SettingsPanel") as Panel
+	settings_title = get_node_or_null("SettingsPanel/SettingsTitle") as Label
+	settings_close_button = get_node_or_null("SettingsPanel/CloseButton") as Button
 	# Only show start menu on Level 1
 	if not get_parent() is Level1_controller:
 		visible = false
@@ -41,9 +53,15 @@ func _ready() -> void:
 		instructions_button.pressed.connect(_on_instructions_button_pressed)
 	if instruction_close_button and not instruction_close_button.pressed.is_connected(_on_close_instructions_pressed):
 		instruction_close_button.pressed.connect(_on_close_instructions_pressed)
+	if settings_button and not settings_button.pressed.is_connected(_on_settings_button_pressed):
+		settings_button.pressed.connect(_on_settings_button_pressed)
+	if settings_close_button and not settings_close_button.pressed.is_connected(_on_close_settings_pressed):
+		settings_close_button.pressed.connect(_on_close_settings_pressed)
 	_set_instruction_popup_visible(false)
+	_set_settings_popup_visible(false)
 
 	_setup_colorblind_option()
+	_setup_language_option()
 	if not LanguageManager.language_changed.is_connected(_refresh_text):
 		LanguageManager.language_changed.connect(_refresh_text)
 	_refresh_text()
@@ -63,9 +81,24 @@ func _setup_colorblind_option() -> void:
 	if not colorblind_option.item_selected.is_connected(_on_colorblind_selected):
 		colorblind_option.item_selected.connect(_on_colorblind_selected)
 
+func _setup_language_option() -> void:
+	language_option.clear()
+	for i in range(LANGUAGE_KEYS.size()):
+		language_option.add_item(tr(LANGUAGE_KEYS[i]), i)
+	var current_locale: String = LanguageManager.get_current_locale()
+	var idx := LANGUAGE_MODES.find(current_locale)
+	if idx >= 0:
+		language_option.select(idx)
+	if not language_option.item_selected.is_connected(_on_language_selected):
+		language_option.item_selected.connect(_on_language_selected)
+
 func _unhandled_input(event: InputEvent) -> void:
 	if instruction_panel and instruction_panel.visible and event.is_action_pressed("ui_cancel"):
 		_set_instruction_popup_visible(false)
+		get_viewport().set_input_as_handled()
+		return
+	if settings_panel and settings_panel.visible and event.is_action_pressed("ui_cancel"):
+		_set_settings_popup_visible(false)
 		get_viewport().set_input_as_handled()
 		return
 	if event.is_action_pressed("toggle_language"):
@@ -78,10 +111,20 @@ func _refresh_text() -> void:
 	$MenuContainer/QuitButton.text = tr("menu_quit_game")
 	if instructions_button:
 		instructions_button.text = tr("menu_instructions_button")
+	if settings_button:
+		settings_button.text = tr("menu_settings_button")
 
 	if colorblind_label:
 		colorblind_label.text = tr("menu_colorblind_title")
+	if language_label:
+		language_label.text = tr("menu_language_title")
 	_setup_colorblind_option()
+	_setup_language_option()
+
+	if settings_title:
+		settings_title.text = tr("menu_settings_title")
+	if settings_close_button:
+		settings_close_button.text = tr("menu_close")
 
 	if instruction_title:
 		instruction_title.text = tr("menu_instructions_title")
@@ -108,6 +151,16 @@ func _on_colorblind_selected(index: int) -> void:
 	if index >= 0 and index < COLORBLIND_MODES.size():
 		GameManager.set_colorblind_mode(COLORBLIND_MODES[index])
 
+func _on_language_selected(index: int) -> void:
+	if index >= 0 and index < LANGUAGE_MODES.size():
+		LanguageManager.set_language(LANGUAGE_MODES[index])
+
+func _on_settings_button_pressed() -> void:
+	_set_settings_popup_visible(true)
+
+func _on_close_settings_pressed() -> void:
+	_set_settings_popup_visible(false)
+
 func _on_instructions_button_pressed() -> void:
 	_set_instruction_popup_visible(true)
 
@@ -117,3 +170,7 @@ func _on_close_instructions_pressed() -> void:
 func _set_instruction_popup_visible(is_visible: bool) -> void:
 	if instruction_panel:
 		instruction_panel.visible = is_visible
+
+func _set_settings_popup_visible(is_visible: bool) -> void:
+	if settings_panel:
+		settings_panel.visible = is_visible
