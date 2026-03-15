@@ -51,9 +51,16 @@ func clear_inventory() -> void:
 func _add_tile_to_ui(tile_data) -> void:
 	var texture_rect = TextureRect.new()
 	
-	texture_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	texture_rect.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 	texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	texture_rect.custom_minimum_size = Vector2(45, 65) 
+	
+	texture_rect.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	texture_rect.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	
+	texture_rect.custom_minimum_size = Vector2(45, 65)
+	texture_rect.set_size(Vector2(25, 35))   # ⭐关键
+	
+	texture_rect.clip_contents = true        # ⭐防止溢出
 	
 	var value := int(tile_data.get("value", 0))
 	var suit := int(tile_data.get("suit", -1))

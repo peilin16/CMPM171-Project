@@ -5,6 +5,7 @@ class_name Level_controller
 @onready var shop_menu:Shop_menu = $ShopMenu
 @onready var widget_spawner:Node2D = $WidgetSpawner
 @onready var director:Wave_director = $WaveDirector
+@onready var is_start:bool = false;
 var level:Level;
 var level_name:String
 func _ready() -> void:
@@ -24,13 +25,14 @@ func _ready() -> void:
 	
 	
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("stop"):
+	if Input.is_action_just_pressed("stop") and is_start:
 		if not pause_menu.visible:
 			pause_menu.visible = true;
 		pause_menu.global_position = GameManager.camera_manager.get_center()
 		get_tree().paused = true;
 
 func start_game()->void:
+	is_start = true
 	GameManager.player_manager._spawn_player(self,Vector2(0,0));
 	director.start();
 	PoolManager.bullet_pool_manager._preload_order(level.bullet_order);
