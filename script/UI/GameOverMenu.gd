@@ -41,13 +41,8 @@ func _refresh_text() -> void:
 	restart_button.text = tr("game_over_restart")
 	quit_button.text = tr("game_over_title_screen")
 
-	score_label.text = tr("game_over_score").format({
-		"score": GameManager.player_manager.player_score
-	});
-	var s:String = GameManager.level_manager.get_level_name()
-	wave_label.text = tr("game_over_level").format({
-	"level:": s
-})
+	score_label.text = "score :"+ str( GameManager.player_manager.player_score)
+	wave_label.text = "level "+ GameManager.level_manager.get_level_name();
 	
 
 # --- [API] 供外部调用的设置函数 ---
