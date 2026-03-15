@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bn8q56en4s1o1" path="res://script/UI/MahjongInventory.gd" id="1_34lew"]
 
 [node name="MahjongInventory" type="Control" unique_id=1680046872]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 25)
 layout_mode = 3
 anchors_preset = 12
 anchor_top = 1.0
