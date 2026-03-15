@@ -58,9 +58,8 @@ func _add_tile_to_ui(tile_data) -> void:
 	texture_rect.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	
 	texture_rect.custom_minimum_size = Vector2(45, 65)
-	texture_rect.set_size(Vector2(25, 35))   # ⭐关键
-	
-	texture_rect.clip_contents = true        # ⭐防止溢出
+	texture_rect.set_size(Vector2(25, 35))  
+	texture_rect.clip_contents = true       
 	
 	var value := int(tile_data.get("value", 0))
 	var suit := int(tile_data.get("suit", -1))

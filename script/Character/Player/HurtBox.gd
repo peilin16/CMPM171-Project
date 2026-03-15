@@ -14,6 +14,7 @@ var controller:Player_controller;
 var _contact_damage_timer: float = 0.0
 var _touching_enemies: Array[Enemy_controller] = []
 var _spawn_grace_timer: float = 0.0
+
 func open()->void:
 	can_hurt = true;
 
@@ -43,6 +44,8 @@ func _on_area_entered(area: Area2D) -> void:
 	 # Replace with function body.
 
 func hurt(num:float)->void:
+	if _is_damage_blocked():
+		return
 	if num <= 0:
 		return
 	var reduction := 0.0
@@ -61,11 +64,15 @@ func _physics_process(delta: float) -> void:
 			can_hurt = true
 		else:
 			_clear_invalid_enemies()
-			if not _touching_enemies.is_empty():
-				_touching_enemies.clear()
 			_contact_damage_timer = 0.0
 			return
 
+	if _is_damage_blocked():
+		_clear_invalid_enemies()
+		_contact_damage_timer = 0.0
+		return
+
+	_sync_touching_enemies()
 	if not can_hurt:
 		return
 
@@ -82,7 +89,7 @@ func _physics_process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body is not Enemy_controller:
 		return;
-	if not can_hurt:
+	if _is_damage_blocked():
 		return;
 	var enemy := body as Enemy_controller
 	if not _touching_enemies.has(enemy):
@@ -102,6 +109,16 @@ func _clear_invalid_enemies() -> void:
 		return is_instance_valid(enemy)
 	)
 
+func _sync_touching_enemies() -> void:
+	for body in get_overlapping_bodies():
+		if body is not Enemy_controller:
+			continue
+		var enemy := body as Enemy_controller
+		if not is_instance_valid(enemy):
+			continue
+		if not _touching_enemies.has(enemy):
+			_touching_enemies.append(enemy)
+
 func _apply_contact_damage() -> void:
 	if _touching_enemies.is_empty():
 		return
@@ -110,3 +127,10 @@ func _apply_contact_damage() -> void:
 func _get_effective_contact_damage_interval() -> float:
 	var enemy_count: int = max(_touching_enemies.size(), 1)
 	return max(min_contact_damage_interval, contact_damage_interval / float(enemy_count))
+
+func _is_damage_blocked() -> bool:
+	if not can_hurt:
+		return true
+	if _spawn_grace_timer > 0.0:
+		return true
+	return controller != null and controller.is_dashing
