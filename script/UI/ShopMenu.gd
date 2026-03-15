@@ -74,25 +74,38 @@ func _ready() -> void:
 
 # --- 核心逻辑 ---
 
-
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_language"):
 		LanguageManager.toggle_language()
 		get_viewport().set_input_as_handled()
 
-
 func setup_shop() -> void:
 	current_options.clear()
 	
-	# 随机生成3张牌 (each has a chance to be special)
-	for i in range(3):
+	# 随机生成3张不重复的牌 (each has a chance to be special)
+	while current_options.size() < 3:
+		var candidate_suit: int
+		var candidate_value: int
+		
+		# 1. 抽出一张候选牌
 		if randf() < SPECIAL_TILE_CHANCE:
 			var special = SPECIAL_TILES[randi() % SPECIAL_TILES.size()]
-			current_options.append({"suit": special[0], "value": special[1]})
+			candidate_suit = special[0]
+			candidate_value = special[1]
 		else:
-			var random_suit = randi() % 3  # 0:万, 1:筒, 2:条
-			var random_value = (randi() % 9) + 1 # 1-9
-			current_options.append({"suit": random_suit, "value": random_value})
+			candidate_suit = randi() % 3  # 0:万, 1:筒, 2:条
+			candidate_value = (randi() % 9) + 1 # 1-9
+			
+		# 2. 检查这张牌是否已经存在于 current_options 中
+		var is_duplicate = false
+		for option in current_options:
+			if option["suit"] == candidate_suit and option["value"] == candidate_value:
+				is_duplicate = true
+				break
+				
+		# 3. 如果是独一无二的，加入商店列表
+		if not is_duplicate:
+			current_options.append({"suit": candidate_suit, "value": candidate_value})
 	
 	# 应用图片到按钮上
 	_apply_tile_to_button(option_1, current_options[0])
