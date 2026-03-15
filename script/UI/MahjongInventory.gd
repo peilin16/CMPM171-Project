@@ -53,7 +53,7 @@ func _add_tile_to_ui(tile_data) -> void:
 	
 	texture_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	texture_rect.custom_minimum_size = Vector2(45, 65) 
+	texture_rect.custom_minimum_size = Vector2(20, 40) 
 	
 	var value := int(tile_data.get("value", 0))
 	var suit := int(tile_data.get("suit", -1))
