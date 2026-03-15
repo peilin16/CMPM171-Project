@@ -17,7 +17,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="Ron&Gun"
 run/main_scene="uid://okvl3jg17a5h"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://b6d7xhwqxtf7c"
 config/macos_native_icon="res://icon.icns"
 
 [audio]
