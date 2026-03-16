@@ -25,13 +25,13 @@ and `Disabled` in the `Notarization` option
 
 to export our build from Godot.
 
-Therefore, here are 2 cases you might run into:
+Therefore, here are 2 cases you might run into when you run the app for the first time:
 
-1. When you run the app for the first time, the following dialog is displayed: `"Ron&Gun.app" can't be opened because Apple cannot check it for malicious software.`
+1. `"Ron&Gun.app" can't be opened because Apple cannot check it for malicious software.`
 - Open `System Preferences`
 - Click `Security & Privacy`, then scroll down to the bottom, and click `Open Anyway`.
 
-2. OR when you run the app for the first time, the following dialog is displayed: `"Ron&Gun.app" is damaged and can't be opened. You should move it to the Bin.`
+2. OR `"Ron&Gun.app" is damaged and can't be opened. You should move it to the Bin.`
 - Open `Terminal`
-- Navigate to the folder containing the app (Use the `cd path_to_the_app_folder` command, e.g. `cd Applications` if it's installed there).
-- Run `xattr -dr com.apple.quarantine "Unsigned Game.app"` (including quotation marks & .app extension name)
+- Navigate to the folder containing the app (Use the `cd path` command, e.g., `cd Applications` if it's installed there).
+- Run `xattr -dr com.apple.quarantine "Ron&Gun.app"` (including quotation marks & .app extension name)
